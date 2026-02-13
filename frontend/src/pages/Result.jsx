@@ -76,8 +76,10 @@ export default function Result() {
     scanProduct(upc)
       .then(async (result) => {
         setData(result);
-        if (result.category && result.parentCompany) {
-          const altData = await getAlternatives(result.category.id, result.parentCompany.id);
+        if (result.parentCompany) {
+          const bp = getBeliefProfile();
+          const catId = result.category?.id || 'general';
+          const altData = await getAlternatives(catId, result.parentCompany.id, upc.startsWith('search-') ? null : upc, bp);
           setAlts(altData.alternatives || []);
         }
       })
@@ -123,19 +125,19 @@ export default function Result() {
     <div className="p-4 space-y-4">
       {/* Product card */}
       <div className="bg-white rounded-2xl shadow-lg p-5">
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-start">
           {product.image ? (
             <img
               src={product.image}
-              alt={product.name}
+              alt=""
+              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling && (e.target.nextSibling.style.display = 'flex'); }}
               className="w-20 h-20 object-contain rounded-xl bg-gray-50 shrink-0"
             />
-          ) : (
-            <div className="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center text-3xl shrink-0">📦</div>
-          )}
-          <div className="min-w-0">
-            <h2 className="font-bold text-lg leading-tight truncate">{product.name || 'Unknown Product'}</h2>
-            {product.brand && <p className="text-sm text-gray-500">{product.brand}</p>}
+          ) : null}
+          <div className="w-20 h-20 bg-gray-100 rounded-xl items-center justify-center text-3xl shrink-0" style={{ display: product.image ? 'none' : 'flex' }}>📦</div>
+          <div className="flex-1">
+            <h2 className="font-bold text-lg leading-tight break-words">{product.name || 'Unknown Product'}</h2>
+            {product.brand && <p className="text-sm text-gray-500 mt-1">{product.brand}</p>}
             <p className="text-xs text-gray-400 mt-1 font-mono">{upc}</p>
           </div>
         </div>
@@ -210,31 +212,58 @@ export default function Result() {
         </div>
       )}
 
-      {/* Alternatives */}
-      {alts.length > 0 && (
+      {/* Smart Alternatives */}
+      {alts.length > 0 ? (
         <div className="space-y-3">
-          <h3 className="font-bold text-sm uppercase text-gray-500 px-1">
-            🔄 Alternatives to Consider
-          </h3>
-          {alts.map((alt) => {
-            const altAlignment = getAlignment(alt.political, prefs);
+          <div className="px-1">
+            <h3 className="font-bold text-base text-teal-800">🔄 Better Aligned Alternatives</h3>
+            <p className="text-xs text-gray-500">Products that match your values better</p>
+          </div>
+          {alts.map((alt, i) => {
+            const pct = alt.alignment?.pct ?? 50;
+            const badgeColor = alt.alignment?.dealBreakerHit ? 'bg-red-500' : pct >= 70 ? 'bg-emerald-500' : pct >= 40 ? 'bg-yellow-500' : 'bg-red-400';
             return (
-              <div key={alt.company.id} className="bg-white rounded-2xl shadow p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold">{alt.company.name}</p>
-                    <p className="text-xs text-gray-500">{alt.brands.join(', ')}</p>
+              <div key={alt.barcode || alt.parentCompany?.id || i} className="bg-white rounded-2xl shadow-lg p-4 border-l-4 border-teal-500">
+                <div className="flex gap-3 items-start">
+                  {alt.image ? (
+                    <img src={alt.image} alt="" className="w-14 h-14 object-contain rounded-lg bg-gray-50 shrink-0" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling && (e.target.nextSibling.style.display = 'flex'); }} />
+                  ) : null}
+                  <div className="w-14 h-14 bg-gray-100 rounded-lg items-center justify-center text-2xl shrink-0" style={{ display: alt.image ? 'none' : 'flex' }}>📦</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <p className="font-semibold text-sm leading-tight truncate">{alt.name || alt.brand || 'Alternative'}</p>
+                        {alt.brand && alt.brand !== alt.name && <p className="text-xs text-gray-500 truncate">{alt.brand}</p>}
+                        {alt.parentCompany && <p className="text-xs text-gray-400">{alt.parentCompany.name}</p>}
+                      </div>
+                      <span className={`${badgeColor} text-white text-xs font-bold px-2 py-1 rounded-full shrink-0`}>
+                        {alt.alignment?.dealBreakerHit ? '🚫' : `${pct}%`}
+                      </span>
+                    </div>
                   </div>
-                  <AlignmentBadge alignment={altAlignment} size="sm" />
                 </div>
-                <DonationBar
-                  percentDem={alt.political.percentDem}
-                  percentRep={alt.political.percentRep}
-                  className="mt-2"
-                />
+                {/* Why it's better */}
+                {alt.alignment?.reasons?.length > 0 && (
+                  <div className="mt-2 space-y-1 pl-1">
+                    {alt.alignment.reasons.slice(0, 3).map((reason, ri) => (
+                      <p key={ri} className="text-xs text-gray-600 leading-snug">{reason}</p>
+                    ))}
+                  </div>
+                )}
+                {alt.barcode && (
+                  <div className="mt-2 text-right">
+                    <span className="text-xs text-teal-600 font-semibold">Try this →</span>
+                  </div>
+                )}
               </div>
             );
           })}
+        </div>
+      ) : !loading && parentCompany && (
+        <div className="bg-white rounded-2xl shadow p-5 text-center text-sm text-gray-500">
+          <p className="text-2xl mb-2">🔍</p>
+          <p>We couldn't find alternatives in our database yet.</p>
+          <p className="text-xs text-gray-400 mt-1">Help us grow by suggesting products!</p>
         </div>
       )}
 

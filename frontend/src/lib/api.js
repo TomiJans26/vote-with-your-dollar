@@ -174,8 +174,17 @@ export async function scanProduct(upc) {
   return res.json();
 }
 
-export async function getAlternatives(category, companyId) {
-  const res = await authFetch(`${BASE}/alternatives/${category}/${companyId}`);
+export async function getAlternatives(category, companyId, upc, beliefProfile) {
+  const res = await authFetch(`${BASE}/alternatives`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      category,
+      companyId,
+      upc: upc || null,
+      beliefProfile: beliefProfile || {},
+    }),
+  });
   if (!res.ok) return { alternatives: [] };
   return res.json();
 }

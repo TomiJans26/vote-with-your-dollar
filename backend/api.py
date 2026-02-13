@@ -42,16 +42,40 @@ FEC_CACHE_TTL = 3600
 # ---------------------------------------------------------------------------
 # Helper functions (ported from server.js)
 # ---------------------------------------------------------------------------
-def find_parent_company(brand: str | None):
-    if not brand:
+def _normalize(s: str) -> str:
+    return s.lower().replace("-", "").replace(" ", "").replace("'", "").replace("'", "").strip()
+
+
+def find_parent_company(brand: str | None, product_name: str | None = None):
+    if not brand and not product_name:
         return None
-    bl = brand.lower()
-    exact = brand_map.get(bl)
-    if exact:
-        return exact
-    for key, company in brand_map.items():
-        if bl in key or key in bl:
-            return company
+    # Try exact brand match (lowercase key in brand_map)
+    if brand:
+        bl = brand.lower().strip()
+        exact = brand_map.get(bl)
+        if exact:
+            return exact
+        # Fuzzy: normalize and try exact normalized match
+        bl_norm = _normalize(brand)
+        for key, company in brand_map.items():
+            key_norm = _normalize(key)
+            if bl_norm == key_norm:
+                return company
+        # Substring only if both sides are long enough (avoid "olay" in "fritolay")
+        if len(bl_norm) >= 5:
+            for key, company in brand_map.items():
+                key_norm = _normalize(key)
+                if len(key_norm) >= 5 and (bl_norm in key_norm or key_norm in bl_norm):
+                    return company
+    # Try matching product name against brand list
+    if product_name:
+        pn_norm = _normalize(product_name)
+        # Sort brands longest-first to prefer specific matches
+        sorted_brands = sorted(brand_map.items(), key=lambda x: len(x[0]), reverse=True)
+        for key, company in sorted_brands:
+            key_norm = _normalize(key)
+            if len(key_norm) >= 3 and pn_norm.startswith(key_norm):
+                return company
     return None
 
 
@@ -144,9 +168,9 @@ def lookup_openfoodfacts(barcode: str):
                 "source": "openfoodfacts",
                 "barcode": barcode,
                 "name": p.get("product_name"),
-                "brand": p.get("brands"),
+                "brand": p.get("brands") or p.get("brand_owner") or p.get("brand_owner_imported"),
                 "categories": p.get("categories"),
-                "image": p.get("image_url"),
+                "image": p.get("image_url") or p.get("image_small_url"),
             }
     except Exception:
         pass
@@ -225,7 +249,7 @@ def scan_product(upc):
     if not product:
         return jsonify({"error": "Product not found", "upc": upc}), 404
 
-    parent_company = find_parent_company(product.get("brand"))
+    parent_company = find_parent_company(product.get("brand"), product.get("name"))
     category = guess_category(product)
     political = None
 
@@ -271,19 +295,317 @@ def scan_product(upc):
     })
 
 
+# ---------------------------------------------------------------------------
+# Open Food Facts cache (in-memory, 1h TTL)
+# ---------------------------------------------------------------------------
+_off_cache: dict[str, tuple[any, float]] = {}
+OFF_CACHE_TTL = 3600
+
+
+def _off_cached_get(url: str, params: dict | None = None, timeout: int = 15):
+    """GET with in-memory 1h cache for Open Food Facts API calls."""
+    import hashlib
+    key = hashlib.md5((url + str(sorted((params or {}).items()))).encode()).hexdigest()
+    cached = _off_cache.get(key)
+    if cached and time.time() - cached[1] < OFF_CACHE_TTL:
+        return cached[0]
+    try:
+        resp = http_requests.get(url, params=params, timeout=timeout)
+        data = resp.json() if resp.ok else None
+    except Exception:
+        data = None
+    _off_cache[key] = (data, time.time())
+    return data
+
+
+# ---------------------------------------------------------------------------
+# Belief alignment scoring (mirrors frontend getBeliefAlignment)
+# ---------------------------------------------------------------------------
+_IMPORTANCE_WEIGHTS = [0, 1, 3, 0]  # 0=don't care, 1=somewhat, 2=very, 3=dealbreaker
+
+
+def _score_company(company_id: str, belief_profile: dict, original_company_id: str | None = None):
+    """Score a company against a belief profile. Returns dict with score, dealBreakerHit, reasons."""
+    company_issues = _company_issues_data.get(company_id, {}).get("issues", {})
+    original_issues = _company_issues_data.get(original_company_id, {}).get("issues", {}) if original_company_id else {}
+
+    if not company_issues or not belief_profile:
+        return {"score": 0, "dealBreakerHit": False, "reasons": [], "matchingIssues": [], "conflictingIssues": []}
+
+    reasons = []
+    matching = []
+    conflicting = []
+    weighted_sum = 0
+    total_weight = 0
+    deal_breaker_hit = False
+
+    # Issue name lookup
+    issue_names = {
+        "abortion": "Abortion / Reproductive Rights", "lgbtq_rights": "LGBTQ+ Rights",
+        "racial_justice": "Racial Justice / Equity", "immigration": "Immigration",
+        "religious_liberty": "Religious Liberty", "death_penalty": "Death Penalty",
+        "workers_rights": "Workers' Rights / Labor Unions", "minimum_wage": "Minimum Wage / Living Wage",
+        "corporate_tax": "Corporate Tax Policy", "free_trade": "Free Trade vs Protectionism",
+        "climate_change": "Climate Change / Carbon Emissions", "renewable_energy": "Renewable Energy",
+        "environmental_regulations": "Environmental Regulations", "animal_rights": "Animal Rights / Welfare",
+        "gun_control": "Gun Control / 2nd Amendment", "military_spending": "Military / Defense Spending",
+        "police_reform": "Police Reform / Criminal Justice", "drug_policy": "Drug Policy / Legalization",
+        "universal_healthcare": "Universal Healthcare", "education_funding": "Education Funding",
+        "student_debt": "Student Debt", "vaccine_policy": "Vaccine Policy",
+    }
+    importance_labels = {0: "don't care", 1: "somewhat important", 2: "very important", 3: "deal breaker"}
+
+    for issue_id, belief in belief_profile.items():
+        if not isinstance(belief, dict):
+            continue
+        importance = belief.get("importance", 0)
+        if importance == 0:
+            continue
+        company_issue = company_issues.get(issue_id)
+        if not company_issue:
+            continue
+
+        user_stance = belief.get("stance", 0) / 2  # normalize -2..2 to -1..1
+        company_stance = company_issue.get("stance", 0)
+        issue_name = issue_names.get(issue_id, issue_id)
+        imp_label = importance_labels.get(importance, "")
+        orig_issue = original_issues.get(issue_id)
+
+        if importance == 3:
+            misalignment = user_stance * company_stance
+            if misalignment < -0.2:
+                deal_breaker_hit = True
+                conflicting.append(issue_id)
+                reasons.append(f"🚫 Conflicts with your deal breaker on {issue_name}")
+            elif misalignment > 0.2:
+                weighted_sum += 5
+                total_weight += 5
+                matching.append(issue_id)
+                reasons.append(f"✅ Supports {issue_name} (your deal breaker)")
+        else:
+            weight = _IMPORTANCE_WEIGHTS[importance]
+            score = user_stance * company_stance
+            weighted_sum += score * weight
+            total_weight += weight
+
+            if score > 0.3:
+                matching.append(issue_id)
+                # Compare with original company
+                if orig_issue and user_stance * orig_issue.get("stance", 0) < 0:
+                    orig_company_name = company_map.get(original_company_id, {}).get("name", "the original company")
+                    reasons.append(f"✅ Supports {issue_name} ({imp_label} to you) — unlike {orig_company_name}")
+                else:
+                    reasons.append(f"✅ Supports {issue_name} ({imp_label} to you)")
+            elif score < -0.3:
+                conflicting.append(issue_id)
+                reasons.append(f"⚠️ Mixed on {issue_name}")
+
+    final_score = max(-1, min(1, weighted_sum / total_weight)) if total_weight > 0 else 0
+    if deal_breaker_hit:
+        final_score = -1
+
+    if final_score > 0.4:
+        label = "Great match"
+    elif final_score > 0.1:
+        label = "Good match"
+    elif final_score > -0.1:
+        label = "Mixed"
+    elif final_score > -0.4:
+        label = "Weak match"
+    else:
+        label = "Poor match"
+
+    return {
+        "score": round(final_score, 3),
+        "pct": max(0, round(((final_score + 1) / 2) * 100)),
+        "dealBreakerHit": deal_breaker_hit,
+        "label": label,
+        "reasons": reasons[:6],
+        "matchingIssues": matching,
+        "conflictingIssues": conflicting,
+    }
+
+
+def _find_off_alternatives(upc: str, exclude_company_id: str):
+    """Find alternative products from Open Food Facts based on original product's categories."""
+    # First get the original product's categories
+    product_data = _off_cached_get(f"https://world.openfoodfacts.org/api/v2/product/{upc}.json")
+    if not product_data or product_data.get("status") != 1:
+        return []
+
+    product = product_data.get("product", {})
+    categories_tags = product.get("categories_tags", [])
+    product_name = product.get("product_name", "")
+
+    alt_products = []
+    seen_barcodes = {upc}
+    exclude_company = company_map.get(exclude_company_id)
+    exclude_brands = set()
+    if exclude_company:
+        exclude_brands = {b.lower() for b in exclude_company.get("brands", [])}
+
+    # Try category-based search using the most specific category (v2 API — fast and reliable)
+    for cat_tag in reversed(categories_tags[:5]):
+        cat_name = cat_tag.replace("en:", "")
+        data = _off_cached_get("https://world.openfoodfacts.org/api/v2/search",
+                               params={"categories_tags_en": cat_name, "page_size": 20,
+                                       "fields": "code,product_name,brands,brand_owner,brand_owner_imported,image_small_url,image_url",
+                                       "countries_tags_en": "united-states"})
+        if not data:
+            continue
+        for p in data.get("products", []):
+            barcode = p.get("code")
+            name = p.get("product_name")
+            brand = p.get("brands", "")
+            if not barcode or not name or barcode in seen_barcodes:
+                continue
+            # Filter out same parent company
+            brand_lower = brand.lower() if brand else ""
+            brand_for_lookup = brand or p.get("brand_owner") or p.get("brand_owner_imported")
+            parent = find_parent_company(brand_for_lookup, name)
+            if parent and parent["id"] == exclude_company_id:
+                continue
+            if brand_lower in exclude_brands:
+                continue
+            seen_barcodes.add(barcode)
+            alt_products.append({
+                "barcode": barcode,
+                "name": name,
+                "brand": brand or brand_for_lookup or "Unknown Brand",
+                "image": p.get("image_small_url") or p.get("image_url"),
+                "parentCompany": {"id": parent["id"], "name": parent["name"]} if parent else None,
+            })
+            if len(alt_products) >= 20:
+                break
+        if len(alt_products) >= 10:
+            break
+
+    # Also try search-based
+    if len(alt_products) < 5 and product_name:
+        search_term = product_name.split(",")[0].split("-")[0].strip()[:40]
+        data = _off_cached_get("https://world.openfoodfacts.org/api/v2/search",
+                               params={"search_terms": search_term, "page_size": 20,
+                                       "fields": "code,product_name,brands,brand_owner,brand_owner_imported,image_small_url,image_url"})
+        if data:
+            for p in data.get("products", []):
+                barcode = p.get("code")
+                name = p.get("product_name")
+                brand = p.get("brands", "")
+                if not barcode or not name or barcode in seen_barcodes:
+                    continue
+                brand_for_lookup = brand or p.get("brand_owner") or p.get("brand_owner_imported")
+                parent = find_parent_company(brand_for_lookup, name)
+                if parent and parent["id"] == exclude_company_id:
+                    continue
+                brand_lower = brand.lower() if brand else ""
+                if brand_lower in exclude_brands:
+                    continue
+                seen_barcodes.add(barcode)
+                alt_products.append({
+                    "barcode": barcode,
+                    "name": name,
+                    "brand": brand or brand_for_lookup or "Unknown Brand",
+                    "image": p.get("image_small_url") or p.get("image_url"),
+                    "parentCompany": {"id": parent["id"], "name": parent["name"]} if parent else None,
+                })
+                if len(alt_products) >= 20:
+                    break
+
+    return alt_products
+
+
+def _fallback_alternatives(category: str, exclude_company_id: str, belief_profile: dict):
+    """Fallback: return company-level alternatives from our database when OFF doesn't work."""
+    alts = [c for c in _companies_raw if c["id"] != exclude_company_id]
+    results = []
+    for alt in alts:
+        score_data = _score_company(alt["id"], belief_profile, exclude_company_id) if belief_profile else {"score": 0, "pct": 50, "dealBreakerHit": False, "label": "Unknown", "reasons": [], "matchingIssues": [], "conflictingIssues": []}
+        if score_data["dealBreakerHit"]:
+            continue
+        results.append({
+            "barcode": None,
+            "name": alt.get("brands", [""])[0],
+            "brand": alt.get("brands", [""])[0],
+            "image": None,
+            "parentCompany": {"id": alt["id"], "name": alt["name"]},
+            "alignment": score_data,
+        })
+    results.sort(key=lambda x: x["alignment"]["score"], reverse=True)
+    return results[:5]
+
+
 @api_bp.route("/alternatives/<category>/<company_id>", methods=["GET"])
 def get_alternatives(category, company_id):
-    alternatives_src = [c for c in _companies_raw if c["id"] != company_id][:10]
-    results = []
-    for alt in alternatives_src:
-        if len(results) >= 3:
-            break
-        political = get_company_political_data(alt["id"])
-        results.append({
-            "company": {"id": alt["id"], "name": alt["name"], "ticker": alt.get("ticker")},
-            "brands": alt.get("brands", [])[:5],
-            "political": political,
-        })
+    upc = request.args.get("upc")
+    belief_json = request.args.get("beliefProfile")
+    belief_profile = json.loads(belief_json) if belief_json else {}
+
+    return _build_alternatives_response(category, company_id, upc, belief_profile)
+
+
+@api_bp.route("/alternatives", methods=["POST"])
+def post_alternatives():
+    data = request.get_json(silent=True) or {}
+    category = data.get("category", "")
+    company_id = data.get("companyId", "")
+    upc = data.get("upc")
+    belief_profile = data.get("beliefProfile", {})
+
+    return _build_alternatives_response(category, company_id, upc, belief_profile)
+
+
+def _build_alternatives_response(category, company_id, upc, belief_profile):
+    scored_results = []
+    unscored_results = []
+
+    # Try Open Food Facts product-level alternatives
+    if upc:
+        off_products = _find_off_alternatives(upc, company_id)
+        seen_companies = set()
+        seen_brands = set()
+        for prod in off_products:
+            parent = prod.get("parentCompany")
+            brand_key = (prod.get("brand") or prod.get("name") or "").lower()
+            
+            # Avoid duplicate brands
+            if brand_key in seen_brands:
+                continue
+            seen_brands.add(brand_key)
+            
+            if parent:
+                # Only one product per parent company
+                if parent["id"] in seen_companies:
+                    continue
+                seen_companies.add(parent["id"])
+                
+                score_data = _score_company(parent["id"], belief_profile, company_id) if belief_profile else {"score": 0, "pct": 50, "dealBreakerHit": False, "label": "Unknown", "reasons": [], "matchingIssues": [], "conflictingIssues": []}
+                if score_data["dealBreakerHit"]:
+                    continue
+                scored_results.append({**prod, "alignment": score_data})
+            else:
+                # Unknown parent company — still show as alternative!
+                # These are often smaller/independent brands which may be better choices
+                unscored_results.append({
+                    **prod,
+                    "alignment": {
+                        "score": 0, "pct": None, "dealBreakerHit": False,
+                        "label": "Independent / Unknown Parent",
+                        "reasons": ["ℹ️ This brand isn't owned by a major conglomerate in our database — it may be independently owned"],
+                        "matchingIssues": [], "conflictingIssues": []
+                    }
+                })
+
+    # Combine: scored first (sorted by alignment), then unscored products
+    scored_results.sort(key=lambda x: x["alignment"]["score"], reverse=True)
+    results = scored_results[:5]
+    
+    # Fill remaining slots with unscored real products (NOT random companies)
+    if len(results) < 5:
+        for us in unscored_results:
+            results.append(us)
+            if len(results) >= 5:
+                break
+
     return jsonify({"category": category, "alternatives": results})
 
 
