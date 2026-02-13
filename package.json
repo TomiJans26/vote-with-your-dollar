@@ -1,0 +1,22 @@
+{
+  "name": "vote-with-your-dollar",
+  "version": "0.1.0",
+  "description": "Scan products, discover parent company political donations, find ethical alternatives",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "server": "python backend/app.py",
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "license": "MIT"
+}

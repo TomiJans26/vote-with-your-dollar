@@ -1,0 +1,279 @@
+{
+  "description": "Known PAC names registered with the FEC for parent companies. Use these to query the OpenFEC API. Some private/foreign companies may not have US PACs.",
+  "pacs": [
+    {
+      "companyId": "procter-gamble",
+      "pacNames": ["PROCTER & GAMBLE COMPANY GOOD GOVERNMENT COMMITTEE", "P&G PAC"],
+      "fecIds": ["C00149831"]
+    },
+    {
+      "companyId": "unilever",
+      "pacNames": ["UNILEVER UNITED STATES INC POLITICAL ACTION COMMITTEE", "UNILEVER PAC"],
+      "fecIds": ["C00256404"]
+    },
+    {
+      "companyId": "nestle",
+      "pacNames": ["NESTLE USA INC POLITICAL ACTION COMMITTEE", "NESTLE PAC"],
+      "fecIds": ["C00099457"]
+    },
+    {
+      "companyId": "pepsico",
+      "pacNames": ["PEPSICO INC CONCERNED CITIZENS FUND", "PEPSICO PAC"],
+      "fecIds": ["C00109017"]
+    },
+    {
+      "companyId": "coca-cola",
+      "pacNames": ["THE COCA-COLA COMPANY NONPARTISAN COMMITTEE FOR GOOD GOVERNMENT", "COCA-COLA PAC"],
+      "fecIds": ["C00060590"]
+    },
+    {
+      "companyId": "johnson-johnson",
+      "pacNames": ["JOHNSON & JOHNSON EMPLOYEES' GOOD GOVERNMENT FUND", "J&J PAC"],
+      "fecIds": ["C00110338"]
+    },
+    {
+      "companyId": "kraft-heinz",
+      "pacNames": ["KRAFT HEINZ COMPANY PAC", "KRAFTPAC", "KRAFT FOODS GROUP INC PAC", "H.J. HEINZ COMPANY PAC"],
+      "fecIds": ["C00078451", "C00076158"]
+    },
+    {
+      "companyId": "general-mills",
+      "pacNames": ["GENERAL MILLS INC PAC", "GENERAL MILLS PAC"],
+      "fecIds": ["C00078626"]
+    },
+    {
+      "companyId": "kellanova",
+      "pacNames": ["KELLOGG COMPANY BETTER GOVERNMENT COMMITTEE", "KELLOGG PAC"],
+      "fecIds": ["C00079350"]
+    },
+    {
+      "companyId": "mars",
+      "pacNames": ["MARS INCORPORATED POLITICAL ACTION COMMITTEE", "MARSPAC"],
+      "fecIds": ["C00153460"],
+      "note": "Private company; PAC activity may be limited."
+    },
+    {
+      "companyId": "mondelez",
+      "pacNames": ["MONDELEZ INTERNATIONAL INC PAC", "MONDELEZ PAC", "KRAFT FOODS INC PAC (predecessor)"],
+      "fecIds": ["C00508853"]
+    },
+    {
+      "companyId": "colgate-palmolive",
+      "pacNames": ["COLGATE-PALMOLIVE COMPANY PAC", "COLGATE PAC"],
+      "fecIds": ["C00141564"]
+    },
+    {
+      "companyId": "church-dwight",
+      "pacNames": ["CHURCH & DWIGHT CO INC PAC"],
+      "fecIds": [],
+      "note": "Minimal PAC activity; may not have active FEC registration."
+    },
+    {
+      "companyId": "reckitt",
+      "pacNames": ["RECKITT BENCKISER INC PAC"],
+      "fecIds": [],
+      "note": "UK-headquartered; US PAC may be minimal."
+    },
+    {
+      "companyId": "henkel",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "German-headquartered; no known US PAC."
+    },
+    {
+      "companyId": "danone",
+      "pacNames": ["DANONE NORTH AMERICA PAC"],
+      "fecIds": [],
+      "note": "French-headquartered; limited US PAC activity."
+    },
+    {
+      "companyId": "conagra",
+      "pacNames": ["CONAGRA BRANDS INC GOOD GOVERNMENT ASSOCIATION", "CONAGRA PAC"],
+      "fecIds": ["C00094953"]
+    },
+    {
+      "companyId": "smuckers",
+      "pacNames": ["J.M. SMUCKER COMPANY PAC", "SMUCKER PAC"],
+      "fecIds": ["C00387837"]
+    },
+    {
+      "companyId": "hormel",
+      "pacNames": ["HORMEL FOODS CORPORATION PAC", "HORMEL PAC"],
+      "fecIds": ["C00310953"]
+    },
+    {
+      "companyId": "tyson",
+      "pacNames": ["TYSON FOODS INC POLITICAL ACTION COMMITTEE", "TYSON PAC"],
+      "fecIds": ["C00248526"]
+    },
+    {
+      "companyId": "campbells",
+      "pacNames": ["CAMPBELL SOUP COMPANY PAC", "CAMPBELLPAC"],
+      "fecIds": ["C00107276"]
+    },
+    {
+      "companyId": "clorox",
+      "pacNames": ["THE CLOROX COMPANY EMPLOYEES' PAC", "CLOROX PAC"],
+      "fecIds": ["C00283796"]
+    },
+    {
+      "companyId": "sc-johnson",
+      "pacNames": ["S.C. JOHNSON & SON INC GOOD GOVERNMENT COMMITTEE"],
+      "fecIds": [],
+      "note": "Private company; limited FEC data."
+    },
+    {
+      "companyId": "kimberly-clark",
+      "pacNames": ["KIMBERLY-CLARK CORPORATION PAC", "KIMBERLY-CLARK PAC"],
+      "fecIds": ["C00092536"]
+    },
+    {
+      "companyId": "estee-lauder",
+      "pacNames": ["ESTEE LAUDER INC PAC"],
+      "fecIds": [],
+      "note": "Minimal PAC activity; Lauder family makes personal contributions."
+    },
+    {
+      "companyId": "loreal",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "French-headquartered; no known US PAC."
+    },
+    {
+      "companyId": "revlon",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "Filed bankruptcy 2022; no active PAC."
+    },
+    {
+      "companyId": "hershey",
+      "pacNames": ["THE HERSHEY COMPANY PAC", "HERSHEY PAC"],
+      "fecIds": ["C00253179"]
+    },
+    {
+      "companyId": "mccormick",
+      "pacNames": ["MCCORMICK & COMPANY INC PAC"],
+      "fecIds": ["C00349191"]
+    },
+    {
+      "companyId": "spectrum-brands",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "No known active PAC."
+    },
+    {
+      "companyId": "energizer",
+      "pacNames": ["ENERGIZER HOLDINGS INC PAC"],
+      "fecIds": [],
+      "note": "Spun off from Energizer Holdings; limited PAC data."
+    },
+    {
+      "companyId": "berkshire-duracell",
+      "pacNames": ["BERKSHIRE HATHAWAY INC PAC"],
+      "fecIds": ["C00347559"],
+      "note": "Berkshire itself; Duracell is a subsidiary."
+    },
+    {
+      "companyId": "bayer",
+      "pacNames": ["BAYER CORPORATION PAC", "BAYER PAC", "MONSANTO COMPANY CITIZENSHIP FUND (legacy)"],
+      "fecIds": ["C00204099", "C00042069"]
+    },
+    {
+      "companyId": "abbott",
+      "pacNames": ["ABBOTT LABORATORIES EMPLOYEES PAC", "ABBOTT PAC"],
+      "fecIds": ["C00025536"]
+    },
+    {
+      "companyId": "haleon",
+      "pacNames": ["HALEON PAC", "GLAXOSMITHKLINE CONSUMER PAC (predecessor)"],
+      "fecIds": [],
+      "note": "Spun off from GSK in 2022; PAC registration may be under GSK legacy or new filing."
+    },
+    {
+      "companyId": "edgewell",
+      "pacNames": ["EDGEWELL PERSONAL CARE PAC"],
+      "fecIds": [],
+      "note": "Spun off from Energizer; limited PAC data."
+    },
+    {
+      "companyId": "prestige-consumer",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "No known PAC."
+    },
+    {
+      "companyId": "treehouse-foods",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "No known PAC."
+    },
+    {
+      "companyId": "post-holdings",
+      "pacNames": ["POST HOLDINGS INC PAC"],
+      "fecIds": [],
+      "note": "Limited PAC activity."
+    },
+    {
+      "companyId": "bg-foods",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "No known PAC."
+    },
+    {
+      "companyId": "pinnacle-foods",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "Now part of Conagra."
+    },
+    {
+      "companyId": "bob-evans",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "Now part of Post Holdings."
+    },
+    {
+      "companyId": "dean-foods",
+      "pacNames": ["DEAN FOODS COMPANY PAC"],
+      "fecIds": ["C00368076"],
+      "note": "Defunct as of 2019 bankruptcy."
+    },
+    {
+      "companyId": "land-o-lakes",
+      "pacNames": ["LAND O'LAKES INC PAC", "LAND O'LAKES PAC"],
+      "fecIds": ["C00110445"]
+    },
+    {
+      "companyId": "ocean-spray",
+      "pacNames": ["OCEAN SPRAY CRANBERRIES INC PAC"],
+      "fecIds": [],
+      "note": "Cooperative; minimal PAC activity."
+    },
+    {
+      "companyId": "keurig-dr-pepper",
+      "pacNames": ["KEURIG DR PEPPER INC PAC", "DR PEPPER SNAPPLE GROUP INC PAC (predecessor)"],
+      "fecIds": ["C00432104"]
+    },
+    {
+      "companyId": "monster-beverage",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "No known PAC; Coca-Cola holds ~19.4% stake."
+    },
+    {
+      "companyId": "red-bull",
+      "pacNames": [],
+      "fecIds": [],
+      "note": "Austrian private company; no US PAC."
+    },
+    {
+      "companyId": "ab-inbev",
+      "pacNames": ["ANHEUSER-BUSCH COMPANIES INC PAC", "ANHEUSER-BUSCH PAC", "AB PAC"],
+      "fecIds": ["C00037051"]
+    },
+    {
+      "companyId": "molson-coors",
+      "pacNames": ["MOLSON COORS BEVERAGE COMPANY PAC", "MILLERCOORS PAC (legacy)", "MOLSON COORS PAC"],
+      "fecIds": ["C00140715"]
+    }
+  ]
+}

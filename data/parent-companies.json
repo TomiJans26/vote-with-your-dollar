@@ -1,0 +1,731 @@
+{
+  "companies": [
+    {
+      "id": "procter-gamble",
+      "name": "Procter & Gamble",
+      "ticker": "PG",
+      "country": "US",
+      "industry": "Consumer Packaged Goods",
+      "brands": [
+        "Tide", "Gain", "Downy", "Bounce", "Dreft", "Era",
+        "Cascade", "Dawn", "Fairy", "Joy", "Mr. Clean", "Swiffer", "Febreze",
+        "Charmin", "Bounty", "Puffs", "Pampers", "Luvs",
+        "Gillette", "Venus", "Braun", "Old Spice", "Secret", "Native",
+        "Head & Shoulders", "Pantene", "Herbal Essences", "Aussie", "Olay",
+        "SK-II", "Crest", "Oral-B", "Scope", "Pepto-Bismol", "Vicks",
+        "NyQuil", "DayQuil", "Metamucil", "Align", "Prilosec OTC",
+        "Always", "Tampax", "Safeguard", "Ivory", "Zest"
+      ]
+    },
+    {
+      "id": "unilever",
+      "name": "Unilever",
+      "ticker": "UL",
+      "country": "UK/NL",
+      "industry": "Consumer Packaged Goods",
+      "brands": [
+        "Dove", "Axe", "Lynx", "Degree", "Rexona", "Suave",
+        "TRESemmé", "Nexxus", "Shea Moisture", "Love Beauty and Planet",
+        "Vaseline", "Pond's", "St. Ives", "Simple",
+        "Hellmann's", "Best Foods", "Knorr", "Lipton", "Ben & Jerry's",
+        "Breyers", "Magnum", "Klondike", "Popsicle", "Talenti",
+        "Seventh Generation", "Domestos", "Cif", "Comfort", "Surf",
+        "Persil", "OMO", "Sun", "Q-tips", "Dollar Shave Club"
+      ]
+    },
+    {
+      "id": "nestle",
+      "name": "Nestlé",
+      "ticker": "NSRGY",
+      "country": "CH",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Nescafé", "Nespresso", "Starbucks (at-home)", "Coffee-mate", "Carnation",
+        "Nestlé Pure Life", "Perrier", "S.Pellegrino", "Poland Spring", "Deer Park",
+        "Arrowhead", "Ozarka", "Ice Mountain", "Zephyrhills",
+        "Stouffer's", "Lean Cuisine", "DiGiorno", "Tombstone", "Hot Pockets",
+        "Buitoni", "Maggi", "Gerber", "NaturNes",
+        "KitKat", "Butterfinger", "Crunch", "Baby Ruth", "Toll House",
+        "Häagen-Dazs", "Dreyer's", "Edy's", "Skinny Cow",
+        "Purina", "Fancy Feast", "Friskies", "Dog Chow", "Beneful", "Pro Plan",
+        "Cheerios (not Nestlé — General Mills)", "Garden of Life",
+        "Sweet Earth", "Essentia Water", "Maison Perrier"
+      ]
+    },
+    {
+      "id": "pepsico",
+      "name": "PepsiCo",
+      "ticker": "PEP",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Pepsi", "Mountain Dew", "Sierra Mist", "Starry", "Mug",
+        "Gatorade", "Propel", "Aquafina", "LIFEWTR", "Bubly",
+        "Tropicana", "Naked Juice", "Kevita",
+        "Lay's", "Ruffles", "Doritos", "Tostitos", "Cheetos", "Fritos",
+        "SunChips", "Funyuns", "Smartfood", "Stacy's Pita Chips",
+        "Quaker", "Cap'n Crunch", "Life Cereal", "Rice-A-Roni", "Near East",
+        "Sabra", "Off the Eaten Path", "Bare Snacks",
+        "Frito-Lay", "Miss Vickie's", "PopCorners", "Grandma's Cookies"
+      ]
+    },
+    {
+      "id": "coca-cola",
+      "name": "The Coca-Cola Company",
+      "ticker": "KO",
+      "country": "US",
+      "industry": "Beverages",
+      "brands": [
+        "Coca-Cola", "Diet Coke", "Coke Zero", "Sprite", "Fanta",
+        "Minute Maid", "Simply", "Hi-C", "Fairlife",
+        "Dasani", "SmartWater", "Topo Chico", "AHA",
+        "Powerade", "BodyArmor", "Vitaminwater",
+        "Gold Peak", "Honest Tea", "Peace Tea", "Fuze Tea",
+        "Costa Coffee", "Georgia Coffee",
+        "Schweppes", "Canada Dry", "Barq's", "Mello Yello", "Pibb Xtra",
+        "Fresca", "Seagram's (mixers)", "Monster (stake)"
+      ]
+    },
+    {
+      "id": "johnson-johnson",
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "country": "US",
+      "industry": "Healthcare / Consumer Health",
+      "brands": [
+        "Johnson's Baby", "Band-Aid", "Neosporin", "Tylenol", "Motrin",
+        "Benadryl", "Zyrtec", "Sudafed", "Imodium", "Pepcid",
+        "Listerine", "Neutrogena", "Aveeno", "Clean & Clear",
+        "Lubriderm", "Rogaine", "Nicorette", "Desitin",
+        "Stayfree", "Carefree", "o.b.", "Splenda"
+      ]
+    },
+    {
+      "id": "kraft-heinz",
+      "name": "Kraft Heinz",
+      "ticker": "KHC",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Heinz", "Kraft", "Oscar Mayer", "Velveeta", "Philadelphia",
+        "Lunchables", "Jell-O", "Kool-Aid", "Crystal Light", "MiO",
+        "Maxwell House", "Gevalia", "Capri Sun",
+        "Ore-Ida", "Bagel Bites", "TGI Friday's (frozen)",
+        "Planters", "Classico", "Grey Poupon", "A.1.", "Lea & Perrins",
+        "Smart Ones", "Cracker Barrel (cheese)", "Cheez Whiz"
+      ]
+    },
+    {
+      "id": "general-mills",
+      "name": "General Mills",
+      "ticker": "GIS",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Cheerios", "Lucky Charms", "Cinnamon Toast Crunch", "Cocoa Puffs",
+        "Trix", "Wheaties", "Chex", "Total", "Kix", "Reese's Puffs",
+        "Nature Valley", "Fiber One", "Lärabar", "Annie's",
+        "Betty Crocker", "Bisquick", "Pillsbury", "Toaster Strudel",
+        "Progresso", "Old El Paso", "Hamburger Helper",
+        "Yoplait", "Liberté", "Oui by Yoplait",
+        "Häagen-Dazs (US)", "Blue Buffalo", "Gardetto's", "Bugles",
+        "Fruit Roll-Ups", "Fruit by the Foot", "Gushers", "Gold Medal Flour"
+      ]
+    },
+    {
+      "id": "kellanova",
+      "name": "Kellanova (formerly Kellogg's)",
+      "ticker": "K",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Pringles", "Cheez-It", "Pop-Tarts", "Eggo", "Rice Krispies Treats",
+        "Nutri-Grain", "Club Crackers", "Town House", "Keebler",
+        "Famous Amos", "Murray", "Carr's",
+        "Morningstar Farms", "Gardenburger", "Incogmeato",
+        "Frosted Flakes", "Froot Loops", "Apple Jacks", "Corn Flakes",
+        "Raisin Bran", "Mini-Wheats", "Special K", "Rice Krispies",
+        "Corn Pops", "Honey Smacks", "Cracklin' Oat Bran",
+        "Bear Naked", "Kashi", "RXBAR"
+      ]
+    },
+    {
+      "id": "mars",
+      "name": "Mars, Inc.",
+      "ticker": null,
+      "country": "US",
+      "industry": "Food & Confectionery",
+      "brands": [
+        "M&M's", "Snickers", "Twix", "Milky Way", "3 Musketeers",
+        "Dove Chocolate", "Skittles", "Starburst", "Life Savers", "Altoids",
+        "Wrigley's", "Extra", "Orbit", "5 Gum", "Hubba Bubba", "Juicy Fruit",
+        "Uncle Ben's", "Ben's Original", "Seeds of Change", "Tasty Bite",
+        "Pedigree", "Whiskas", "Royal Canin", "Iams", "Cesar", "Temptations",
+        "Sheba", "Nutro", "Greenies", "Eukanuba",
+        "KIND Snacks", "Nature's Recipe", "CocoaVia"
+      ]
+    },
+    {
+      "id": "mondelez",
+      "name": "Mondelēz International",
+      "ticker": "MDLZ",
+      "country": "US",
+      "industry": "Snacks & Confectionery",
+      "brands": [
+        "Oreo", "Chips Ahoy!", "Nutter Butter", "Newtons",
+        "Ritz", "Triscuit", "Wheat Thins", "Teddy Grahams", "Good Thins",
+        "Cadbury", "Milka", "Toblerone", "Côte d'Or",
+        "belVita", "Barni", "TUC",
+        "Sour Patch Kids", "Swedish Fish", "Halls",
+        "Tang", "Philadelphia (intl)",
+        "Clif Bar", "Tate's Bake Shop", "Hu Kitchen",
+        "Maynards", "Bassett's", "Green & Black's"
+      ]
+    },
+    {
+      "id": "colgate-palmolive",
+      "name": "Colgate-Palmolive",
+      "ticker": "CL",
+      "country": "US",
+      "industry": "Personal Care / Household",
+      "brands": [
+        "Colgate", "Palmolive", "Ajax", "Fabuloso", "Murphy Oil Soap",
+        "Softsoap", "Irish Spring", "Protex", "Sanex",
+        "Speed Stick", "Lady Speed Stick", "Tom's of Maine",
+        "Meridol", "Elmex", "Hill's Science Diet", "Hill's Prescription Diet",
+        "Suavitel", "Soupline", "Fleecy", "Tender Care"
+      ]
+    },
+    {
+      "id": "church-dwight",
+      "name": "Church & Dwight",
+      "ticker": "CHD",
+      "country": "US",
+      "industry": "Consumer Packaged Goods",
+      "brands": [
+        "Arm & Hammer", "OxiClean", "OraJel", "Spinbrush",
+        "First Response", "Trojan", "Vitafusion", "L'il Critters",
+        "Batiste", "Nair", "Waterpik", "Kaboom",
+        "Xtra (laundry)", "Arrid", "Pepsodent", "Close-Up",
+        "Zicam", "TheraBreath", "Hero Cosmetics"
+      ]
+    },
+    {
+      "id": "reckitt",
+      "name": "Reckitt Benckiser (Reckitt)",
+      "ticker": "RBGLY",
+      "country": "UK",
+      "industry": "Consumer Health / Hygiene",
+      "brands": [
+        "Lysol", "Dettol", "Finish", "Woolite", "Air Wick",
+        "Calgon", "Vanish", "Harpic",
+        "Enfamil", "Nutramigen", "Mead Johnson",
+        "Mucinex", "Delsym", "Cepacol",
+        "Durex", "K-Y", "Scholl", "Dr. Scholl's",
+        "Clearasil", "Veet", "Strepsils",
+        "Mortein", "SBP"
+      ]
+    },
+    {
+      "id": "henkel",
+      "name": "Henkel",
+      "ticker": "HENKY",
+      "country": "DE",
+      "industry": "Consumer / Industrial",
+      "brands": [
+        "Persil (NA)", "Purex", "all (laundry)", "Snuggle", "Sun (NA)",
+        "Dial", "Tone", "Right Guard",
+        "Schwarzkopf", "got2b", "Gliss", "Syoss", "Nature Box",
+        "Loctite", "Pritt", "Duck Tape"
+      ]
+    },
+    {
+      "id": "danone",
+      "name": "Danone",
+      "ticker": "DANOY",
+      "country": "FR",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Dannon", "Activia", "Oikos", "DanActive", "Danimals",
+        "Light + Fit", "Two Good", "International Delight", "Silk",
+        "So Delicious", "Alpro", "Horizon Organic",
+        "Evian", "Volvic", "Badoit",
+        "Aptamil", "Nutrilon", "Cow & Gate",
+        "Happy Family Organics", "Wallaby Organic", "STōK Cold Brew"
+      ]
+    },
+    {
+      "id": "conagra",
+      "name": "Conagra Brands",
+      "ticker": "CAG",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Healthy Choice", "Marie Callender's", "Banquet", "Kid Cuisine",
+        "Hunt's", "Ro*Tel", "Chef Boyardee", "PAM",
+        "Reddi-wip", "Swiss Miss", "Snack Pack",
+        "Slim Jim", "Duke's", "Andy Capp's", "David Seeds",
+        "Duncan Hines", "Vlasic", "Mrs. Butterworth's",
+        "Orville Redenbacher's", "Act II", "Angie's Boomchickapop",
+        "Birds Eye", "Gardein", "Udi's", "Glutino",
+        "Earth Balance", "Frontera", "P.F. Chang's (frozen)"
+      ]
+    },
+    {
+      "id": "smuckers",
+      "name": "The J.M. Smucker Company",
+      "ticker": "SJM",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Smucker's", "Jif", "Folgers", "Café Bustelo", "Dunkin' (at-home coffee)",
+        "Milk-Bone", "Meow Mix", "Rachael Ray Nutrish", "Nature's Recipe",
+        "9Lives", "Kibbles 'n Bits",
+        "Uncrustables", "1850 Coffee",
+        "Sahale Snacks", "Santa Cruz Organic"
+      ]
+    },
+    {
+      "id": "hormel",
+      "name": "Hormel Foods",
+      "ticker": "HRL",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Hormel", "SPAM", "Dinty Moore", "Mary Kitchen",
+        "Applegate", "Columbus Craft Meats", "Jennie-O",
+        "Natural Choice", "Wholly", "Herdez", "Chi-Chi's",
+        "Black Label (bacon)", "Skippy", "Justin's",
+        "Planters (JV)", "Hormel Compleats",
+        "Lloyd's", "House of Tsang"
+      ]
+    },
+    {
+      "id": "tyson",
+      "name": "Tyson Foods",
+      "ticker": "TSN",
+      "country": "US",
+      "industry": "Meat & Protein",
+      "brands": [
+        "Tyson", "Jimmy Dean", "Hillshire Farm", "Ball Park",
+        "Sara Lee (deli)", "State Fair", "Aidells",
+        "Wright Brand", "Raised & Rooted",
+        "Bosco's", "IBP", "Supreme",
+        "Any'tizers", "Tyson Air Fried"
+      ]
+    },
+    {
+      "id": "campbells",
+      "name": "Campbell's (Campbell Soup Company)",
+      "ticker": "CPB",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Campbell's", "Chunky", "Well Yes!", "SpaghettiOs",
+        "Prego", "Pace", "Swanson",
+        "V8", "V8 Splash",
+        "Pepperidge Farm", "Goldfish", "Milano",
+        "Lance", "Cape Cod", "Kettle Brand", "Snyder's of Hanover",
+        "Late July", "Snack Factory Pretzel Crisps",
+        "Pacific Foods", "Rao's Homemade"
+      ]
+    },
+    {
+      "id": "clorox",
+      "name": "The Clorox Company",
+      "ticker": "CLX",
+      "country": "US",
+      "industry": "Cleaning / Consumer Goods",
+      "brands": [
+        "Clorox", "Pine-Sol", "Liquid-Plumr", "Tilex",
+        "Fresh Step", "Scoop Away", "Glad",
+        "Kingsford", "Hidden Valley", "KC Masterpiece",
+        "Burt's Bees", "Brita", "RenewLife",
+        "Natural Vitality Calm", "Rainbow Light", "NeoCell"
+      ]
+    },
+    {
+      "id": "sc-johnson",
+      "name": "SC Johnson",
+      "ticker": null,
+      "country": "US",
+      "industry": "Household Products",
+      "brands": [
+        "Windex", "Pledge", "Scrubbing Bubbles", "Fantastik",
+        "Glade", "OFF!", "Raid", "Baygon",
+        "Ziploc", "Saran Wrap", "Mrs. Meyer's Clean Day",
+        "Method", "Caldrea", "Shout", "Drano"
+      ]
+    },
+    {
+      "id": "kimberly-clark",
+      "name": "Kimberly-Clark",
+      "ticker": "KMB",
+      "country": "US",
+      "industry": "Personal Care / Paper",
+      "brands": [
+        "Kleenex", "Scott", "Cottonelle", "Viva",
+        "Huggies", "Pull-Ups", "GoodNites",
+        "Kotex", "U by Kotex", "Poise", "Depend",
+        "WypAll", "Kimtech"
+      ]
+    },
+    {
+      "id": "estee-lauder",
+      "name": "Estée Lauder Companies",
+      "ticker": "EL",
+      "country": "US",
+      "industry": "Beauty & Cosmetics",
+      "brands": [
+        "Estée Lauder", "Clinique", "MAC", "Bobbi Brown", "La Mer",
+        "Origins", "Aveda", "Bumble and bumble", "Jo Malone London",
+        "Tom Ford Beauty", "Too Faced", "Smashbox", "BECCA",
+        "Dr. Jart+", "Glamglow", "Le Labo", "Kilian Paris",
+        "Donna Karan Cosmetics", "AERIN", "Prescriptives"
+      ]
+    },
+    {
+      "id": "loreal",
+      "name": "L'Oréal",
+      "ticker": "LRLCY",
+      "country": "FR",
+      "industry": "Beauty & Cosmetics",
+      "brands": [
+        "L'Oréal Paris", "Maybelline", "Garnier", "NYX",
+        "Essie", "CeraVe", "La Roche-Posay", "Vichy", "SkinCeuticals",
+        "Lancôme", "Kiehl's", "Urban Decay", "IT Cosmetics",
+        "Redken", "Matrix", "Pureology", "Kérastase",
+        "Ralph Lauren Fragrances", "Yves Saint Laurent Beauty", "Giorgio Armani Beauty",
+        "Valentino Beauty", "Mugler", "Carol's Daughter",
+        "Baxter of California", "Thayers", "Aesop"
+      ]
+    },
+    {
+      "id": "revlon",
+      "name": "Revlon",
+      "ticker": "REV",
+      "country": "US",
+      "industry": "Beauty & Cosmetics",
+      "brands": [
+        "Revlon", "Elizabeth Arden", "Almay",
+        "American Crew", "Mitchum",
+        "Cutex", "Sinful Colors",
+        "Charlie", "Gatineau", "Creme of Nature"
+      ]
+    },
+    {
+      "id": "hershey",
+      "name": "The Hershey Company",
+      "ticker": "HSY",
+      "country": "US",
+      "industry": "Confectionery",
+      "brands": [
+        "Hershey's", "Reese's", "Kit Kat (US)", "Kisses",
+        "Jolly Rancher", "Twizzlers", "Ice Breakers", "Breath Savers",
+        "Almond Joy", "Mounds", "York",
+        "Cadbury (US)", "Rolo (US)", "Whoppers",
+        "SkinnyPop", "Pirate's Booty", "Dot's Pretzels",
+        "ONE Bar", "Lily's", "Bark Thins"
+      ]
+    },
+    {
+      "id": "mccormick",
+      "name": "McCormick & Company",
+      "ticker": "MKC",
+      "country": "US",
+      "industry": "Spices & Flavorings",
+      "brands": [
+        "McCormick", "French's", "Frank's RedHot",
+        "Old Bay", "Lawry's", "Zatarain's",
+        "Simply Asia", "Thai Kitchen", "Stubb's",
+        "Cholula", "Grill Mates", "Club House",
+        "Schwartz", "Ducros", "Kamis", "DaVinci Gourmet"
+      ]
+    },
+    {
+      "id": "spectrum-brands",
+      "name": "Spectrum Brands",
+      "ticker": "SPB",
+      "country": "US",
+      "industry": "Diversified Consumer Products",
+      "brands": [
+        "Remington", "George Foreman", "Black Flag",
+        "Cutter", "Repel", "Spectracide", "Hot Shot",
+        "Tetra", "Marineland", "Nature's Miracle",
+        "Good Boy", "Meaty Treats", "DreamBone",
+        "Kwikset", "Weiser", "Baldwin"
+      ]
+    },
+    {
+      "id": "energizer",
+      "name": "Energizer Holdings",
+      "ticker": "ENR",
+      "country": "US",
+      "industry": "Batteries / Personal Care",
+      "brands": [
+        "Energizer", "Eveready", "Rayovac", "VARTA",
+        "Armor All", "STP", "A/C Pro",
+        "Banana Boat", "Hawaiian Tropic",
+        "Playtex (gloves/household)", "Wet Ones", "HandiWipes",
+        "Schick (Energizer spun off Edgewell)"
+      ]
+    },
+    {
+      "id": "berkshire-duracell",
+      "name": "Berkshire Hathaway (Duracell)",
+      "ticker": "BRK.B",
+      "country": "US",
+      "industry": "Conglomerate / Batteries",
+      "brands": [
+        "Duracell", "Duracell Optimum", "Duracell Rechargeable",
+        "Kraft Heinz (major stake)", "Coca-Cola (major stake)",
+        "Dairy Queen", "See's Candies", "Fruit of the Loom", "Russell Athletic"
+      ]
+    },
+    {
+      "id": "bayer",
+      "name": "Bayer",
+      "ticker": "BAYRY",
+      "country": "DE",
+      "industry": "Pharmaceuticals / Consumer Health",
+      "brands": [
+        "Bayer Aspirin", "Aleve", "MiraLAX", "Claritin",
+        "Alka-Seltzer", "One A Day", "Flintstones Vitamins",
+        "Coppertone", "Dr. Scholl's (some markets)",
+        "Roundup (Monsanto)", "Berocca", "Canesten",
+        "Bepanthen", "Elevit", "Midol"
+      ]
+    },
+    {
+      "id": "abbott",
+      "name": "Abbott Laboratories",
+      "ticker": "ABT",
+      "country": "US",
+      "industry": "Healthcare / Nutrition",
+      "brands": [
+        "Similac", "Ensure", "Pedialyte", "PediaSure",
+        "Glucerna", "ZonePerfect", "EAS",
+        "FreeStyle (glucose monitors)", "BinaxNOW",
+        "Similac 360 Total Care", "EleCare", "Juven"
+      ]
+    },
+    {
+      "id": "haleon",
+      "name": "Haleon (formerly GSK Consumer)",
+      "ticker": "HLN",
+      "country": "UK",
+      "industry": "Consumer Health",
+      "brands": [
+        "Advil", "Centrum", "Caltrate", "Emergen-C",
+        "Excedrin", "Robitussin", "Theraflu", "Tums",
+        "Sensodyne", "parodontax", "Polident", "Poligrip",
+        "ChapStick", "Flonase", "Preparation H",
+        "Abreva", "Nexium 24HR", "Voltaren"
+      ]
+    },
+    {
+      "id": "edgewell",
+      "name": "Edgewell Personal Care",
+      "ticker": "EPC",
+      "country": "US",
+      "industry": "Personal Care",
+      "brands": [
+        "Schick", "Wilkinson Sword", "Skintimate",
+        "Edge", "Playtex (tampons)", "Carefree", "Stayfree",
+        "Banana Boat (former)", "Hawaiian Tropic (former)",
+        "Bulldog Skincare", "Jack Black", "Cremo", "Billie"
+      ]
+    },
+    {
+      "id": "prestige-consumer",
+      "name": "Prestige Consumer Healthcare",
+      "ticker": "PBH",
+      "country": "US",
+      "industry": "OTC Healthcare",
+      "brands": [
+        "Clear Eyes", "Compound W", "Dramamine",
+        "Fleet", "Luden's", "Chloraseptic",
+        "Monistat", "Nix", "BC Powder", "Goody's",
+        "DenTek", "Summer's Eve", "FiberCon",
+        "Debrox", "Little Remedies", "PediaCare"
+      ]
+    },
+    {
+      "id": "treehouse-foods",
+      "name": "TreeHouse Foods",
+      "ticker": "THS",
+      "country": "US",
+      "industry": "Private Label / Store Brand",
+      "brands": [
+        "TreeHouse (private label manufacturer)",
+        "Produces store-brand: coffee, crackers, pickles, salad dressing, broth, pasta, snack bars, candy",
+        "Customers include Walmart, Kroger, Target, Aldi, Costco"
+      ]
+    },
+    {
+      "id": "post-holdings",
+      "name": "Post Holdings",
+      "ticker": "POST",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Post", "Grape-Nuts", "Honeycomb", "Pebbles (Fruity/Cocoa)",
+        "Great Grains", "Honey Bunches of Oats", "Malt-O-Meal",
+        "Mom's Best", "Barbara's",
+        "Bob Evans (refrigerated sides)", "Michael Angelo's",
+        "Weetabix (stake)", "8th Continent",
+        "Peter Pan (peanut butter)", "Premier Protein", "Dymatize"
+      ]
+    },
+    {
+      "id": "bg-foods",
+      "name": "B&G Foods",
+      "ticker": "BGS",
+      "country": "US",
+      "industry": "Food & Beverage",
+      "brands": [
+        "Green Giant", "Le Sueur", "Cream of Wheat",
+        "Ortega", "Las Palmas", "Bear Creek",
+        "Clabber Girl", "Dash (seasoning)", "Ac'cent",
+        "Crisco", "Maple Grove Farms", "Spring Tree",
+        "Mrs. Dash", "Molly McButter",
+        "Victoria (pasta sauce)", "Wright's", "Polaner",
+        "SnackWell's", "Back to Nature", "B&M Baked Beans"
+      ]
+    },
+    {
+      "id": "pinnacle-foods",
+      "name": "Pinnacle Foods (now part of Conagra)",
+      "ticker": null,
+      "country": "US",
+      "industry": "Food & Beverage",
+      "note": "Acquired by Conagra in 2018. Brands now under Conagra.",
+      "brands": [
+        "Birds Eye", "Gardein", "Udi's", "Glutino",
+        "Earth Balance", "Evol", "Duncan Hines",
+        "Vlasic", "Mrs. Butterworth's", "Log Cabin",
+        "Wish-Bone (transferred)"
+      ]
+    },
+    {
+      "id": "bob-evans",
+      "name": "Bob Evans Farms (now Post Holdings)",
+      "ticker": null,
+      "country": "US",
+      "industry": "Food",
+      "note": "Acquired by Post Holdings in 2018.",
+      "brands": [
+        "Bob Evans", "Bob Evans Grocery (refrigerated sides, sausage, mac & cheese)"
+      ]
+    },
+    {
+      "id": "dean-foods",
+      "name": "Dean Foods (defunct — 2019 bankruptcy)",
+      "ticker": null,
+      "country": "US",
+      "industry": "Dairy",
+      "note": "Filed bankruptcy 2019; assets sold to Dairy Farmers of America.",
+      "brands": [
+        "Dean's", "TruMoo", "DairyPure", "Land O'Lakes (fluid milk license)",
+        "Meadow Gold", "Tuscan", "Garelick Farms",
+        "Lehigh Valley", "Berkeley Farms"
+      ]
+    },
+    {
+      "id": "land-o-lakes",
+      "name": "Land O'Lakes",
+      "ticker": null,
+      "country": "US",
+      "industry": "Dairy / Agriculture",
+      "brands": [
+        "Land O'Lakes Butter", "Land O'Lakes Cheese",
+        "Kozy Shack", "Purina (animal feed — different from Nestlé Purina pet)",
+        "WinField United (ag)"
+      ]
+    },
+    {
+      "id": "ocean-spray",
+      "name": "Ocean Spray",
+      "ticker": null,
+      "country": "US",
+      "industry": "Beverages / Fruit",
+      "brands": [
+        "Ocean Spray Cranberry Juice", "Ocean Spray Craisins",
+        "Ocean Spray Juice Blends", "Ocean Spray Sparkling",
+        "Diet Ocean Spray", "Ocean Spray Growing Goodness"
+      ]
+    },
+    {
+      "id": "keurig-dr-pepper",
+      "name": "Keurig Dr Pepper",
+      "ticker": "KDP",
+      "country": "US",
+      "industry": "Beverages",
+      "brands": [
+        "Dr Pepper", "7UP", "A&W Root Beer", "Sunkist Soda",
+        "Canada Dry", "Squirt", "Vernors", "RC Cola",
+        "Snapple", "Mott's", "Clamato", "Hawaiian Punch",
+        "Yoo-hoo", "Bai", "Core",
+        "Keurig", "K-Cup", "Green Mountain Coffee",
+        "The Original Donut Shop", "Laughing Man",
+        "Krispy Kreme (at-home)", "Timothy's", "Van Houtte"
+      ]
+    },
+    {
+      "id": "monster-beverage",
+      "name": "Monster Beverage",
+      "ticker": "MNST",
+      "country": "US",
+      "industry": "Beverages",
+      "brands": [
+        "Monster Energy", "Monster Ultra", "Monster Rehab",
+        "Monster Java", "Reign", "NOS",
+        "Full Throttle", "Burn", "Mother",
+        "Predator", "Fury"
+      ]
+    },
+    {
+      "id": "red-bull",
+      "name": "Red Bull",
+      "ticker": null,
+      "country": "AT",
+      "industry": "Beverages",
+      "brands": [
+        "Red Bull", "Red Bull Sugarfree", "Red Bull Zero",
+        "Red Bull Editions", "Red Bull Organics"
+      ]
+    },
+    {
+      "id": "ab-inbev",
+      "name": "Anheuser-Busch InBev",
+      "ticker": "BUD",
+      "country": "BE",
+      "industry": "Alcoholic Beverages",
+      "brands": [
+        "Budweiser", "Bud Light", "Michelob Ultra", "Natural Light", "Busch",
+        "Stella Artois", "Beck's", "Corona", "Modelo", "Negra Modelo",
+        "Hoegaarden", "Leffe", "Goose Island", "Elysian",
+        "10 Barrel", "Wicked Weed", "Devils Backbone",
+        "Shock Top", "Landshark", "Rolling Rock",
+        "Cutwater Spirits", "Nutrl", "Babe Wine"
+      ]
+    },
+    {
+      "id": "molson-coors",
+      "name": "Molson Coors Beverage Company",
+      "ticker": "TAP",
+      "country": "US/CA",
+      "industry": "Alcoholic Beverages",
+      "brands": [
+        "Coors Light", "Coors Banquet", "Miller Lite", "Miller High Life",
+        "Miller Genuine Draft", "Milwaukee's Best",
+        "Molson Canadian", "Molson Export", "Carling",
+        "Blue Moon", "Leinenkugel's", "Peroni", "Pilsner Urquell",
+        "Staropramen", "Hop Valley",
+        "Vizzy", "Topo Chico Hard Seltzer", "Simply Spiked",
+        "Keystone Light", "Steel Reserve", "Hamm's",
+        "Arnold Palmer Spiked", "ZOA Energy"
+      ]
+    }
+  ]
+}
