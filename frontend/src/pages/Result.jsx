@@ -267,8 +267,28 @@ export default function Result() {
         </div>
       )}
 
-      {/* Scan again */}
-      <div className="text-center pt-2 pb-4">
+      {/* Share + Scan again */}
+      <div className="text-center pt-2 pb-4 space-y-3">
+        {parentCompany && navigator.share && (
+          <button
+            onClick={() => {
+              const pct = beliefResult ? Math.round(((beliefResult.score + 1) / 2) * 100) : null;
+              const text = beliefResult?.dealBreakerHit
+                ? `🚫 ${parentCompany.name} (makes ${product.name || product.brand}) hit one of my deal breakers on DollarVote!`
+                : pct != null
+                  ? `${pct >= 60 ? '👍' : '👎'} ${parentCompany.name} (makes ${product.name || product.brand}) scores ${pct}% aligned with my values on DollarVote!`
+                  : `I just looked up ${product.name || product.brand} on DollarVote — it's made by ${parentCompany.name}!`;
+              navigator.share({
+                title: 'DollarVote — Vote With Your Dollar',
+                text,
+                url: 'https://dollarvote.app',
+              }).catch(() => {});
+            }}
+            className="inline-block px-8 py-3 bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-600 transition-colors mr-2"
+          >
+            📤 Share
+          </button>
+        )}
         <Link
           to="/"
           className="inline-block px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors"
