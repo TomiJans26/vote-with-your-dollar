@@ -100,12 +100,19 @@ export default function Result() {
       <div className="p-6 text-center space-y-4">
         <div className="text-5xl">😕</div>
         <h2 className="text-lg font-bold text-gray-800">Product Not Found</h2>
-        <p className="text-sm text-gray-600">
-          We couldn't find a product for barcode <span className="font-mono bg-gray-100 px-2 py-0.5 rounded">{upc}</span>
+        <p className="text-sm text-gray-600">{error}</p>
+        <p className="text-xs text-gray-400">
+          Barcode: <span className="font-mono bg-gray-100 px-2 py-0.5 rounded">{upc}</span>
         </p>
-        <Link to="/" className="inline-block mt-4 px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold">
-          Scan Again
-        </Link>
+        <div className="pt-2 space-y-2">
+          <Link to="/" className="inline-block px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold">
+            🔍 Search by Brand
+          </Link>
+          <p className="text-xs text-gray-400">
+            Not all products have barcodes in our database yet.<br/>
+            Try searching by brand name — we track 100+ companies and 600+ brands!
+          </p>
+        </div>
       </div>
     );
   }

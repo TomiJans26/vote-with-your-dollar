@@ -34,11 +34,27 @@ _categories_raw = _load_json("product-categories.json")["categories"]
 _pacs_raw = _load_json("fec-pac-names.json")["pacs"]
 _company_issues_data = _load_json("company-issues.json")
 
+
+# ---------------------------------------------------------------------------
+# Helpers (must be before brand_map build)
+# ---------------------------------------------------------------------------
+import re as _re
+
+def _normalize(s: str) -> str:
+    # Strip parenthetical notes like "(via Swedish Match acquisition)"
+    s = _re.sub(r'\s*\(.*?\)', '', s)
+    return s.lower().replace("-", "").replace(" ", "").replace("'", "").replace("\u2019", "").strip()
+
+
 # Build lookups
 brand_map: dict[str, dict] = {}
 for c in _companies_raw:
     for b in c.get("brands", []):
         brand_map[b.lower()] = c
+        # Also index normalized version (strips parentheticals)
+        norm_key = _normalize(b)
+        if norm_key and norm_key not in brand_map:
+            brand_map[norm_key] = c
 
 company_map: dict[str, dict] = {c["id"]: c for c in _companies_raw}
 pac_map: dict[str, dict] = {p["companyId"]: p for p in _pacs_raw}
@@ -46,13 +62,6 @@ pac_map: dict[str, dict] = {p["companyId"]: p for p in _pacs_raw}
 # FEC cache
 _fec_cache: dict[str, tuple[dict, float]] = {}
 FEC_CACHE_TTL = 3600
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-def _normalize(s: str) -> str:
-    return s.lower().replace("-", "").replace(" ", "").replace("'", "").replace("\u2019", "").strip()
 
 
 def find_parent_company(brand: str | None, product_name: str | None = None):
@@ -214,9 +223,35 @@ def scan_product(upc: str, authorization: str = Header(None), db: Session = Depe
             "category": None, "political": political, "companyIssues": company_issues,
         }
 
+    # Handle brand-name lookups (e.g., "brand-zyn")
+    if upc.startswith("brand-"):
+        brand_query = upc[6:]
+        parent = find_parent_company(brand_query)
+        if not parent:
+            raise HTTPException(404, {"error": f"Brand '{brand_query}' not found in our database", "upc": upc})
+        political = get_company_political_data(parent["id"])
+        company_issues = _company_issues_data.get(parent["id"], {}).get("issues", {})
+        # Find which brand matched, use clean name
+        matched_brand = brand_query.title()
+        bq_norm = _normalize(brand_query)
+        for b in parent.get("brands", []):
+            if bq_norm == _normalize(b):
+                # Strip parenthetical from display name
+                matched_brand = _re.sub(r'\s*\(.*?\)', '', b).strip()
+                break
+        return {
+            "product": {"name": matched_brand, "brand": matched_brand,
+                        "image": None, "barcode": None, "categories": parent.get("industry")},
+            "parentCompany": {"id": parent["id"], "name": parent["name"],
+                              "ticker": parent.get("ticker"), "industry": parent.get("industry")},
+            "category": None, "political": political, "companyIssues": company_issues,
+        }
+
     product = lookup_barcode(upc)
     if not product:
-        raise HTTPException(404, {"error": "Product not found", "upc": upc})
+        # Fallback: try matching barcode digits against UPC databases failed,
+        # return helpful error with suggestion to search by brand name
+        raise HTTPException(404, {"error": "Product not found in barcode databases. Try searching by brand name instead.", "upc": upc})
 
     parent_company = find_parent_company(product.get("brand"), product.get("name"))
     category = guess_category(product)
