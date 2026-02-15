@@ -117,6 +117,24 @@ export function logout() {
   setUser(null);
 }
 
+export async function verifyEmail(code) {
+  const res = await authFetch(`${BASE}/auth/verify-email`, {
+    method: 'POST',
+    body: JSON.stringify({ code }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(extractError(data, 'Verification failed'));
+  if (data.user) setUser(data.user);
+  return data;
+}
+
+export async function resendVerification() {
+  const res = await authFetch(`${BASE}/auth/resend-verification`, { method: 'POST' });
+  const data = await res.json();
+  if (!res.ok) throw new Error(extractError(data, 'Failed to resend'));
+  return data;
+}
+
 export async function getMe() {
   const res = await authFetch(`${BASE}/auth/me`);
   if (!res.ok) return null;

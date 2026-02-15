@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import VerifyEmail from './pages/VerifyEmail';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
@@ -26,9 +27,24 @@ function RequireAuth({ children }) {
   return children;
 }
 
+function RequireVerified({ children }) {
+  if (!isAuthenticated()) {
+    return <Navigate to="/register" replace />;
+  }
+  const u = getStoredUser();
+  if (u && !u.email_verified) {
+    return <Navigate to="/verify-email" replace />;
+  }
+  return children;
+}
+
 function RequireOnboarding({ children }) {
   if (!isAuthenticated()) {
     return <Navigate to="/register" replace />;
+  }
+  const u = getStoredUser();
+  if (u && !u.email_verified) {
+    return <Navigate to="/verify-email" replace />;
   }
   if (!hasCompletedOnboarding()) {
     return <Navigate to="/onboarding" replace />;
@@ -64,7 +80,8 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser, handleLogout }}>
       <Routes>
-        <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
+        <Route path="/verify-email" element={<RequireAuth><VerifyEmail /></RequireAuth>} />
+        <Route path="/onboarding" element={<RequireVerified><Onboarding /></RequireVerified>} />
         <Route path="/login" element={<Login onAuth={handleAuth} />} />
         <Route path="/register" element={<Register onAuth={handleAuth} />} />
         <Route path="/terms" element={<Terms />} />

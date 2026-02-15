@@ -29,7 +29,7 @@ export default function Register({ onAuth }) {
     try {
       const data = await register(username, email, password);
       onAuth?.(data.user);
-      navigate('/onboarding');
+      navigate('/verify-email');
     } catch (err) {
       setError(err.message);
     } finally {

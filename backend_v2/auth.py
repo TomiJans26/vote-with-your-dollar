@@ -1,6 +1,7 @@
 import re
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt as pyjwt
@@ -9,6 +10,7 @@ from database import get_db
 from models import User
 from schemas import RegisterRequest, LoginRequest, AuthResponse, TokenResponse, UserResponse
 from config import settings
+from email_utils import generate_verify_code, send_verification_email, VERIFY_CODE_EXPIRY_MINUTES
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -94,10 +96,20 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
     if db.query(User).filter_by(username=username).first():
         raise HTTPException(409, "Username already taken")
 
-    user = User(email=email, username=username, password_hash=generate_password_hash(password))
+    code = generate_verify_code()
+    user = User(
+        email=email,
+        username=username,
+        password_hash=generate_password_hash(password),
+        email_verified=False,
+        verify_code=code,
+        verify_code_expires=datetime.now(timezone.utc) + timedelta(minutes=VERIFY_CODE_EXPIRY_MINUTES),
+    )
     db.add(user)
     db.commit()
     db.refresh(user)
+
+    send_verification_email(email, username, code)
 
     access, refresh = _create_tokens(user.id)
     return {"user": user.to_dict(), "access_token": access, "refresh_token": refresh}
@@ -132,6 +144,49 @@ def refresh(authorization: str = Header(None)):
 
     access = _create_token(user_id, timedelta(minutes=settings.JWT_ACCESS_EXPIRE_MINUTES), "access")
     return {"access_token": access}
+
+
+class VerifyRequest(BaseModel):
+    code: str
+
+
+@router.post("/verify-email")
+def verify_email(req: VerifyRequest, user: User = Depends(auth_required), db: Session = Depends(get_db)):
+    if user.email_verified:
+        return {"message": "Email already verified", "user": user.to_dict()}
+
+    if not user.verify_code:
+        raise HTTPException(400, "No verification code pending. Request a new one.")
+
+    if user.verify_code_expires and datetime.now(timezone.utc) > user.verify_code_expires.replace(tzinfo=timezone.utc) if user.verify_code_expires.tzinfo is None else user.verify_code_expires:
+        raise HTTPException(400, "Verification code expired. Request a new one.")
+
+    if req.code.strip() != user.verify_code:
+        raise HTTPException(400, "Invalid verification code")
+
+    user.email_verified = True
+    user.verify_code = None
+    user.verify_code_expires = None
+    db.commit()
+    db.refresh(user)
+    return {"message": "Email verified!", "user": user.to_dict()}
+
+
+@router.post("/resend-verification")
+def resend_verification(user: User = Depends(auth_required), db: Session = Depends(get_db)):
+    if user.email_verified:
+        return {"message": "Email already verified"}
+
+    code = generate_verify_code()
+    user.verify_code = code
+    user.verify_code_expires = datetime.now(timezone.utc) + timedelta(minutes=VERIFY_CODE_EXPIRY_MINUTES)
+    db.commit()
+
+    sent = send_verification_email(user.email, user.username, code)
+    if not sent:
+        raise HTTPException(500, "Failed to send verification email. Please try again.")
+
+    return {"message": "Verification code sent!"}
 
 
 @router.get("/me")

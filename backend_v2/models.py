@@ -18,6 +18,9 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False, index=True)
     username = Column(String(80), unique=True, nullable=False, index=True)
     password_hash = Column(String(255), nullable=False)
+    email_verified = Column(Boolean, default=False)
+    verify_code = Column(String(10), nullable=True)
+    verify_code_expires = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=_utcnow)
     updated_at = Column(DateTime, default=_utcnow, onupdate=_utcnow)
 
@@ -29,6 +32,7 @@ class User(Base):
             "id": self.id,
             "email": self.email,
             "username": self.username,
+            "email_verified": self.email_verified,
             "created_at": self.created_at.isoformat() if self.created_at else None,
         }
 
