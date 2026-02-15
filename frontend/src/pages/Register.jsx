@@ -10,6 +10,7 @@ export default function Register({ onAuth }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,9 +100,24 @@ export default function Register({ onAuth }) {
             />
           </div>
 
+          <label className="flex items-start gap-2 text-xs text-gray-500 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={e => setAgreed(e.target.checked)}
+              className="mt-0.5 accent-teal-600"
+            />
+            <span>
+              I agree to the{' '}
+              <Link to="/terms" className="text-teal-600 hover:underline" target="_blank">Terms of Service</Link>
+              {' '}and{' '}
+              <Link to="/privacy" className="text-teal-600 hover:underline" target="_blank">Privacy Policy</Link>
+            </span>
+          </label>
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !agreed}
             className="w-full py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors disabled:opacity-50"
           >
             {loading ? 'Creating account...' : 'Create Account'}

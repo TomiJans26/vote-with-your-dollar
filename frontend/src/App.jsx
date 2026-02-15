@@ -9,6 +9,8 @@ import History from './pages/History';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
@@ -65,6 +67,8 @@ export default function App() {
         <Route path="/onboarding" element={<RequireAuth><Onboarding /></RequireAuth>} />
         <Route path="/login" element={<Login onAuth={handleAuth} />} />
         <Route path="/register" element={<Register onAuth={handleAuth} />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route element={<Layout />}>
           <Route index element={<RequireOnboarding><Scanner /></RequireOnboarding>} />
           <Route path="/result/:upc" element={<Result />} />

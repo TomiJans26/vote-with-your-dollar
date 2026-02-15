@@ -1,0 +1,135 @@
+{
+  "categories": [
+    {
+      "id": "beverages",
+      "name": "Beverages",
+      "subcategories": [
+        "water", "soda", "juice", "sports-drinks", "energy-drinks", "tea", "coffee",
+        "beer", "wine", "spirits", "plant-based-milk", "dairy-milk", "kombucha"
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "Snacks",
+      "subcategories": [
+        "chips", "crackers", "cookies", "candy", "chocolate", "nuts", "granola-bars",
+        "popcorn", "pretzels", "fruit-snacks", "jerky", "trail-mix"
+      ]
+    },
+    {
+      "id": "dairy",
+      "name": "Dairy & Eggs",
+      "subcategories": [
+        "milk", "cheese", "yogurt", "butter", "cream", "eggs", "ice-cream",
+        "sour-cream", "cottage-cheese", "cream-cheese"
+      ]
+    },
+    {
+      "id": "cereal-breakfast",
+      "name": "Cereal & Breakfast",
+      "subcategories": [
+        "cereal", "oatmeal", "pancake-mix", "syrup", "granola", "breakfast-bars", "toaster-pastries"
+      ]
+    },
+    {
+      "id": "condiments-sauces",
+      "name": "Condiments & Sauces",
+      "subcategories": [
+        "ketchup", "mustard", "mayonnaise", "salad-dressing", "hot-sauce",
+        "soy-sauce", "bbq-sauce", "pasta-sauce", "salsa", "vinegar", "spices"
+      ]
+    },
+    {
+      "id": "canned-packaged",
+      "name": "Canned & Packaged Foods",
+      "subcategories": [
+        "canned-soup", "canned-vegetables", "canned-fruit", "canned-beans",
+        "canned-tuna", "pasta", "rice", "mac-and-cheese", "ramen"
+      ]
+    },
+    {
+      "id": "frozen",
+      "name": "Frozen Foods",
+      "subcategories": [
+        "frozen-meals", "frozen-pizza", "frozen-vegetables", "frozen-fruit",
+        "ice-cream", "frozen-breakfast", "frozen-snacks", "frozen-meat"
+      ]
+    },
+    {
+      "id": "meat-protein",
+      "name": "Meat & Protein",
+      "subcategories": [
+        "chicken", "beef", "pork", "turkey", "deli-meat", "hot-dogs",
+        "sausage", "bacon", "plant-based-meat", "tofu", "seafood"
+      ]
+    },
+    {
+      "id": "bread-bakery",
+      "name": "Bread & Bakery",
+      "subcategories": [
+        "bread", "bagels", "tortillas", "rolls", "english-muffins", "baked-goods"
+      ]
+    },
+    {
+      "id": "baby",
+      "name": "Baby Products",
+      "subcategories": [
+        "baby-food", "baby-formula", "diapers", "baby-wipes", "baby-care"
+      ]
+    },
+    {
+      "id": "personal-care",
+      "name": "Personal Care",
+      "subcategories": [
+        "shampoo", "conditioner", "body-wash", "soap", "deodorant", "toothpaste",
+        "mouthwash", "razor", "shaving-cream", "lotion", "sunscreen", "lip-balm"
+      ]
+    },
+    {
+      "id": "skincare-beauty",
+      "name": "Skincare & Beauty",
+      "subcategories": [
+        "face-wash", "moisturizer", "makeup", "foundation", "mascara",
+        "hair-color", "hair-styling", "nail-care", "perfume", "cologne"
+      ]
+    },
+    {
+      "id": "cleaning",
+      "name": "Cleaning Products",
+      "subcategories": [
+        "laundry-detergent", "dish-soap", "all-purpose-cleaner", "bathroom-cleaner",
+        "glass-cleaner", "disinfectant", "bleach", "fabric-softener", "dryer-sheets"
+      ]
+    },
+    {
+      "id": "paper-goods",
+      "name": "Paper & Household Goods",
+      "subcategories": [
+        "paper-towels", "toilet-paper", "tissues", "trash-bags",
+        "aluminum-foil", "plastic-wrap", "storage-bags"
+      ]
+    },
+    {
+      "id": "pet",
+      "name": "Pet Products",
+      "subcategories": [
+        "dog-food", "cat-food", "pet-treats", "pet-care"
+      ]
+    },
+    {
+      "id": "health-wellness",
+      "name": "Health & Wellness",
+      "subcategories": [
+        "vitamins", "supplements", "otc-medicine", "first-aid",
+        "pain-relief", "allergy", "digestive-health"
+      ]
+    },
+    {
+      "id": "batteries-household",
+      "name": "Batteries & Household",
+      "subcategories": [
+        "batteries", "light-bulbs", "air-freshener", "pest-control", "candles"
+      ]
+    }
+  ]
+}

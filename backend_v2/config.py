@@ -46,7 +46,7 @@ class Settings:
     ).split(",")
 
     # Data files
-    DATA_DIR: str = os.path.join(basedir, "..", "data")
+    DATA_DIR: str = os.environ.get("DATA_DIR", os.path.join(basedir, "data"))
 
 
 settings = Settings()
