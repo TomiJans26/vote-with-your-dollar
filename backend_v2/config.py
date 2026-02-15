@@ -11,13 +11,22 @@ class Settings:
     JWT_REFRESH_EXPIRE_DAYS: int = 30
     JWT_ALGORITHM: str = "HS256"
 
-    # MSSQL
+    # Database — supports PostgreSQL (production) and MSSQL (local dev)
+    DATABASE_URL_ENV: str = os.environ.get("DATABASE_URL", "")
     MSSQL_DRIVER: str = os.environ.get("MSSQL_DRIVER", "ODBC Driver 17 for SQL Server")
     MSSQL_SERVER: str = os.environ.get("MSSQL_SERVER", r".\SQLEXPRESS01")
     MSSQL_DATABASE: str = os.environ.get("MSSQL_DATABASE", "DollarVote")
 
     @property
     def DATABASE_URL(self) -> str:
+        # If DATABASE_URL is set (Railway/production), use it
+        if self.DATABASE_URL_ENV:
+            url = self.DATABASE_URL_ENV
+            # SQLAlchemy needs postgresql:// not postgres://
+            if url.startswith("postgres://"):
+                url = url.replace("postgres://", "postgresql://", 1)
+            return url
+        # Otherwise fall back to local MSSQL
         from urllib.parse import quote_plus
         conn = (
             f"DRIVER={{{self.MSSQL_DRIVER}}};"
@@ -33,7 +42,7 @@ class Settings:
 
     # CORS
     CORS_ORIGINS: list[str] = os.environ.get(
-        "CORS_ORIGINS", "http://localhost:5173,http://localhost:3000"
+        "CORS_ORIGINS", "http://localhost:5173,http://localhost:3000,https://dollarvote.app,https://www.dollarvote.app"
     ).split(",")
 
     # Data files
