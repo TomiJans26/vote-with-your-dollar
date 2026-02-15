@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 import requests as http_requests
 
 from database import get_db
-from models import User, BeliefProfile, ScanHistory
+from models import User, BeliefProfile, ScanHistory, ClickEvent
 from schemas import SaveBeliefsRequest, AlternativesRequest
 from config import settings
 from auth import auth_required, auth_optional
@@ -48,6 +48,18 @@ def _amazon_link(product_name: str, brand: str = "") -> str:
     from urllib.parse import quote_plus
     query = f"{brand} {product_name}".strip() if brand else product_name
     return f"https://www.amazon.com/s?k={quote_plus(query)}&tag={AMAZON_AFFILIATE_TAG}"
+
+
+def _store_links(product_name: str, brand: str = "") -> dict:
+    """Generate store search links for Walmart, Target, Kroger."""
+    from urllib.parse import quote_plus
+    query = f"{brand} {product_name}".strip() if brand else product_name
+    q = quote_plus(query)
+    return {
+        "walmart": f"https://www.walmart.com/search?q={q}",
+        "target": f"https://www.target.com/s?searchTerm={q}",
+        "kroger": f"https://www.kroger.com/search?query={q}",
+    }
 
 
 def _normalize(s: str) -> str:
@@ -349,9 +361,11 @@ def _build_alternatives_response(category, company_id, upc, belief_profile):
                 if score_data["dealBreakerHit"]:
                     continue
                 prod["buyLink"] = _amazon_link(prod.get("name", ""), prod.get("brand", ""))
+                prod["storeLinks"] = _store_links(prod.get("name", ""), prod.get("brand", ""))
                 scored_results.append({**prod, "alignment": score_data})
             else:
                 prod["buyLink"] = _amazon_link(prod.get("name", ""), prod.get("brand", ""))
+                prod["storeLinks"] = _store_links(prod.get("name", ""), prod.get("brand", ""))
                 unscored_results.append({
                     **prod, "alignment": {
                         "score": 0, "pct": None, "dealBreakerHit": False,
@@ -443,6 +457,59 @@ def get_company_issues(company_id: str):
     if not issues:
         return {"companyId": company_id, "issues": {}}
     return {"companyId": company_id, **issues}
+
+
+# ---------------------------------------------------------------------------
+# Store finder + Click tracking
+# ---------------------------------------------------------------------------
+from pydantic import BaseModel as _BaseModel
+
+
+class ClickTrackRequest(_BaseModel):
+    brand: str = ""
+    companyId: str = ""
+    originalCompanyId: str = ""
+    linkType: str = ""  # amazon, walmart, target, kroger
+
+
+@router.post("/track/click")
+def track_click(req: ClickTrackRequest, authorization: str = Header(None),
+                db: Session = Depends(get_db)):
+    user = auth_optional(authorization, db)
+    try:
+        evt = ClickEvent(
+            user_id=user.id if user else None,
+            alternative_brand=req.brand,
+            alternative_company_id=req.companyId,
+            original_company_id=req.originalCompanyId,
+            link_type=req.linkType,
+        )
+        db.add(evt)
+        db.commit()
+    except Exception:
+        db.rollback()
+    return {"ok": True}
+
+
+@router.get("/stores/nearby")
+def stores_nearby(lat: float = Query(0), lng: float = Query(0),
+                  zip_code: str = Query("")):
+    """Find nearby Kroger-family stores. Accepts zip_code or lat/lng (zip preferred)."""
+    from kroger import find_locations
+    if not zip_code:
+        # Reverse-geocode lat/lng to zip is complex; for now require zip
+        return {"stores": [], "note": "Please provide zip_code parameter"}
+    stores = find_locations(zip_code, limit=5)
+    return {"stores": stores}
+
+
+@router.get("/product/availability")
+def product_availability(product_name: str = Query(""), store_id: str = Query("")):
+    from kroger import find_products
+    if not product_name or not store_id:
+        raise HTTPException(400, "product_name and store_id required")
+    products = find_products(product_name, store_id, limit=3)
+    return {"products": products}
 
 
 # ---------------------------------------------------------------------------

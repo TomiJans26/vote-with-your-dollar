@@ -225,6 +225,16 @@ export async function searchProducts(query) {
   return res.json();
 }
 
+export async function trackClick(brand, companyId, originalCompanyId, linkType) {
+  try {
+    fetch(`${BASE}/track/click`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ brand, companyId, originalCompanyId, linkType }),
+    });
+  } catch { /* fire-and-forget */ }
+}
+
 export async function getCompanyIssues(companyId) {
   const res = await authFetch(`${BASE}/company/${companyId}/issues`);
   if (!res.ok) return { companyId, issues: {} };

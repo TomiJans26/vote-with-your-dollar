@@ -157,6 +157,18 @@ class ScanHistory(Base):
     product = relationship("Product")
 
 
+class ClickEvent(Base):
+    __tablename__ = "click_events"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    alternative_brand = Column(String(255))
+    alternative_company_id = Column(String(100))
+    original_company_id = Column(String(100))
+    link_type = Column(String(50))  # amazon, walmart, target, kroger
+    clicked_at = Column(DateTime, default=_utcnow)
+
+
 class ProductCategory(Base):
     __tablename__ = "product_categories"
 

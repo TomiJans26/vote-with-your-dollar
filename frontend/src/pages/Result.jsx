@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { scanProduct, getAlternatives } from '../lib/api';
+import { scanProduct, getAlternatives, trackClick } from '../lib/api';
 import { getPrefs, getAlignment, getBeliefProfile, getBeliefAlignment, hasCompletedOnboarding } from '../lib/prefs';
 import DonationBar from '../components/DonationBar';
 import AlignmentBadge from '../components/AlignmentBadge';
@@ -58,6 +58,46 @@ function AlignmentHero({ score, beliefResult }) {
       )}
       {beliefResult?.dealBreakerHit && (
         <p className="text-xs text-white/80 mt-1">This company conflicts with one of your deal-breaker issues</p>
+      )}
+    </div>
+  );
+}
+
+function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
+  const [open, setOpen] = useState(false);
+
+  const stores = [
+    { key: 'walmart', label: '🏬 Walmart', url: storeLinks.walmart },
+    { key: 'target', label: '🎯 Target', url: storeLinks.target },
+    { key: 'kroger', label: '🛒 Kroger', url: storeLinks.kroger },
+  ];
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center gap-1 px-4 py-2 bg-indigo-500 text-white text-xs font-semibold rounded-lg hover:bg-indigo-600 transition-colors"
+      >
+        🏪 Find in Store {open ? '▲' : '▼'}
+      </button>
+      {open && (
+        <div className="absolute left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-10 min-w-[160px] overflow-hidden">
+          {stores.map((s) => (
+            <a
+              key={s.key}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackClick(brand, companyId, originalCompanyId, s.key);
+                setOpen(false);
+              }}
+              className="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition-colors border-b border-gray-100 last:border-0"
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -257,15 +297,24 @@ export default function Result() {
                     ))}
                   </div>
                 )}
-                <div className="mt-3 flex items-center justify-between">
-                  {alt.buyLink ? (
-                    <a href={alt.buyLink} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-4 py-1.5 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 transition-colors">
-                      🛒 Buy This Instead
-                    </a>
-                  ) : alt.barcode ? (
-                    <span className="text-xs text-teal-600 font-semibold">Try this →</span>
-                  ) : <span />}
+                <div className="mt-3 space-y-2">
+                  <div className="flex flex-wrap gap-2">
+                    {alt.buyLink && (
+                      <a href={alt.buyLink} target="_blank" rel="noopener noreferrer"
+                        onClick={() => trackClick(alt.brand || alt.name, alt.parentCompany?.id || '', parentCompany?.id || '', 'amazon')}
+                        className="inline-flex items-center gap-1 px-4 py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+                        📦 Order Online
+                      </a>
+                    )}
+                    {alt.storeLinks && (
+                      <StoreDropdown
+                        storeLinks={alt.storeLinks}
+                        brand={alt.brand || alt.name || ''}
+                        companyId={alt.parentCompany?.id || ''}
+                        originalCompanyId={parentCompany?.id || ''}
+                      />
+                    )}
+                  </div>
                   <span className="text-[10px] text-gray-300">affiliate link</span>
                 </div>
               </div>
