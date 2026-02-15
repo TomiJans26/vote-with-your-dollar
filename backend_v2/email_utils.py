@@ -2,17 +2,12 @@
 import os
 import random
 import string
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import requests
 from datetime import datetime, timedelta, timezone
 
 
-SMTP_HOST = os.environ.get("SMTP_HOST", "smtp-mail.outlook.com")
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
-SMTP_USER = os.environ.get("SMTP_USER", "")
-SMTP_PASS = os.environ.get("SMTP_PASS", "")
-FROM_EMAIL = os.environ.get("FROM_EMAIL", SMTP_USER)
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+FROM_EMAIL = os.environ.get("FROM_EMAIL", "noreply@dollarvote.app")
 VERIFY_CODE_EXPIRY_MINUTES = 15
 
 
@@ -22,17 +17,15 @@ def generate_verify_code() -> str:
 
 
 def send_verification_email(to_email: str, username: str, code: str) -> bool:
-    """Send a verification code email. Returns True on success."""
-    if not SMTP_USER or not SMTP_PASS:
-        print(f"[EMAIL] SMTP not configured. Code for {to_email}: {code}")
+    """Send a verification code email via Resend API. Returns True on success."""
+    if not RESEND_API_KEY:
+        print(f"[EMAIL] Resend not configured. Code for {to_email}: {code}")
         return True  # Don't block registration if email isn't configured
-
-    subject = f"DollarVote - Your verification code: {code}"
 
     html = f"""
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
         <div style="text-align: center; margin-bottom: 24px;">
-            <h1 style="color: #0d9488; margin: 0;">🗳️ DollarVote</h1>
+            <h1 style="color: #0d9488; margin: 0;">DollarVote</h1>
             <p style="color: #6b7280; margin: 4px 0 0;">Vote With Your Dollar</p>
         </div>
         <div style="background: #f9fafb; border-radius: 12px; padding: 24px; text-align: center;">
@@ -49,20 +42,27 @@ def send_verification_email(to_email: str, username: str, code: str) -> bool:
     </div>
     """
 
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"] = f"DollarVote <{FROM_EMAIL}>"
-    msg["To"] = to_email
-    msg.attach(MIMEText(f"Your DollarVote verification code is: {code}\n\nThis code expires in {VERIFY_CODE_EXPIRY_MINUTES} minutes.", "plain"))
-    msg.attach(MIMEText(html, "html"))
-
     try:
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=10) as server:
-            server.starttls()
-            server.login(SMTP_USER, SMTP_PASS)
-            server.sendmail(FROM_EMAIL, to_email, msg.as_string())
-        print(f"[EMAIL] Verification sent to {to_email}")
-        return True
+        res = requests.post(
+            "https://api.resend.com/emails",
+            headers={
+                "Authorization": f"Bearer {RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "from": f"DollarVote <{FROM_EMAIL}>",
+                "to": [to_email],
+                "subject": f"DollarVote - Your verification code: {code}",
+                "html": html,
+            },
+            timeout=10,
+        )
+        if res.status_code in (200, 201):
+            print(f"[EMAIL] Verification sent to {to_email}")
+            return True
+        else:
+            print(f"[EMAIL] Resend error {res.status_code}: {res.text}")
+            return False
     except Exception as e:
         print(f"[EMAIL] Failed to send to {to_email}: {e}")
         return False
