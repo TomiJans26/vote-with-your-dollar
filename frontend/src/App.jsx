@@ -5,6 +5,7 @@ import Scanner from './pages/Scanner';
 import Result from './pages/Result';
 import Settings from './pages/Settings';
 import About from './pages/About';
+import History from './pages/History';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -67,6 +68,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<RequireOnboarding><Scanner /></RequireOnboarding>} />
           <Route path="/result/:upc" element={<Result />} />
+          <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
         </Route>

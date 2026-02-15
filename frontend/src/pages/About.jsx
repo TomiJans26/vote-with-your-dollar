@@ -42,7 +42,7 @@ export default function About() {
           <h3 className="font-bold text-teal-800 mb-1">Data Sources</h3>
           <ul className="list-disc ml-4 space-y-1">
             <li><strong>Product data:</strong> Open Food Facts, UPCitemdb</li>
-            <li><strong>Company/brand mapping:</strong> Curated database of 50+ parent companies and 600+ brands</li>
+            <li><strong>Company/brand mapping:</strong> Curated database of 100+ parent companies and 600+ brands</li>
             <li><strong>Political donations:</strong> Federal Election Commission (FEC) via OpenFEC API</li>
             <li><strong>Company issue stances:</strong> Curated from public reports, news, and corporate disclosures</li>
           </ul>
@@ -61,8 +61,9 @@ export default function About() {
         <section>
           <h3 className="font-bold text-teal-800 mb-1">Privacy</h3>
           <p>
-            Your belief profile is stored locally on your device. We don't track your scans
-            or sell any data. This is an open-source project.
+            Your belief profile is stored locally and synced to your account when signed in.
+            Scan history is saved to help you track your shopping habits over time.
+            We never sell individual user data. Period.
           </p>
         </section>
       </div>

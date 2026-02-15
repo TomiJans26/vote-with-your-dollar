@@ -80,6 +80,12 @@ async function refreshAccessToken() {
 // ---------------------------------------------------------------------------
 // Auth API
 // ---------------------------------------------------------------------------
+function extractError(data, fallback) {
+  if (typeof data.detail === 'string') return data.detail;
+  if (data.detail?.error) return data.detail.error;
+  return data.error || data.message || fallback;
+}
+
 export async function register(username, email, password) {
   const res = await fetch(`${BASE}/auth/register`, {
     method: 'POST',
@@ -87,7 +93,7 @@ export async function register(username, email, password) {
     body: JSON.stringify({ username, email, password }),
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Registration failed');
+  if (!res.ok) throw new Error(extractError(data, 'Registration failed'));
   setTokens(data.access_token, data.refresh_token);
   setUser(data.user);
   return data;
@@ -100,7 +106,7 @@ export async function login(email, password) {
     body: JSON.stringify({ email, password }),
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Login failed');
+  if (!res.ok) throw new Error(extractError(data, 'Login failed'));
   setTokens(data.access_token, data.refresh_token);
   setUser(data.user);
   return data;
@@ -156,7 +162,7 @@ export async function getScanHistory() {
 
 export async function deleteAccount() {
   const res = await authFetch(`${BASE}/profile`, { method: 'DELETE' });
-  if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || 'Failed'); }
+  if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(extractError(d, 'Failed')); }
   clearTokens();
   setUser(null);
   return true;
@@ -169,7 +175,7 @@ export async function scanProduct(upc) {
   const res = await authFetch(`${BASE}/scan/${upc}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || 'Product not found');
+    throw new Error(extractError(err, 'Product not found'));
   }
   return res.json();
 }
@@ -191,7 +197,7 @@ export async function getAlternatives(category, companyId, upc, beliefProfile) {
 
 export async function getCompany(companyId) {
   const res = await authFetch(`${BASE}/company/${companyId}`);
-  if (!res.ok) throw new Error('Company not found');
+  if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(extractError(d, 'Company not found')); }
   return res.json();
 }
 

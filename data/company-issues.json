@@ -1,402 +1,2352 @@
 {
   "procter-gamble": {
     "issues": {
-      "lgbtq_rights": { "stance": 0.5, "confidence": "medium", "notes": "Strong workplace LGBTQ+ protections, Pride campaigns" },
-      "racial_justice": { "stance": 0.4, "confidence": "medium", "notes": "'The Talk' ad campaign, diversity commitments" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainability goals but significant packaging waste" },
-      "animal_rights": { "stance": -0.3, "confidence": "medium", "notes": "Still conducts some animal testing for regulatory compliance" }
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Strong workplace LGBTQ+ protections, Pride campaigns"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "'The Talk' ad campaign, diversity commitments"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainability goals but significant packaging waste"
+      },
+      "animal_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Still conducts some animal testing for regulatory compliance"
+      }
     }
   },
   "unilever": {
     "issues": {
-      "climate_change": { "stance": 0.5, "confidence": "medium", "notes": "Strong sustainability commitments and reporting under Sustainable Living Plan" },
-      "workers_rights": { "stance": 0.4, "confidence": "medium", "notes": "Living wage commitments across supply chain" },
-      "environmental_regulations": { "stance": 0.4, "confidence": "medium", "notes": "Supports stronger environmental regulations" },
-      "racial_justice": { "stance": 0.3, "confidence": "medium", "notes": "Diversity and inclusion initiatives globally" },
-      "lgbtq_rights": { "stance": 0.4, "confidence": "medium", "notes": "Inclusive workplace policies and marketing" }
+      "climate_change": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Strong sustainability commitments and reporting under Sustainable Living Plan"
+      },
+      "workers_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Living wage commitments across supply chain"
+      },
+      "environmental_regulations": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Supports stronger environmental regulations"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Diversity and inclusion initiatives globally"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Inclusive workplace policies and marketing"
+      }
     }
   },
   "nestle": {
     "issues": {
-      "environmental_regulations": { "stance": -0.4, "confidence": "medium", "notes": "Major plastic polluter, water rights controversies in multiple countries" },
-      "workers_rights": { "stance": -0.5, "confidence": "medium", "notes": "Child labor concerns in cocoa supply chain" },
-      "universal_healthcare": { "stance": -0.3, "confidence": "low", "notes": "Controversial infant formula marketing in developing nations" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Net-zero pledges but slow progress relative to scale" },
-      "animal_rights": { "stance": -0.2, "confidence": "low", "notes": "Some animal testing, factory farming supply chain" }
+      "environmental_regulations": {
+        "stance": -0.4,
+        "confidence": "medium",
+        "notes": "Major plastic polluter, water rights controversies in multiple countries"
+      },
+      "workers_rights": {
+        "stance": -0.5,
+        "confidence": "medium",
+        "notes": "Child labor concerns in cocoa supply chain"
+      },
+      "universal_healthcare": {
+        "stance": -0.3,
+        "confidence": "low",
+        "notes": "Controversial infant formula marketing in developing nations"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Net-zero pledges but slow progress relative to scale"
+      },
+      "animal_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Some animal testing, factory farming supply chain"
+      }
     }
   },
   "pepsico": {
     "issues": {
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Net-zero emissions target by 2040, pep+ sustainability agenda" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainability commitments but significant plastic pollution" },
-      "racial_justice": { "stance": 0.4, "confidence": "medium", "notes": "$570M racial equality initiative announced 2020" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Mixed record — improved wages but supply chain concerns" }
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Net-zero emissions target by 2040, pep+ sustainability agenda"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainability commitments but significant plastic pollution"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "$570M racial equality initiative announced 2020"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Mixed record — improved wages but supply chain concerns"
+      }
     }
   },
   "coca-cola": {
     "issues": {
-      "environmental_regulations": { "stance": -0.3, "confidence": "medium", "notes": "Named world's largest plastic polluter multiple years running" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Has climate targets but progress is slow" },
-      "lgbtq_rights": { "stance": 0.5, "confidence": "medium", "notes": "Supports LGBTQ+ rights and workplace equality" },
-      "workers_rights": { "stance": -0.2, "confidence": "low", "notes": "Mixed record on labor practices globally, bottler controversies" },
-      "racial_justice": { "stance": 0.3, "confidence": "medium", "notes": "Diversity commitments and supplier diversity programs" }
+      "environmental_regulations": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Named world's largest plastic polluter multiple years running"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Has climate targets but progress is slow"
+      },
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Supports LGBTQ+ rights and workplace equality"
+      },
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Mixed record on labor practices globally, bottler controversies"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Diversity commitments and supplier diversity programs"
+      }
     }
   },
   "johnson-johnson": {
     "issues": {
-      "universal_healthcare": { "stance": -0.3, "confidence": "medium", "notes": "Lobbies to protect pharmaceutical pricing structures" },
-      "vaccine_policy": { "stance": 0.7, "confidence": "high", "notes": "Developed COVID-19 vaccine at cost, supports public vaccination" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Talc lawsuit controversies, manufacturing pollution concerns" },
-      "workers_rights": { "stance": 0.2, "confidence": "low", "notes": "Generally positive workplace policies" }
+      "universal_healthcare": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Lobbies to protect pharmaceutical pricing structures"
+      },
+      "vaccine_policy": {
+        "stance": 0.7,
+        "confidence": "high",
+        "notes": "Developed COVID-19 vaccine at cost, supports public vaccination"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Talc lawsuit controversies, manufacturing pollution concerns"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Generally positive workplace policies"
+      }
     }
   },
   "kraft-heinz": {
     "issues": {
-      "environmental_regulations": { "stance": -0.2, "confidence": "low", "notes": "Some sustainability targets but limited public advocacy" },
-      "workers_rights": { "stance": -0.3, "confidence": "medium", "notes": "Cost-cutting culture under 3G Capital management affected workers" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Set emissions reduction targets but behind peers" },
-      "animal_rights": { "stance": -0.3, "confidence": "low", "notes": "Major meat processor Oscar Mayer, limited welfare commitments" }
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Some sustainability targets but limited public advocacy"
+      },
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Cost-cutting culture under 3G Capital management affected workers"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Set emissions reduction targets but behind peers"
+      },
+      "animal_rights": {
+        "stance": -0.3,
+        "confidence": "low",
+        "notes": "Major meat processor Oscar Mayer, limited welfare commitments"
+      }
     }
   },
   "general-mills": {
     "issues": {
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Science-based emissions reduction targets, regenerative agriculture" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainable sourcing commitments for key ingredients" },
-      "lgbtq_rights": { "stance": 0.4, "confidence": "medium", "notes": "Workplace equality policies, filed amicus brief for marriage equality" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Generally positive labor relations" }
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Science-based emissions reduction targets, regenerative agriculture"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable sourcing commitments for key ingredients"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Workplace equality policies, filed amicus brief for marriage equality"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Generally positive labor relations"
+      }
     }
   },
   "kellanova": {
     "issues": {
-      "workers_rights": { "stance": -0.4, "confidence": "high", "notes": "Major 2021 strike over two-tier wage system and working conditions" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Some sustainability commitments but not industry-leading" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Packaging reduction goals" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "medium", "notes": "Inclusive workplace policies, Pride campaigns" }
+      "workers_rights": {
+        "stance": -0.4,
+        "confidence": "high",
+        "notes": "Major 2021 strike over two-tier wage system and working conditions"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some sustainability commitments but not industry-leading"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Packaging reduction goals"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Inclusive workplace policies, Pride campaigns"
+      }
     }
   },
   "mars": {
     "issues": {
-      "climate_change": { "stance": 0.4, "confidence": "medium", "notes": "Sustainable in a Generation plan, $1B climate investment" },
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Five Principles include mutuality, living wage efforts in supply chain" },
-      "environmental_regulations": { "stance": 0.3, "confidence": "medium", "notes": "Deforestation-free supply chain commitments" },
-      "animal_rights": { "stance": -0.2, "confidence": "low", "notes": "Pet food company, some animal testing for pet nutrition" },
-      "racial_justice": { "stance": 0.3, "confidence": "low", "notes": "Rebranded Uncle Ben's to Ben's Original addressing racial imagery" }
+      "climate_change": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Sustainable in a Generation plan, $1B climate investment"
+      },
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Five Principles include mutuality, living wage efforts in supply chain"
+      },
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Deforestation-free supply chain commitments"
+      },
+      "animal_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Pet food company, some animal testing for pet nutrition"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Rebranded Uncle Ben's to Ben's Original addressing racial imagery"
+      }
     }
   },
   "mondelez": {
     "issues": {
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Cocoa Life sustainability program but palm oil deforestation concerns" },
-      "workers_rights": { "stance": -0.3, "confidence": "medium", "notes": "Moved production to Mexico closing US plants, labor disputes" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "CO2 reduction targets set but progress varies" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Inclusive workplace policies" }
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Cocoa Life sustainability program but palm oil deforestation concerns"
+      },
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Moved production to Mexico closing US plants, labor disputes"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "CO2 reduction targets set but progress varies"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace policies"
+      }
     }
   },
   "colgate-palmolive": {
     "issues": {
-      "environmental_regulations": { "stance": 0.3, "confidence": "medium", "notes": "Recyclable toothpaste tubes, zero waste to landfill goals" },
-      "animal_rights": { "stance": 0.2, "confidence": "medium", "notes": "Reduced animal testing significantly, cruelty-free goals" },
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Net-zero carbon targets across operations" },
-      "workers_rights": { "stance": 0.2, "confidence": "low", "notes": "Generally positive workplace reputation" }
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Recyclable toothpaste tubes, zero waste to landfill goals"
+      },
+      "animal_rights": {
+        "stance": 0.2,
+        "confidence": "medium",
+        "notes": "Reduced animal testing significantly, cruelty-free goals"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Net-zero carbon targets across operations"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Generally positive workplace reputation"
+      }
     }
   },
   "church-dwight": {
     "issues": {
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Some green product lines but limited public advocacy" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Basic emissions reporting, not industry-leading" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance" }
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some green product lines but limited public advocacy"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Basic emissions reporting, not industry-leading"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      }
     }
   },
   "reckitt": {
     "issues": {
-      "universal_healthcare": { "stance": 0.2, "confidence": "low", "notes": "Health and hygiene mission, access to products programs" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainability targets for plastic reduction" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Some supply chain labor concerns in developing markets" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Carbon reduction commitments across operations" }
+      "universal_healthcare": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Health and hygiene mission, access to products programs"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainability targets for plastic reduction"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Some supply chain labor concerns in developing markets"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Carbon reduction commitments across operations"
+      }
     }
   },
   "henkel": {
     "issues": {
-      "climate_change": { "stance": 0.4, "confidence": "medium", "notes": "Climate positive by 2040 goal, strong German ESG culture" },
-      "environmental_regulations": { "stance": 0.3, "confidence": "medium", "notes": "Circular economy commitments, sustainable packaging" },
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Strong worker protections under German labor law, works councils" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Diversity and inclusion programs" }
+      "climate_change": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Climate positive by 2040 goal, strong German ESG culture"
+      },
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Circular economy commitments, sustainable packaging"
+      },
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Strong worker protections under German labor law, works councils"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Diversity and inclusion programs"
+      }
     }
   },
   "danone": {
     "issues": {
-      "climate_change": { "stance": 0.6, "confidence": "high", "notes": "B Corp certified, One Planet One Health mission, CEO fired partly for ESG focus" },
-      "environmental_regulations": { "stance": 0.5, "confidence": "medium", "notes": "Strong sustainable agriculture and packaging commitments" },
-      "workers_rights": { "stance": 0.4, "confidence": "medium", "notes": "Living wage commitments, employee ownership programs" },
-      "animal_rights": { "stance": 0.2, "confidence": "low", "notes": "Plant-based portfolio expansion with Silk and Alpro" },
-      "universal_healthcare": { "stance": 0.3, "confidence": "low", "notes": "Nutrition access programs in developing countries" }
+      "climate_change": {
+        "stance": 0.6,
+        "confidence": "high",
+        "notes": "B Corp certified, One Planet One Health mission, CEO fired partly for ESG focus"
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Strong sustainable agriculture and packaging commitments"
+      },
+      "workers_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Living wage commitments, employee ownership programs"
+      },
+      "animal_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Plant-based portfolio expansion with Silk and Alpro"
+      },
+      "universal_healthcare": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Nutrition access programs in developing countries"
+      }
     }
   },
   "conagra": {
     "issues": {
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Some sustainable packaging goals but limited advocacy" },
-      "workers_rights": { "stance": -0.2, "confidence": "low", "notes": "Plant closures and job cuts during restructuring" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Basic emissions reduction targets" },
-      "animal_rights": { "stance": 0.1, "confidence": "low", "notes": "Gardein plant-based brand but also major meat products" }
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable packaging goals but limited advocacy"
+      },
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Plant closures and job cuts during restructuring"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Basic emissions reduction targets"
+      },
+      "animal_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Gardein plant-based brand but also major meat products"
+      }
     }
   },
   "smuckers": {
     "issues": {
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Some sustainable sourcing for coffee" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Generally moderate employer, no major controversies" },
-      "animal_rights": { "stance": -0.1, "confidence": "low", "notes": "Pet food brands, standard industry practices" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Early-stage sustainability reporting" }
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable sourcing for coffee"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Generally moderate employer, no major controversies"
+      },
+      "animal_rights": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Pet food brands, standard industry practices"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Early-stage sustainability reporting"
+      }
     }
   },
   "hormel": {
     "issues": {
-      "animal_rights": { "stance": -0.5, "confidence": "high", "notes": "Major meat processor, factory farming practices" },
-      "workers_rights": { "stance": -0.2, "confidence": "medium", "notes": "Meatpacking plant safety concerns, COVID outbreaks" },
-      "environmental_regulations": { "stance": -0.2, "confidence": "low", "notes": "Agricultural emissions and water pollution from operations" },
-      "climate_change": { "stance": -0.1, "confidence": "low", "notes": "Livestock industry is major emissions source" },
-      "immigration": { "stance": 0.2, "confidence": "low", "notes": "Workforce includes significant immigrant labor" }
+      "animal_rights": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Major meat processor, factory farming practices"
+      },
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Meatpacking plant safety concerns, COVID outbreaks"
+      },
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Agricultural emissions and water pollution from operations"
+      },
+      "climate_change": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Livestock industry is major emissions source"
+      },
+      "immigration": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Workforce includes significant immigrant labor"
+      }
     }
   },
   "tyson": {
     "issues": {
-      "animal_rights": { "stance": -0.7, "confidence": "high", "notes": "Factory farming practices, animal welfare concerns documented" },
-      "environmental_regulations": { "stance": -0.5, "confidence": "medium", "notes": "Major water polluter, greenhouse gas emissions from livestock" },
-      "workers_rights": { "stance": -0.5, "confidence": "medium", "notes": "Workplace safety violations at processing plants, COVID outbreaks" },
-      "immigration": { "stance": 0.3, "confidence": "low", "notes": "Relies heavily on immigrant labor force" },
-      "climate_change": { "stance": -0.3, "confidence": "medium", "notes": "One of largest corporate GHG emitters globally" }
+      "animal_rights": {
+        "stance": -0.7,
+        "confidence": "high",
+        "notes": "Factory farming practices, animal welfare concerns documented"
+      },
+      "environmental_regulations": {
+        "stance": -0.5,
+        "confidence": "medium",
+        "notes": "Major water polluter, greenhouse gas emissions from livestock"
+      },
+      "workers_rights": {
+        "stance": -0.5,
+        "confidence": "medium",
+        "notes": "Workplace safety violations at processing plants, COVID outbreaks"
+      },
+      "immigration": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Relies heavily on immigrant labor force"
+      },
+      "climate_change": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "One of largest corporate GHG emitters globally"
+      }
     }
   },
   "campbells": {
     "issues": {
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainable agriculture commitments for tomato supply chain" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Generally moderate labor practices" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Science-based emissions targets set" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Inclusive workplace policies, Star Wars same-sex couple ad" }
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable agriculture commitments for tomato supply chain"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Generally moderate labor practices"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Science-based emissions targets set"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace policies, Star Wars same-sex couple ad"
+      }
     }
   },
   "clorox": {
     "issues": {
-      "environmental_regulations": { "stance": 0.3, "confidence": "medium", "notes": "Green Works line, ESG reporting, sustainable packaging goals" },
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Science-based emissions targets, renewable energy usage" },
-      "lgbtq_rights": { "stance": 0.4, "confidence": "medium", "notes": "High HRC Corporate Equality Index scores" },
-      "workers_rights": { "stance": 0.2, "confidence": "low", "notes": "Generally positive workplace culture" }
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Green Works line, ESG reporting, sustainable packaging goals"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Science-based emissions targets, renewable energy usage"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "High HRC Corporate Equality Index scores"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Generally positive workplace culture"
+      }
     }
   },
   "sc-johnson": {
     "issues": {
-      "environmental_regulations": { "stance": 0.4, "confidence": "medium", "notes": "Greenlist ingredient transparency program, eliminated CFCs early" },
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Renewable energy investments, methane capture at facilities" },
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Family-owned, profit-sharing tradition, strong employee culture" },
-      "environmental_regulations": { "stance": 0.4, "confidence": "medium", "notes": "Pioneer in ingredient transparency" }
+      "environmental_regulations": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Pioneer in ingredient transparency"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Renewable energy investments, methane capture at facilities"
+      },
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Family-owned, profit-sharing tradition, strong employee culture"
+      }
     }
   },
   "kimberly-clark": {
     "issues": {
-      "environmental_regulations": { "stance": -0.2, "confidence": "medium", "notes": "Deforestation concerns from virgin pulp sourcing for tissue products" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Emissions reduction targets but heavy resource consumption" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Standard corporate labor practices" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Inclusive workplace policies" }
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Deforestation concerns from virgin pulp sourcing for tissue products"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Emissions reduction targets but heavy resource consumption"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Standard corporate labor practices"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace policies"
+      }
     }
   },
   "estee-lauder": {
     "issues": {
-      "lgbtq_rights": { "stance": 0.6, "confidence": "high", "notes": "Strong LGBTQ+ advocacy, high HRC scores, inclusive marketing" },
-      "racial_justice": { "stance": 0.4, "confidence": "medium", "notes": "Diversity commitments, inclusive shade ranges" },
-      "animal_rights": { "stance": -0.3, "confidence": "medium", "notes": "Sells in China where animal testing is required for some products" },
-      "workers_rights": { "stance": 0.2, "confidence": "low", "notes": "Generally positive workplace culture" },
-      "climate_change": { "stance": 0.3, "confidence": "low", "notes": "Sustainability goals for packaging and operations" }
+      "lgbtq_rights": {
+        "stance": 0.6,
+        "confidence": "high",
+        "notes": "Strong LGBTQ+ advocacy, high HRC scores, inclusive marketing"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Diversity commitments, inclusive shade ranges"
+      },
+      "animal_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Sells in China where animal testing is required for some products"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Generally positive workplace culture"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Sustainability goals for packaging and operations"
+      }
     }
   },
   "loreal": {
     "issues": {
-      "environmental_regulations": { "stance": 0.4, "confidence": "medium", "notes": "L'Oréal for the Future program, strong sustainability reporting" },
-      "climate_change": { "stance": 0.4, "confidence": "medium", "notes": "Carbon neutral industrial sites, science-based targets" },
-      "lgbtq_rights": { "stance": 0.4, "confidence": "medium", "notes": "Inclusive marketing, workplace equality policies" },
-      "animal_rights": { "stance": 0.3, "confidence": "medium", "notes": "No animal testing since 1989 except where required by law" },
-      "racial_justice": { "stance": 0.3, "confidence": "medium", "notes": "Diversity commitments though faced controversies" }
+      "environmental_regulations": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "L'Oréal for the Future program, strong sustainability reporting"
+      },
+      "climate_change": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Carbon neutral industrial sites, science-based targets"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Inclusive marketing, workplace equality policies"
+      },
+      "animal_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "No animal testing since 1989 except where required by law"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Diversity commitments though faced controversies"
+      }
     }
   },
   "revlon": {
     "issues": {
-      "workers_rights": { "stance": -0.2, "confidence": "low", "notes": "Bankruptcy in 2022, workforce reductions" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Inclusive marketing campaigns" },
-      "environmental_regulations": { "stance": 0.0, "confidence": "low", "notes": "Limited sustainability reporting relative to peers" }
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Bankruptcy in 2022, workforce reductions"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive marketing campaigns"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting relative to peers"
+      }
     }
   },
   "hershey": {
     "issues": {
-      "workers_rights": { "stance": -0.3, "confidence": "medium", "notes": "Child labor in West African cocoa supply chain concerns" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainable cocoa sourcing efforts, packaging goals" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Emissions reduction targets set" },
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "HerShe campaign, inclusive workplace" },
-      "racial_justice": { "stance": 0.3, "confidence": "low", "notes": "Diversity and inclusion commitments" }
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Child labor in West African cocoa supply chain concerns"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable cocoa sourcing efforts, packaging goals"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Emissions reduction targets set"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "HerShe campaign, inclusive workplace"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Diversity and inclusion commitments"
+      }
     }
   },
   "mccormick": {
     "issues": {
-      "environmental_regulations": { "stance": 0.3, "confidence": "medium", "notes": "Sustainable sourcing programs for spices globally" },
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "Science-based targets, Purpose-led Performance framework" },
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Fair labor practices in global supply chain" },
-      "racial_justice": { "stance": 0.3, "confidence": "low", "notes": "Diversity commitments, supplier diversity programs" }
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Sustainable sourcing programs for spices globally"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Science-based targets, Purpose-led Performance framework"
+      },
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Fair labor practices in global supply chain"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Diversity commitments, supplier diversity programs"
+      }
     }
   },
   "spectrum-brands": {
     "issues": {
-      "environmental_regulations": { "stance": -0.2, "confidence": "low", "notes": "Pesticide product lines (Spectracide, Hot Shot), limited ESG focus" },
-      "climate_change": { "stance": 0.0, "confidence": "low", "notes": "Minimal public climate commitments" },
-      "animal_rights": { "stance": -0.1, "confidence": "low", "notes": "Pet products company, standard industry practices" }
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Pesticide product lines (Spectracide, Hot Shot), limited ESG focus"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal public climate commitments"
+      },
+      "animal_rights": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Pet products company, standard industry practices"
+      }
     }
   },
   "energizer": {
     "issues": {
-      "environmental_regulations": { "stance": -0.2, "confidence": "low", "notes": "Battery disposal environmental concerns, some recycling programs" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Basic sustainability reporting" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance" }
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Battery disposal environmental concerns, some recycling programs"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Basic sustainability reporting"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      }
     }
   },
   "berkshire-duracell": {
     "issues": {
-      "climate_change": { "stance": -0.2, "confidence": "medium", "notes": "Warren Buffett historically skeptical of ESG investing, major fossil fuel holdings" },
-      "corporate_tax": { "stance": -0.3, "confidence": "medium", "notes": "Buffett advocates for fair taxation publicly but company uses legal tax optimization" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Varies widely across subsidiary companies" },
-      "environmental_regulations": { "stance": -0.3, "confidence": "medium", "notes": "BNSF Railway and energy holdings face environmental scrutiny" },
-      "free_trade": { "stance": 0.5, "confidence": "medium", "notes": "Buffett is a strong proponent of free trade and globalization" }
+      "climate_change": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Warren Buffett historically skeptical of ESG investing, major fossil fuel holdings"
+      },
+      "corporate_tax": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Buffett advocates for fair taxation publicly but company uses legal tax optimization"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Varies widely across subsidiary companies"
+      },
+      "environmental_regulations": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "BNSF Railway and energy holdings face environmental scrutiny"
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Buffett is a strong proponent of free trade and globalization"
+      }
     }
   },
   "bayer": {
     "issues": {
-      "environmental_regulations": { "stance": -0.5, "confidence": "high", "notes": "Monsanto acquisition brought Roundup/glyphosate lawsuits and environmental concerns" },
-      "universal_healthcare": { "stance": 0.2, "confidence": "low", "notes": "Pharmaceutical company, supports drug access programs" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Carbon neutrality targets for operations" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Strong German worker protections, works councils" },
-      "animal_rights": { "stance": -0.4, "confidence": "medium", "notes": "Pharmaceutical animal testing, agrochemical impacts on biodiversity" }
+      "environmental_regulations": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Monsanto acquisition brought Roundup/glyphosate lawsuits and environmental concerns"
+      },
+      "universal_healthcare": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Pharmaceutical company, supports drug access programs"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Carbon neutrality targets for operations"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Strong German worker protections, works councils"
+      },
+      "animal_rights": {
+        "stance": -0.4,
+        "confidence": "medium",
+        "notes": "Pharmaceutical animal testing, agrochemical impacts on biodiversity"
+      }
     }
   },
   "abbott": {
     "issues": {
-      "universal_healthcare": { "stance": 0.1, "confidence": "low", "notes": "Makes essential nutrition and diagnostic products, mixed on pricing" },
-      "vaccine_policy": { "stance": 0.5, "confidence": "medium", "notes": "BinaxNOW COVID tests, supports public health infrastructure" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Sturgis plant shutdown raised safety concerns for infant formula" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "2030 sustainability targets, CDP reporting" }
+      "universal_healthcare": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Makes essential nutrition and diagnostic products, mixed on pricing"
+      },
+      "vaccine_policy": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "BinaxNOW COVID tests, supports public health infrastructure"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Sturgis plant shutdown raised safety concerns for infant formula"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "2030 sustainability targets, CDP reporting"
+      }
     }
   },
   "haleon": {
     "issues": {
-      "universal_healthcare": { "stance": 0.2, "confidence": "low", "notes": "OTC health products, self-care accessibility mission" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "New company (2022 spinoff), establishing sustainability framework" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Net-zero ambitions inherited from GSK framework" },
-      "workers_rights": { "stance": 0.1, "confidence": "low", "notes": "Standard corporate practices as new standalone company" }
+      "universal_healthcare": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "OTC health products, self-care accessibility mission"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "New company (2022 spinoff), establishing sustainability framework"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Net-zero ambitions inherited from GSK framework"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Standard corporate practices as new standalone company"
+      }
     }
   },
   "edgewell": {
     "issues": {
-      "lgbtq_rights": { "stance": 0.3, "confidence": "low", "notes": "Billie brand focused on inclusive body-positive marketing" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Some sustainable product initiatives" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance" }
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Billie brand focused on inclusive body-positive marketing"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable product initiatives"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      }
     }
   },
   "prestige-consumer": {
     "issues": {
-      "universal_healthcare": { "stance": 0.1, "confidence": "low", "notes": "Makes affordable OTC healthcare products" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance" },
-      "environmental_regulations": { "stance": 0.0, "confidence": "low", "notes": "Limited sustainability reporting" }
+      "universal_healthcare": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Makes affordable OTC healthcare products"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting"
+      }
     }
   },
   "treehouse-foods": {
     "issues": {
-      "workers_rights": { "stance": -0.2, "confidence": "low", "notes": "Manufacturing-heavy workforce, some plant safety concerns" },
-      "environmental_regulations": { "stance": 0.0, "confidence": "low", "notes": "Private label manufacturer, limited public sustainability stance" },
-      "climate_change": { "stance": 0.0, "confidence": "low", "notes": "Minimal public commitments" }
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Manufacturing-heavy workforce, some plant safety concerns"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Private label manufacturer, limited public sustainability stance"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal public commitments"
+      }
     }
   },
   "post-holdings": {
     "issues": {
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Standard corporate practices" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Some sustainable packaging efforts" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Basic emissions reporting" },
-      "animal_rights": { "stance": -0.2, "confidence": "low", "notes": "Michael Foods egg segment, cage-free transition slow" }
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Standard corporate practices"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable packaging efforts"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Basic emissions reporting"
+      },
+      "animal_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Michael Foods egg segment, cage-free transition slow"
+      }
     }
   },
   "bg-foods": {
     "issues": {
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Green Giant brand has sustainability messaging" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance" },
-      "climate_change": { "stance": 0.0, "confidence": "low", "notes": "Limited sustainability reporting for company size" }
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Green Giant brand has sustainability messaging"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting for company size"
+      }
     }
   },
   "pinnacle-foods": {
     "issues": {
-      "animal_rights": { "stance": 0.3, "confidence": "medium", "notes": "Gardein plant-based brand, Earth Balance vegan products" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Now part of Conagra, brand-level sustainability varies" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Acquired by Conagra in 2018" }
+      "animal_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Gardein plant-based brand, Earth Balance vegan products"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Now part of Conagra, brand-level sustainability varies"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Acquired by Conagra in 2018"
+      }
     }
   },
   "bob-evans": {
     "issues": {
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Now part of Post Holdings, standard food manufacturing labor" },
-      "environmental_regulations": { "stance": 0.0, "confidence": "low", "notes": "Limited standalone reporting post-acquisition" }
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Now part of Post Holdings, standard food manufacturing labor"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited standalone reporting post-acquisition"
+      }
     }
   },
   "dean-foods": {
     "issues": {
-      "workers_rights": { "stance": -0.3, "confidence": "medium", "notes": "Bankruptcy in 2019 left workers and pension obligations in jeopardy" },
-      "environmental_regulations": { "stance": -0.2, "confidence": "low", "notes": "Dairy industry environmental impact, now defunct" },
-      "animal_rights": { "stance": -0.3, "confidence": "low", "notes": "Large-scale industrial dairy operations" }
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Bankruptcy in 2019 left workers and pension obligations in jeopardy"
+      },
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Dairy industry environmental impact, now defunct"
+      },
+      "animal_rights": {
+        "stance": -0.3,
+        "confidence": "low",
+        "notes": "Large-scale industrial dairy operations"
+      }
     }
   },
   "land-o-lakes": {
     "issues": {
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Farmer-owned cooperative model, supports member farmers" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainable agriculture programs for member farms" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Some carbon programs for farmers but dairy industry is emissions-heavy" },
-      "racial_justice": { "stance": 0.1, "confidence": "low", "notes": "Removed Native American imagery from packaging in 2020" }
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Farmer-owned cooperative model, supports member farmers"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable agriculture programs for member farms"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some carbon programs for farmers but dairy industry is emissions-heavy"
+      },
+      "racial_justice": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Removed Native American imagery from packaging in 2020"
+      }
     }
   },
   "ocean-spray": {
     "issues": {
-      "workers_rights": { "stance": 0.3, "confidence": "medium", "notes": "Farmer-owned cooperative, supports cranberry grower members" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Sustainable cranberry farming practices" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Some sustainability initiatives but limited public targets" }
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Farmer-owned cooperative, supports cranberry grower members"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable cranberry farming practices"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainability initiatives but limited public targets"
+      }
     }
   },
   "keurig-dr-pepper": {
     "issues": {
-      "environmental_regulations": { "stance": -0.3, "confidence": "medium", "notes": "K-Cup pods generated massive plastic waste, recyclability improvements slow" },
-      "climate_change": { "stance": 0.1, "confidence": "low", "notes": "Some emissions targets but single-serve model is resource-intensive" },
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Standard corporate labor practices" },
-      "corporate_tax": { "stance": -0.3, "confidence": "low", "notes": "JAB Holdings ownership structure involves tax-efficient Luxembourg setup" }
+      "environmental_regulations": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "K-Cup pods generated massive plastic waste, recyclability improvements slow"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some emissions targets but single-serve model is resource-intensive"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Standard corporate labor practices"
+      },
+      "corporate_tax": {
+        "stance": -0.3,
+        "confidence": "low",
+        "notes": "JAB Holdings ownership structure involves tax-efficient Luxembourg setup"
+      }
     }
   },
   "monster-beverage": {
     "issues": {
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "No significant public stance on labor issues" },
-      "environmental_regulations": { "stance": -0.1, "confidence": "low", "notes": "Aluminum can recycling but limited broader environmental policy" },
-      "climate_change": { "stance": 0.0, "confidence": "low", "notes": "Minimal public sustainability commitments" },
-      "universal_healthcare": { "stance": -0.2, "confidence": "low", "notes": "Energy drink health concerns, faced lawsuits over health impacts" }
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance on labor issues"
+      },
+      "environmental_regulations": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Aluminum can recycling but limited broader environmental policy"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal public sustainability commitments"
+      },
+      "universal_healthcare": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Energy drink health concerns, faced lawsuits over health impacts"
+      }
     }
   },
   "red-bull": {
     "issues": {
-      "workers_rights": { "stance": 0.0, "confidence": "low", "notes": "Private company, limited labor transparency" },
-      "climate_change": { "stance": 0.0, "confidence": "low", "notes": "Motorsport sponsorships have high carbon footprint" },
-      "environmental_regulations": { "stance": 0.1, "confidence": "low", "notes": "Aluminum can wall-to-wall recycling program" },
-      "racial_justice": { "stance": -0.2, "confidence": "low", "notes": "2020 internal controversy over racial justice messaging led to executive departures" }
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Private company, limited labor transparency"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Motorsport sponsorships have high carbon footprint"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Aluminum can wall-to-wall recycling program"
+      },
+      "racial_justice": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "2020 internal controversy over racial justice messaging led to executive departures"
+      }
     }
   },
   "ab-inbev": {
     "issues": {
-      "climate_change": { "stance": 0.3, "confidence": "medium", "notes": "100% renewable electricity goal, sustainability targets across value chain" },
-      "workers_rights": { "stance": -0.3, "confidence": "medium", "notes": "Cost-cutting culture, brewery closures and layoffs after mergers" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Water stewardship programs in water-stressed areas" },
-      "lgbtq_rights": { "stance": 0.4, "confidence": "medium", "notes": "Bud Light partnership with trans influencer (2023 controversy showed support then retreat)" },
-      "racial_justice": { "stance": 0.2, "confidence": "low", "notes": "Diversity initiatives and supplier programs" }
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "100% renewable electricity goal, sustainability targets across value chain"
+      },
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Cost-cutting culture, brewery closures and layoffs after mergers"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Water stewardship programs in water-stressed areas"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Bud Light partnership with trans influencer (2023 controversy showed support then retreat)"
+      },
+      "racial_justice": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Diversity initiatives and supplier programs"
+      }
     }
   },
   "molson-coors": {
     "issues": {
-      "lgbtq_rights": { "stance": 0.2, "confidence": "low", "notes": "Some inclusive marketing but less prominent than competitors" },
-      "workers_rights": { "stance": -0.2, "confidence": "low", "notes": "Brewery closures and restructuring layoffs" },
-      "environmental_regulations": { "stance": 0.2, "confidence": "low", "notes": "Water and energy reduction targets at breweries" },
-      "climate_change": { "stance": 0.2, "confidence": "low", "notes": "Some emissions reduction commitments" }
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some inclusive marketing but less prominent than competitors"
+      },
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Brewery closures and restructuring layoffs"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Water and energy reduction targets at breweries"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some emissions reduction commitments"
+      }
+    }
+  },
+  "altria": {
+    "issues": {
+      "public_health": {
+        "stance": -0.8,
+        "confidence": "high",
+        "notes": "Major tobacco company; products are leading cause of preventable death"
+      },
+      "corporate_tax": {
+        "stance": -0.4,
+        "confidence": "medium",
+        "notes": "Significant lobbying for favorable tax treatment"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Standard corporate labor practices"
+      },
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Non-discrimination policies in workplace"
+      },
+      "gun_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "PAC donates to both parties; leans Republican"
+      }
+    }
+  },
+  "philip-morris-intl": {
+    "issues": {
+      "public_health": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Tobacco company but investing heavily in smoke-free alternatives (IQOS, ZYN)"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Carbon neutrality targets for operations"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Equal pay certification globally"
+      }
+    }
+  },
+  "british-american-tobacco": {
+    "issues": {
+      "public_health": {
+        "stance": -0.7,
+        "confidence": "high",
+        "notes": "Major tobacco company; transitioning to 'reduced risk' products like Vuse, Velo"
+      },
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Human rights concerns in tobacco leaf supply chains, child labor allegations in Malawi/Bangladesh"
+      },
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Cigarette butt pollution is massive environmental issue"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Net-zero by 2050 target"
+      }
+    }
+  },
+  "kenvue": {
+    "issues": {
+      "universal_healthcare": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Makes affordable OTC health products, self-care mission"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Healthy Lives Mission includes sustainability goals"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inherited J&J inclusive workplace policies"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "New standalone company as of 2023"
+      }
+    }
+  },
+  "walmart": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Historically anti-union, wage controversies, many employees on public assistance"
+      },
+      "gun_rights": {
+        "stance": 0.1,
+        "confidence": "medium",
+        "notes": "Stopped selling assault-style rifles 2015, raised age to 21 in 2018, but still sells guns/ammo"
+      },
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Added LGBTQ+ protections to non-discrimination policy"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Project Gigaton supplier emissions reduction initiative"
+      },
+      "racial_justice": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "$100M racial equity pledge in 2020"
+      },
+      "immigration": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "2019 ICE raids at Mississippi plants arrested 680 workers"
+      }
+    }
+  },
+  "target": {
+    "issues": {
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "high",
+        "notes": "Pride collections, though scaled back in 2023 after backlash/threats"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "REACH commitments, Black-owned brand shelf space"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "medium",
+        "notes": "Raised minimum wage to $15/hr in 2020, but scheduling concerns"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Target Forward sustainability strategy, renewable energy investments"
+      },
+      "gun_rights": {
+        "stance": 0.2,
+        "confidence": "medium",
+        "notes": "Asked customers not to bring firearms into stores 2014"
+      }
+    }
+  },
+  "costco": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.5,
+        "confidence": "high",
+        "notes": "Known for above-average wages and benefits in retail sector"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some sustainability efforts but limited public targets"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Packaging reduction efforts"
+      },
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Non-discrimination policies"
+      }
+    }
+  },
+  "kroger": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Union disputes, store closures to avoid hazard pay mandates during COVID"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Zero Hunger Zero Waste initiative"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Plastic bag phase-out, food waste reduction"
+      },
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Workplace non-discrimination policies"
+      }
+    }
+  },
+  "amazon": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Anti-union efforts, warehouse working conditions, high injury rates documented"
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Paid zero federal income tax in 2018 despite $11B profit; aggressive tax optimization"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Climate Pledge co-founder, 100K electric delivery vans ordered, but massive carbon footprint from operations"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Strong LGBTQ+ workplace protections, Pride support"
+      },
+      "racial_justice": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Racial equity audit, but discrimination lawsuits"
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Global e-commerce platform depends on free trade"
+      }
+    }
+  },
+  "walgreens": {
+    "issues": {
+      "universal_healthcare": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Pharmacy access mission, COVID vaccination sites"
+      },
+      "workers_rights": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Store closures and layoffs during restructuring"
+      },
+      "lgbtq_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Workplace non-discrimination policies"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainability commitments"
+      }
+    }
+  },
+  "cvs-health": {
+    "issues": {
+      "public_health": {
+        "stance": 0.5,
+        "confidence": "high",
+        "notes": "Stopped selling tobacco products in 2014, major public health stance"
+      },
+      "universal_healthcare": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Aetna acquisition, MinuteClinic expansion, healthcare access mission"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Mixed record, pharmacy workload concerns"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "High HRC Corporate Equality Index scores"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "ESG reporting and emissions targets"
+      }
+    }
+  },
+  "ferrero": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Cocoa supply chain child labor concerns in West Africa"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Palm oil sustainability commitments but deforestation concerns persist"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Emissions reduction targets"
+      },
+      "animal_rights": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Kinder Eggs use some animal-derived ingredients; no major animal welfare stance"
+      }
+    }
+  },
+  "coty": {
+    "issues": {
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive marketing campaigns, CoverGirl diverse ambassadors"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable packaging goals"
+      },
+      "animal_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some brands are cruelty-free but sells in China (animal testing required)"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Restructuring layoffs under new ownership"
+      }
+    }
+  },
+  "georgia-pacific": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Koch Industries subsidiary; significant lobbying against environmental regulations"
+      },
+      "climate_change": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Koch network is major funder of climate change skepticism and anti-regulation efforts"
+      },
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Manufacturing safety concerns at some facilities"
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Koch Industries lobbies heavily for lower corporate taxes and deregulation"
+      },
+      "campaign_finance": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Koch network is one of largest political spending operations in US"
+      }
+    }
+  },
+  "reynolds-consumer": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Aluminum and plastic products contribute to waste; some recycling initiatives"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited public sustainability commitments"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      }
+    }
+  },
+  "wonderful-company": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Water usage controversies in drought-prone California for pistachio/almond/citrus farming"
+      },
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Agricultural labor concerns"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainability programs but water-intensive agriculture"
+      },
+      "campaign_finance": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Resnicks are major political donors to both parties"
+      }
+    }
+  },
+  "diageo": {
+    "issues": {
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Strong LGBTQ+ advocacy, high HRC scores, inclusive campaigns"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Society 2030 plan includes diversity commitments, $100M Diageo Bar Academy"
+      },
+      "climate_change": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Science-based targets, grain-to-glass sustainability approach"
+      },
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Water stewardship programs, sustainable packaging"
+      },
+      "workers_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Living wage commitments, inclusive workplace"
+      }
+    }
+  },
+  "constellation-brands": {
+    "issues": {
+      "immigration": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "CEO Bill Newlands has publicly supported immigration reform; Hispanic consumers are core market"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Water stewardship at breweries, some sustainability targets"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Standard corporate practices"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Brewery water use controversies in Mexico"
+      }
+    }
+  },
+  "brown-forman": {
+    "issues": {
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "High HRC Corporate Equality Index scores, inclusive workplace"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Environmental sustainability targets, bourbon barrel forest management"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Diversity initiatives, Louisville community investment"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Family-controlled company, generally positive employee culture"
+      }
+    }
+  },
+  "pernod-ricard": {
+    "issues": {
+      "climate_change": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Good Times from a Good Place sustainability roadmap"
+      },
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Circular economy packaging commitments, terroir preservation"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace, Absolut brand has long history of LGBTQ+ support"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "French labor protections apply"
+      }
+    }
+  },
+  "beam-suntory": {
+    "issues": {
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Proof Positive sustainability strategy"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Water stewardship at distilleries"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Japanese corporate culture emphasis on employee welfare"
+      }
+    }
+  },
+  "e-and-j-gallo": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "History of labor disputes with United Farm Workers in 1970s-80s; improved since"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainable winegrowing practices"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some sustainability efforts at wineries"
+      }
+    }
+  },
+  "boston-beer": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Employee ownership culture, profit sharing"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some sustainability initiatives at breweries"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace policies"
+      }
+    }
+  },
+  "mark-anthony-brands": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Private company, limited sustainability reporting"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Private company, limited transparency"
+      }
+    }
+  },
+  "flowers-foods": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Lawsuits over misclassifying delivery drivers as independent contractors"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainability reporting"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Basic emissions targets"
+      }
+    }
+  },
+  "lamb-weston": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Water usage in potato processing"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Sustainability targets for operations"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Standard food manufacturing practices"
+      }
+    }
+  },
+  "del-monte": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Sustainable agriculture initiatives"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting"
+      }
+    }
+  },
+  "dole": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Historical labor controversies in Latin American plantations, pesticide exposure lawsuits"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable farming practices"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "The Dole Promise sustainability commitments"
+      }
+    }
+  },
+  "smithfield": {
+    "issues": {
+      "animal_rights": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Largest pork producer, factory farming, gestation crate controversies"
+      },
+      "environmental_regulations": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Hog farm pollution, lagoon waste systems, water contamination in NC"
+      },
+      "workers_rights": {
+        "stance": -0.4,
+        "confidence": "medium",
+        "notes": "Meatpacking safety concerns, COVID outbreaks at plants, Sioux Falls SD outbreak"
+      },
+      "climate_change": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Livestock emissions, some biogas capture programs"
+      },
+      "immigration": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Significant immigrant workforce"
+      }
+    }
+  },
+  "jbs": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.7,
+        "confidence": "high",
+        "notes": "Linked to Amazon deforestation, massive environmental footprint"
+      },
+      "animal_rights": {
+        "stance": -0.6,
+        "confidence": "high",
+        "notes": "Largest meat company globally, factory farming at scale"
+      },
+      "workers_rights": {
+        "stance": -0.5,
+        "confidence": "high",
+        "notes": "Meatpacking safety violations, COVID outbreaks, child labor allegations at US suppliers"
+      },
+      "climate_change": {
+        "stance": -0.4,
+        "confidence": "medium",
+        "notes": "One of world's largest GHG emitters, net-zero pledge questioned by critics"
+      },
+      "corporate_tax": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Batista family corruption scandal in Brazil, bribery convictions"
+      }
+    }
+  },
+  "perdue-farms": {
+    "issues": {
+      "animal_rights": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Better than industry average; commitments to no-antibiotics-ever, animal care improvements"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Chesapeake Bay watershed pollution concerns from poultry operations"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Standard poultry processing labor conditions"
+      }
+    }
+  },
+  "lactalis": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Private company, limited transparency"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting for world's largest dairy company"
+      },
+      "climate_change": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Dairy industry emissions; minimal public climate commitments"
+      }
+    }
+  },
+  "saputo": {
+    "issues": {
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some emissions reduction targets"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Dairy processing water and waste management"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Canadian corporate standards"
+      }
+    }
+  },
+  "sargento": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Family-owned, generally positive employer reputation"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited public sustainability reporting"
+      },
+      "immigration": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Former CEO resigned 2016 after son charged with harboring undocumented workers"
+      }
+    }
+  },
+  "blue-diamond": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "medium",
+        "notes": "Almond farming water usage controversies in California drought"
+      },
+      "workers_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Farmer-owned cooperative model"
+      },
+      "climate_change": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable farming practices"
+      }
+    }
+  },
+  "chobani": {
+    "issues": {
+      "immigration": {
+        "stance": 0.7,
+        "confidence": "high",
+        "notes": "CEO Hamdi Ulukaya is vocal refugee advocate, hires refugees, Tent Partnership founder"
+      },
+      "workers_rights": {
+        "stance": 0.5,
+        "confidence": "high",
+        "notes": "Gave 10% equity to employees, above-average wages and benefits"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Diverse workforce, inclusive hiring"
+      },
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive workplace"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some sustainability initiatives"
+      }
+    }
+  },
+  "starbucks": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.4,
+        "confidence": "high",
+        "notes": "Aggressive anti-union campaign against Starbucks Workers United, NLRB complaints"
+      },
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "high",
+        "notes": "Early adopter of LGBTQ+ benefits, trans healthcare coverage, Pride support"
+      },
+      "racial_justice": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Racial bias training after 2018 Philadelphia incident, diversity goals"
+      },
+      "climate_change": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Planet Positive goals, plant-based menu expansion"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Reusable cup initiatives but still massive single-use waste"
+      }
+    }
+  },
+  "celsius": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting as growth-stage company"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal public commitments"
+      }
+    }
+  },
+  "simply-good-foods": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal public commitments"
+      }
+    }
+  },
+  "utz-brands": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainability efforts"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited public reporting"
+      }
+    }
+  },
+  "hain-celestial": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "Natural and organic product mission"
+      },
+      "climate_change": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Organic agriculture reduces some environmental impacts"
+      },
+      "animal_rights": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Vegetarian/vegan product lines"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Accounting irregularities in past raised governance concerns"
+      }
+    }
+  },
+  "scotts-miracle-gro": {
+    "issues": {
+      "environmental_regulations": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Pesticide and chemical fertilizer products, Roundup marketing partnership with Bayer"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited climate commitments"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "animal_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "Tomcat rodent killing products, pesticides harmful to pollinators"
+      }
+    }
+  },
+  "central-garden-pet": {
+    "issues": {
+      "animal_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Pet products company; also sells pesticides and pest control"
+      },
+      "environmental_regulations": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Pesticide product lines (Sevin, Amdro)"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      }
+    }
+  },
+  "tootsie-roll": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Small, private-feeling public company; limited reporting"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Minimal sustainability reporting"
+      },
+      "climate_change": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "No public commitments"
+      }
+    }
+  },
+  "just-born": {
+    "issues": {
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Family-owned, Bethlehem PA manufacturer"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited reporting as private company"
+      }
+    }
+  },
+  "haribo": {
+    "issues": {
+      "workers_rights": {
+        "stance": -0.3,
+        "confidence": "medium",
+        "notes": "2017 documentary revealed exploitation of migrant workers at Brazilian supplier; child labor in supply chain"
+      },
+      "environmental_regulations": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Limited sustainability reporting"
+      },
+      "animal_rights": {
+        "stance": -0.2,
+        "confidence": "low",
+        "notes": "Gelatin-based products from animal sources"
+      }
+    }
+  },
+  "bath-body-works": {
+    "issues": {
+      "lgbtq_rights": {
+        "stance": 0.3,
+        "confidence": "low",
+        "notes": "Inclusive marketing, workplace policies"
+      },
+      "environmental_regulations": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Some sustainable packaging initiatives"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "Retail labor standard practices"
+      },
+      "animal_rights": {
+        "stance": 0.3,
+        "confidence": "medium",
+        "notes": "No animal testing policy"
+      }
+    }
+  },
+  "beyond-meat": {
+    "issues": {
+      "animal_rights": {
+        "stance": 0.8,
+        "confidence": "high",
+        "notes": "Entire business model is plant-based alternative to animal agriculture"
+      },
+      "climate_change": {
+        "stance": 0.7,
+        "confidence": "high",
+        "notes": "Plant-based protein uses significantly less water, land, and energy than animal protein"
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Supports sustainable food system policies"
+      },
+      "workers_rights": {
+        "stance": 0.0,
+        "confidence": "low",
+        "notes": "COO suspended for biting a man's nose in 2022; otherwise limited labor info"
+      }
+    }
+  },
+  "oatly": {
+    "issues": {
+      "climate_change": {
+        "stance": 0.7,
+        "confidence": "high",
+        "notes": "Climate labeling on products, sustainability is core mission"
+      },
+      "animal_rights": {
+        "stance": 0.7,
+        "confidence": "high",
+        "notes": "Plant-based alternative to dairy, explicit anti-dairy messaging"
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "medium",
+        "notes": "Advocates for climate food labeling regulations"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "No significant public stance"
+      },
+      "corporate_tax": {
+        "stance": -0.1,
+        "confidence": "low",
+        "notes": "Blackstone investment drew criticism from some sustainability advocates"
+      }
+    }
+  },
+  "elf-beauty": {
+    "issues": {
+      "animal_rights": {
+        "stance": 0.5,
+        "confidence": "high",
+        "notes": "Cruelty-free and vegan certified, Leaping Bunny certified"
+      },
+      "lgbtq_rights": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Inclusive marketing, diverse brand ambassadors"
+      },
+      "racial_justice": {
+        "stance": 0.4,
+        "confidence": "medium",
+        "notes": "Diverse and inclusive brand positioning, affordable for all"
+      },
+      "environmental_regulations": {
+        "stance": 0.2,
+        "confidence": "low",
+        "notes": "Some clean beauty initiatives"
+      },
+      "workers_rights": {
+        "stance": 0.1,
+        "confidence": "low",
+        "notes": "Standard corporate practices"
+      }
     }
   }
 }

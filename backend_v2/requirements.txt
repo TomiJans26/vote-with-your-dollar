@@ -1,0 +1,8 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+sqlalchemy>=2.0
+pyodbc
+pydantic>=2.0
+PyJWT>=2.8
+werkzeug>=3.0
+requests
