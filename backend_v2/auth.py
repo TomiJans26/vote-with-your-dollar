@@ -84,8 +84,8 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
         errors.append("Valid email is required")
     if not username or len(username) < 2 or len(username) > 80:
         errors.append("Username must be 2-80 characters")
-    if not re.match(r"^[a-zA-Z0-9_]+$", username):
-        errors.append("Username can only contain letters, numbers, and underscores")
+    if not re.match(r"^[a-zA-Z0-9_.\-]+$", username):
+        errors.append("Username can only contain letters, numbers, underscores, dots, and hyphens")
     if len(password) < 8:
         errors.append("Password must be at least 8 characters")
     if errors:

@@ -257,11 +257,17 @@ export default function Result() {
                     ))}
                   </div>
                 )}
-                {alt.barcode && (
-                  <div className="mt-2 text-right">
+                <div className="mt-3 flex items-center justify-between">
+                  {alt.buyLink ? (
+                    <a href={alt.buyLink} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-4 py-1.5 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+                      🛒 Buy This Instead
+                    </a>
+                  ) : alt.barcode ? (
                     <span className="text-xs text-teal-600 font-semibold">Try this →</span>
-                  </div>
-                )}
+                  ) : <span />}
+                  <span className="text-[10px] text-gray-300">affiliate link</span>
+                </div>
               </div>
             );
           })}

@@ -40,6 +40,16 @@ _company_issues_data = _load_json("company-issues.json")
 # ---------------------------------------------------------------------------
 import re as _re
 
+AMAZON_AFFILIATE_TAG = os.environ.get("AMAZON_AFFILIATE_TAG", "dollarvote20-20")
+
+
+def _amazon_link(product_name: str, brand: str = "") -> str:
+    """Generate an Amazon search link with affiliate tag."""
+    from urllib.parse import quote_plus
+    query = f"{brand} {product_name}".strip() if brand else product_name
+    return f"https://www.amazon.com/s?k={quote_plus(query)}&tag={AMAZON_AFFILIATE_TAG}"
+
+
 def _normalize(s: str) -> str:
     # Strip parenthetical notes like "(via Swedish Match acquisition)"
     s = _re.sub(r'\s*\(.*?\)', '', s)
@@ -249,9 +259,23 @@ def scan_product(upc: str, authorization: str = Header(None), db: Session = Depe
 
     product = lookup_barcode(upc)
     if not product:
-        # Fallback: try matching barcode digits against UPC databases failed,
-        # return helpful error with suggestion to search by brand name
-        raise HTTPException(404, {"error": "Product not found in barcode databases. Try searching by brand name instead.", "upc": upc})
+        # Fallback: try UPCitemdb for product name, then brand-match
+        upc_product = lookup_upcitemdb(upc)
+        if upc_product and upc_product.get("brand"):
+            parent = find_parent_company(upc_product["brand"], upc_product.get("name"))
+            if parent:
+                political = get_company_political_data(parent["id"])
+                company_issues = _company_issues_data.get(parent["id"], {}).get("issues", {})
+                return {
+                    "product": {"name": upc_product.get("name", upc_product["brand"]),
+                                "brand": upc_product["brand"],
+                                "image": upc_product.get("image"), "barcode": upc,
+                                "categories": parent.get("industry")},
+                    "parentCompany": {"id": parent["id"], "name": parent["name"],
+                                      "ticker": parent.get("ticker"), "industry": parent.get("industry")},
+                    "category": None, "political": political, "companyIssues": company_issues,
+                }
+        raise HTTPException(404, {"error": "Product not found. Try searching by brand name instead.", "upc": upc})
 
     parent_company = find_parent_company(product.get("brand"), product.get("name"))
     category = guess_category(product)
@@ -324,8 +348,10 @@ def _build_alternatives_response(category, company_id, upc, belief_profile):
                     "reasons": [], "matchingIssues": [], "conflictingIssues": []}
                 if score_data["dealBreakerHit"]:
                     continue
+                prod["buyLink"] = _amazon_link(prod.get("name", ""), prod.get("brand", ""))
                 scored_results.append({**prod, "alignment": score_data})
             else:
+                prod["buyLink"] = _amazon_link(prod.get("name", ""), prod.get("brand", ""))
                 unscored_results.append({
                     **prod, "alignment": {
                         "score": 0, "pct": None, "dealBreakerHit": False,
