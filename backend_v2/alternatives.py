@@ -1,5 +1,6 @@
 """Smart alternatives engine using Open Food Facts v2 API."""
 import hashlib
+import re
 import time
 import requests as http_requests
 
@@ -20,6 +21,25 @@ def _off_cached_get(url: str, params: dict | None = None, timeout: int = 15):
         data = None
     _off_cache[key] = (data, time.time())
     return data
+
+
+def _product_keywords(name: str) -> set[str]:
+    """Extract meaningful keywords from a product name for relevance matching."""
+    stop = {"the", "a", "an", "of", "and", "with", "in", "for", "or", "no", "low", "free",
+            "organic", "natural", "original", "classic", "style", "brand", "flavored", "flavor",
+            "size", "pack", "oz", "ml", "g", "kg", "lb", "ct"}
+    words = set(re.sub(r'[^a-z\s]', '', name.lower()).split()) - stop
+    return {w for w in words if len(w) >= 3}
+
+
+def _relevance_score(original_name: str, candidate_name: str) -> float:
+    """Score 0-1 how relevant a candidate product is to the original."""
+    orig_kw = _product_keywords(original_name)
+    cand_kw = _product_keywords(candidate_name)
+    if not orig_kw:
+        return 0.5
+    overlap = orig_kw & cand_kw
+    return len(overlap) / len(orig_kw)
 
 
 def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
@@ -62,6 +82,10 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
                 continue
             if brand_lower in exclude_brands:
                 continue
+            # Relevance check — skip products that aren't similar to what was scanned
+            rel = _relevance_score(product_name, name)
+            if rel < 0.2:
+                continue
             seen_barcodes.add(barcode)
             alt_products.append({
                 "barcode": barcode,
@@ -69,6 +93,7 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
                 "brand": brand or brand_for_lookup or "Unknown Brand",
                 "image": p.get("image_small_url") or p.get("image_url"),
                 "parentCompany": {"id": parent["id"], "name": parent["name"]} if parent else None,
+                "_relevance": rel,
             })
             if len(alt_products) >= 20:
                 break
@@ -96,6 +121,9 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
                 brand_lower = brand.lower() if brand else ""
                 if brand_lower in exclude_brands:
                     continue
+                rel = _relevance_score(product_name, name)
+                if rel < 0.2:
+                    continue
                 seen_barcodes.add(barcode)
                 alt_products.append({
                     "barcode": barcode,
@@ -103,8 +131,14 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
                     "brand": brand or brand_for_lookup or "Unknown Brand",
                     "image": p.get("image_small_url") or p.get("image_url"),
                     "parentCompany": {"id": parent["id"], "name": parent["name"]} if parent else None,
+                    "_relevance": rel,
                 })
                 if len(alt_products) >= 20:
                     break
 
+    # Sort by relevance so the most similar products surface first
+    alt_products.sort(key=lambda x: x.get("_relevance", 0), reverse=True)
+    # Strip internal relevance score before returning
+    for p in alt_products:
+        p.pop("_relevance", None)
     return alt_products

@@ -218,30 +218,13 @@ export default function Result() {
             />
           )}
 
-          {/* Donation breakdown */}
-          {political && (
-            <div className="space-y-2">
-              <p className="text-xs uppercase text-gray-400 font-semibold">PAC Donations</p>
-              <DonationBar percentDem={political.percentDem} percentRep={political.percentRep} />
-              <div className="flex justify-between text-xs">
-                <span className="text-dem-dark font-semibold">
-                  🔵 Democrat {political.percentDem}%
-                </span>
-                <span className="text-rep-dark font-semibold">
-                  🔴 Republican {political.percentRep}%
-                </span>
-              </div>
-              {political.donations?.total > 0 && (
-                <p className="text-xs text-gray-400">
-                  Total: ${(political.donations.total).toLocaleString()}
-                </p>
-              )}
-              {political.error && (
-                <p className="text-xs text-amber-600 bg-amber-50 rounded p-2">{political.error}</p>
-              )}
-              {!political.hasPac && (
-                <p className="text-xs text-gray-400 italic">No US PAC found for this company</p>
-              )}
+          {/* PAC Donations - total only, no party breakdown */}
+          {political && political.donations?.total > 0 && (
+            <div className="space-y-1">
+              <p className="text-xs uppercase text-gray-400 font-semibold">Political Donations</p>
+              <p className="text-sm font-semibold text-gray-700">
+                💰 ${(political.donations.total).toLocaleString()} in PAC contributions
+              </p>
             </div>
           )}
 
