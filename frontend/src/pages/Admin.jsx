@@ -98,6 +98,8 @@ export default function Admin() {
   const [companies, setCompanies] = useState(null);
   const [research, setResearch] = useState(null);
   const [companySearch, setCompanySearch] = useState('');
+  const [sortCol, setSortCol] = useState('name');
+  const [sortDir, setSortDir] = useState('asc');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyDetail, setCompanyDetail] = useState(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
@@ -140,10 +142,22 @@ export default function Admin() {
     navigate('/admin/login');
   };
 
+  const toggleSort = (col) => {
+    if (sortCol === col) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
+    else { setSortCol(col); setSortDir('asc'); }
+  };
+  const sortArrow = (col) => sortCol === col ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '';
+
   const filteredCompanies = companies?.companies?.filter(
     (c) => !companySearch || c.name.toLowerCase().includes(companySearch.toLowerCase())
       || (c.ticker || '').toLowerCase().includes(companySearch.toLowerCase())
-  );
+  )?.sort((a, b) => {
+    const dir = sortDir === 'asc' ? 1 : -1;
+    const av = a[sortCol] ?? '';
+    const bv = b[sortCol] ?? '';
+    if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
+    return String(av).localeCompare(String(bv)) * dir;
+  });
 
   const openCompanyDetail = async (companyId) => {
     setLoadingDetail(true);
@@ -588,11 +602,11 @@ export default function Admin() {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="text-gray-400 border-b border-gray-700 text-left">
-                            <th className="p-3">Name</th>
-                            <th className="p-3">Ticker</th>
-                            <th className="p-3">Industry</th>
-                            <th className="p-3">Country</th>
-                            <th className="p-3 text-right">Brands</th>
+                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('name')}>Name{sortArrow('name')}</th>
+                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('ticker')}>Ticker{sortArrow('ticker')}</th>
+                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('industry')}>Industry{sortArrow('industry')}</th>
+                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('country')}>Country{sortArrow('country')}</th>
+                            <th className="p-3 text-right cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('brand_count')}>Brands{sortArrow('brand_count')}</th>
                           </tr>
                         </thead>
                         <tbody>
