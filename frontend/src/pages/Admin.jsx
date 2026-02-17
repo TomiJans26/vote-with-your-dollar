@@ -38,6 +38,36 @@ function adminPost(path, body) {
   }).then((r) => r.json());
 }
 
+// Issue list for dropdowns
+const ALL_ISSUES = [
+  'gun_rights', 'immigration', 'military_defense', 'government_spending',
+  'environmental_regulations', 'climate_change', 'renewable_energy', 'lgbtq_rights',
+  'racial_justice', 'womens_rights', 'religious_freedom', 'free_speech',
+  'workers_rights', 'corporate_tax', 'healthcare', 'education_funding',
+  'minimum_wage', 'trade_policy', 'drug_policy', 'data_privacy',
+  'ai_regulation', 'vaccine_policy',
+];
+
+const ISSUE_LABELS = Object.fromEntries(
+  ALL_ISSUES.map((k) => [k, k.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())])
+);
+
+const STANCE_COLORS = {
+  strong_support: 'bg-green-500/20 text-green-400 border-green-500/30',
+  lean_support: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+  neutral: 'bg-gray-600/20 text-gray-400 border-gray-600/30',
+  lean_oppose: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+  strong_oppose: 'bg-red-500/20 text-red-400 border-red-500/30',
+};
+
+function StanceBadge({ stance }) {
+  const label = (stance || 'neutral').replace(/_/g, ' ');
+  const cls = STANCE_COLORS[stance] || STANCE_COLORS.neutral;
+  return (
+    <span className={`text-xs px-2 py-0.5 rounded-full border ${cls}`}>{label}</span>
+  );
+}
+
 // Stat card component
 function StatCard({ label, value, sub }) {
   return (
@@ -69,6 +99,11 @@ export default function Admin() {
   const [research, setResearch] = useState(null);
   const [companySearch, setCompanySearch] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [companyDetail, setCompanyDetail] = useState(null);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [rankIssues, setRankIssues] = useState(['', '', '']);
+  const [rankedCompanies, setRankedCompanies] = useState(null);
+  const [rankingMode, setRankingMode] = useState(false);
 
   useEffect(() => {
     if (!getAdminToken()) {
@@ -109,6 +144,35 @@ export default function Admin() {
     (c) => !companySearch || c.name.toLowerCase().includes(companySearch.toLowerCase())
       || (c.ticker || '').toLowerCase().includes(companySearch.toLowerCase())
   );
+
+  const openCompanyDetail = async (companyId) => {
+    setLoadingDetail(true);
+    try {
+      const data = await adminFetch(`/companies/${companyId}`);
+      setCompanyDetail(data);
+    } catch (e) {
+      if (e.message === 'unauthorized') {
+        localStorage.removeItem('dv_admin_token');
+        navigate('/admin/login');
+      }
+    }
+    setLoadingDetail(false);
+  };
+
+  const rankCompanies = async () => {
+    const selected = rankIssues.filter(Boolean);
+    if (selected.length === 0) return;
+    try {
+      const data = await adminFetch(`/companies/ranked?issues=${selected.join(',')}`);
+      setRankedCompanies(data);
+      setRankingMode(true);
+    } catch (e) {
+      if (e.message === 'unauthorized') {
+        localStorage.removeItem('dv_admin_token');
+        navigate('/admin/login');
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 flex">
@@ -337,41 +401,222 @@ export default function Admin() {
           {/* COMPANIES */}
           {section === 'companies' && (
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Companies</h2>
-              <input
-                type="text"
-                placeholder="Search companies..."
-                value={companySearch}
-                onChange={(e) => setCompanySearch(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-4"
-              />
-              {companies ? (
-                <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="text-gray-400 border-b border-gray-700 text-left">
-                        <th className="p-3">Name</th>
-                        <th className="p-3">Ticker</th>
-                        <th className="p-3">Industry</th>
-                        <th className="p-3">Country</th>
-                        <th className="p-3 text-right">Brands</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredCompanies?.map((c) => (
-                        <tr key={c.id} className="border-b border-gray-700/50">
-                          <td className="p-3 text-white font-medium">{c.name}</td>
-                          <td className="p-3 text-teal-400 font-mono text-xs">{c.ticker || '—'}</td>
-                          <td className="p-3 text-gray-300">{c.industry || '—'}</td>
-                          <td className="p-3 text-gray-400">{c.country || '—'}</td>
-                          <td className="p-3 text-right text-gray-400">{c.brand_count}</td>
-                        </tr>
+              {/* Company Detail View */}
+              {companyDetail ? (
+                <div>
+                  <button
+                    onClick={() => setCompanyDetail(null)}
+                    className="text-teal-400 hover:text-teal-300 text-sm mb-4 flex items-center gap-1"
+                  >
+                    ← Back to companies
+                  </button>
+                  <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h2 className="text-2xl font-bold text-white">{companyDetail.company.name}</h2>
+                        <div className="flex gap-4 mt-1 text-sm">
+                          {companyDetail.company.ticker && (
+                            <span className="text-teal-400 font-mono">{companyDetail.company.ticker}</span>
+                          )}
+                          {companyDetail.company.industry && (
+                            <span className="text-gray-400">{companyDetail.company.industry}</span>
+                          )}
+                          {companyDetail.company.country && (
+                            <span className="text-gray-500">{companyDetail.company.country}</span>
+                          )}
+                        </div>
+                        {companyDetail.company.description && (
+                          <p className="text-gray-400 text-sm mt-3 max-w-2xl">{companyDetail.company.description}</p>
+                        )}
+                      </div>
+                      <div className="flex gap-4 text-center">
+                        <div className="bg-gray-900 rounded-lg px-4 py-3 border border-gray-700">
+                          <p className="text-2xl font-bold text-teal-400">{companyDetail.click_count}</p>
+                          <p className="text-gray-500 text-xs">Clicks</p>
+                        </div>
+                        <div className="bg-gray-900 rounded-lg px-4 py-3 border border-gray-700">
+                          <p className="text-2xl font-bold text-green-400">${companyDetail.pac_total.toLocaleString()}</p>
+                          <p className="text-gray-500 text-xs">PAC Total</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Brands */}
+                  {companyDetail.company.brands?.length > 0 && (
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-white mb-3">Brands ({companyDetail.company.brands.length})</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {companyDetail.company.brands.map((b, i) => (
+                          <span key={i} className="bg-gray-700/50 text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-600/50">
+                            {b}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Issues */}
+                  {companyDetail.issues?.length > 0 && (
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-white mb-4">Issue Stances</h3>
+                      <div className="grid gap-3">
+                        {companyDetail.issues.map((issue) => (
+                          <div key={issue.key} className="flex items-center gap-3 py-2 border-b border-gray-700/50 last:border-0">
+                            <span className="text-gray-300 text-sm w-48 shrink-0">{ISSUE_LABELS[issue.key] || issue.key}</span>
+                            <StanceBadge stance={issue.stance} />
+                            {issue.importance && (
+                              <span className="text-gray-500 text-xs">({issue.importance})</span>
+                            )}
+                            {issue.notes && (
+                              <span className="text-gray-500 text-xs truncate max-w-md" title={issue.notes}>{issue.notes}</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Research Queue Items */}
+                  {companyDetail.research_items?.length > 0 && (
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
+                      <h3 className="text-lg font-semibold text-white mb-3">Research Queue</h3>
+                      {companyDetail.research_items.map((r) => (
+                        <div key={r.id} className="flex items-center gap-3 py-2 text-sm border-b border-gray-700/50 last:border-0">
+                          <span className="text-gray-300">{r.brand_name || '—'}</span>
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${
+                            r.status === 'complete' ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/30 text-gray-300'
+                          }`}>{r.status}</span>
+                          <span className="text-gray-500 text-xs">{r.scan_count} scans</span>
+                        </div>
                       ))}
-                    </tbody>
-                  </table>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <p className="text-gray-500">Loading...</p>
+                /* Company List View */
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-6">Companies</h2>
+
+                  {/* Value Sort Controls */}
+                  <div className="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-4">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Rank by Values</h3>
+                    <div className="flex flex-wrap items-end gap-3">
+                      {[0, 1, 2].map((idx) => (
+                        <div key={idx} className="flex-1 min-w-[180px]">
+                          <label className="text-xs text-gray-500 mb-1 block">Priority {idx + 1} {idx === 0 ? '(3×)' : idx === 1 ? '(2×)' : '(1×)'}</label>
+                          <select
+                            value={rankIssues[idx]}
+                            onChange={(e) => {
+                              const next = [...rankIssues];
+                              next[idx] = e.target.value;
+                              setRankIssues(next);
+                            }}
+                            className="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                          >
+                            <option value="">— Select issue —</option>
+                            {ALL_ISSUES.map((ik) => (
+                              <option key={ik} value={ik}>{ISSUE_LABELS[ik]}</option>
+                            ))}
+                          </select>
+                        </div>
+                      ))}
+                      <button
+                        onClick={rankCompanies}
+                        disabled={!rankIssues.some(Boolean)}
+                        className="bg-teal-600 hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors"
+                      >
+                        Rank
+                      </button>
+                      {rankingMode && (
+                        <button
+                          onClick={() => { setRankingMode(false); setRankedCompanies(null); }}
+                          className="text-gray-400 hover:text-white text-sm px-3 py-2"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <input
+                    type="text"
+                    placeholder="Search companies..."
+                    value={companySearch}
+                    onChange={(e) => setCompanySearch(e.target.value)}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-4"
+                  />
+
+                  {/* Ranked results */}
+                  {rankingMode && rankedCompanies ? (
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="text-gray-400 border-b border-gray-700 text-left">
+                            <th className="p-3 w-12">#</th>
+                            <th className="p-3">Company</th>
+                            <th className="p-3 text-right">Score</th>
+                            {rankedCompanies.issues.map((ik) => (
+                              <th key={ik} className="p-3 text-center">{ISSUE_LABELS[ik]}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {rankedCompanies.companies
+                            .filter((c) => !companySearch || c.name.toLowerCase().includes(companySearch.toLowerCase()))
+                            .map((c, i) => (
+                            <tr key={c.id} className="border-b border-gray-700/50 hover:bg-gray-700/30 cursor-pointer" onClick={() => openCompanyDetail(c.id)}>
+                              <td className="p-3 text-gray-500">{i + 1}</td>
+                              <td className="p-3 text-white font-medium">{c.name}</td>
+                              <td className="p-3 text-right font-bold">
+                                <span className={c.score > 0 ? 'text-green-400' : c.score < 0 ? 'text-red-400' : 'text-gray-400'}>
+                                  {c.score > 0 ? '+' : ''}{c.score}
+                                </span>
+                              </td>
+                              {rankedCompanies.issues.map((ik) => (
+                                <td key={ik} className="p-3 text-center">
+                                  <StanceBadge stance={c.stances[ik]} />
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : companies ? (
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="text-gray-400 border-b border-gray-700 text-left">
+                            <th className="p-3">Name</th>
+                            <th className="p-3">Ticker</th>
+                            <th className="p-3">Industry</th>
+                            <th className="p-3">Country</th>
+                            <th className="p-3 text-right">Brands</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredCompanies?.map((c) => (
+                            <tr key={c.id} className="border-b border-gray-700/50 hover:bg-gray-700/30 cursor-pointer" onClick={() => openCompanyDetail(c.slug || c.id)}>
+                              <td className="p-3 text-white font-medium">{c.name}</td>
+                              <td className="p-3 text-teal-400 font-mono text-xs">{c.ticker || '—'}</td>
+                              <td className="p-3 text-gray-300">{c.industry || '—'}</td>
+                              <td className="p-3 text-gray-400">{c.country || '—'}</td>
+                              <td className="p-3 text-right text-gray-400">{c.brand_count}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500">Loading...</p>
+                  )}
+                </div>
+              )}
+              {loadingDetail && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                  <div className="bg-gray-800 rounded-xl p-6 text-white">Loading company details...</div>
+                </div>
               )}
             </div>
           )}
