@@ -1,6 +1,8 @@
 # DollarVote Global Expansion Roadmap
 ### "Every Dollar. Every Country. Every Value."
 
+> **DollarVote Motto:** *We will never take profit over values. In any circumstance. Ever.*
+
 ---
 
 ## The Vision
