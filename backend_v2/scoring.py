@@ -28,6 +28,23 @@ ISSUE_NAMES = {
 IMPORTANCE_WEIGHTS = [0, 1, 3, 0]  # 0=don't care, 1=somewhat, 2=very, 3=dealbreaker
 IMPORTANCE_LABELS = {0: "don't care", 1: "somewhat important", 2: "very important", 3: "deal breaker"}
 
+STANCE_TO_NUM = {
+    "strong_oppose": -1.0,
+    "lean_oppose": -0.5,
+    "neutral": 0.0,
+    "lean_support": 0.5,
+    "strong_support": 1.0,
+}
+
+
+def _parse_stance(val) -> float:
+    """Convert stance to numeric. Handles both string labels and numbers."""
+    if isinstance(val, (int, float)):
+        return float(val)
+    if isinstance(val, str):
+        return STANCE_TO_NUM.get(val.lower().strip(), 0.0)
+    return 0.0
+
 
 def score_company(
     company_issues: dict,
@@ -53,8 +70,8 @@ def score_company(
         if not ci:
             continue
 
-        user_stance = belief.get("stance", 0) / 2
-        company_stance = ci.get("stance", 0)
+        user_stance = belief.get("stance", 0) / 2  # user stance is -2 to 2, normalize to -1 to 1
+        company_stance = _parse_stance(ci.get("stance", 0))
         issue_name = ISSUE_NAMES.get(issue_id, issue_id)
         imp_label = IMPORTANCE_LABELS.get(importance, "")
         orig_issue = (original_company_issues or {}).get(issue_id)
@@ -78,7 +95,7 @@ def score_company(
 
             if score > 0.3:
                 matching.append(issue_id)
-                if orig_issue and user_stance * orig_issue.get("stance", 0) < 0:
+                if orig_issue and user_stance * _parse_stance(orig_issue.get("stance", 0)) < 0:
                     reasons.append(f"✅ Supports {issue_name} ({imp_label} to you) — unlike {original_company_name or 'the original company'}")
                 else:
                     reasons.append(f"✅ Supports {issue_name} ({imp_label} to you)")
