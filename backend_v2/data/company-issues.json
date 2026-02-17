@@ -1,208 +1,913 @@
 {
   "procter-gamble": {
     "issues": {
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G's ESG policy pages do not include reproductive rights as a stated corporate policy issue."
+      },
       "lgbtq_rights": {
-        "stance": 0.5,
-        "confidence": "medium",
-        "notes": "Strong workplace LGBTQ+ protections, Pride campaigns"
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "P&G earns perfect HRC Corporate Equality Index score for LGBTQ+ workplace inclusion.; P&G's equality and inclusion page highlights LGBTQ+ commitments including inclusive benefits, ERGs, and advertisin"
       },
       "racial_justice": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "'The Talk' ad campaign, diversity commitments"
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "P&G CEO David Taylor's statement affirming Black Lives Matter and pledging $5M+ to racial justice causes.; P&G's 'Widen the Screen' initiative to expand representation of Black creators in advertising"
+      },
+      "immigration": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "P&G, as a Business Roundtable member, is part of a group advocating for immigration reform including DACA protections."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G's Code of Conduct prohibits discrimination based on religion."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G has not issued any public statement on capital punishment."
+      },
+      "workers_rights": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G's Supplier Responsibility standards require suppliers to respect ILO labor rights including freedom of association and fair wages."
+      },
+      "minimum_wage": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G's LDA lobbying filings include labor cost policy among issues lobbied."
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "Business Roundtable (P&G member) advocates for competitive corporate tax rates to maintain US economic competitiveness."
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G's lobbying disclosures include trade policy as a priority area."
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "P&G's climate strategy commits to carbon neutrality by 2040, including Scope 1, 2, and material Scope 3 emissions.; P&G is a RE100 member, committed to sourcing 100% renewable electricity."
+      },
+      "renewable_energy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "P&G committed to 100% renewable electricity as a RE100 member and has signed multiple wind and solar PPAs."
       },
       "environmental_regulations": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Sustainability goals but significant packaging waste"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G supports sustainable packaging regulations and extended producer responsibility frameworks."
       },
       "animal_rights": {
-        "stance": -0.3,
-        "confidence": "medium",
-        "notes": "Still conducts some animal testing for regulatory compliance"
+        "stance": -0.5,
+        "confidence": "HIGH",
+        "notes": "P&G's animal research policy acknowledges ongoing animal testing for safety while committing to developing non-animal alternatives.; Cruelty Free International continues to criticize P&G for animal te"
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G has not taken a public position on gun policy."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G has no public stance on defense or military spending."
+      },
+      "police_reform": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G CEO David Taylor statement following George Floyd murder, pledging commitment to racial equity."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G has no public stance on drug policy reform."
+      },
+      "universal_healthcare": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "P&G provides comprehensive health benefits to employees worldwide."
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G's community investment includes education funding through the P&G Fund."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "P&G has not issued public statements on student loan debt policy."
+      },
+      "vaccine_policy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "P&G was among major corporations requiring COVID-19 vaccines for office employees in 2021."
       }
     }
   },
   "unilever": {
     "issues": {
-      "climate_change": {
-        "stance": 0.5,
-        "confidence": "medium",
-        "notes": "Strong sustainability commitments and reporting under Sustainable Living Plan"
-      },
-      "workers_rights": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "Living wage commitments across supply chain"
-      },
-      "environmental_regulations": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "Supports stronger environmental regulations"
-      },
-      "racial_justice": {
-        "stance": 0.3,
-        "confidence": "medium",
-        "notes": "Diversity and inclusion initiatives globally"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Unilever publishes an A-Z list of public positions. Abortion is not listed. No CEO or corporate statement found taking a position on abortion access or legislation."
       },
       "lgbtq_rights": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "Inclusive workplace policies and marketing"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Unilever's ED&I strategy explicitly opposes marginalisation of individuals 'simply because of who they are', covering gender identity and sexual orientation. Company markets inclusive campaigns global"
+      },
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Unilever commissioned independent research into William Lever's colonial-era forced labour plantations (DRC, Solomon Islands), stating 'We abhor all forms of racism, discrimination or worker abuse.' E"
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Immigration is not listed among Unilever's public positions. As a global employer in 190+ countries, Unilever has not taken a formal public stance on immigration policy."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Religious liberty not addressed in Unilever's public positions. Company's non-discrimination policy does cover religion in the workplace as a protected characteristic."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Unilever has not published a position on the death penalty. No evidence of lobbying or public statements on capital punishment found."
+      },
+      "workers_rights": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Human rights position explicitly states: 'committed to safe and healthy working conditions, the right to freedom of association and collective bargaining, and to effective information and consultation"
+      },
+      "minimum_wage": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Unilever's Living Wage Promise requires suppliers to assess the gap between what they pay and a living wage, and take steps to close it. The program goes beyond minimum wage to a living wage standard."
+      },
+      "corporate_tax": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Unilever is a multinational listed on LSE, Euronext Amsterdam and NYSE with operations across 190 countries. No public position on corporate tax rates found. As a major multinational, Unilever uses st"
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Unilever sells products in over 190 countries and has a global supply chain. As one of the world's largest consumer goods companies, it benefits from and generally supports free trade frameworks, thou"
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Unilever has achieved 72% reduction in Scope 1 & 2 GHG emissions since 2015. Has a published Climate Transition Action Plan. Advocates for government policies to accelerate clean energy transition glo"
+      },
+      "renewable_energy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Unilever prioritizes renewable electricity and energy efficiency in operations. Has achieved major reductions in Scope 1 & 2 emissions through renewable energy. Calls on governments to accelerate clea"
+      },
+      "environmental_regulations": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Explicitly states: 'Governments, regulators and industry must move further and faster in creating the enabling environments needed for companies like ours to meet climate targets.' Pushes for policies"
+      },
+      "animal_rights": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Animal testing position: 'We do not test on animals and believe that animal testing is not needed.' Proactively shares non-animal safety approaches. Animal welfare: 100% cage-free eggs in Europe and N"
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Gun control is not addressed in Unilever's A-Z position statements. No corporate statements or lobbying activity on firearms policy found."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Military spending not addressed in Unilever's public positions. No evidence of lobbying or public statements on defense budgets found."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Police reform not addressed in Unilever's public positions. Ben & Jerry's (Unilever sub-brand) has spoken on racial justice but parent company has not made a direct statement on police reform."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Drug policy not addressed in Unilever's public positions. No evidence of lobbying or public statements on drug decriminalization or enforcement policy found."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on universal healthcare or health insurance systems found. Unilever does provide health benefits to employees globally but has not advocated for specific national healthcare policie"
+      },
+      "education_funding": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No explicit public position on government education funding. Unilever does run training and capability-building programs in its supply chain (e.g. for farmers) but has not taken a policy stance on pub"
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on student debt relief or cancellation found. Unilever has not lobbied or issued statements on US student loan policy."
+      },
+      "vaccine_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public stance on vaccine mandates or public health vaccination policy found. Unilever has stated commitment to employee wellbeing but has not publicly advocated on specific vaccine mandate policies"
       }
     }
   },
   "nestle": {
     "issues": {
-      "environmental_regulations": {
-        "stance": -0.4,
-        "confidence": "medium",
-        "notes": "Major plastic polluter, water rights controversies in multiple countries"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's sustainability reporting covers environmental and social topics but does not include abortion policy."
+      },
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Nestl\u00c3\u00a9's diversity and inclusion framework includes LGBTQ+ employees in its commitment to a respectful workplace.; Nestl\u00c3\u00a9 has appeared on Stonewall's Global Diversity List for LGBTQ+ workplace inclu"
+      },
+      "racial_justice": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's diversity commitments include racial and ethnic representation goals.; Nestl\u00c3\u00a9 announced renaming of some ice cream brands following racial stereotyping criticism in 2020."
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's inclusion policies emphasize diverse nationality and culture but don't address immigration policy."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's Human Rights Policy prohibits discrimination based on religion."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 has no public stance on capital punishment."
       },
       "workers_rights": {
         "stance": -0.5,
-        "confidence": "medium",
-        "notes": "Child labor concerns in cocoa supply chain"
+        "confidence": "HIGH",
+        "notes": "Washington Post investigation documenting child labor in Nestl\u00c3\u00a9's cocoa supply chain in West Africa, finding children as young as 12 doing hazardous work.; Nestl\u00c3\u00a9's Responsible Sourcing commitments "
       },
-      "universal_healthcare": {
-        "stance": -0.3,
-        "confidence": "low",
-        "notes": "Controversial infant formula marketing in developing nations"
+      "minimum_wage": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's commitment to living wages for direct employees by 2030."
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "LOW",
+        "notes": "The Guardian Paradise Papers coverage revealed Nestl\u00c3\u00a9's use of tax haven structures."
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Nestl\u00c3\u00a9's investor relations material emphasizes global operations and supply chains dependent on open trade."
       },
       "climate_change": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Net-zero pledges but slow progress relative to scale"
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Nestl\u00c3\u00a9's net zero roadmap commits to 2050 net zero with SBTi-approved 50% reduction by 2030.; CDP rates Nestl\u00c3\u00a9's climate disclosure and action."
+      },
+      "renewable_energy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Nestl\u00c3\u00a9's renewable electricity target of 100% by 2025 as part of its emissions reduction strategy."
+      },
+      "environmental_regulations": {
+        "stance": 0,
+        "confidence": "MEDIUM",
+        "notes": "Guardian investigation into Nestl\u00c3\u00a9's water extraction in Michigan, drawing water near Flint during its water crisis.; Nestl\u00c3\u00a9's water stewardship commitments and claims of responsible water use."
       },
       "animal_rights": {
-        "stance": -0.2,
-        "confidence": "low",
-        "notes": "Some animal testing, factory farming supply chain"
+        "stance": -0.5,
+        "confidence": "HIGH",
+        "notes": "Nestl\u00c3\u00a9's Farm Animal Welfare Policy commits to Five Freedoms but permits industrial farming practices.; World Animal Protection's factory farming campaign identifies Nestl\u00c3\u00a9 as a major buyer of facto"
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9, as a Swiss company, has not taken a public stance on US gun policy."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 has no public stance on military spending."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 has not made significant public statements on police reform or racial justice in the United States specifically. The company's diversity commitments are primarily internal-facing."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 has no public stance on drug policy reform."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9, headquartered in Switzerland where universal healthcare exists, has not taken positions on US healthcare policy. The company provides health benefits to employees but has not advocated for un"
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 Foundation focuses on nutrition science research and food security education."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9 has not issued public statements on student loan debt policy."
+      },
+      "vaccine_policy": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Nestl\u00c3\u00a9's COVID-19 response included encouraging employee vaccination and following public health guidelines."
       }
     }
   },
   "pepsico": {
     "issues": {
-      "climate_change": {
-        "stance": 0.3,
-        "confidence": "medium",
-        "notes": "Net-zero emissions target by 2040, pep+ sustainability agenda"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo's public policy engagement page does not list reproductive rights as a priority issue."
       },
-      "environmental_regulations": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Sustainability commitments but significant plastic pollution"
+      "lgbtq_rights": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "PepsiCo earns HRC Corporate Equality Index score of 100 (Equality 100 Award) for LGBTQ+ workplace inclusion policies.; PepsiCo's 'Inclusion for Growth' strategy explicitly includes LGBTQ+ employees in"
       },
       "racial_justice": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "$570M racial equality initiative announced 2020"
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "$400M, 5-year commitment to uplift Black and Hispanic communities across talent, suppliers, communities.; PepsiCo Inclusion for Growth strategy includes racial equity as a core pillar."
+      },
+      "immigration": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo is a member of the Business Roundtable, which signed a letter urging Congress to protect DACA recipients.; PepsiCo's diversity and inclusion strategy encompasses global workforce diversity, im"
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo's Code of Conduct prohibits discrimination on the basis of religion among other protected categories."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Public policy engagement focuses on food, agriculture, trade, recycling, environmental sustainability, and AI \u00e2\u20ac\u201d no mention of capital punishment."
       },
       "workers_rights": {
-        "stance": 0.1,
-        "confidence": "low",
-        "notes": "Mixed record — improved wages but supply chain concerns"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo's Human Rights policy commits to fair pay, safe conditions, freedom of association, and supply chain due diligence based on UN Guiding Principles.; PepsiCo reports annual pay equity analysis a"
+      },
+      "minimum_wage": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo's LDA lobbying filings include labor and wage policy among lobbying issues.; PepsiCo prioritizes lobbying on food, trade, and regulatory topics including labor cost issues; opposes discriminat"
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "Business Roundtable (of which PepsiCo is a member) has advocated for maintaining competitive corporate tax rates.; PepsiCo's federal lobbying disclosures include tax policy as an issue area."
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo lists 'trade' among its key public policy issues for 2024, consistent with a global company favoring free trade agreements."
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "PepsiCo's Climate Transition Plan outlines net zero by 2040, requiring 40% reduction in absolute GHG emissions across Scopes 1, 2, and 3 by 2030.; Detailed Climate Transition Plan calling for governme"
+      },
+      "renewable_energy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "PepsiCo committed to 100% renewable electricity by 2030 and has signed power purchase agreements for wind and solar. RE100 member."
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo's climate strategy acknowledges dependence on external enablers including 'Government policy that incentivizes and/or mandates climate action.'; PepsiCo supports recycling regulations and exte"
+      },
+      "animal_rights": {
+        "stance": 0,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo Animal Welfare policy covers farm animal treatment standards and cage-free egg commitments."
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo's public policy priorities do not include gun control legislation."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo has no public stance on defense or military spending as a consumer goods company."
+      },
+      "police_reform": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "CEO Laguarta spoke out on systemic racism and committed $400M to address racial inequities following George Floyd's murder."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo has no documented public stance on drug policy reform."
+      },
+      "universal_healthcare": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "PepsiCo provides comprehensive employee health and wellness benefits."
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo Foundation invests in education, including scholarships and STEM programs in underserved communities."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "PepsiCo has not issued public statements on student loan policy or debt forgiveness."
+      },
+      "vaccine_policy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "PepsiCo prioritized employee health during COVID-19, offering vaccination support and paid time off."
       }
     }
   },
   "coca-cola": {
     "issues": {
-      "environmental_regulations": {
-        "stance": -0.3,
-        "confidence": "medium",
-        "notes": "Named world's largest plastic polluter multiple years running"
-      },
-      "climate_change": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Has climate targets but progress is slow"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola's press release archive shows public engagement on voting rights, racial equity, and sustainability but not on abortion policy."
       },
       "lgbtq_rights": {
-        "stance": 0.5,
-        "confidence": "medium",
-        "notes": "Supports LGBTQ+ rights and workplace equality"
-      },
-      "workers_rights": {
-        "stance": -0.2,
-        "confidence": "low",
-        "notes": "Mixed record on labor practices globally, bottler controversies"
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Coca-Cola earns perfect HRC Corporate Equality Index score for LGBTQ+ workplace inclusion.; Coca-Cola's diversity and inclusion commitments explicitly cover LGBTQ+ employees and communities."
       },
       "racial_justice": {
-        "stance": 0.3,
-        "confidence": "medium",
-        "notes": "Diversity commitments and supplier diversity programs"
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "CEO James Quincey publicly stated the Georgia voter restriction law 'is wrong' and 'does not match our values' in April 2021.; Coca-Cola committed $500M toward racial equity initiatives including supp"
+      },
+      "immigration": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "As a Business Roundtable member, Coca-Cola is part of a group that called on Congress to protect DACA recipients."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola's Human Rights Policy prohibits discrimination based on religion among other protected characteristics."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola has not issued any public statement on capital punishment."
+      },
+      "workers_rights": {
+        "stance": 0,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola's Human Rights Policy commits to ILO labor standards including freedom of association and fair wages.; Business & Human Rights Resource Centre documents multiple allegations of labor rights "
+      },
+      "minimum_wage": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola's federal lobbying disclosures include labor cost-related policy areas."
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "Reuters coverage of Coca-Cola's $12B IRS tax dispute over royalty payments, illustrating company's use of tax minimization strategies."
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola's global operations across 200+ countries reflect its interest in maintaining free trade."
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "Coca-Cola has set a 1.5\u00c2\u00b0C emissions target by 2035, water replenishment goals, and packaging reduction targets."
+      },
+      "renewable_energy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola's sustainability targets include renewable energy procurement as part of its 1.5\u00c2\u00b0C emissions pathway."
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Coca-Cola's water replenishment and packaging reduction commitments align with and support environmental regulation."
+      },
+      "animal_rights": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola's ingredient sustainability focuses on agriculture and water, with limited specific animal welfare commitments."
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola has not taken a public position on gun policy despite being headquartered in Georgia, where gun laws are politically prominent."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola has no public stance on defense or military spending."
+      },
+      "police_reform": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola committed $500M toward racial equity after the murder of George Floyd, with CEO Quincey calling for systemic change."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola has no public stance on drug policy reform. The company does not produce alcoholic or cannabis beverages in the US market."
+      },
+      "universal_healthcare": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Coca-Cola provides health and wellness benefits to all employees globally."
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola Foundation has invested over $1 billion in educational programs and scholarships worldwide."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Coca-Cola has not issued a public statement on student loan debt forgiveness or federal student debt policy."
+      },
+      "vaccine_policy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Coca-Cola was among companies requiring COVID-19 vaccines for office employees in 2021."
       }
     }
   },
   "johnson-johnson": {
     "issues": {
-      "universal_healthcare": {
-        "stance": -0.3,
-        "confidence": "medium",
-        "notes": "Lobbies to protect pharmaceutical pricing structures"
+      "abortion": {
+        "stance": 0,
+        "confidence": "MEDIUM",
+        "notes": "J&J's global health equity focus includes access to healthcare broadly but does not specify abortion policy.; J&J was reported among companies offering abortion travel benefits to employees after the "
       },
-      "vaccine_policy": {
-        "stance": 0.7,
-        "confidence": "high",
-        "notes": "Developed COVID-19 vaccine at cost, supports public vaccination"
+      "lgbtq_rights": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "J&J earns perfect HRC Corporate Equality Index score for LGBTQ+ workplace inclusion policies.; J&J's social impact page includes LGBTQ+ inclusion as a component of its diversity and equity commitments"
       },
-      "environmental_regulations": {
-        "stance": 0.1,
-        "confidence": "low",
-        "notes": "Talc lawsuit controversies, manufacturing pollution concerns"
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's Global Health Equity initiative addresses racial and health disparities, backed by $100M commitment.; J&J announced a $100M commitment in 2020 to advance racial equity in health and business."
+      },
+      "immigration": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "J&J, as a Business Roundtable member, is part of advocacy for immigration reform including DACA protections and skilled worker visas."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "J&J's Credo commits to fair treatment for all employees regardless of religion."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "The Guardian reported J&J drugs being traced to state execution protocols, raising questions about corporate responsibility."
       },
       "workers_rights": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Generally positive workplace policies"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's Credo (foundational document) commits to fair wages, safe working conditions, and employee dignity.; J&J's Responsible Supply Base standards require suppliers to respect fundamental labor rights"
+      },
+      "minimum_wage": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "J&J has not taken a clear public position on federal minimum wage increases. As a primarily professional/healthcare employer, the issue affects its supply chain more than direct operations."
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's LDA lobbying filings include tax policy as an issue area."
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's lobbying activities include trade policy supporting open markets for pharmaceutical products."
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "J&J is committed to net zero by 2045, with science-based interim targets and CDP A-list recognition.; J&J's Health for Humanity report details climate targets and environmental performance."
+      },
+      "renewable_energy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "J&J is a RE100 member targeting 100% renewable electricity by 2025 with signed wind and solar PPAs."
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's environmental sustainability approach supports regulatory frameworks for climate and water."
+      },
+      "animal_rights": {
+        "stance": -0.5,
+        "confidence": "HIGH",
+        "notes": "J&J's Responsible Research page outlines animal testing practices and 3Rs commitments, confirming ongoing animal testing for medical/pharmaceutical development."
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "J&J focuses on health equity issues including community violence but has not specifically advocated for gun control legislation."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "J&J has no public stance on military spending as a civilian healthcare company."
+      },
+      "police_reform": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "J&J $100M racial equity commitment with focus on health equity and systemic racism."
+      },
+      "drug_policy": {
+        "stance": -0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J faced litigation over its role in the opioid epidemic as a manufacturer and distributor.; J&J's lobbying disclosures include drug pricing and pharmaceutical regulation as priority issues."
+      },
+      "universal_healthcare": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J's social impact mission focuses on improving healthcare access for all, consistent with supporting broader coverage.; J&J's Global Health Equity work explicitly aims to expand access to healthcare"
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "J&J Foundation's nursing initiative provides substantial education funding to train nursing professionals worldwide."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "J&J has not issued public statements on student loan debt policy."
+      },
+      "vaccine_policy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "FDA Emergency Use Authorization for J&J's (Janssen) single-dose COVID-19 vaccine, February 2021.; J&J announcement of COVID-19 vaccine development and commitment to vaccine access globally."
       }
     }
   },
   "kraft-heinz": {
     "issues": {
-      "environmental_regulations": {
-        "stance": -0.2,
-        "confidence": "low",
-        "notes": "Some sustainability targets but limited public advocacy"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on abortion access or abortion legislation found. Kraft Heinz has not issued CEO or corporate statements on abortion rights or restrictions. No lobbying activity on abortion documen"
+      },
+      "lgbtq_rights": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "In June 2019, Kraft Heinz achieved a 100 percent Corporate Equality Index (CEI) score from the Human Rights Campaign. Wikipedia notes this recognized Kraft Heinz 'for its LGBTQ inclusion efforts and b"
+      },
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Kraft Heinz's 2020 Strategic Transformation Plan included a new ESG report. Company has diversity and inclusion programs. Made public statements after 2020 racial justice events. Has participated in i"
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on immigration policy found. Kraft Heinz employs workers in many countries and has supply chains in diverse geographies but has not issued statements on immigration legislation."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on religious liberty legislation found."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on capital punishment found."
       },
       "workers_rights": {
-        "stance": -0.3,
-        "confidence": "medium",
-        "notes": "Cost-cutting culture under 3G Capital management affected workers"
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Kraft Heinz has faced criticism for aggressive cost-cutting since the 3G Capital/Berkshire Hathaway merger approach, including significant workforce reductions. No strong public advocacy for labor rig"
+      },
+      "minimum_wage": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on minimum wage legislation found. Under Berkshire Hathaway's influence, Kraft Heinz has generally avoided public policy advocacy on wage issues."
+      },
+      "corporate_tax": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No explicit public stance on corporate tax rates. Warren Buffett (Berkshire Hathaway) has personally expressed support for higher taxes on the wealthy, but Kraft Heinz as a corporation has not taken a"
+      },
+      "free_trade": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Kraft Heinz is the world's fifth-largest food and beverage company with operations across North America, South America, Europe, Asia, and Australia. Benefits from global trade but no explicit advocacy"
       },
       "climate_change": {
-        "stance": 0.1,
-        "confidence": "low",
-        "notes": "Set emissions reduction targets but behind peers"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "In September 2020, Kraft Heinz released its updated ESG report with goals to make 100% of product packaging recyclable, reusable, or compostable by 2025 and to sustainably source 100% of Heinz Ketchup"
+      },
+      "renewable_energy": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Kraft Heinz ESG report mentions energy efficiency and sustainability goals, but specific renewable energy transition targets are less prominent than competitors like Unilever and General Mills. Some r"
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Kraft Heinz 2020 ESG update includes packaging recyclability goals and sustainable sourcing commitments. Company eliminated artificial food dyes from US products in June 2025 following regulatory pres"
       },
       "animal_rights": {
-        "stance": -0.3,
-        "confidence": "low",
-        "notes": "Major meat processor Oscar Mayer, limited welfare commitments"
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No significant animal welfare commitments comparable to General Mills (cage-free eggs) or Kellogg's (cage-free + gestation stalls) documented for Kraft Heinz. Company sells many animal-based products "
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on gun control or firearms legislation found."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on military spending or defense budgets found."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on police reform found."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on drug decriminalization or drug enforcement policy found."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on universal healthcare found. Kraft Heinz provides comprehensive healthcare benefits to employees including LGBTQ+ health coverage (as evidenced by 100% HRC CEI score), but has not"
+      },
+      "education_funding": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on government education funding policy found."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on student debt cancellation or college affordability policy found."
+      },
+      "vaccine_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public advocacy stance on vaccine mandates found. During COVID-19, Kraft Heinz implemented health protocols but did not publicly advocate on vaccine mandate policy."
       }
     }
   },
   "general-mills": {
     "issues": {
-      "climate_change": {
-        "stance": 0.3,
-        "confidence": "medium",
-        "notes": "Science-based emissions reduction targets, regenerative agriculture"
-      },
-      "environmental_regulations": {
-        "stance": 0.2,
-        "confidence": "low",
-        "notes": "Sustainable sourcing commitments for key ingredients"
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "General Mills has not issued any public statement or policy position on abortion access or abortion legislation. No lobbying activity on abortion found in publicly available records."
       },
       "lgbtq_rights": {
-        "stance": 0.4,
-        "confidence": "medium",
-        "notes": "Workplace equality policies, filed amicus brief for marriage equality"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "General Mills lists 'Champion Belonging' as one of four core corporate values. Company has established LGBTQ employee networks (over 25 years old), inclusive advertising campaigns featuring same-sex c"
+      },
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "General Mills 'Championing Belonging' program explicitly addresses racial inclusion. 'Courageous Conversations' platform for employees on challenging topics. Company made public statements supporting "
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on immigration policy found. General Mills employs workers in many countries but has not issued statements on immigration law or border policy."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Religion is included as a protected characteristic under General Mills' belonging framework but no public policy position on religious liberty legislation has been found."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on capital punishment found. General Mills has not lobbied or issued statements on death penalty legislation."
       },
       "workers_rights": {
-        "stance": 0.1,
-        "confidence": "low",
-        "notes": "Generally positive labor relations"
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "General Mills publishes a human rights statement and Slavery and Human Trafficking Statement. Company lists human rights as a key pillar, including worker protections in supply chain.; General Mills i"
+      },
+      "minimum_wage": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on federal or state minimum wage levels found. General Mills has not lobbied for or against minimum wage increases based on publicly available records."
+      },
+      "corporate_tax": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No explicit public stance on corporate tax rates. As a Fortune 500 company listed on NYSE, General Mills participates in standard tax planning but has not issued public advocacy statements on corporat"
+      },
+      "free_trade": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "General Mills sells products globally and has international joint ventures (e.g. Cereal Partners Worldwide with Nestl\u00c3\u00a9). Benefits from global trade but no explicit public advocacy stance on free trad"
+      },
+      "climate_change": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "General Mills has committed to reducing value chain GHG emissions by 30% by 2030 (vs 2020 baseline) and achieving net zero emissions by 2050. Advancing regenerative agriculture on 1 million acres by 2"
+      },
+      "renewable_energy": {
+        "stance": 1.0,
+        "confidence": "HIGH",
+        "notes": "General Mills has committed to sourcing 100% renewable electricity for all global operations by 2030. This is a verified, publicly stated commitment on company website."
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "General Mills has set ambitious environmental targets and works with NGOs and industry partnerships. Company describes itself as depending on 'a healthy planet.' Has supported sustainable agriculture "
+      },
+      "animal_rights": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "In April 2011, General Mills announced it would switch all 1 million eggs it uses annually to cage-free. This was an early, proactive animal welfare commitment predating many industry standards. Compa"
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on gun control or firearms legislation found. General Mills has not lobbied or issued statements on gun policy."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on military spending found. General Mills does have veteran employee programs but has not taken a stance on defense budgets."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "As a Minneapolis-area company, General Mills made public statements about racial equity following George Floyd's death in 2020, but did not specifically endorse police reform legislation. 'Courageous "
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on drug decriminalization or drug enforcement policy found."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on universal healthcare or Medicare-for-All found. General Mills provides employee health benefits but has not advocated for specific healthcare system reform."
+      },
+      "education_funding": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "General Mills has historically supported education through Betty Crocker Box Tops for Education program (running since 1929 in various forms) and community investment in Minneapolis/St. Paul area scho"
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on student debt cancellation or college affordability policy found."
+      },
+      "vaccine_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public advocacy stance on vaccine mandates found. During COVID-19, General Mills implemented health protocols for workers but did not publicly lobby for or against vaccine mandates."
       }
     }
   },
@@ -634,7 +1339,7 @@
       "environmental_regulations": {
         "stance": 0.4,
         "confidence": "medium",
-        "notes": "L'Oréal for the Future program, strong sustainability reporting"
+        "notes": "L'Or\u00c3\u00a9al for the Future program, strong sustainability reporting"
       },
       "climate_change": {
         "stance": 0.4,
@@ -2346,6 +3051,234 @@
         "stance": 0.1,
         "confidence": "low",
         "notes": "Standard corporate practices"
+      }
+    }
+  },
+  "kelloggs": {
+    "issues": {
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on abortion access or abortion legislation found for Kellogg Company, Kellanova, or WK Kellogg Co. No lobbying on abortion issues documented in public records."
+      },
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "In October 2019, Kellogg's partnered with GLAAD by launching a limited edition 'All Together Cereal' combining six mini cereal boxes to promote anti-bullying and LGBTQ advocacy efforts, donating $50,0"
+      },
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Kellogg Company has diversity and inclusion programs and made public statements after 2020 racial justice events. Company has participated in the HRC Corporate Equality Index and has Employee Resource"
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on immigration policy found. Kellogg Company has international operations and employs workers globally but has not taken a public stance on immigration legislation."
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on religious liberty legislation found. Kellogg's roots are in the Seventh-day Adventist tradition (Battle Creek Sanitarium origins), but the modern company has not taken religious "
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on capital punishment found."
+      },
+      "workers_rights": {
+        "stance": -0.5,
+        "confidence": "HIGH",
+        "notes": "In October 2021, workers at all Kellogg's US cereal plants went on strike over labor contract disputes including a two-tier wage system. On December 3, 2021, a tentative deal was struck but union memb"
+      },
+      "minimum_wage": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No explicit public stance on minimum wage legislation. The 2021 strike context involved a two-tier wage system where new hires would receive lower pay, suggesting resistance to wage parity, though no "
+      },
+      "corporate_tax": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No explicit public position on corporate tax rates found. Kellogg Company lobbied on various trade and regulatory issues but specific corporate tax lobbying not documented in available sources."
+      },
+      "free_trade": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "Kellogg's products were manufactured and marketed in over 180 countries before the 2023 split. Company benefits from global trade but no explicit advocacy position on free trade agreements found."
+      },
+      "climate_change": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Kellogg Company issued a 'Better Days' global commitment in June 2019 focused on hunger, children, and farmers with targets to reach by 2030. Company had sustainability programs but less ambitious cli"
+      },
+      "renewable_energy": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Kellogg Company had renewable energy goals as part of its sustainability programs. Kellanova (successor) has continued ESG commitments. Specific renewable energy targets were set but are less ambitiou"
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "In January 2020, Kellogg's decided to work with suppliers to phase out the use of glyphosate as a drying agent by 2025, responding to consumer and regulatory concerns. This indicates willingness to co"
+      },
+      "animal_rights": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "In 2015, Kellogg's announced it would source 100% cage-free eggs and eliminate gestation stalls from its pork supply chain by 2025. Kellogg's also owned Morningstar Farms (vegetarian/vegan brand) and "
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on gun control or firearms legislation found."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on military spending or defense budgets found."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on police reform found. Kellogg Company issued diversity statements after 2020 events but did not specifically endorse police reform legislation."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on drug decriminalization or drug enforcement policy found."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on universal healthcare found. During the 2021 strike, healthcare benefits were part of the contract dispute, but this does not indicate a formal policy position on universal health"
+      },
+      "education_funding": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on education funding policy found. The W.K. Kellogg Foundation (separate from Kellogg Company) is a major educational philanthropy, but the company itself has not lobbied on educati"
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on student debt cancellation or college affordability policy found."
+      },
+      "vaccine_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public advocacy stance on vaccine mandates or public health vaccination policy found."
+      }
+    }
+  },
+  "mars-inc": {
+    "issues": {
+      "abortion": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on abortion access or abortion legislation found. As a private company, Mars Inc. makes fewer public policy statements than publicly traded peers. No lobbying on abortion issues fou"
+      },
+      "lgbtq_rights": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Mars website states: 'No matter the visible or invisible differences, we have long-been committed to fostering an environment where everyone has an equal opportunity to reach their full potential' und"
+      },
+      "racial_justice": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Mars Sustainable in a Generation Plan includes 'society is inclusive' as a core vision. The company has renamed 'Uncle Ben's' to 'Ben's Original' in 2021 to remove racial stereotyping from product bra"
+      },
+      "immigration": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on immigration policy found. Mars human rights policy focuses on supply chain workers, forced labor, and migrant worker protections in its extended supply chain, but does not addres"
+      },
+      "religious_liberty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on religious liberty legislation found."
+      },
+      "death_penalty": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on capital punishment found."
+      },
+      "workers_rights": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Mars has a comprehensive global Human Rights Policy aligned with UN Guiding Principles and ILO Declaration on Fundamental Principles and Rights at Work. Addresses forced labor, child labor, and migran"
+      },
+      "minimum_wage": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Mars has committed to living wages across its operations and supply chain. The 'Increasing Income' pillar of the Sustainable in a Generation Plan explicitly addresses fair compensation. This indicates"
+      },
+      "corporate_tax": {
+        "stance": -0.5,
+        "confidence": "LOW",
+        "notes": "In 2009, Mars hired Ernst & Young to lobby on corporate and international tax issues, including issues related to tax changes proposed by the Obama administration \u00e2\u20ac\u201d indicating active resistance to p"
+      },
+      "free_trade": {
+        "stance": 0.5,
+        "confidence": "LOW",
+        "notes": "Mars operates globally with manufacturing in 22+ US facilities and extensive international operations. As a company reliant on global commodity supply chains (cocoa, palm oil, sugar), Mars benefits fr"
+      },
+      "climate_change": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Mars Sustainable in a Generation Plan includes a 2050 net zero emissions commitment, science-based actions in support of UN Sustainable Development Goals, and significant investment in transforming ra"
+      },
+      "renewable_energy": {
+        "stance": 0.5,
+        "confidence": "HIGH",
+        "notes": "Renewable Energy is explicitly listed as a Healthy Planet priority in Mars' Sustainable in a Generation Plan. Mars is expanding use of renewable energy as part of its path to net zero by 2050."
+      },
+      "environmental_regulations": {
+        "stance": 0.5,
+        "confidence": "MEDIUM",
+        "notes": "Mars states it is 'building lasting partnerships with NGOs, governments and industry, to help transform the systems' causing environmental problems. Company supports deforestation-free supply chains a"
+      },
+      "animal_rights": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "In 2007, Mars announced it would use animal rennet (from calf stomach lining) in UK products. After significant consumer backlash led by the Vegetarian Society, Mars reversed course and switched to al"
+      },
+      "gun_control": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on gun control or firearms legislation found."
+      },
+      "military_spending": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on military spending or defense budgets found."
+      },
+      "police_reform": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on police reform found."
+      },
+      "drug_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on drug decriminalization or drug enforcement policy found."
+      },
+      "universal_healthcare": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on universal healthcare policy found. Mars does provide employee health benefits and 'Nourishing Wellbeing' is listed as a sustainability pillar, but this refers to nutrition and he"
+      },
+      "education_funding": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on government education funding policy found. Mars does invest in community programs and training for supply chain farmers but has not lobbied on education spending."
+      },
+      "student_debt": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public position on student debt cancellation or college affordability policy found."
+      },
+      "vaccine_policy": {
+        "stance": 0,
+        "confidence": "LOW",
+        "notes": "No public advocacy stance on vaccine mandates found. As a private company, Mars has not made public statements on vaccination policy."
       }
     }
   }

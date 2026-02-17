@@ -107,20 +107,31 @@ def score_company(
     if deal_breaker_hit:
         final_score = -1
 
-    if final_score > 0.4:
+    # Stretch the score to use more of the 0-100 range
+    # Apply a 2x multiplier capped at -1 to 1 for more granularity
+    display_score = max(-1, min(1, final_score * 2))
+
+    if final_score > 0.3:
         label = "Great match"
     elif final_score > 0.1:
         label = "Good match"
     elif final_score > -0.1:
         label = "Mixed"
-    elif final_score > -0.4:
+    elif final_score > -0.3:
         label = "Weak match"
     else:
         label = "Poor match"
 
+    # Count how many user issues had no company data
+    total_user_issues = sum(1 for i, b in belief_profile.items() if isinstance(b, dict) and b.get("importance", 0) > 0)
+    matched_issues = len(matching) + len(conflicting)
+    coverage = matched_issues / total_user_issues if total_user_issues > 0 else 0
+    if coverage < 0.3 and not deal_breaker_hit:
+        reasons.append(f"📊 Limited data — we only have info on {len([k for k in belief_profile if isinstance(belief_profile.get(k), dict) and belief_profile[k].get('importance', 0) > 0 and company_issues.get(k)])} of your {total_user_issues} important issues")
+
     return {
         "score": round(final_score, 3),
-        "pct": max(0, round(((final_score + 1) / 2) * 100)),
+        "pct": max(0, min(100, round(((display_score + 1) / 2) * 100))),
         "dealBreakerHit": deal_breaker_hit,
         "label": label,
         "reasons": reasons[:6],
