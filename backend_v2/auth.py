@@ -117,13 +117,16 @@ def register(req: RegisterRequest, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def login(req: LoginRequest, db: Session = Depends(get_db)):
-    email = req.email.strip().lower()
-    if not email or not req.password:
-        raise HTTPException(400, "Email and password are required")
+    identifier = req.email.strip().lower()
+    if not identifier or not req.password:
+        raise HTTPException(400, "Email/username and password are required")
 
-    user = db.query(User).filter_by(email=email).first()
+    # Try email first, then username
+    user = db.query(User).filter_by(email=identifier).first()
+    if not user:
+        user = db.query(User).filter(User.username.ilike(identifier)).first()
     if not user or not check_password_hash(user.password_hash, req.password):
-        raise HTTPException(401, "Invalid email or password")
+        raise HTTPException(401, "Invalid email/username or password")
 
     access, refresh = _create_tokens(user.id)
     return {"user": user.to_dict(), "access_token": access, "refresh_token": refresh}
