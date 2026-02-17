@@ -12,6 +12,8 @@ import Register from './pages/Register';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import VerifyEmail from './pages/VerifyEmail';
+import AdminLogin from './pages/AdminLogin';
+import Admin from './pages/Admin';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
@@ -80,6 +82,8 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser, handleLogout }}>
       <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/verify-email" element={<RequireAuth><VerifyEmail /></RequireAuth>} />
         <Route path="/onboarding" element={<RequireVerified><Onboarding /></RequireVerified>} />
         <Route path="/login" element={<Login onAuth={handleAuth} />} />

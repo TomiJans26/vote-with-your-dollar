@@ -15,9 +15,16 @@ app.add_middleware(
 
 from auth import router as auth_router
 from api import router as api_router
+from admin import router as admin_router
 
 app.include_router(auth_router)
 app.include_router(api_router)
+app.include_router(admin_router)
+
+# Create research_queue table if it doesn't exist
+from database import engine
+from admin import ResearchQueue
+ResearchQueue.__table__.create(bind=engine, checkfirst=True)
 
 
 @app.get("/")
