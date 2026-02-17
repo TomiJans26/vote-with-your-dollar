@@ -1,4 +1,5 @@
 // Issue definitions for belief profile onboarding
+// leftLabel = the -2 end (left-leaning view), rightLabel = the +2 end (right-leaning view)
 export const ISSUE_CATEGORIES = [
   {
     id: 'social',
@@ -6,12 +7,12 @@ export const ISSUE_CATEGORIES = [
     emoji: '🤝',
     description: 'How people live, love, and relate to each other',
     issues: [
-      { id: 'abortion', name: 'Abortion / Reproductive Rights', description: 'Access to abortion and reproductive healthcare services' },
-      { id: 'lgbtq_rights', name: 'LGBTQ+ Rights', description: 'Equal rights and protections for LGBTQ+ individuals' },
-      { id: 'racial_justice', name: 'Racial Justice / Equity', description: 'Policies addressing racial inequality and systemic racism' },
-      { id: 'immigration', name: 'Immigration', description: 'Pathways to citizenship, border policy, and refugee resettlement' },
-      { id: 'religious_liberty', name: 'Religious Liberty', description: 'Protections for religious expression and conscience' },
-      { id: 'death_penalty', name: 'Death Penalty', description: 'Use of capital punishment in the justice system' },
+      { id: 'abortion', name: 'Abortion / Reproductive Rights', description: 'Where do you stand?', leftLabel: 'Pro-Choice', rightLabel: 'Pro-Life' },
+      { id: 'lgbtq_rights', name: 'LGBTQ+ Rights', description: 'Where do you stand?', leftLabel: 'Expand Protections', rightLabel: 'Traditional Values' },
+      { id: 'racial_justice', name: 'Racial Justice / Equity', description: 'Where do you stand?', leftLabel: 'Systemic Reform', rightLabel: 'Individual Merit' },
+      { id: 'immigration', name: 'Immigration', description: 'Where do you stand?', leftLabel: 'Open Pathways', rightLabel: 'Secure Borders' },
+      { id: 'religious_liberty', name: 'Religious Liberty', description: 'Where do you stand?', leftLabel: 'Separation of Church & State', rightLabel: 'Protect Religious Expression' },
+      { id: 'death_penalty', name: 'Death Penalty', description: 'Where do you stand?', leftLabel: 'Abolish', rightLabel: 'Keep / Expand' },
     ],
   },
   {
@@ -20,10 +21,10 @@ export const ISSUE_CATEGORIES = [
     emoji: '💰',
     description: 'Jobs, wages, and how the economy works for people',
     issues: [
-      { id: 'workers_rights', name: "Workers' Rights / Labor Unions", description: 'Collective bargaining, union protections, and worker safety' },
-      { id: 'minimum_wage', name: 'Minimum Wage / Living Wage', description: 'Federal and state minimum wage levels' },
-      { id: 'corporate_tax', name: 'Corporate Tax Policy', description: 'Tax rates and loopholes for large corporations' },
-      { id: 'free_trade', name: 'Free Trade vs Protectionism', description: 'International trade agreements and tariff policy' },
+      { id: 'workers_rights', name: "Workers' Rights / Labor Unions", description: 'Where do you stand?', leftLabel: 'Strengthen Unions', rightLabel: 'Free Market' },
+      { id: 'minimum_wage', name: 'Minimum Wage / Living Wage', description: 'Where do you stand?', leftLabel: 'Raise It', rightLabel: 'Let Market Decide' },
+      { id: 'corporate_tax', name: 'Corporate Tax Policy', description: 'Where do you stand?', leftLabel: 'Tax More', rightLabel: 'Tax Less' },
+      { id: 'free_trade', name: 'Free Trade vs Protectionism', description: 'Where do you stand?', leftLabel: 'Free Trade', rightLabel: 'America First' },
     ],
   },
   {
@@ -32,10 +33,10 @@ export const ISSUE_CATEGORIES = [
     emoji: '🌍',
     description: 'Our planet, climate, and the natural world',
     issues: [
-      { id: 'climate_change', name: 'Climate Change / Carbon Emissions', description: 'Reducing greenhouse gases and addressing global warming' },
-      { id: 'renewable_energy', name: 'Renewable Energy', description: 'Investment in solar, wind, and clean energy sources' },
-      { id: 'environmental_regulations', name: 'Environmental Regulations', description: 'EPA rules, pollution limits, and conservation policy' },
-      { id: 'animal_rights', name: 'Animal Rights / Welfare', description: 'Protections for animals in farming, testing, and wildlife' },
+      { id: 'climate_change', name: 'Climate Change / Carbon Emissions', description: 'Where do you stand?', leftLabel: 'Urgent Action', rightLabel: 'Not a Priority' },
+      { id: 'renewable_energy', name: 'Renewable Energy', description: 'Where do you stand?', leftLabel: 'Invest Heavily', rightLabel: 'All Energy Sources' },
+      { id: 'environmental_regulations', name: 'Environmental Regulations', description: 'Where do you stand?', leftLabel: 'More Regulation', rightLabel: 'Less Regulation' },
+      { id: 'animal_rights', name: 'Animal Rights / Welfare', description: 'Where do you stand?', leftLabel: 'Stronger Protections', rightLabel: 'Current Laws Fine' },
     ],
   },
   {
@@ -44,10 +45,10 @@ export const ISSUE_CATEGORIES = [
     emoji: '🛡️',
     description: 'How we keep communities and the country safe',
     issues: [
-      { id: 'gun_control', name: 'Gun Control / 2nd Amendment', description: 'Firearm regulations, background checks, and gun rights' },
-      { id: 'military_spending', name: 'Military / Defense Spending', description: 'Federal defense budget and military priorities' },
-      { id: 'police_reform', name: 'Police Reform / Criminal Justice', description: 'Policing practices, sentencing reform, and incarceration' },
-      { id: 'drug_policy', name: 'Drug Policy / Legalization', description: 'Cannabis legalization, drug scheduling, and treatment vs. criminalization' },
+      { id: 'gun_control', name: 'Gun Control / 2nd Amendment', description: 'Where do you stand?', leftLabel: 'More Gun Control', rightLabel: 'Protect Gun Rights' },
+      { id: 'military_spending', name: 'Military / Defense Spending', description: 'Where do you stand?', leftLabel: 'Reduce Spending', rightLabel: 'Increase Spending' },
+      { id: 'police_reform', name: 'Police Reform / Criminal Justice', description: 'Where do you stand?', leftLabel: 'Major Reform', rightLabel: 'Back the Blue' },
+      { id: 'drug_policy', name: 'Drug Policy / Legalization', description: 'Where do you stand?', leftLabel: 'Legalize & Treat', rightLabel: 'Strict Enforcement' },
     ],
   },
   {
@@ -56,10 +57,10 @@ export const ISSUE_CATEGORIES = [
     emoji: '🏥',
     description: 'Healthcare access and how we educate the next generation',
     issues: [
-      { id: 'universal_healthcare', name: 'Universal Healthcare', description: 'Government-funded healthcare for all citizens' },
-      { id: 'education_funding', name: 'Education Funding', description: 'Public school funding, teacher pay, and school choice' },
-      { id: 'student_debt', name: 'Student Debt', description: 'College affordability and student loan forgiveness' },
-      { id: 'vaccine_policy', name: 'Vaccine Policy', description: 'Vaccine mandates, public health requirements, and personal choice' },
+      { id: 'universal_healthcare', name: 'Universal Healthcare', description: 'Where do you stand?', leftLabel: 'Healthcare for All', rightLabel: 'Private Market' },
+      { id: 'education_funding', name: 'Education Funding', description: 'Where do you stand?', leftLabel: 'Fund Public Schools', rightLabel: 'School Choice' },
+      { id: 'student_debt', name: 'Student Debt', description: 'Where do you stand?', leftLabel: 'Forgive Loans', rightLabel: 'Personal Responsibility' },
+      { id: 'vaccine_policy', name: 'Vaccine Policy', description: 'Where do you stand?', leftLabel: 'Mandate for Safety', rightLabel: 'Personal Choice' },
     ],
   },
 ];

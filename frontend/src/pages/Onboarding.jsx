@@ -16,9 +16,16 @@ function ProgressBar({ current, total }) {
   );
 }
 
-function StanceSlider({ value, onChange }) {
+function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
+  const positionLabel = value === -2 ? leftLabel : value === -1 ? leftLabel : value === 0 ? 'Neutral' : value === 1 ? rightLabel : rightLabel;
+  const positionStrength = Math.abs(value) === 2 ? 'Strongly' : Math.abs(value) === 1 ? 'Lean' : '';
+  const displayLabel = value === 0 ? '🤷 Neutral' : `${positionStrength} → ${positionLabel}`;
   return (
     <div className="space-y-1">
+      <div className="flex justify-between items-center text-xs font-semibold px-0.5">
+        <span className="text-blue-600">← {leftLabel}</span>
+        <span className="text-red-600">{rightLabel} →</span>
+      </div>
       <input
         type="range"
         min={-2} max={2} step={1}
@@ -26,12 +33,14 @@ function StanceSlider({ value, onChange }) {
         onChange={e => onChange(Number(e.target.value))}
         className="w-full accent-teal-600"
       />
-      <div className="flex justify-between text-[10px] text-gray-400 px-0.5">
-        {STANCE_LABELS.map(s => (
-          <span key={s.value} className={value === s.value ? 'text-teal-700 font-bold' : ''}>
-            {s.label}
-          </span>
-        ))}
+      <div className="text-center">
+        <span className={`text-xs font-bold px-3 py-1 rounded-full ${
+          value === 0 ? 'bg-gray-100 text-gray-600' :
+          value < 0 ? 'bg-blue-100 text-blue-700' :
+          'bg-red-100 text-red-700'
+        }`}>
+          {displayLabel}
+        </span>
       </div>
     </div>
   );
@@ -79,7 +88,7 @@ function IssueCard({ issue, belief, onUpdate }) {
 
       <div>
         <p className="text-xs text-gray-500 mb-1 font-medium">Your stance</p>
-        <StanceSlider value={stance} onChange={v => onUpdate(issue.id, { stance: v, importance })} />
+        <StanceSlider value={stance} onChange={v => onUpdate(issue.id, { stance: v, importance })} leftLabel={issue.leftLabel || 'Oppose'} rightLabel={issue.rightLabel || 'Support'} />
       </div>
 
       <div>
