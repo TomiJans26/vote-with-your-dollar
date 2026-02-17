@@ -147,13 +147,15 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
     };
   }
 
-  const score = totalWeight > 0 ? Math.max(-1, Math.min(1, weightedSum / totalWeight)) : 0;
+  const rawScore = totalWeight > 0 ? Math.max(-1, Math.min(1, weightedSum / totalWeight)) : 0;
+  // Stretch the score for display — small differences become visible
+  const score = Math.max(-1, Math.min(1, rawScore * 2));
 
   let label, color;
-  if (score > 0.4) { label = '👍 Great match'; color = 'green'; }
-  else if (score > 0.1) { label = '👍 Good match'; color = 'lightgreen'; }
-  else if (score > -0.1) { label = '➖ Mixed'; color = 'yellow'; }
-  else if (score > -0.4) { label = '👎 Weak match'; color = 'orange'; }
+  if (rawScore > 0.3) { label = '👍 Great match'; color = 'green'; }
+  else if (rawScore > 0.1) { label = '👍 Good match'; color = 'lightgreen'; }
+  else if (rawScore > -0.1) { label = '➖ Mixed'; color = 'yellow'; }
+  else if (rawScore > -0.3) { label = '👎 Weak match'; color = 'orange'; }
   else { label = '👎 Poor match'; color = 'red'; }
 
   return { score, dealBreakerHit: false, triggers, label, color };
