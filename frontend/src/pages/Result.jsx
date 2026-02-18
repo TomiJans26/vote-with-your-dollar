@@ -15,8 +15,8 @@ function AlignmentHero({ score, beliefResult }) {
       label = 'Deal Breaker';
       emoji = '🚫';
     } else {
-      // score is -1..1, map to 0..100
-      pct = Math.round(((beliefResult.score + 1) / 2) * 100);
+      // Use pct directly from distance-based scoring
+      pct = beliefResult.pct ?? Math.round(((beliefResult.score + 1) / 2) * 100);
       label = 'Aligned';
       emoji = pct >= 70 ? '🟢' : pct >= 40 ? '🟡' : '🔴';
     }

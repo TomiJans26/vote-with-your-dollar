@@ -72,66 +72,78 @@ export function getAlignment(political, prefs) {
  *
  * companyIssues: { [issueId]: { stance: -1..1, confidence, notes } }
  */
+/**
+ * Distance-based alignment scoring.
+ * Both user and company stances mapped to 1-5 scale.
+ * Alignment = (4 - gap) / 4 where gap = |user - company|
+ *   Gap 0 → 100%, Gap 1 → 75%, Gap 2 → 50%, Gap 3 → 25%, Gap 4 → 0%
+ */
 export function getBeliefAlignment(companyIssues, beliefProfile) {
-  if (!companyIssues || !beliefProfile) return { score: 0, dealBreakerHit: false, triggers: [], label: 'No data', color: 'gray' };
+  if (!companyIssues || !beliefProfile) return { score: 0, pct: 50, dealBreakerHit: false, triggers: [], label: 'No data', color: 'gray' };
 
   const triggers = [];
-  let weightedSum = 0;
+  let weightedAlignmentSum = 0;
   let totalWeight = 0;
   let dealBreakerHit = false;
 
-  const importanceWeights = [0, 1, 3, 0]; // 0=don't care, 1=somewhat, 2=very, 3=dealbreaker (handled separately)
+  const importanceWeights = { 0: 0, 1: 1, 2: 3, 3: 5 };
+
+  // Map -1..1 to 1..5
+  const to1_5 = (v) => (v + 1) * 2 + 1;
 
   for (const issueId of Object.keys(beliefProfile)) {
     const belief = beliefProfile[issueId];
     const company = companyIssues[issueId];
     if (!belief || !company) continue;
-    if (belief.importance === 0) continue; // don't care
+    if (belief.importance === 0) continue;
 
-    // User stance normalized to -1..1 (from -2..2)
-    const userStance = belief.stance / 2;
-    const companyStance = company.stance;
+    // Map both to 1-5 scale
+    const userRaw = belief.stance; // -2 to 2 from onboarding
+    const user1_5 = to1_5(userRaw / 2); // -2..2 → -1..1 → 1..5
 
-    // Agreement: 1 = perfectly aligned, -1 = perfectly opposed
-    const agreement = 1 - Math.abs(userStance - companyStance);
+    const companyRaw = typeof company.stance === 'number' ? company.stance : 0;
+    const company1_5 = to1_5(companyRaw); // -1..1 → 1..5
 
-    // Find the issue name
+    // Distance-based alignment
+    const gap = Math.abs(user1_5 - company1_5); // 0 to 4
+    const alignment = (4 - gap) / 4; // 1.0 = perfect, 0.0 = opposite
+
     const issueDef = ALL_ISSUES.find(i => i.id === issueId);
     const issueName = issueDef?.name || issueId;
+    const weight = importanceWeights[belief.importance] || 0;
 
     if (belief.importance === 3) {
-      // DEAL BREAKER: if company opposes user's stance significantly
-      const misalignment = userStance * companyStance; // negative if opposed
-      if (misalignment < -0.2) {
+      // Deal breaker: if gap > 2 (more than half the scale apart)
+      if (gap > 2) {
         dealBreakerHit = true;
         triggers.push({
-          issueId,
-          issueName,
-          type: 'dealbreaker',
-          notes: company.notes || `Company stance conflicts with your deal breaker on ${issueName}`,
-          companyStance,
-          userStance,
+          issueId, issueName, type: 'dealbreaker',
+          notes: company.notes || `${gap.toFixed(0)} points apart on ${issueName}`,
+          companyStance: companyRaw, userStance: userRaw, gap,
         });
-      } else if (misalignment > 0.2) {
-        // Aligned on dealbreaker - big positive
-        weightedSum += 5;
-        totalWeight += 5;
+      } else {
+        weightedAlignmentSum += alignment * weight;
+        totalWeight += weight;
+        if (gap <= 1) {
+          triggers.push({
+            issueId, issueName, type: 'aligned',
+            notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
+          });
+        }
       }
     } else {
-      const weight = importanceWeights[belief.importance];
-      // Score: how much they agree (-1 to 1)
-      const score = userStance * companyStance; // positive if same direction
-      weightedSum += score * weight;
+      weightedAlignmentSum += alignment * weight;
       totalWeight += weight;
 
-      if (Math.abs(score) > 0.3) {
+      if (gap <= 1) {
         triggers.push({
-          issueId,
-          issueName,
-          type: score > 0 ? 'aligned' : 'misaligned',
-          notes: company.notes,
-          companyStance,
-          userStance,
+          issueId, issueName, type: 'aligned',
+          notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
+        });
+      } else if (gap >= 3) {
+        triggers.push({
+          issueId, issueName, type: 'misaligned',
+          notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
         });
       }
     }
@@ -139,26 +151,23 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
 
   if (dealBreakerHit) {
     return {
-      score: -1,
-      dealBreakerHit: true,
-      triggers,
-      label: '🚫 Deal Breaker',
-      color: 'dealbreaker',
+      score: -1, pct: 0, dealBreakerHit: true, triggers,
+      label: '🚫 Deal Breaker', color: 'dealbreaker',
     };
   }
 
-  const rawScore = totalWeight > 0 ? Math.max(-1, Math.min(1, weightedSum / totalWeight)) : 0;
-  // Stretch the score for display — small differences become visible
-  const score = Math.max(-1, Math.min(1, rawScore * 2));
+  const pct = totalWeight > 0 ? Math.round((weightedAlignmentSum / totalWeight) * 100) : 50;
+  const clampedPct = Math.max(0, Math.min(100, pct));
+  const score = (clampedPct / 50) - 1; // for compatibility: 0%→-1, 50%→0, 100%→1
 
   let label, color;
-  if (rawScore > 0.3) { label = '👍 Great match'; color = 'green'; }
-  else if (rawScore > 0.1) { label = '👍 Good match'; color = 'lightgreen'; }
-  else if (rawScore > -0.1) { label = '➖ Mixed'; color = 'yellow'; }
-  else if (rawScore > -0.3) { label = '👎 Weak match'; color = 'orange'; }
+  if (clampedPct >= 75) { label = '👍 Great match'; color = 'green'; }
+  else if (clampedPct >= 60) { label = '👍 Good match'; color = 'lightgreen'; }
+  else if (clampedPct >= 40) { label = '➖ Mixed'; color = 'yellow'; }
+  else if (clampedPct >= 25) { label = '👎 Weak match'; color = 'orange'; }
   else { label = '👎 Poor match'; color = 'red'; }
 
-  return { score, dealBreakerHit: false, triggers, label, color };
+  return { score, pct: clampedPct, dealBreakerHit: false, triggers, label, color };
 }
 
 /**

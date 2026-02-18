@@ -1,4 +1,17 @@
-"""Belief alignment scoring engine — ported from Flask backend."""
+"""Belief alignment scoring engine — distance-based model.
+
+Both user and company stances are mapped to a 1-5 scale:
+  1 = strongly oppose, 2 = lean oppose, 3 = neutral, 4 = lean support, 5 = strongly support
+
+Alignment per issue = (4 - gap) / 4, where gap = |user - company|
+  Gap 0 → 100% aligned
+  Gap 1 → 75% aligned
+  Gap 2 → 50% aligned
+  Gap 3 → 25% aligned
+  Gap 4 → 0% aligned
+
+Final score = weighted average of per-issue alignment, weighted by importance.
+"""
 
 ISSUE_NAMES = {
     "abortion": "Abortion / Reproductive Rights",
@@ -25,7 +38,7 @@ ISSUE_NAMES = {
     "vaccine_policy": "Vaccine Policy",
 }
 
-IMPORTANCE_WEIGHTS = [0, 1, 3, 0]  # 0=don't care, 1=somewhat, 2=very, 3=dealbreaker
+IMPORTANCE_WEIGHTS = {0: 0, 1: 1, 2: 3, 3: 5}  # 0=don't care, 1=somewhat, 2=very, 3=dealbreaker
 IMPORTANCE_LABELS = {0: "don't care", 1: "somewhat important", 2: "very important", 3: "deal breaker"}
 
 STANCE_TO_NUM = {
@@ -38,12 +51,17 @@ STANCE_TO_NUM = {
 
 
 def _parse_stance(val) -> float:
-    """Convert stance to numeric. Handles both string labels and numbers."""
+    """Convert stance to numeric -1.0 to 1.0. Handles both string labels and numbers."""
     if isinstance(val, (int, float)):
         return float(val)
     if isinstance(val, str):
         return STANCE_TO_NUM.get(val.lower().strip(), 0.0)
     return 0.0
+
+
+def _to_1_5(val_neg1_to_1: float) -> float:
+    """Map a value from -1..1 to 1..5 scale."""
+    return (val_neg1_to_1 + 1) * 2 + 1  # -1→1, 0→3, 1→5
 
 
 def score_company(
@@ -57,8 +75,10 @@ def score_company(
                 "reasons": [], "matchingIssues": [], "conflictingIssues": []}
 
     reasons, matching, conflicting = [], [], []
-    weighted_sum = total_weight = 0.0
+    weighted_alignment_sum = 0.0
+    total_weight = 0.0
     deal_breaker_hit = False
+    issues_scored = 0
 
     for issue_id, belief in belief_profile.items():
         if not isinstance(belief, dict):
@@ -70,68 +90,89 @@ def score_company(
         if not ci:
             continue
 
-        user_stance = belief.get("stance", 0) / 2  # user stance is -2 to 2, normalize to -1 to 1
-        company_stance = _parse_stance(ci.get("stance", 0))
+        # Map both to 1-5 scale
+        user_raw = belief.get("stance", 0)  # -2 to 2 from onboarding
+        user_1_5 = _to_1_5(user_raw / 2)   # normalize -2..2 → -1..1 → 1..5
+
+        company_raw = _parse_stance(ci.get("stance", 0))  # -1.0 to 1.0
+        company_1_5 = _to_1_5(company_raw)  # → 1..5
+
+        # Distance-based alignment
+        gap = abs(user_1_5 - company_1_5)   # 0 to 4
+        alignment = (4 - gap) / 4           # 1.0 = perfect, 0.0 = opposite
+
         issue_name = ISSUE_NAMES.get(issue_id, issue_id)
         imp_label = IMPORTANCE_LABELS.get(importance, "")
-        orig_issue = (original_company_issues or {}).get(issue_id)
+        weight = IMPORTANCE_WEIGHTS.get(importance, 0)
+        issues_scored += 1
 
+        # Deal breaker check: if gap is > 2 (more than half the scale apart)
         if importance == 3:
-            misalignment = user_stance * company_stance
-            if misalignment < -0.2:
+            if gap > 2:
                 deal_breaker_hit = True
                 conflicting.append(issue_id)
-                reasons.append(f"🚫 Conflicts with your deal breaker on {issue_name}")
-            elif misalignment > 0.2:
-                weighted_sum += 5
-                total_weight += 5
+                reasons.append(f"🚫 Deal breaker: {issue_name} — company is {gap:.0f} points away from your stance")
+            else:
                 matching.append(issue_id)
-                reasons.append(f"✅ Supports {issue_name} (your deal breaker)")
+                weighted_alignment_sum += alignment * weight
+                total_weight += weight
+                if gap <= 1:
+                    reasons.append(f"✅ {issue_name} — closely aligned (deal breaker, gap: {gap:.0f})")
         else:
-            weight = IMPORTANCE_WEIGHTS[importance]
-            score = user_stance * company_stance
-            weighted_sum += score * weight
+            weighted_alignment_sum += alignment * weight
             total_weight += weight
 
-            if score > 0.3:
+            if gap <= 1:
                 matching.append(issue_id)
-                if orig_issue and user_stance * _parse_stance(orig_issue.get("stance", 0)) < 0:
-                    reasons.append(f"✅ Supports {issue_name} ({imp_label} to you) — unlike {original_company_name or 'the original company'}")
+                # Check if this is BETTER than the original company
+                orig_issue = (original_company_issues or {}).get(issue_id)
+                if orig_issue:
+                    orig_company_1_5 = _to_1_5(_parse_stance(orig_issue.get("stance", 0)))
+                    orig_gap = abs(user_1_5 - orig_company_1_5)
+                    if orig_gap > gap:
+                        reasons.append(f"✅ {issue_name} ({imp_label}) — closer to you than {original_company_name or 'the original'}")
+                    else:
+                        reasons.append(f"✅ {issue_name} ({imp_label})")
                 else:
-                    reasons.append(f"✅ Supports {issue_name} ({imp_label} to you)")
-            elif score < -0.3:
+                    reasons.append(f"✅ {issue_name} ({imp_label})")
+            elif gap >= 3:
                 conflicting.append(issue_id)
-                reasons.append(f"⚠️ Mixed on {issue_name}")
+                reasons.append(f"⚠️ {issue_name} — {gap:.0f} points apart")
 
-    final_score = max(-1, min(1, weighted_sum / total_weight)) if total_weight > 0 else 0
+    # Calculate final percentage
     if deal_breaker_hit:
-        final_score = -1
+        pct = 0
+        label = "🚫 Deal Breaker"
+    elif total_weight > 0:
+        pct = round((weighted_alignment_sum / total_weight) * 100)
+        pct = max(0, min(100, pct))
 
-    # Stretch the score to use more of the 0-100 range
-    # Apply a 2x multiplier capped at -1 to 1 for more granularity
-    display_score = max(-1, min(1, final_score * 2))
-
-    if final_score > 0.3:
-        label = "Great match"
-    elif final_score > 0.1:
-        label = "Good match"
-    elif final_score > -0.1:
-        label = "Mixed"
-    elif final_score > -0.3:
-        label = "Weak match"
+        if pct >= 75:
+            label = "Great match"
+        elif pct >= 60:
+            label = "Good match"
+        elif pct >= 40:
+            label = "Mixed"
+        elif pct >= 25:
+            label = "Weak match"
+        else:
+            label = "Poor match"
     else:
-        label = "Poor match"
+        pct = 50
+        label = "No data"
 
-    # Count how many user issues had no company data
-    total_user_issues = sum(1 for i, b in belief_profile.items() if isinstance(b, dict) and b.get("importance", 0) > 0)
-    matched_issues = len(matching) + len(conflicting)
-    coverage = matched_issues / total_user_issues if total_user_issues > 0 else 0
-    if coverage < 0.3 and not deal_breaker_hit:
-        reasons.append(f"📊 Limited data — we only have info on {len([k for k in belief_profile if isinstance(belief_profile.get(k), dict) and belief_profile[k].get('importance', 0) > 0 and company_issues.get(k)])} of your {total_user_issues} important issues")
+    # Coverage warning
+    total_user_issues = sum(1 for i, b in belief_profile.items()
+                           if isinstance(b, dict) and b.get("importance", 0) > 0)
+    if issues_scored < total_user_issues * 0.3 and not deal_breaker_hit:
+        reasons.append(f"📊 Limited data — scored {issues_scored} of your {total_user_issues} important issues")
+
+    # Score as -1 to 1 for compatibility (pct is the primary display value now)
+    score = (pct / 50) - 1  # 0%→-1, 50%→0, 100%→1
 
     return {
-        "score": round(final_score, 3),
-        "pct": max(0, min(100, round(((display_score + 1) / 2) * 100))),
+        "score": round(score, 3),
+        "pct": pct,
         "dealBreakerHit": deal_breaker_hit,
         "label": label,
         "reasons": reasons[:6],
