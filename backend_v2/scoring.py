@@ -1,16 +1,14 @@
-"""Belief alignment scoring engine — distance-based model.
+"""Belief alignment scoring engine — continuous distance-based model.
 
-Both user and company stances are mapped to a 1-5 scale:
-  1 = strongly oppose, 2 = lean oppose, 3 = neutral, 4 = lean support, 5 = strongly support
+Both stances normalized to -1.0 to 1.0 continuous scale.
+Alignment per issue = 1 - (gap / 2), where gap = |user - company| (0 to 2 range)
+  Gap 0.0 → 100% aligned
+  Gap 0.5 → 75% aligned
+  Gap 1.0 → 50% aligned
+  Gap 1.5 → 25% aligned
+  Gap 2.0 → 0% aligned
 
-Alignment per issue = (4 - gap) / 4, where gap = |user - company|
-  Gap 0 → 100% aligned
-  Gap 1 → 75% aligned
-  Gap 2 → 50% aligned
-  Gap 3 → 25% aligned
-  Gap 4 → 0% aligned
-
-Final score = weighted average of per-issue alignment, weighted by importance.
+Continuous = granular. 51% ≠ 50%. Every decimal matters.
 """
 
 ISSUE_NAMES = {
@@ -38,7 +36,7 @@ ISSUE_NAMES = {
     "vaccine_policy": "Vaccine Policy",
 }
 
-IMPORTANCE_WEIGHTS = {0: 0, 1: 1, 2: 3, 3: 5}  # 0=don't care, 1=somewhat, 2=very, 3=dealbreaker
+IMPORTANCE_WEIGHTS = {0: 0, 1: 1, 2: 3, 3: 5}
 IMPORTANCE_LABELS = {0: "don't care", 1: "somewhat important", 2: "very important", 3: "deal breaker"}
 
 STANCE_TO_NUM = {
@@ -51,17 +49,12 @@ STANCE_TO_NUM = {
 
 
 def _parse_stance(val) -> float:
-    """Convert stance to numeric -1.0 to 1.0. Handles both string labels and numbers."""
+    """Convert stance to numeric -1.0 to 1.0."""
     if isinstance(val, (int, float)):
-        return float(val)
+        return max(-1.0, min(1.0, float(val)))
     if isinstance(val, str):
         return STANCE_TO_NUM.get(val.lower().strip(), 0.0)
     return 0.0
-
-
-def _to_1_5(val_neg1_to_1: float) -> float:
-    """Map a value from -1..1 to 1..5 scale."""
-    return (val_neg1_to_1 + 1) * 2 + 1  # -1→1, 0→3, 1→5
 
 
 def score_company(
@@ -90,54 +83,50 @@ def score_company(
         if not ci:
             continue
 
-        # Map both to 1-5 scale
-        user_raw = belief.get("stance", 0)  # -2 to 2 from onboarding
-        user_1_5 = _to_1_5(user_raw / 2)   # normalize -2..2 → -1..1 → 1..5
+        # Both normalized to -1.0 to 1.0
+        user_norm = max(-1.0, min(1.0, belief.get("stance", 0) / 2))  # -2..2 → -1..1
+        company_norm = _parse_stance(ci.get("stance", 0))  # already -1..1
 
-        company_raw = _parse_stance(ci.get("stance", 0))  # -1.0 to 1.0
-        company_1_5 = _to_1_5(company_raw)  # → 1..5
-
-        # Distance-based alignment
-        gap = abs(user_1_5 - company_1_5)   # 0 to 4
-        alignment = (4 - gap) / 4           # 1.0 = perfect, 0.0 = opposite
+        # Continuous distance: gap is 0..2, alignment is 0..1
+        gap = abs(user_norm - company_norm)  # 0.0 to 2.0
+        alignment = 1.0 - (gap / 2.0)       # 1.0 = perfect, 0.0 = opposite
 
         issue_name = ISSUE_NAMES.get(issue_id, issue_id)
         imp_label = IMPORTANCE_LABELS.get(importance, "")
         weight = IMPORTANCE_WEIGHTS.get(importance, 0)
         issues_scored += 1
 
-        # Deal breaker check: if gap is > 2 (more than half the scale apart)
+        # Deal breaker: if gap > 1.0 (more than half the scale apart)
         if importance == 3:
-            if gap > 2:
+            if gap > 1.0:
                 deal_breaker_hit = True
                 conflicting.append(issue_id)
-                reasons.append(f"🚫 Deal breaker: {issue_name} — company is {gap:.0f} points away from your stance")
+                pct_apart = round(gap / 2 * 100)
+                reasons.append(f"🚫 Deal breaker: {issue_name} — {pct_apart}% apart")
             else:
                 matching.append(issue_id)
                 weighted_alignment_sum += alignment * weight
                 total_weight += weight
-                if gap <= 1:
-                    reasons.append(f"✅ {issue_name} — closely aligned (deal breaker, gap: {gap:.0f})")
+                if gap <= 0.5:
+                    reasons.append(f"✅ {issue_name} — closely aligned (deal breaker)")
         else:
             weighted_alignment_sum += alignment * weight
             total_weight += weight
 
-            if gap <= 1:
+            if gap <= 0.5:
                 matching.append(issue_id)
-                # Check if this is BETTER than the original company
                 orig_issue = (original_company_issues or {}).get(issue_id)
                 if orig_issue:
-                    orig_company_1_5 = _to_1_5(_parse_stance(orig_issue.get("stance", 0)))
-                    orig_gap = abs(user_1_5 - orig_company_1_5)
+                    orig_gap = abs(user_norm - _parse_stance(orig_issue.get("stance", 0)))
                     if orig_gap > gap:
-                        reasons.append(f"✅ {issue_name} ({imp_label}) — closer to you than {original_company_name or 'the original'}")
+                        reasons.append(f"✅ {issue_name} ({imp_label}) — closer than {original_company_name or 'the original'}")
                     else:
                         reasons.append(f"✅ {issue_name} ({imp_label})")
                 else:
                     reasons.append(f"✅ {issue_name} ({imp_label})")
-            elif gap >= 3:
+            elif gap >= 1.5:
                 conflicting.append(issue_id)
-                reasons.append(f"⚠️ {issue_name} — {gap:.0f} points apart")
+                reasons.append(f"⚠️ {issue_name} — significantly apart")
 
     # Calculate final percentage
     if deal_breaker_hit:
@@ -167,8 +156,7 @@ def score_company(
     if issues_scored < total_user_issues * 0.3 and not deal_breaker_hit:
         reasons.append(f"📊 Limited data — scored {issues_scored} of your {total_user_issues} important issues")
 
-    # Score as -1 to 1 for compatibility (pct is the primary display value now)
-    score = (pct / 50) - 1  # 0%→-1, 50%→0, 100%→1
+    score = (pct / 50) - 1  # compatibility: 0%→-1, 50%→0, 100%→1
 
     return {
         "score": round(score, 3),

@@ -73,10 +73,11 @@ export function getAlignment(political, prefs) {
  * companyIssues: { [issueId]: { stance: -1..1, confidence, notes } }
  */
 /**
- * Distance-based alignment scoring.
- * Both user and company stances mapped to 1-5 scale.
- * Alignment = (4 - gap) / 4 where gap = |user - company|
- *   Gap 0 → 100%, Gap 1 → 75%, Gap 2 → 50%, Gap 3 → 25%, Gap 4 → 0%
+ * Continuous distance-based alignment scoring.
+ * Both stances on -1.0 to 1.0 continuous scale.
+ * Alignment = 1 - (gap / 2), where gap = |user - company| (0 to 2 range)
+ *   Gap 0.0 → 100%, Gap 0.5 → 75%, Gap 1.0 → 50%, Gap 2.0 → 0%
+ * Continuous = granular. 51% ≠ 50%. Every decimal matters.
  */
 export function getBeliefAlignment(companyIssues, beliefProfile) {
   if (!companyIssues || !beliefProfile) return { score: 0, pct: 50, dealBreakerHit: false, triggers: [], label: 'No data', color: 'gray' };
@@ -88,46 +89,40 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
 
   const importanceWeights = { 0: 0, 1: 1, 2: 3, 3: 5 };
 
-  // Map -1..1 to 1..5
-  const to1_5 = (v) => (v + 1) * 2 + 1;
-
   for (const issueId of Object.keys(beliefProfile)) {
     const belief = beliefProfile[issueId];
     const company = companyIssues[issueId];
     if (!belief || !company) continue;
     if (belief.importance === 0) continue;
 
-    // Map both to 1-5 scale
-    const userRaw = belief.stance; // -2 to 2 from onboarding
-    const user1_5 = to1_5(userRaw / 2); // -2..2 → -1..1 → 1..5
+    // Both normalized to -1.0 to 1.0
+    const userNorm = Math.max(-1, Math.min(1, belief.stance / 2)); // -2..2 → -1..1
+    const companyNorm = Math.max(-1, Math.min(1, typeof company.stance === 'number' ? company.stance : 0));
 
-    const companyRaw = typeof company.stance === 'number' ? company.stance : 0;
-    const company1_5 = to1_5(companyRaw); // -1..1 → 1..5
-
-    // Distance-based alignment
-    const gap = Math.abs(user1_5 - company1_5); // 0 to 4
-    const alignment = (4 - gap) / 4; // 1.0 = perfect, 0.0 = opposite
+    // Continuous distance
+    const gap = Math.abs(userNorm - companyNorm); // 0.0 to 2.0
+    const alignment = 1.0 - (gap / 2.0);         // 1.0 = perfect, 0.0 = opposite
 
     const issueDef = ALL_ISSUES.find(i => i.id === issueId);
     const issueName = issueDef?.name || issueId;
     const weight = importanceWeights[belief.importance] || 0;
 
     if (belief.importance === 3) {
-      // Deal breaker: if gap > 2 (more than half the scale apart)
-      if (gap > 2) {
+      // Deal breaker: if gap > 1.0 (more than half the scale apart)
+      if (gap > 1.0) {
         dealBreakerHit = true;
         triggers.push({
           issueId, issueName, type: 'dealbreaker',
-          notes: company.notes || `${gap.toFixed(0)} points apart on ${issueName}`,
-          companyStance: companyRaw, userStance: userRaw, gap,
+          notes: company.notes || `${Math.round(gap / 2 * 100)}% apart on ${issueName}`,
+          companyStance: companyNorm, userStance: userNorm, gap,
         });
       } else {
         weightedAlignmentSum += alignment * weight;
         totalWeight += weight;
-        if (gap <= 1) {
+        if (gap <= 0.5) {
           triggers.push({
             issueId, issueName, type: 'aligned',
-            notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
+            notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
           });
         }
       }
@@ -135,15 +130,15 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
       weightedAlignmentSum += alignment * weight;
       totalWeight += weight;
 
-      if (gap <= 1) {
+      if (gap <= 0.5) {
         triggers.push({
           issueId, issueName, type: 'aligned',
-          notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
+          notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
         });
-      } else if (gap >= 3) {
+      } else if (gap >= 1.5) {
         triggers.push({
           issueId, issueName, type: 'misaligned',
-          notes: company.notes, companyStance: companyRaw, userStance: userRaw, gap,
+          notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
         });
       }
     }
@@ -158,7 +153,7 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
 
   const pct = totalWeight > 0 ? Math.round((weightedAlignmentSum / totalWeight) * 100) : 50;
   const clampedPct = Math.max(0, Math.min(100, pct));
-  const score = (clampedPct / 50) - 1; // for compatibility: 0%→-1, 50%→0, 100%→1
+  const score = (clampedPct / 50) - 1;
 
   let label, color;
   if (clampedPct >= 75) { label = '👍 Great match'; color = 'green'; }
