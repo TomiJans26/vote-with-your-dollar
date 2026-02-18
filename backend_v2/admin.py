@@ -174,6 +174,22 @@ def admin_companies_ranked(
     }
     weights = [3, 2, 1]
 
+    def _stance_to_score(val):
+        """Convert stance value (string or number) to a score for ranking."""
+        if isinstance(val, (int, float)):
+            return val * 2  # -1..1 → -2..2 to match string scale
+        return STANCE_SCORE.get(val, 0)
+
+    def _stance_to_label(val):
+        """Convert numeric stance to display label."""
+        if isinstance(val, (int, float)):
+            if val >= 0.7: return "strong_support"
+            if val >= 0.3: return "lean_support"
+            if val <= -0.7: return "strong_oppose"
+            if val <= -0.3: return "lean_oppose"
+            return "neutral"
+        return val if val else "neutral"
+
     results = []
     for c in _companies_raw:
         cid = c["id"]
@@ -181,15 +197,15 @@ def admin_companies_ranked(
         score = 0
         stances = {}
         for idx, ik in enumerate(issue_list):
-            stance_str = ci.get(ik, {}).get("stance", "neutral")
-            stances[ik] = stance_str
-            score += STANCE_SCORE.get(stance_str, 0) * weights[idx]
+            stance_val = ci.get(ik, {}).get("stance", 0)
+            stances[ik] = _stance_to_label(stance_val)
+            score += _stance_to_score(stance_val) * weights[idx]
         results.append({
             "id": cid,
             "name": c.get("name", ""),
             "ticker": c.get("ticker"),
             "industry": c.get("industry"),
-            "score": score,
+            "score": round(score, 2),
             "stances": stances,
         })
 

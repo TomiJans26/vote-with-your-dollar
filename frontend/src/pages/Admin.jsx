@@ -60,9 +60,21 @@ const STANCE_COLORS = {
   strong_oppose: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
 
+function stanceToLabel(val) {
+  if (typeof val === 'number') {
+    if (val >= 0.7) return 'strong_support';
+    if (val >= 0.3) return 'lean_support';
+    if (val <= -0.7) return 'strong_oppose';
+    if (val <= -0.3) return 'lean_oppose';
+    return 'neutral';
+  }
+  return val || 'neutral';
+}
+
 function StanceBadge({ stance }) {
-  const label = (stance || 'neutral').replace(/_/g, ' ');
-  const cls = STANCE_COLORS[stance] || STANCE_COLORS.neutral;
+  const key = stanceToLabel(stance);
+  const label = key.replace(/_/g, ' ');
+  const cls = STANCE_COLORS[key] || STANCE_COLORS.neutral;
   return (
     <span className={`text-xs px-2 py-0.5 rounded-full border ${cls}`}>{label}</span>
   );
@@ -178,12 +190,20 @@ export default function Admin() {
     if (selected.length === 0) return;
     try {
       const data = await adminFetch(`/companies/ranked?issues=${selected.join(',')}`);
-      setRankedCompanies(data);
-      setRankingMode(true);
+      if (data?.companies) {
+        setRankedCompanies(data);
+        setRankingMode(true);
+      } else {
+        console.error('Ranked response missing companies:', data);
+        alert('Failed to rank companies — check console');
+      }
     } catch (e) {
       if (e.message === 'unauthorized') {
         localStorage.removeItem('dv_admin_token');
         navigate('/admin/login');
+      } else {
+        console.error('Rank error:', e);
+        alert('Error ranking companies: ' + e.message);
       }
     }
   };
