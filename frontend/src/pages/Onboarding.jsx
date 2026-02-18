@@ -30,13 +30,34 @@ function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
       </div>
       <div className="flex items-center gap-2">
         <span className="text-[10px] text-blue-400 w-4 text-right">5</span>
-        <input
-          type="range"
-          min={-5} max={5} step={1}
-          value={value}
-          onChange={e => onChange(Number(e.target.value))}
-          className="w-full accent-teal-600"
-        />
+        <div className="w-full relative">
+          <input
+            type="range"
+            min={-5} max={5} step={1}
+            value={value}
+            onChange={e => onChange(Number(e.target.value))}
+            list={`ticks-${leftLabel}`}
+            className="w-full accent-teal-600 relative z-10"
+          />
+          <div className="flex justify-between px-[6px] -mt-1.5">
+            {Array.from({length: 11}, (_, i) => (
+              <div key={i} className={`w-px ${i === 5 ? 'h-3 bg-gray-400' : 'h-2 bg-gray-300'}`} />
+            ))}
+          </div>
+          <div className="flex justify-between px-0 mt-0.5">
+            <span className="text-[9px] text-blue-400">5</span>
+            <span className="text-[9px] text-blue-400">4</span>
+            <span className="text-[9px] text-blue-400">3</span>
+            <span className="text-[9px] text-blue-400">2</span>
+            <span className="text-[9px] text-blue-400">1</span>
+            <span className="text-[9px] text-gray-400 font-bold">0</span>
+            <span className="text-[9px] text-red-400">1</span>
+            <span className="text-[9px] text-red-400">2</span>
+            <span className="text-[9px] text-red-400">3</span>
+            <span className="text-[9px] text-red-400">4</span>
+            <span className="text-[9px] text-red-400">5</span>
+          </div>
+        </div>
         <span className="text-[10px] text-red-400 w-4">5</span>
       </div>
       <div className="text-center">
