@@ -101,7 +101,7 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
 
     // Skip neutral/no-data company stances — silence ≠ disagreement
     const companyConf = (company.confidence || '').toLowerCase();
-    if (companyVal === 0 && (companyConf === 'low' || companyConf === '' || !company.confidence)) {
+    if (companyVal === 0 && (companyConf === 'low' || companyConf === 'none' || companyConf === '' || !company.confidence)) {
       continue; // Don't count "no data" as 50% alignment
     }
 

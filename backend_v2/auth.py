@@ -10,7 +10,7 @@ from database import get_db
 from models import User
 from schemas import RegisterRequest, LoginRequest, AuthResponse, TokenResponse, UserResponse
 from config import settings
-from email_utils import generate_verify_code, send_verification_email, VERIFY_CODE_EXPIRY_MINUTES
+from email_utils import generate_verify_code, send_verification_email, send_password_reset_email, VERIFY_CODE_EXPIRY_MINUTES
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -190,6 +190,62 @@ def resend_verification(user: User = Depends(auth_required), db: Session = Depen
         raise HTTPException(500, "Failed to send verification email. Please try again.")
 
     return {"message": "Verification code sent!"}
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+
+class ResetPasswordRequest(BaseModel):
+    email: str
+    code: str
+    new_password: str
+
+
+@router.post("/forgot-password")
+def forgot_password(req: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    email = req.email.strip().lower()
+    # Always return success to avoid email enumeration
+    user = db.query(User).filter_by(email=email).first()
+    if not user:
+        return {"message": "If that email exists, a reset code has been sent."}
+
+    code = generate_verify_code()
+    user.verify_code = code
+    user.verify_code_expires = datetime.now(timezone.utc) + timedelta(minutes=VERIFY_CODE_EXPIRY_MINUTES)
+    db.commit()
+
+    send_password_reset_email(email, code)
+    return {"message": "If that email exists, a reset code has been sent."}
+
+
+@router.post("/reset-password")
+def reset_password(req: ResetPasswordRequest, db: Session = Depends(get_db)):
+    email = req.email.strip().lower()
+    if len(req.new_password) < 8:
+        raise HTTPException(400, "Password must be at least 8 characters")
+
+    user = db.query(User).filter_by(email=email).first()
+    if not user:
+        raise HTTPException(400, "Invalid email or code")
+
+    if not user.verify_code:
+        raise HTTPException(400, "No reset code pending. Request a new one.")
+
+    if user.verify_code_expires:
+        expires = user.verify_code_expires.replace(tzinfo=timezone.utc) if user.verify_code_expires.tzinfo is None else user.verify_code_expires
+        if datetime.now(timezone.utc) > expires:
+            raise HTTPException(400, "Reset code expired. Request a new one.")
+
+    if req.code.strip() != user.verify_code:
+        raise HTTPException(400, "Invalid reset code")
+
+    user.password_hash = generate_password_hash(req.new_password)
+    user.verify_code = None
+    user.verify_code_expires = None
+    db.commit()
+
+    return {"message": "Password reset successfully! You can now log in."}
 
 
 @router.get("/me")

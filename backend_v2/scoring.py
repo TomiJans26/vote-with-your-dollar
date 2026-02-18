@@ -95,7 +95,7 @@ def score_company(
 
         # Skip neutral/no-data company stances — silence ≠ disagreement
         company_conf = str(ci.get("confidence", "")).lower()
-        if company_val == 0 and company_conf in ("low", ""):
+        if company_val == 0 and company_conf in ("low", "none", ""):
             continue
 
         # Distance on 10-point scale

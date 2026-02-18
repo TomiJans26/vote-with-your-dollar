@@ -317,7 +317,7 @@ export default function Result() {
         {parentCompany && navigator.share && (
           <button
             onClick={() => {
-              const pct = beliefResult ? Math.round(((beliefResult.score + 1) / 2) * 100) : null;
+              const pct = beliefResult?.pct ?? null;
               const text = beliefResult?.dealBreakerHit
                 ? `🚫 ${parentCompany.name} (makes ${product.name || product.brand}) hit one of my deal breakers on DollarVote!`
                 : pct != null

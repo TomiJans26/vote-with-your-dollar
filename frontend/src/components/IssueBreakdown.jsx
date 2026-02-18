@@ -22,7 +22,7 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
 
       // Skip no-data stances for alignment display
       const companyConf = (data.confidence || '').toLowerCase();
-      const hasData = !(companyStance === 0 && (companyConf === 'low' || !data.confidence));
+      const hasData = !(companyStance === 0 && (companyConf === 'low' || companyConf === 'none' || !data.confidence));
 
       items.push({
         issueId,
