@@ -11,11 +11,18 @@ export default function Register({ onAuth }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [inviteCode, setInviteCode] = useState('');
+
+  const VALID_INVITE = 'DOLLARVOTE2026';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
+    if (inviteCode.toUpperCase() !== VALID_INVITE) {
+      setError('Invalid invite code. DollarVote is in private beta.');
+      return;
+    }
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -50,6 +57,19 @@ export default function Register({ onAuth }) {
           {error && (
             <div className="text-sm text-red-600 bg-red-50 rounded-lg p-3">{error}</div>
           )}
+
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Invite Code</label>
+            <input
+              type="text"
+              value={inviteCode}
+              onChange={e => setInviteCode(e.target.value)}
+              required
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              placeholder="Enter invite code"
+            />
+            <p className="text-[10px] text-gray-400 mt-1">🔒 DollarVote is in private beta</p>
+          </div>
 
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1">Username</label>
