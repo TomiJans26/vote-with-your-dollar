@@ -3,7 +3,6 @@ import { ALL_ISSUES } from '../lib/issues';
 export default function IssueBreakdown({ triggers, companyIssues, beliefProfile }) {
   if ((!triggers || triggers.length === 0) && !companyIssues) return null;
 
-  // Build enriched issue list from companyIssues if available
   let items = [];
   if (companyIssues && Object.keys(companyIssues).length > 0) {
     for (const [issueId, data] of Object.entries(companyIssues)) {
@@ -11,13 +10,19 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
       const belief = beliefProfile?.[issueId];
       const trigger = triggers?.find(t => t.issueId === issueId);
 
-      const userStance = belief ? belief.stance / 2 : 0; // normalize -2..2 to -1..1
-      const companyStance = data.stance;
+      // Both on -5 to +5 scale
+      const userStance = belief ? belief.stance : 0;
+      const companyStance = typeof data.stance === 'number' ? data.stance : 0;
       const isDealBreaker = belief?.importance === 3;
       const importance = belief?.importance || 0;
 
-      // Agreement: positive = aligned, negative = misaligned
-      const agreement = userStance !== 0 ? userStance * companyStance : 0;
+      // Distance-based alignment per issue (0-100%)
+      const gap = Math.abs(userStance - companyStance); // 0 to 10
+      const alignmentPct = Math.round((1 - gap / 10) * 100); // 100% = perfect, 0% = opposite
+
+      // Skip no-data stances for alignment display
+      const companyConf = (data.confidence || '').toLowerCase();
+      const hasData = !(companyStance === 0 && (companyConf === 'low' || !data.confidence));
 
       items.push({
         issueId,
@@ -25,29 +30,32 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
         emoji: getCategoryEmoji(issueId),
         companyStance,
         userStance,
-        agreement,
+        alignmentPct,
+        hasData,
         isDealBreaker,
         importance,
         confidence: data.confidence || 'low',
         notes: data.notes,
-        type: trigger?.type || (agreement > 0.2 ? 'aligned' : agreement < -0.2 ? 'misaligned' : 'neutral'),
+        type: trigger?.type || (hasData && belief && importance > 0
+          ? (gap <= 2 ? 'aligned' : gap >= 7 ? 'misaligned' : 'neutral')
+          : 'neutral'),
       });
     }
 
-    // Sort: deal breakers first, then by importance desc, then by |agreement| desc
+    // Sort: deal breakers first, then by importance desc, then by alignment
     items.sort((a, b) => {
       if (a.isDealBreaker !== b.isDealBreaker) return a.isDealBreaker ? -1 : 1;
       if (a.importance !== b.importance) return b.importance - a.importance;
-      return Math.abs(b.agreement) - Math.abs(a.agreement);
+      return b.alignmentPct - a.alignmentPct;
     });
   } else if (triggers && triggers.length > 0) {
-    // Fallback to simple trigger display
     items = triggers.map(t => ({
       ...t,
       emoji: getCategoryEmoji(t.issueId),
       isDealBreaker: t.type === 'dealbreaker',
       importance: t.type === 'dealbreaker' ? 3 : 1,
-      agreement: (t.userStance || 0) * (t.companyStance || 0),
+      alignmentPct: t.gap != null ? Math.round((1 - t.gap / 10) * 100) : 50,
+      hasData: true,
       confidence: 'medium',
     }));
   }
@@ -69,38 +77,53 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
 }
 
 function IssueBar({ item }) {
-  const { issueName, emoji, companyStance, agreement, isDealBreaker, confidence, notes, type } = item;
+  const { issueName, emoji, companyStance, userStance, alignmentPct, hasData, isDealBreaker, importance, confidence, notes, type } = item;
 
-  // Bar width based on absolute stance magnitude
-  const barWidth = Math.max(8, Math.abs(companyStance) * 100);
+  // Bar width = alignment percentage
+  const barWidth = Math.max(5, alignmentPct);
 
-  // Color logic
+  // Color based on alignment percentage
   let barColor, bgColor, borderColor, textColor;
   if (isDealBreaker && type === 'dealbreaker') {
     barColor = 'bg-red-500';
     bgColor = 'bg-red-50';
     borderColor = 'border-red-300';
     textColor = 'text-red-800';
-  } else if (type === 'aligned' || agreement > 0.2) {
+  } else if (alignmentPct >= 70) {
     barColor = 'bg-emerald-500';
     bgColor = 'bg-emerald-50/50';
     borderColor = 'border-emerald-200';
     textColor = 'text-emerald-800';
-  } else if (type === 'misaligned' || agreement < -0.2) {
+  } else if (alignmentPct >= 40) {
+    barColor = 'bg-yellow-500';
+    bgColor = 'bg-yellow-50/50';
+    borderColor = 'border-yellow-200';
+    textColor = 'text-yellow-800';
+  } else {
     barColor = 'bg-orange-500';
     bgColor = 'bg-orange-50/50';
     borderColor = 'border-orange-200';
     textColor = 'text-orange-800';
-  } else {
-    // Neutral or no user stance — show political leaning
-    barColor = companyStance > 0 ? 'bg-blue-500' : companyStance < 0 ? 'bg-red-400' : 'bg-gray-400';
+  }
+
+  if (!hasData) {
+    barColor = 'bg-gray-300';
     bgColor = 'bg-gray-50/50';
     borderColor = 'border-gray-200';
-    textColor = 'text-gray-700';
+    textColor = 'text-gray-500';
   }
 
   // Confidence indicator
-  const confidenceDots = confidence === 'high' ? '●●●' : confidence === 'medium' ? '●●○' : '●○○';
+  const confidenceDots = confidence === 'high' || confidence === 'HIGH' ? '●●●' : confidence === 'medium' || confidence === 'MEDIUM' ? '●●○' : '●○○';
+
+  // Stance label using 5-0-5 scale
+  const stanceLabel = (val) => {
+    if (val >= 4) return 'Strongly supports';
+    if (val >= 2) return 'Leans support';
+    if (val <= -4) return 'Strongly opposes';
+    if (val <= -2) return 'Leans oppose';
+    return 'Neutral';
+  };
 
   return (
     <div className={`rounded-lg border p-2.5 ${bgColor} ${borderColor}`}>
@@ -119,7 +142,7 @@ function IssueBar({ item }) {
         </span>
       </div>
 
-      {/* Horizontal bar */}
+      {/* Alignment bar */}
       <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
         <div
           className={`h-full rounded-full transition-all duration-500 ${barColor}`}
@@ -127,13 +150,18 @@ function IssueBar({ item }) {
         />
       </div>
 
-      {/* Stance label + notes */}
+      {/* Stance + alignment % */}
       <div className="flex items-center justify-between mt-1">
         <span className="text-[10px] text-gray-500">
-          {companyStance > 0.5 ? 'Strongly supports' : companyStance > 0 ? 'Leans support' : companyStance < -0.5 ? 'Strongly opposes' : companyStance < 0 ? 'Leans oppose' : 'Neutral'}
+          {stanceLabel(companyStance)}
+          {importance > 0 && hasData && ` · ${alignmentPct}% aligned`}
         </span>
-        <span className={`text-[10px] font-medium ${type === 'aligned' ? 'text-emerald-600' : type === 'misaligned' || type === 'dealbreaker' ? 'text-red-600' : 'text-gray-400'}`}>
-          {type === 'aligned' ? '✓ Aligned' : type === 'misaligned' ? '✗ Misaligned' : type === 'dealbreaker' ? '🚫 Conflict' : ''}
+        <span className={`text-[10px] font-medium ${
+          type === 'aligned' ? 'text-emerald-600' : 
+          type === 'misaligned' || type === 'dealbreaker' ? 'text-red-600' : 
+          'text-gray-400'
+        }`}>
+          {type === 'aligned' ? '✓ Aligned' : type === 'misaligned' ? '✗ Misaligned' : type === 'dealbreaker' ? '🚫 Conflict' : hasData ? '' : 'No data'}
         </span>
       </div>
 
