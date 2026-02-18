@@ -95,34 +95,35 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
     if (!belief || !company) continue;
     if (belief.importance === 0) continue;
 
-    // Both normalized to -1.0 to 1.0
-    const userNorm = Math.max(-1, Math.min(1, belief.stance / 2)); // -2..2 → -1..1
-    const companyNorm = Math.max(-1, Math.min(1, typeof company.stance === 'number' ? company.stance : 0));
+    // Both on -5 to +5 scale
+    const userVal = Math.max(-5, Math.min(5, belief.stance)); // already -5..5 from slider
+    const companyRawStance = typeof company.stance === 'number' ? company.stance : 0;
+    const companyVal = companyRawStance * 5; // -1..1 → -5..5
 
     // Continuous distance
-    const gap = Math.abs(userNorm - companyNorm); // 0.0 to 2.0
-    const alignment = 1.0 - (gap / 2.0);         // 1.0 = perfect, 0.0 = opposite
+    const gap = Math.abs(userVal - companyVal); // 0.0 to 10.0
+    const alignment = 1.0 - (gap / 10.0);      // 1.0 = perfect, 0.0 = opposite
 
     const issueDef = ALL_ISSUES.find(i => i.id === issueId);
     const issueName = issueDef?.name || issueId;
     const weight = importanceWeights[belief.importance] || 0;
 
     if (belief.importance === 3) {
-      // Deal breaker: if gap > 1.0 (more than half the scale apart)
-      if (gap > 1.0) {
+      // Deal breaker: if gap > 5 (more than half the 10-point scale apart)
+      if (gap > 5) {
         dealBreakerHit = true;
         triggers.push({
           issueId, issueName, type: 'dealbreaker',
-          notes: company.notes || `${Math.round(gap / 2 * 100)}% apart on ${issueName}`,
-          companyStance: companyNorm, userStance: userNorm, gap,
+          notes: company.notes || `${Math.round(gap)} points apart on ${issueName}`,
+          companyStance: companyVal, userStance: userVal, gap,
         });
       } else {
         weightedAlignmentSum += alignment * weight;
         totalWeight += weight;
-        if (gap <= 0.5) {
+        if (gap <= 2) {
           triggers.push({
             issueId, issueName, type: 'aligned',
-            notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
+            notes: company.notes, companyStance: companyVal, userStance: userVal, gap,
           });
         }
       }
@@ -130,15 +131,15 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
       weightedAlignmentSum += alignment * weight;
       totalWeight += weight;
 
-      if (gap <= 0.5) {
+      if (gap <= 2) {
         triggers.push({
           issueId, issueName, type: 'aligned',
-          notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
+          notes: company.notes, companyStance: companyVal, userStance: userVal, gap,
         });
-      } else if (gap >= 1.5) {
+      } else if (gap >= 7) {
         triggers.push({
           issueId, issueName, type: 'misaligned',
-          notes: company.notes, companyStance: companyNorm, userStance: userNorm, gap,
+          notes: company.notes, companyStance: companyVal, userStance: userVal, gap,
         });
       }
     }

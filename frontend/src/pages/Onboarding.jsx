@@ -17,18 +17,24 @@ function ProgressBar({ current, total }) {
 }
 
 function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
-  const positionLabel = value === -2 ? leftLabel : value === -1 ? leftLabel : value === 0 ? 'Neutral' : value === 1 ? rightLabel : rightLabel;
-  const positionStrength = Math.abs(value) === 2 ? 'Strongly' : Math.abs(value) === 1 ? 'Lean' : '';
-  const displayLabel = value === 0 ? '🤷 Neutral' : `${positionStrength} → ${positionLabel}`;
+  const abs = Math.abs(value);
+  const strength = abs >= 5 ? 'Strongly' : abs >= 4 ? '' : abs >= 3 ? 'Lean' : abs >= 2 ? 'Slightly' : abs >= 1 ? 'Barely' : '';
+  const direction = value < 0 ? leftLabel : value > 0 ? rightLabel : '';
+  const displayLabel = value === 0 ? '🤷 Neutral' : `${strength} ${direction}`.trim();
+  
+  // Color intensity based on distance from center
+  const intensity = Math.min(abs / 5, 1);
+  
   return (
     <div className="space-y-1">
       <div className="flex justify-between items-center text-xs font-semibold px-0.5">
         <span className="text-blue-600">← {leftLabel}</span>
+        <span className="text-gray-400 text-[10px]">{value}</span>
         <span className="text-red-600">{rightLabel} →</span>
       </div>
       <input
         type="range"
-        min={-2} max={2} step={1}
+        min={-5} max={5} step={1}
         value={value}
         onChange={e => onChange(Number(e.target.value))}
         className="w-full accent-teal-600"
@@ -36,8 +42,8 @@ function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
       <div className="text-center">
         <span className={`text-xs font-bold px-3 py-1 rounded-full ${
           value === 0 ? 'bg-gray-100 text-gray-600' :
-          value < 0 ? 'bg-blue-100 text-blue-700' :
-          'bg-red-100 text-red-700'
+          value < 0 ? (abs >= 4 ? 'bg-blue-200 text-blue-800' : 'bg-blue-100 text-blue-700') :
+          (abs >= 4 ? 'bg-red-200 text-red-800' : 'bg-red-100 text-red-700')
         }`}>
           {displayLabel}
         </span>

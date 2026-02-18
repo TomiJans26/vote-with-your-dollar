@@ -70,11 +70,17 @@ export const ALL_ISSUES = ISSUE_CATEGORIES.flatMap(cat => cat.issues);
 
 // Stance labels
 export const STANCE_LABELS = [
-  { value: -2, label: 'Strongly Oppose' },
-  { value: -1, label: 'Oppose' },
+  { value: -5, label: 'Strongly Oppose' },
+  { value: -4, label: 'Oppose' },
+  { value: -3, label: 'Lean Oppose' },
+  { value: -2, label: 'Slightly Oppose' },
+  { value: -1, label: 'Barely Oppose' },
   { value: 0, label: 'Neutral' },
-  { value: 1, label: 'Support' },
-  { value: 2, label: 'Strongly Support' },
+  { value: 1, label: 'Barely Support' },
+  { value: 2, label: 'Slightly Support' },
+  { value: 3, label: 'Lean Support' },
+  { value: 4, label: 'Support' },
+  { value: 5, label: 'Strongly Support' },
 ];
 
 // Importance levels

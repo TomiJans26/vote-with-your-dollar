@@ -1,14 +1,17 @@
-"""Belief alignment scoring engine — continuous distance-based model.
+"""Belief alignment scoring engine — 10-point scale, distance-based.
 
-Both stances normalized to -1.0 to 1.0 continuous scale.
-Alignment per issue = 1 - (gap / 2), where gap = |user - company| (0 to 2 range)
-  Gap 0.0 → 100% aligned
-  Gap 0.5 → 75% aligned
-  Gap 1.0 → 50% aligned
-  Gap 1.5 → 25% aligned
-  Gap 2.0 → 0% aligned
+Both stances on -5 to +5 scale (0 = neutral, 5 = strongly support, -5 = strongly oppose).
+User stances come directly as -5 to +5 from onboarding sliders.
+Company stances stored as -1.0 to 1.0, scaled to -5..+5 for comparison.
 
-Continuous = granular. 51% ≠ 50%. Every decimal matters.
+Alignment per issue = 1 - (gap / 10), where gap = |user - company| (0 to 10 range)
+  Gap 0  → 100% aligned
+  Gap 2  → 80% aligned
+  Gap 5  → 50% aligned
+  Gap 8  → 20% aligned
+  Gap 10 → 0% aligned
+
+1% granularity. Every point matters.
 """
 
 ISSUE_NAMES = {
@@ -83,50 +86,50 @@ def score_company(
         if not ci:
             continue
 
-        # Both normalized to -1.0 to 1.0
-        user_norm = max(-1.0, min(1.0, belief.get("stance", 0) / 2))  # -2..2 → -1..1
-        company_norm = _parse_stance(ci.get("stance", 0))  # already -1..1
+        # User stance: -5 to +5 directly from slider
+        user_val = max(-5, min(5, belief.get("stance", 0)))
+        # Company stance: -1..1 scaled to -5..+5
+        company_val = _parse_stance(ci.get("stance", 0)) * 5
 
-        # Continuous distance: gap is 0..2, alignment is 0..1
-        gap = abs(user_norm - company_norm)  # 0.0 to 2.0
-        alignment = 1.0 - (gap / 2.0)       # 1.0 = perfect, 0.0 = opposite
+        # Distance on 10-point scale
+        gap = abs(user_val - company_val)  # 0 to 10
+        alignment = 1.0 - (gap / 10.0)    # 1.0 = perfect, 0.0 = opposite
 
         issue_name = ISSUE_NAMES.get(issue_id, issue_id)
         imp_label = IMPORTANCE_LABELS.get(importance, "")
         weight = IMPORTANCE_WEIGHTS.get(importance, 0)
         issues_scored += 1
 
-        # Deal breaker: if gap > 1.0 (more than half the scale apart)
+        # Deal breaker: if gap > 5 (more than half the scale)
         if importance == 3:
-            if gap > 1.0:
+            if gap > 5:
                 deal_breaker_hit = True
                 conflicting.append(issue_id)
-                pct_apart = round(gap / 2 * 100)
-                reasons.append(f"🚫 Deal breaker: {issue_name} — {pct_apart}% apart")
+                reasons.append(f"🚫 Deal breaker: {issue_name} — {gap:.0f} points apart")
             else:
                 matching.append(issue_id)
                 weighted_alignment_sum += alignment * weight
                 total_weight += weight
-                if gap <= 0.5:
+                if gap <= 2:
                     reasons.append(f"✅ {issue_name} — closely aligned (deal breaker)")
         else:
             weighted_alignment_sum += alignment * weight
             total_weight += weight
 
-            if gap <= 0.5:
+            if gap <= 2:
                 matching.append(issue_id)
                 orig_issue = (original_company_issues or {}).get(issue_id)
                 if orig_issue:
-                    orig_gap = abs(user_norm - _parse_stance(orig_issue.get("stance", 0)))
+                    orig_gap = abs(user_val - _parse_stance(orig_issue.get("stance", 0)) * 5)
                     if orig_gap > gap:
                         reasons.append(f"✅ {issue_name} ({imp_label}) — closer than {original_company_name or 'the original'}")
                     else:
                         reasons.append(f"✅ {issue_name} ({imp_label})")
                 else:
                     reasons.append(f"✅ {issue_name} ({imp_label})")
-            elif gap >= 1.5:
+            elif gap >= 7:
                 conflicting.append(issue_id)
-                reasons.append(f"⚠️ {issue_name} — significantly apart")
+                reasons.append(f"⚠️ {issue_name} — {gap:.0f} points apart")
 
     # Calculate final percentage
     if deal_breaker_hit:
@@ -156,7 +159,7 @@ def score_company(
     if issues_scored < total_user_issues * 0.3 and not deal_breaker_hit:
         reasons.append(f"📊 Limited data — scored {issues_scored} of your {total_user_issues} important issues")
 
-    score = (pct / 50) - 1  # compatibility: 0%→-1, 50%→0, 100%→1
+    score = (pct / 50) - 1
 
     return {
         "score": round(score, 3),
