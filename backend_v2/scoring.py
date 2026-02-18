@@ -88,13 +88,14 @@ def score_company(
 
         # User stance: -5 to +5 directly from slider
         user_val = max(-5, min(5, belief.get("stance", 0)))
-        # Company stance: -1..1 scaled to -5..+5
-        company_raw = _parse_stance(ci.get("stance", 0))
-        company_val = company_raw * 5
+        # Company stance: already -5 to +5
+        company_val = ci.get("stance", 0)
+        if isinstance(company_val, str):
+            company_val = _parse_stance(company_val) * 5
 
         # Skip neutral/no-data company stances — silence ≠ disagreement
         company_conf = str(ci.get("confidence", "")).lower()
-        if company_raw == 0 and company_conf in ("low", ""):
+        if company_val == 0 and company_conf in ("low", ""):
             continue
 
         # Distance on 10-point scale
@@ -126,7 +127,10 @@ def score_company(
                 matching.append(issue_id)
                 orig_issue = (original_company_issues or {}).get(issue_id)
                 if orig_issue:
-                    orig_gap = abs(user_val - _parse_stance(orig_issue.get("stance", 0)) * 5)
+                    orig_stance = orig_issue.get("stance", 0)
+                    if isinstance(orig_stance, str):
+                        orig_stance = _parse_stance(orig_stance) * 5
+                    orig_gap = abs(user_val - orig_stance)
                     if orig_gap > gap:
                         reasons.append(f"✅ {issue_name} ({imp_label}) — closer than {original_company_name or 'the original'}")
                     else:

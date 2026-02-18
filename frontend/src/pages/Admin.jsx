@@ -62,10 +62,10 @@ const STANCE_COLORS = {
 
 function stanceToLabel(val) {
   if (typeof val === 'number') {
-    if (val >= 0.7) return 'strong_support';
-    if (val >= 0.3) return 'lean_support';
-    if (val <= -0.7) return 'strong_oppose';
-    if (val <= -0.3) return 'lean_oppose';
+    if (val >= 3.5) return 'strong_support';
+    if (val >= 1.5) return 'lean_support';
+    if (val <= -3.5) return 'strong_oppose';
+    if (val <= -1.5) return 'lean_oppose';
     return 'neutral';
   }
   return val || 'neutral';

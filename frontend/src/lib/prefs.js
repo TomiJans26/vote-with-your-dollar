@@ -97,12 +97,11 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
 
     // Both on -5 to +5 scale
     const userVal = Math.max(-5, Math.min(5, belief.stance)); // already -5..5 from slider
-    const companyRawStance = typeof company.stance === 'number' ? company.stance : 0;
-    const companyVal = companyRawStance * 5; // -1..1 → -5..5
+    const companyVal = typeof company.stance === 'number' ? company.stance : 0; // already -5..5
 
     // Skip neutral/no-data company stances — silence ≠ disagreement
     const companyConf = (company.confidence || '').toLowerCase();
-    if (companyRawStance === 0 && (companyConf === 'low' || companyConf === '' || !company.confidence)) {
+    if (companyVal === 0 && (companyConf === 'low' || companyConf === '' || !company.confidence)) {
       continue; // Don't count "no data" as 50% alignment
     }
 

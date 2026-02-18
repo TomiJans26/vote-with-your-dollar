@@ -175,18 +175,18 @@ def admin_companies_ranked(
     weights = [3, 2, 1]
 
     def _stance_to_score(val):
-        """Convert stance value (string or number) to a score for ranking."""
+        """Convert stance value to a score for ranking. Stances now -5..5."""
         if isinstance(val, (int, float)):
-            return val * 2  # -1..1 → -2..2 to match string scale
+            return val  # already on -5..5 scale
         return STANCE_SCORE.get(val, 0)
 
     def _stance_to_label(val):
         """Convert numeric stance to display label."""
         if isinstance(val, (int, float)):
-            if val >= 0.7: return "strong_support"
-            if val >= 0.3: return "lean_support"
-            if val <= -0.7: return "strong_oppose"
-            if val <= -0.3: return "lean_oppose"
+            if val >= 3.5: return "strong_support"
+            if val >= 1.5: return "lean_support"
+            if val <= -3.5: return "strong_oppose"
+            if val <= -1.5: return "lean_oppose"
             return "neutral"
         return val if val else "neutral"
 
