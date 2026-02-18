@@ -100,6 +100,12 @@ export function getBeliefAlignment(companyIssues, beliefProfile) {
     const companyRawStance = typeof company.stance === 'number' ? company.stance : 0;
     const companyVal = companyRawStance * 5; // -1..1 → -5..5
 
+    // Skip neutral/no-data company stances — silence ≠ disagreement
+    const companyConf = (company.confidence || '').toLowerCase();
+    if (companyRawStance === 0 && (companyConf === 'low' || companyConf === '' || !company.confidence)) {
+      continue; // Don't count "no data" as 50% alignment
+    }
+
     // Continuous distance
     const gap = Math.abs(userVal - companyVal); // 0.0 to 10.0
     const alignment = 1.0 - (gap / 10.0);      // 1.0 = perfect, 0.0 = opposite

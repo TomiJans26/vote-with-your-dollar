@@ -89,7 +89,13 @@ def score_company(
         # User stance: -5 to +5 directly from slider
         user_val = max(-5, min(5, belief.get("stance", 0)))
         # Company stance: -1..1 scaled to -5..+5
-        company_val = _parse_stance(ci.get("stance", 0)) * 5
+        company_raw = _parse_stance(ci.get("stance", 0))
+        company_val = company_raw * 5
+
+        # Skip neutral/no-data company stances — silence ≠ disagreement
+        company_conf = str(ci.get("confidence", "")).lower()
+        if company_raw == 0 and company_conf in ("low", ""):
+            continue
 
         # Distance on 10-point scale
         gap = abs(user_val - company_val)  # 0 to 10
