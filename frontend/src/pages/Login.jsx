@@ -69,6 +69,10 @@ export default function Login({ onAuth }) {
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+
+          <div className="text-center">
+            <Link to="/forgot-password" className="text-sm text-teal-600 hover:underline">Forgot password?</Link>
+          </div>
         </form>
 
         <p className="text-center text-sm text-gray-400">

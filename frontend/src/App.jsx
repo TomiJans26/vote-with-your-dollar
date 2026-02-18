@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import VerifyEmail from './pages/VerifyEmail';
+import ForgotPassword from './pages/ForgotPassword';
 import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
 import { hasCompletedOnboarding } from './lib/prefs';
@@ -86,6 +87,7 @@ export default function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/verify-email" element={<RequireAuth><VerifyEmail /></RequireAuth>} />
         <Route path="/onboarding" element={<RequireVerified><Onboarding /></RequireVerified>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/login" element={<Login onAuth={handleAuth} />} />
         <Route path="/register" element={<Register onAuth={handleAuth} />} />
         <Route path="/terms" element={<Terms />} />

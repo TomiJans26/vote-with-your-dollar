@@ -135,6 +135,28 @@ export async function resendVerification() {
   return data;
 }
 
+export async function forgotPassword(email) {
+  const res = await fetch(`${BASE}/auth/forgot-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(extractError(data, 'Failed to send reset code'));
+  return data;
+}
+
+export async function resetPassword(email, code, new_password) {
+  const res = await fetch(`${BASE}/auth/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, code, new_password }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(extractError(data, 'Password reset failed'));
+  return data;
+}
+
 export async function getMe() {
   const res = await authFetch(`${BASE}/auth/me`);
   if (!res.ok) return null;
