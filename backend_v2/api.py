@@ -564,3 +564,172 @@ def delete_account(user: User = Depends(auth_required), db: Session = Depends(ge
     db.delete(user)
     db.commit()
     return {"ok": True, "message": "Account deleted"}
+
+
+# ---------------------------------------------------------------------------
+# Industries / Explore API
+# ---------------------------------------------------------------------------
+from models import Industry, Brand, Company
+
+@router.get("/industries")
+def list_industries(db: Session = Depends(get_db)):
+    from sqlalchemy import func
+    results = (
+        db.query(
+            Industry.slug, Industry.name, Industry.description,
+            func.count(Company.id).label("company_count")
+        )
+        .outerjoin(Company, Company.industry_id == Industry.id)
+        .group_by(Industry.slug, Industry.name, Industry.description)
+        .order_by(Industry.name)
+        .all()
+    )
+    return {
+        "industries": [
+            {"slug": r[0], "name": r[1], "description": r[2], "company_count": r[3]}
+            for r in results
+        ]
+    }
+
+
+@router.get("/industries/{industry_slug}/companies")
+def get_industry_companies(industry_slug: str, db: Session = Depends(get_db)):
+    from sqlalchemy import func
+    industry = db.query(Industry).filter(Industry.slug == industry_slug).first()
+    if not industry:
+        raise HTTPException(404, "Industry not found")
+
+    companies = (
+        db.query(Company)
+        .filter(Company.industry_id == industry.id)
+        .order_by(Company.name)
+        .all()
+    )
+
+    result = []
+    for c in companies:
+        brands = db.query(Brand).filter(Brand.company_id == c.id).all()
+        brand_names = [b.name for b in brands]
+        result.append({
+            "slug": c.slug, "name": c.name, "ticker": c.ticker,
+            "country": c.country,
+            "brand_count": len(brand_names),
+            "top_brands": brand_names[:5],
+        })
+
+    return {"companies": result}
+
+
+# ---------------------------------------------------------------------------
+# Shopping Report Card API
+# ---------------------------------------------------------------------------
+from datetime import datetime, timedelta, timezone
+
+@router.get("/profile/report")
+def get_shopping_report(
+    period: str = Query("week"),
+    user: User = Depends(auth_required),
+    db: Session = Depends(get_db)
+):
+    now = datetime.now(timezone.utc)
+    if period == "week":
+        since = now - timedelta(days=7)
+        period_label = "This Week"
+    elif period == "month":
+        since = now - timedelta(days=30)
+        period_label = "This Month"
+    else:
+        since = datetime(2020, 1, 1, tzinfo=timezone.utc)
+        period_label = "All Time"
+
+    scans = (
+        db.query(ScanHistory)
+        .filter(ScanHistory.user_id == user.id, ScanHistory.scanned_at >= since)
+        .order_by(ScanHistory.scanned_at.desc())
+        .all()
+    )
+
+    if not scans:
+        return {
+            "overallScore": 50, "periodLabel": period_label,
+            "totalScans": 0, "totalCompanies": 0,
+            "issueBreakdown": [], "dealBreakerAlerts": [],
+            "topAligned": [], "worstAligned": [],
+            "spendingByIndustry": [],
+        }
+
+    # Get user's belief profile
+    beliefs = {}
+    for bp in db.query(BeliefProfile).filter(BeliefProfile.user_id == user.id).all():
+        beliefs[bp.issue_key] = {"stance": bp.stance, "importance": bp.importance, "is_deal_breaker": bp.is_deal_breaker}
+
+    # Aggregate by company
+    company_scans = {}
+    for scan in scans:
+        key = scan.parent_company or "Unknown"
+        if key not in company_scans:
+            company_scans[key] = {"count": 0, "scores": [], "products": []}
+        company_scans[key]["count"] += 1
+        if scan.alignment_score is not None:
+            company_scans[key]["scores"].append(scan.alignment_score)
+        company_scans[key]["products"].append(scan.product_name or scan.brand_name or "Unknown")
+
+    # Calculate overall score
+    all_scores = [s for cs in company_scans.values() for s in cs["scores"]]
+    overall = round(sum(all_scores) / len(all_scores)) if all_scores else 50
+
+    # Top and worst aligned
+    company_avgs = []
+    for name, data in company_scans.items():
+        if data["scores"]:
+            avg = round(sum(data["scores"]) / len(data["scores"]))
+            company_avgs.append({"name": name, "score": avg, "count": data["count"]})
+
+    company_avgs.sort(key=lambda x: x["score"], reverse=True)
+    top = company_avgs[:3]
+    worst = list(reversed(company_avgs[-3:])) if len(company_avgs) > 3 else []
+
+    # Deal breaker alerts
+    deal_breaker_keys = {k for k, v in beliefs.items() if v.get("is_deal_breaker")}
+    alerts = []
+    if deal_breaker_keys:
+        for name, data in company_scans.items():
+            # Check if company has stances opposing user's deal breakers
+            slug = _normalize(name)
+            company_issues = _company_issues_data.get(slug, {}).get("issues", {})
+            for issue_key in deal_breaker_keys:
+                if issue_key in company_issues:
+                    ci_stance = company_issues[issue_key].get("stance", 0)
+                    user_stance = beliefs[issue_key].get("stance", 0)
+                    # If they disagree significantly
+                    if abs(ci_stance - user_stance) > 3:
+                        from lib.issues import ALL_ISSUES
+                        issue_name = issue_key.replace("_", " ").title()
+                        alerts.append({
+                            "company": name,
+                            "issue": issue_name,
+                            "product": data["products"][0] if data["products"] else None
+                        })
+
+    return {
+        "overallScore": overall,
+        "periodLabel": period_label,
+        "totalScans": len(scans),
+        "totalCompanies": len(company_scans),
+        "issueBreakdown": [],  # TODO: per-issue alignment breakdown
+        "dealBreakerAlerts": alerts,
+        "topAligned": top,
+        "worstAligned": worst,
+        "spendingByIndustry": [],  # TODO: breakdown by industry
+    }
+
+
+@router.post("/profile/report-subscribe")
+def subscribe_report_emails(
+    request: Request,
+    user: User = Depends(auth_required),
+    db: Session = Depends(get_db)
+):
+    # TODO: implement email subscription storage
+    # For now, just acknowledge
+    return {"ok": True, "message": "Subscribed to report emails"}

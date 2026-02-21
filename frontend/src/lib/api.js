@@ -262,3 +262,45 @@ export async function getCompanyIssues(companyId) {
   if (!res.ok) return { companyId, issues: {} };
   return res.json();
 }
+
+// ---------------------------------------------------------------------------
+// Shopping Report / Report Card API
+// ---------------------------------------------------------------------------
+export async function getShoppingReport(period = 'week') {
+  if (!isAuthenticated()) return null;
+  try {
+    const res = await authFetch(`${BASE}/profile/report?period=${period}`);
+    if (!res.ok) return null;
+    return res.json();
+  } catch { return null; }
+}
+
+export async function subscribeToReportEmails(email, frequency = 'weekly') {
+  const res = await authFetch(`${BASE}/profile/report-subscribe`, {
+    method: 'POST',
+    body: JSON.stringify({ email, frequency }),
+  });
+  if (!res.ok) return false;
+  return true;
+}
+
+// ---------------------------------------------------------------------------
+// Browse / Explore API
+// ---------------------------------------------------------------------------
+export async function getIndustries() {
+  try {
+    const res = await authFetch(`${BASE}/industries`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.industries || [];
+  } catch { return []; }
+}
+
+export async function getCompaniesByIndustry(industrySlug) {
+  try {
+    const res = await authFetch(`${BASE}/industries/${industrySlug}/companies`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.companies || [];
+  } catch { return []; }
+}

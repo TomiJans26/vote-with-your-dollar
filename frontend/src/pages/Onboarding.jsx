@@ -1,186 +1,92 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ISSUE_CATEGORIES, STANCE_LABELS, IMPORTANCE_LEVELS, ALL_ISSUES } from '../lib/issues';
+import { ISSUE_CATEGORIES, IMPORTANCE_LEVELS } from '../lib/issues';
 import { getBeliefProfile, saveBeliefProfile, setOnboardingComplete } from '../lib/prefs';
 import { isAuthenticated, saveBeliefProfileToServer } from '../lib/api';
 
-function ProgressBar({ current, total }) {
-  const pct = Math.round(((current + 1) / total) * 100);
-  return (
-    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-      <div
-        className="h-full bg-teal-500 rounded-full transition-all duration-500 ease-out"
-        style={{ width: `${pct}%` }}
-      />
-    </div>
-  );
-}
-
-function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
-  const abs = Math.abs(value);
-  const direction = value < 0 ? leftLabel : value > 0 ? rightLabel : '';
-  const displayLabel = value === 0 ? '🤷 Neutral' : `${direction} (${abs}/5)`;
-  
-  return (
-    <div className="space-y-1">
-      <div className="flex justify-between items-center text-xs font-semibold px-0.5">
-        <span className="text-blue-600">← {leftLabel}</span>
-        <span className="text-gray-400 text-[10px]">Neutral</span>
-        <span className="text-red-600">{rightLabel} →</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-[10px] text-blue-400 w-4 text-right">5</span>
-        <div className="w-full relative">
-          <input
-            type="range"
-            min={-5} max={5} step={1}
-            value={value}
-            onChange={e => onChange(Number(e.target.value))}
-            list={`ticks-${leftLabel}`}
-            className="w-full accent-teal-600 relative z-10"
-          />
-          <div className="flex justify-between px-[6px] -mt-1.5">
-            {Array.from({length: 11}, (_, i) => (
-              <div key={i} className={`w-px ${i === 5 ? 'h-3 bg-gray-400' : 'h-2 bg-gray-300'}`} />
-            ))}
-          </div>
-          <div className="flex justify-between px-0 mt-0.5">
-            <span className="text-[9px] text-blue-400">5</span>
-            <span className="text-[9px] text-blue-400">4</span>
-            <span className="text-[9px] text-blue-400">3</span>
-            <span className="text-[9px] text-blue-400">2</span>
-            <span className="text-[9px] text-blue-400">1</span>
-            <span className="text-[9px] text-gray-400 font-bold">0</span>
-            <span className="text-[9px] text-red-400">1</span>
-            <span className="text-[9px] text-red-400">2</span>
-            <span className="text-[9px] text-red-400">3</span>
-            <span className="text-[9px] text-red-400">4</span>
-            <span className="text-[9px] text-red-400">5</span>
-          </div>
-        </div>
-        <span className="text-[10px] text-red-400 w-4">5</span>
-      </div>
-      <div className="text-center">
-        <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-          value === 0 ? 'bg-gray-100 text-gray-600' :
-          value < 0 ? (abs >= 4 ? 'bg-blue-200 text-blue-800' : 'bg-blue-100 text-blue-700') :
-          (abs >= 4 ? 'bg-red-200 text-red-800' : 'bg-red-100 text-red-700')
-        }`}>
-          {displayLabel}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function ImportanceSelector({ value, onChange }) {
-  return (
-    <div className="flex gap-1.5 flex-wrap">
-      {IMPORTANCE_LEVELS.map(level => (
-        <button
-          key={level.value}
-          onClick={() => onChange(level.value)}
-          className={`text-xs px-2.5 py-1.5 rounded-full border transition-all ${
-            value === level.value
-              ? level.bgClass + ' border-transparent scale-105'
-              : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'
-          } ${level.value === 3 && value === 3 ? 'animate-pulse' : ''}`}
-        >
-          {level.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function IssueCard({ issue, belief, onUpdate }) {
-  const stance = belief?.stance ?? 0;
-  const importance = belief?.importance ?? 0;
-
-  return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-3">
-      <div className="flex justify-between items-start">
-        <div>
-          <h4 className="font-semibold text-gray-800 text-sm">{issue.name}</h4>
-          <p className="text-xs text-gray-400 mt-0.5">{issue.description}</p>
-        </div>
-        <button
-          onClick={() => onUpdate(issue.id, null)}
-          className="text-xs text-gray-300 hover:text-gray-500 shrink-0 ml-2"
-          title="Skip this issue"
-        >
-          Skip
-        </button>
-      </div>
-
-      <div>
-        <p className="text-xs text-gray-500 mb-1 font-medium">Your stance</p>
-        <StanceSlider value={stance} onChange={v => onUpdate(issue.id, { stance: v, importance })} leftLabel={issue.leftLabel || 'Oppose'} rightLabel={issue.rightLabel || 'Support'} />
-      </div>
-
-      <div>
-        <p className="text-xs text-gray-500 mb-1.5 font-medium">How much do you care?</p>
-        <ImportanceSelector value={importance} onChange={v => onUpdate(issue.id, { stance, importance: v })} />
-      </div>
-    </div>
-  );
-}
+/*
+  NEW ONBOARDING FLOW:
+  Step 1: Welcome — what DollarVote does
+  Step 2: Quick Pick — tap the 3-5 issues you care MOST about (no sliders, just tap)
+  Step 3: Deal Breakers — which of those are absolute deal breakers?
+  Step 4: Done — start scanning, with nudge to set granular preferences later
+*/
 
 function WelcomeStep({ onNext }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6 space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center p-6 space-y-6">
       <div className="text-6xl">🗳️</div>
-      <h2 className="text-2xl font-bold text-teal-800">Let's figure out what matters to you</h2>
-      <p className="text-gray-500 max-w-sm">
-        We'll walk through a few topics so we can show you how companies align with <em>your</em> values.
+      <h2 className="text-2xl font-bold text-teal-800">Every Dollar Is a Vote</h2>
+      <p className="text-gray-500 max-w-sm leading-relaxed">
+        When you buy something, your money supports that company's values — their lobbying, their donations, their politics.
       </p>
-      <p className="text-sm text-gray-400">No judgment. Just clarity. ✨</p>
+      <p className="text-gray-500 max-w-sm leading-relaxed">
+        <strong>DollarVote</strong> shows you where the money goes and helps you shop aligned with <em>your</em> values.
+      </p>
       <button
         onClick={onNext}
-        className="mt-4 px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors text-lg"
+        className="mt-4 px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors text-lg shadow-lg"
       >
-        Let's Go →
+        Get Started →
       </button>
-      <p className="text-xs text-gray-300">Takes about 2 minutes • Skip anything you want</p>
+      <p className="text-xs text-gray-300">30 seconds • No judgment</p>
     </div>
   );
 }
 
-function CategoryStep({ category, profile, onUpdate, onNext, onBack, onFinishEarly, stepIndex, totalSteps }) {
+function QuickPickStep({ selected, onToggle, onNext, onBack }) {
+  const allIssues = ISSUE_CATEGORIES.flatMap(cat =>
+    cat.issues.map(i => ({ ...i, catEmoji: cat.emoji, catName: cat.name }))
+  );
+
   return (
     <div className="p-4 space-y-4">
-      <ProgressBar current={stepIndex} total={totalSteps} />
-
       <div className="text-center py-2">
-        <span className="text-3xl">{category.emoji}</span>
-        <h3 className="text-lg font-bold text-teal-800 mt-1">{category.name}</h3>
-        <p className="text-sm text-gray-400">{category.description}</p>
+        <h3 className="text-lg font-bold text-teal-800">What matters to you?</h3>
+        <p className="text-sm text-gray-400">Tap the issues you care about. Pick as many or as few as you want.</p>
       </div>
 
-      <div className="space-y-3">
-        {category.issues.map(issue => (
-          <IssueCard
-            key={issue.id}
-            issue={issue}
-            belief={profile[issue.id]}
-            onUpdate={onUpdate}
-          />
-        ))}
+      <div className="grid grid-cols-2 gap-2">
+        {allIssues.map(issue => {
+          const isSelected = selected.includes(issue.id);
+          return (
+            <button
+              key={issue.id}
+              onClick={() => onToggle(issue.id)}
+              className={`text-left p-3 rounded-xl border-2 transition-all ${
+                isSelected
+                  ? 'border-teal-500 bg-teal-50 shadow-md scale-[1.02]'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-start gap-2">
+                <span className={`text-lg ${isSelected ? '' : 'grayscale opacity-50'}`}>{issue.catEmoji}</span>
+                <div className="min-w-0">
+                  <p className={`text-xs font-semibold leading-tight ${isSelected ? 'text-teal-800' : 'text-gray-600'}`}>
+                    {issue.name}
+                  </p>
+                </div>
+              </div>
+              {isSelected && (
+                <div className="mt-1 text-right">
+                  <span className="text-teal-600 text-xs font-bold">✓</span>
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="text-center text-xs text-gray-400">
+        {selected.length === 0 ? 'Tap at least one to continue' : `${selected.length} selected`}
       </div>
 
       <div className="flex justify-between items-center pt-4 pb-6">
-        <button onClick={onBack} className="text-sm text-gray-400 hover:text-gray-600">
-          ← Back
-        </button>
-        <button
-          onClick={onFinishEarly}
-          className="text-xs text-gray-300 hover:text-gray-500 underline"
-        >
-          I'm done
-        </button>
+        <button onClick={onBack} className="text-sm text-gray-400 hover:text-gray-600">← Back</button>
         <button
           onClick={onNext}
-          className="px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors"
+          disabled={selected.length === 0}
+          className="px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors disabled:opacity-40"
         >
           Next →
         </button>
@@ -189,98 +95,145 @@ function CategoryStep({ category, profile, onUpdate, onNext, onBack, onFinishEar
   );
 }
 
-function SummaryStep({ profile, onBack, onConfirm }) {
-  const activeIssues = Object.entries(profile).filter(([_, v]) => v && v.importance > 0);
-  const dealBreakers = activeIssues.filter(([_, v]) => v.importance === 3);
+function DealBreakerStep({ selectedIssues, dealBreakers, onToggle, onNext, onBack }) {
+  const allIssues = ISSUE_CATEGORIES.flatMap(cat => cat.issues);
+  const myIssues = allIssues.filter(i => selectedIssues.includes(i.id));
 
   return (
     <div className="p-4 space-y-4">
-      <div className="text-center py-4">
-        <span className="text-4xl">✅</span>
-        <h3 className="text-xl font-bold text-teal-800 mt-2">Your Values Profile</h3>
-        <p className="text-sm text-gray-400 mt-1">
-          {activeIssues.length} issues configured
-          {dealBreakers.length > 0 && ` • ${dealBreakers.length} deal breaker${dealBreakers.length > 1 ? 's' : ''}`}
+      <div className="text-center py-2">
+        <span className="text-4xl">🚫</span>
+        <h3 className="text-lg font-bold text-teal-800 mt-2">Any deal breakers?</h3>
+        <p className="text-sm text-gray-400">
+          If a company is on the wrong side of a deal breaker, we'll <strong>always warn you</strong> — no matter what.
         </p>
       </div>
 
-      {activeIssues.length === 0 ? (
-        <div className="text-center py-8 text-gray-400">
-          <p>No issues configured yet.</p>
-          <p className="text-sm mt-1">Go back and set at least a few to get personalized results.</p>
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {ISSUE_CATEGORIES.map(cat => {
-            const catIssues = cat.issues
-              .filter(i => profile[i.id]?.importance > 0)
-              .map(i => ({ ...i, belief: profile[i.id] }));
-            if (!catIssues.length) return null;
-            return (
-              <div key={cat.id} className="bg-white rounded-xl shadow-sm p-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase">{cat.emoji} {cat.name}</p>
-                <div className="mt-1.5 space-y-1">
-                  {catIssues.map(i => {
-                    const stanceLabel = STANCE_LABELS.find(s => s.value === i.belief.stance)?.label || 'Neutral';
-                    const impLevel = IMPORTANCE_LEVELS.find(l => l.value === i.belief.importance);
-                    return (
-                      <div key={i.id} className="flex justify-between items-center text-sm">
-                        <span className="text-gray-700">{i.name}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs text-gray-400">{stanceLabel}</span>
-                          <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${impLevel?.bgClass || ''}`}>
-                            {impLevel?.label}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+      <div className="space-y-2">
+        {myIssues.map(issue => {
+          const isDealBreaker = dealBreakers.includes(issue.id);
+          return (
+            <button
+              key={issue.id}
+              onClick={() => onToggle(issue.id)}
+              className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
+                isDealBreaker
+                  ? 'border-red-400 bg-red-50'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className={`text-sm font-medium ${isDealBreaker ? 'text-red-700' : 'text-gray-700'}`}>
+                  {issue.name}
+                </span>
+                <span className={`text-xs px-3 py-1 rounded-full font-bold ${
+                  isDealBreaker ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-400'
+                }`}>
+                  {isDealBreaker ? '🚫 DEAL BREAKER' : 'Important'}
+                </span>
               </div>
-            );
-          })}
-        </div>
-      )}
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="text-xs text-gray-300 text-center">
+        Deal breakers are optional. You can always change these later.
+      </p>
 
       <div className="flex justify-between items-center pt-4 pb-6">
-        <button onClick={onBack} className="text-sm text-gray-400 hover:text-gray-600">
-          ← Edit
-        </button>
+        <button onClick={onBack} className="text-sm text-gray-400 hover:text-gray-600">← Back</button>
         <button
-          onClick={onConfirm}
-          className="px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors text-lg"
+          onClick={onNext}
+          className="px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors"
         >
-          Looks Good! ✨
+          {dealBreakers.length > 0 ? "I'm Set →" : "Skip for Now →"}
         </button>
       </div>
     </div>
   );
 }
 
+function DoneStep({ issueCount, dealBreakerCount, onFinish }) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6 space-y-6">
+      <div className="text-6xl">🎉</div>
+      <h2 className="text-2xl font-bold text-teal-800">You're all set!</h2>
+
+      <div className="bg-white rounded-2xl shadow-lg p-5 space-y-2 max-w-xs w-full">
+        <div className="flex justify-between items-center">
+          <span className="text-sm text-gray-500">Issues tracked</span>
+          <span className="text-lg font-bold text-teal-700">{issueCount}</span>
+        </div>
+        {dealBreakerCount > 0 && (
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-500">Deal breakers</span>
+            <span className="text-lg font-bold text-red-500">{dealBreakerCount}</span>
+          </div>
+        )}
+      </div>
+
+      <p className="text-sm text-gray-500 max-w-sm">
+        Start scanning products to see how they align with your values.
+        We'll track your purchases and show you where your money really goes.
+      </p>
+
+      <button
+        onClick={onFinish}
+        className="mt-4 px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors text-lg shadow-lg"
+      >
+        Start Scanning 📸
+      </button>
+
+      <p className="text-xs text-gray-300">
+        💡 You can fine-tune your stances and add more detail in Settings anytime.
+      </p>
+    </div>
+  );
+}
+
 export default function Onboarding({ onComplete, initialProfile }) {
   const navigate = useNavigate();
-  // Steps: 0=welcome, 1..N=categories, N+1=summary
   const [step, setStep] = useState(0);
-  const [profile, setProfile] = useState(initialProfile || getBeliefProfile());
+  const [selectedIssues, setSelectedIssues] = useState(() => {
+    // Pre-select from existing profile
+    const existing = initialProfile || getBeliefProfile();
+    return Object.keys(existing).filter(k => existing[k]?.importance > 0);
+  });
+  const [dealBreakers, setDealBreakers] = useState(() => {
+    const existing = initialProfile || getBeliefProfile();
+    return Object.keys(existing).filter(k => existing[k]?.importance === 3);
+  });
 
-  const totalSteps = ISSUE_CATEGORIES.length + 2; // welcome + categories + summary
+  const toggleIssue = useCallback((id) => {
+    setSelectedIssues(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+    // Also remove from deal breakers if deselected
+    setDealBreakers(prev => prev.filter(x => x !== id || selectedIssues.includes(id)));
+  }, [selectedIssues]);
 
-  const updateIssue = useCallback((issueId, value) => {
-    setProfile(prev => {
-      const next = { ...prev };
-      if (value === null) {
-        delete next[issueId];
-      } else {
-        next[issueId] = value;
-      }
-      return next;
-    });
+  const toggleDealBreaker = useCallback((id) => {
+    setDealBreakers(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
   }, []);
 
   const finish = () => {
+    // Build profile: selected issues get importance 2 ("Very Important"),
+    // deal breakers get importance 3, stance defaults to 0 (neutral — they can refine later)
+    const profile = {};
+    selectedIssues.forEach(id => {
+      const isDealBreaker = dealBreakers.includes(id);
+      profile[id] = {
+        stance: 0, // neutral by default, they refine in settings
+        importance: isDealBreaker ? 3 : 2,
+        is_deal_breaker: isDealBreaker,
+      };
+    });
+
     saveBeliefProfile(profile);
     setOnboardingComplete();
-    // Sync to server if authenticated
     if (isAuthenticated()) {
       saveBeliefProfileToServer(profile);
     }
@@ -291,27 +244,37 @@ export default function Onboarding({ onComplete, initialProfile }) {
     }
   };
 
-  const goToSummary = () => setStep(ISSUE_CATEGORIES.length + 1);
-
-  if (step === 0) {
-    return <WelcomeStep onNext={() => setStep(1)} />;
+  switch (step) {
+    case 0:
+      return <WelcomeStep onNext={() => setStep(1)} />;
+    case 1:
+      return (
+        <QuickPickStep
+          selected={selectedIssues}
+          onToggle={toggleIssue}
+          onNext={() => selectedIssues.length > 0 && setStep(2)}
+          onBack={() => setStep(0)}
+        />
+      );
+    case 2:
+      return (
+        <DealBreakerStep
+          selectedIssues={selectedIssues}
+          dealBreakers={dealBreakers}
+          onToggle={toggleDealBreaker}
+          onNext={() => setStep(3)}
+          onBack={() => setStep(1)}
+        />
+      );
+    case 3:
+      return (
+        <DoneStep
+          issueCount={selectedIssues.length}
+          dealBreakerCount={dealBreakers.length}
+          onFinish={finish}
+        />
+      );
+    default:
+      return <WelcomeStep onNext={() => setStep(1)} />;
   }
-
-  if (step > ISSUE_CATEGORIES.length) {
-    return <SummaryStep profile={profile} onBack={() => setStep(step - 1)} onConfirm={finish} />;
-  }
-
-  const category = ISSUE_CATEGORIES[step - 1];
-  return (
-    <CategoryStep
-      category={category}
-      profile={profile}
-      onUpdate={updateIssue}
-      onNext={() => setStep(step + 1)}
-      onBack={() => setStep(step - 1)}
-      onFinishEarly={goToSummary}
-      stepIndex={step}
-      totalSteps={totalSteps}
-    />
-  );
 }
