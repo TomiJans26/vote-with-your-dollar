@@ -64,6 +64,17 @@ class BeliefProfile(Base):
     __table_args__ = (UniqueConstraint("user_id", "issue_key", name="uq_user_issue"),)
 
 
+class Industry(Base):
+    __tablename__ = "industries"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    slug = Column(String(100), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    description = Column(Text)
+
+    companies = relationship("Company", back_populates="industry_rel")
+
+
 class Company(Base):
     __tablename__ = "companies"
 
@@ -72,11 +83,13 @@ class Company(Base):
     name = Column(String(255), nullable=False)
     ticker = Column(String(20))
     industry = Column(String(255))
+    industry_id = Column(Integer, ForeignKey("industries.id"), nullable=True)
     country = Column(String(10))
     description = Column(Text)
     logo_url = Column(String(500))
     created_at = Column(DateTime, default=_utcnow)
 
+    industry_rel = relationship("Industry", back_populates="companies")
     brands = relationship("Brand", back_populates="company", cascade="all, delete-orphan")
     issues = relationship("CompanyIssue", back_populates="company", cascade="all, delete-orphan")
     pac_donations = relationship("PacDonation", back_populates="company", cascade="all, delete-orphan")
@@ -89,8 +102,10 @@ class Brand(Base):
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=False, index=True)
     name = Column(String(255), nullable=False)
     category = Column(String(255))
+    category_id = Column(Integer, ForeignKey("product_categories.id"), nullable=True)
 
     company = relationship("Company", back_populates="brands")
+    product_category = relationship("ProductCategory")
 
 
 class CompanyIssue(Base):
