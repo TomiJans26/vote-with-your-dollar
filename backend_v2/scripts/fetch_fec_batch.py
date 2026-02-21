@@ -7,15 +7,19 @@ from database import SessionLocal
 from sqlalchemy import text
 from config import settings
 
-FEC_API_KEY = settings.FEC_API_KEY
+FEC_API_KEY = os.environ.get("FEC_API_KEY", settings.FEC_API_KEY)
 FEC_BASE = "https://api.open.fec.gov/v1"
 
 def search_pac(term):
     try:
         resp = requests.get(
-            f"{FEC_BASE}/names/committees/",
-            params={"q": term, "api_key": FEC_API_KEY},
-            timeout=10
+            f"{FEC_BASE}/committees/",
+            params={
+                "q": term, "api_key": FEC_API_KEY,
+                "committee_type": ["Q", "N", "W", "O", "U", "V"],
+                "per_page": 10,
+            },
+            timeout=15
         )
         if resp.status_code == 200:
             return resp.json().get("results", [])
@@ -51,10 +55,17 @@ def run():
     for i, (slug, name) in enumerate(rows):
         # Clean company name for search
         clean = name.upper()
-        for remove in ["INC.", "INC", "CORP.", "CORP", "CO.", "LLC", "LTD", "PLC", 
-                       "THE ", "(FORMERLY", "(NOW", "(DEFUNCT"]:
-            clean = clean.replace(remove, "")
-        clean = clean.strip().rstrip(")")
+        # Remove parenthetical notes first
+        import re
+        clean = re.sub(r'\s*\(.*?\)', '', clean)
+        # Remove suffixes (whole words only)
+        for remove in [" INC.", " INC", " CORP.", " CORP", " CO.", " LLC", " LTD", " PLC",
+                       " N.V.", " S.A.", " AG", " SE"]:
+            if clean.endswith(remove):
+                clean = clean[:-len(remove)]
+        if clean.startswith("THE "):
+            clean = clean[4:]
+        clean = clean.strip()
         
         # Also try with "PAC" appended
         search_terms = [clean]
@@ -73,12 +84,13 @@ def run():
             
             if pacs:
                 pac = pacs[0]
+                fec_id = pac.get("committee_id") or pac.get("id", "")
                 new_pacs.append({
                     "companyId": slug,
                     "pacNames": [pac["name"]],
-                    "fecIds": [pac["id"]],
+                    "fecIds": [fec_id],
                 })
-                print(f"  FOUND: {pac['name']} ({pac['id']})")
+                print(f"  FOUND: {pac['name']} ({fec_id})")
                 found = True
                 break
             time.sleep(1.5)

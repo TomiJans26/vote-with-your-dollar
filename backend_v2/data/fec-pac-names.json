@@ -853,6 +853,663 @@
       "pacNames": [],
       "fecIds": [],
       "note": "No known PAC."
+    },
+    {
+      "companyId": "albertsons",
+      "pacNames": [
+        "THE ALBERTSONS COMPANIES, INC. POLITICAL ACTION COMMITTEE (ACI PAC)"
+      ],
+      "fecIds": [
+        "C00194084"
+      ]
+    },
+    {
+      "companyId": "american-express",
+      "pacNames": [
+        "AMERICAN EXPRESS COMPANY POLITICAL ACTION COMMITTEE (AXPPAC)"
+      ],
+      "fecIds": [
+        "C00040535"
+      ]
+    },
+    {
+      "companyId": "apple",
+      "pacNames": [
+        "APPLEPAC FKA:  APPLEGATE FOR CONGRESS COMMITTEE"
+      ],
+      "fecIds": [
+        "C00064337"
+      ]
+    },
+    {
+      "companyId": "att",
+      "pacNames": [
+        "AT&T INC. EMPLOYEE FEDERAL POLITICAL ACTION COMMITTEE (AT&T EMPLOYEE FEDERAL PAC)"
+      ],
+      "fecIds": [
+        "C00109017"
+      ]
+    },
+    {
+      "companyId": "bank-of-america",
+      "pacNames": [
+        "INDEPENDENT COMMUNITY BANKERS OF AMERICA POLITICAL ACTION COMMITTEE (ICBA PAC)"
+      ],
+      "fecIds": [
+        "C00032698"
+      ]
+    },
+    {
+      "companyId": "blackrock",
+      "pacNames": [
+        "BLACKROCK FUNDS SERVICES GROUP LLC POLITICAL ACTION COMMITTEE (BLACKROCK PAC)"
+      ],
+      "fecIds": [
+        "C00479246"
+      ]
+    },
+    {
+      "companyId": "bp",
+      "pacNames": [
+        "BP CORPORATION NORTH AMERICA INC. POLITICAL ACTION COMMITTEE (BP NORTH AMERICA EMPLOYEE PAC)"
+      ],
+      "fecIds": [
+        "C00060103"
+      ]
+    },
+    {
+      "companyId": "bridgestone",
+      "pacNames": [
+        "BRIDGESTONE AMERICAS INC. PAC"
+      ],
+      "fecIds": [
+        "C00371948"
+      ]
+    },
+    {
+      "companyId": "capital-one",
+      "pacNames": [
+        "HIBERNIA PEOPLE FOR GOOD GOVERNMENT INC - A FEDERAL PAC OF CAPITAL ONE FINANCIAL CORP."
+      ],
+      "fecIds": [
+        "C00149583"
+      ]
+    },
+    {
+      "companyId": "charter",
+      "pacNames": [
+        "CHARTER COMMUNICATIONS INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00426775"
+      ]
+    },
+    {
+      "companyId": "chick-fil-a",
+      "pacNames": [
+        "CHICK-FIL-A INC PAC (CFA PAC)"
+      ],
+      "fecIds": [
+        "C00323287"
+      ]
+    },
+    {
+      "companyId": "chipotle",
+      "pacNames": [
+        "CHIPOTLE MEXICAN GRILL PAC (CHIPOTLE PAC)"
+      ],
+      "fecIds": [
+        "C00933572"
+      ]
+    },
+    {
+      "companyId": "citigroup",
+      "pacNames": [
+        "CITIGROUP INC. PAC - FEDERAL (CITI PAC - FEDERAL)"
+      ],
+      "fecIds": [
+        "C00008474"
+      ]
+    },
+    {
+      "companyId": "constellation",
+      "pacNames": [
+        "CONSTELLATION BRANDS INC POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00304832"
+      ]
+    },
+    {
+      "companyId": "cvs",
+      "pacNames": [
+        "CVS HEALTH PAC"
+      ],
+      "fecIds": [
+        "C00384818"
+      ]
+    },
+    {
+      "companyId": "darden",
+      "pacNames": [
+        "DARDEN RESTAURANTS, INC. EMPLOYEES GOOD GOVERNMENT FUND"
+      ],
+      "fecIds": [
+        "C00108282"
+      ]
+    },
+    {
+      "companyId": "dell",
+      "pacNames": [
+        "DELL TECHNOLOGIES, INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00369751"
+      ]
+    },
+    {
+      "companyId": "diageo-spirits",
+      "pacNames": [
+        "DIAGEO NORTH AMERICA, INC. EMPLOYEES' POLITICAL PARTICIPATION COMMITTEE (DIAGEO PAC)"
+      ],
+      "fecIds": [
+        "C00034470"
+      ]
+    },
+    {
+      "companyId": "dish",
+      "pacNames": [
+        "ECHOSTAR CORPORATION AND DISH NETWORK CORPORATION PAC (ECHOSTAR DISH NETWORK PAC)"
+      ],
+      "fecIds": [
+        "C00330647"
+      ]
+    },
+    {
+      "companyId": "exxonmobil",
+      "pacNames": [
+        "EXXON MOBIL CORPORATION POLITICAL ACTION COMMITTEE (EXXONMOBIL PAC)"
+      ],
+      "fecIds": [
+        "C00121368"
+      ]
+    },
+    {
+      "companyId": "ford",
+      "pacNames": [
+        "FORD MOTOR COMPANY CIVIC ACTION FUND"
+      ],
+      "fecIds": [
+        "C00046474"
+      ]
+    },
+    {
+      "companyId": "gap-inc",
+      "pacNames": [
+        "GAP INC. GOOD GOVERNMENT FUND"
+      ],
+      "fecIds": [
+        "C00257246"
+      ]
+    },
+    {
+      "companyId": "ge-appliances",
+      "pacNames": [
+        "HAIER US APPLIANCE SOLUTIONS, INC., DBA GE APPLIANCES POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00616938"
+      ]
+    },
+    {
+      "companyId": "general-motors",
+      "pacNames": [
+        "GENERAL MOTORS COMPANY POLITICAL ACTION COMMITTEE (GM PAC)"
+      ],
+      "fecIds": [
+        "C00076810"
+      ]
+    },
+    {
+      "companyId": "goldman-sachs",
+      "pacNames": [
+        "THE GOLDMAN SACHS GROUP, INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00350744"
+      ]
+    },
+    {
+      "companyId": "goodyear",
+      "pacNames": [
+        "THE GOODYEAR TIRE & RUBBER COMPANY GOOD GOVERNMENT FUND (GOODYEAR GOOD GOVERNMENT FUND)"
+      ],
+      "fecIds": [
+        "C00100131"
+      ]
+    },
+    {
+      "companyId": "hm-group",
+      "pacNames": [
+        "MR. COOPER GROUP INC. PAC-FKA NATIONSTAR MORGAGE HOLDINGS INC. PAC"
+      ],
+      "fecIds": [
+        "C00553099"
+      ]
+    },
+    {
+      "companyId": "hp-inc",
+      "pacNames": [
+        "HP INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00626648"
+      ]
+    },
+    {
+      "companyId": "inspire-brands",
+      "pacNames": [
+        "INSPIRE BRANDS INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00492157"
+      ]
+    },
+    {
+      "companyId": "jpmorgan",
+      "pacNames": [
+        "JPMORGAN CHASE & CO. PAC"
+      ],
+      "fecIds": [
+        "C00128512"
+      ]
+    },
+    {
+      "companyId": "lenovo",
+      "pacNames": [
+        "LENOVO (UNITED STATES) INC. NON-PARTISAN CMTE FOR GOOD GOVT (LENOVOPAC)"
+      ],
+      "fecIds": [
+        "C00435602"
+      ]
+    },
+    {
+      "companyId": "live-nation",
+      "pacNames": [
+        "LIVE NATION ENTERTAINMENT, INC., POLITICAL ACTION COMMITTEE (LIVE NATION PAC)"
+      ],
+      "fecIds": [
+        "C00791103"
+      ]
+    },
+    {
+      "companyId": "lowes",
+      "pacNames": [
+        "LOWE'S COMPANIES, INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00251751"
+      ]
+    },
+    {
+      "companyId": "mastercard",
+      "pacNames": [
+        "MASTERCARD INTERNATIONAL INC. EMPLOYEE PAC (MASTERCARD PAC) OR (MASTERCARD EMPLOYEE PAC)"
+      ],
+      "fecIds": [
+        "C00410274"
+      ]
+    },
+    {
+      "companyId": "mattel",
+      "pacNames": [
+        "MATTEL INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00340224"
+      ]
+    },
+    {
+      "companyId": "mercedes-benz",
+      "pacNames": [
+        "MERCEDES-BENZ NORTH AMERICA CORPORATION US EMPLOYEES PAC"
+      ],
+      "fecIds": [
+        "C00611897"
+      ]
+    },
+    {
+      "companyId": "meta",
+      "pacNames": [
+        "META PLATFORMS, INC. PAC"
+      ],
+      "fecIds": [
+        "C00502906"
+      ]
+    },
+    {
+      "companyId": "microsoft",
+      "pacNames": [
+        "MICROSOFT CORPORATION STAKEHOLDERS VOLUNTARY PAC - MSVPAC"
+      ],
+      "fecIds": [
+        "C00227546"
+      ]
+    },
+    {
+      "companyId": "netflix",
+      "pacNames": [
+        "NETFLIX INC PAC (FLIXPAC)"
+      ],
+      "fecIds": [
+        "C00518233"
+      ]
+    },
+    {
+      "companyId": "news-corp",
+      "pacNames": [
+        "BOWERS NEWS MEDIA PAC"
+      ],
+      "fecIds": [
+        "C00878124"
+      ]
+    },
+    {
+      "companyId": "nike",
+      "pacNames": [
+        "NIKE INC FEDERAL POLITICAL ACTION COMMITTEE (NIKE FEDERAL PAC)"
+      ],
+      "fecIds": [
+        "C00142786"
+      ]
+    },
+    {
+      "companyId": "amazon-retail",
+      "pacNames": [
+        "AMAZON.COM SERVICES LLC SEPARATE SEGREGATED FUND (AMAZON PAC)"
+      ],
+      "fecIds": [
+        "C00360354"
+      ]
+    },
+    {
+      "companyId": "comcast",
+      "pacNames": [
+        "COMCAST CORPORATION & NBCUNIVERSAL POLITICAL ACTION COMMITTEE - FEDERAL"
+      ],
+      "fecIds": [
+        "C00248716"
+      ]
+    },
+    {
+      "companyId": "intel",
+      "pacNames": [
+        "INTEL CORPORATION POLITICAL ACTION COMMITTEE (IPAC)"
+      ],
+      "fecIds": [
+        "C00125641"
+      ]
+    },
+    {
+      "companyId": "paramount",
+      "pacNames": [
+        "PARAMOUNT GLOBAL POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00167759"
+      ]
+    },
+    {
+      "companyId": "paypal",
+      "pacNames": [
+        "PAYPAL HOLDINGS, INC PAC (PAYPAL PAC)"
+      ],
+      "fecIds": [
+        "C00581686"
+      ]
+    },
+    {
+      "companyId": "publix",
+      "pacNames": [
+        "PUBLIX SUPER MARKETS, INC. ASSOCIATES POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00400705"
+      ]
+    },
+    {
+      "companyId": "reynolds-american",
+      "pacNames": [
+        "REYNOLDS AMERICAN INC. POLITICAL ACTION COMMITTEE; RAI PAC"
+      ],
+      "fecIds": [
+        "C00042002"
+      ]
+    },
+    {
+      "companyId": "samsung",
+      "pacNames": [
+        "SAMSUNG ELECTRONICS AMERICA INC POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00590315"
+      ]
+    },
+    {
+      "companyId": "scotts-miracle",
+      "pacNames": [
+        "THE SCOTTS MIRACLE-GRO CO STEWARDSHIP PAC"
+      ],
+      "fecIds": [
+        "C00365254"
+      ]
+    },
+    {
+      "companyId": "sherwin-williams",
+      "pacNames": [
+        "SHERWIN-WILLIAMS POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00170027"
+      ]
+    },
+    {
+      "companyId": "sirius-xm",
+      "pacNames": [
+        "SIRIUS XM RADIO INC. AND PANDORA MEDIA, LLC PAC (SIRIUSXM PANDORA PAC)"
+      ],
+      "fecIds": [
+        "C00569285"
+      ]
+    },
+    {
+      "companyId": "stanley-bnd",
+      "pacNames": [
+        "STANLEY BLACK & DECKER, INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00060087"
+      ]
+    },
+    {
+      "companyId": "t-mobile",
+      "pacNames": [
+        "T-MOBILE US, INC.  POLITICAL ACTION COMMITTEE (T-PAC)"
+      ],
+      "fecIds": [
+        "C00361758"
+      ]
+    },
+    {
+      "companyId": "home-depot",
+      "pacNames": [
+        "THE HOME DEPOT INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00284885"
+      ]
+    },
+    {
+      "companyId": "disney",
+      "pacNames": [
+        "TWDC ENTERPRISES 18 CORP. EMPLOYEES PAC AKA 'THE WALT DISNEY COMPANY EMPLOYEES PAC' OR 'DISNEY PAC'"
+      ],
+      "fecIds": [
+        "C00197749"
+      ]
+    },
+    {
+      "companyId": "toyota",
+      "pacNames": [
+        "TOYOTA MOTOR NORTH AMERICA, INC POLITICAL ACTION COMMITTEE (TOYOTA/LEXUS PAC)"
+      ],
+      "fecIds": [
+        "C00542365"
+      ]
+    },
+    {
+      "companyId": "tupperware",
+      "pacNames": [
+        "TUPPERWARE BRANDS CORPORATION PAC"
+      ],
+      "fecIds": [
+        "C00317529"
+      ]
+    },
+    {
+      "companyId": "verizon",
+      "pacNames": [
+        "VERIZON COMMUNICATIONS INC POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00025163"
+      ]
+    },
+    {
+      "companyId": "visa",
+      "pacNames": [
+        "VISA, INC. POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00365122"
+      ]
+    },
+    {
+      "companyId": "wayfair",
+      "pacNames": [
+        "WAYFAIR LLC PAC"
+      ],
+      "fecIds": [
+        "C00689752"
+      ]
+    },
+    {
+      "companyId": "wells-fargo",
+      "pacNames": [
+        "WELLS FARGO AND COMPANY EMPLOYEE PAC (AKA WELLS FARGO EMPLOYEE PAC)"
+      ],
+      "fecIds": [
+        "C00034595"
+      ]
+    },
+    {
+      "companyId": "whirlpool",
+      "pacNames": [
+        "WHIRLPOOL CORPORATION POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00039040"
+      ]
+    },
+    {
+      "companyId": "wolverine-ww",
+      "pacNames": [
+        "WOLVERINE WORLD WIDE INC POLITICAL ACTION COMMITTEE (WOLVPAC)"
+      ],
+      "fecIds": [
+        "C00162560"
+      ]
+    },
+    {
+      "companyId": "yum-brands",
+      "pacNames": [
+        "YUM BRANDS INC. GOOD GOVERNMENT FUND"
+      ],
+      "fecIds": [
+        "C00329474"
+      ]
+    },
+    {
+      "companyId": "allstate",
+      "pacNames": [
+        "ALLSTATE INSURANCE COMPANY PAC"
+      ],
+      "fecIds": [
+        "C00040253"
+      ]
+    },
+    {
+      "companyId": "google-alphabet",
+      "pacNames": [
+        "GOOGLE LLC NETPAC"
+      ],
+      "fecIds": [
+        "C00428623"
+      ]
+    },
+    {
+      "companyId": "mcdonalds",
+      "pacNames": [
+        "MCDONALDS CORPORATION POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00063164"
+      ]
+    },
+    {
+      "companyId": "amd",
+      "pacNames": [
+        "ADVANCED MICRO DEVICES, INC. PAC"
+      ],
+      "fecIds": [
+        "C00404483"
+      ]
+    },
+    {
+      "companyId": "wendys",
+      "pacNames": [
+        "THE WENDYS COMPANY POLITICAL ACTION COMMITTEE"
+      ],
+      "fecIds": [
+        "C00369090"
+      ]
+    },
+    {
+      "companyId": "dominos",
+      "pacNames": [
+        "DOMINOS PIZZA LLC POLITICAL ACTION COMMITTEE (DOMINOS PIZZA PAC)"
+      ],
+      "fecIds": [
+        "C00366088"
+      ]
+    },
+    {
+      "companyId": "chevron",
+      "pacNames": [
+        "CHEVRON EMPLOYEES POLITICAL ACTION COMMITTEE - CHEVRON CORPORATION"
+      ],
+      "fecIds": [
+        "C00035006"
+      ]
+    },
+    {
+      "companyId": "fox-corp",
+      "pacNames": [
+        "FOX CORPORATION POLITICAL ACTION COMMITTEE (FOX PAC)"
+      ],
+      "fecIds": [
+        "C00693002"
+      ]
     }
   ]
 }
