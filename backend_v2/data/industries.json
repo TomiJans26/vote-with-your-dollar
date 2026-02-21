@@ -1,0 +1,113 @@
+{
+  "industries": [
+    {
+      "id": 11,
+      "slug": "automotive",
+      "name": "Automotive",
+      "description": "Cars, parts, gas stations"
+    },
+    {
+      "id": 6,
+      "slug": "baby-kids",
+      "name": "Baby & Kids",
+      "description": "Diapers, formula, baby food, kids products"
+    },
+    {
+      "id": 3,
+      "slug": "beauty-cosmetics",
+      "name": "Beauty & Cosmetics",
+      "description": "Skincare, makeup, hair care, fragrance"
+    },
+    {
+      "id": 8,
+      "slug": "clothing-apparel",
+      "name": "Clothing & Apparel",
+      "description": "Fashion, shoes, accessories"
+    },
+    {
+      "id": 18,
+      "slug": "consumer-conglomerate",
+      "name": "Consumer Conglomerate",
+      "description": "Multi-industry consumer goods companies"
+    },
+    {
+      "id": 9,
+      "slug": "electronics-tech",
+      "name": "Electronics & Tech",
+      "description": "Phones, computers, gadgets"
+    },
+    {
+      "id": 12,
+      "slug": "entertainment-media",
+      "name": "Entertainment & Media",
+      "description": "Streaming, gaming, news, publishing"
+    },
+    {
+      "id": 13,
+      "slug": "financial-services",
+      "name": "Financial Services",
+      "description": "Banks, credit cards, insurance"
+    },
+    {
+      "id": 1,
+      "slug": "food-beverage",
+      "name": "Food & Beverage",
+      "description": "Food, drinks, snacks, grocery items"
+    },
+    {
+      "id": 5,
+      "slug": "health-wellness",
+      "name": "Health & Wellness",
+      "description": "OTC medicine, vitamins, supplements"
+    },
+    {
+      "id": 10,
+      "slug": "home-furniture",
+      "name": "Home & Furniture",
+      "description": "Furniture, decor, appliances"
+    },
+    {
+      "id": 4,
+      "slug": "household-cleaning",
+      "name": "Household & Cleaning",
+      "description": "Cleaning products, paper goods, home supplies"
+    },
+    {
+      "id": 2,
+      "slug": "personal-care",
+      "name": "Personal Care",
+      "description": "Hygiene, grooming, oral care, body care"
+    },
+    {
+      "id": 7,
+      "slug": "pet-care",
+      "name": "Pet Care",
+      "description": "Pet food, treats, pet supplies"
+    },
+    {
+      "id": 16,
+      "slug": "restaurants-food-service",
+      "name": "Restaurants & Food Service",
+      "description": "Fast food, restaurant chains"
+    },
+    {
+      "id": 15,
+      "slug": "retail-ecommerce",
+      "name": "Retail & E-Commerce",
+      "description": "Stores: Walmart, Amazon, Target"
+    },
+    {
+      "id": 14,
+      "slug": "telecom-internet",
+      "name": "Telecom & Internet",
+      "description": "Cell carriers, ISPs"
+    },
+    {
+      "id": 17,
+      "slug": "tobacco-alcohol",
+      "name": "Tobacco & Alcohol",
+      "description": "Tobacco, alcohol companies"
+    }
+  ],
+  "_count": 18
+}

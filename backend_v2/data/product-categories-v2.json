@@ -1,0 +1,1594 @@
+{
+  "categories": [
+    {
+      "id": 218,
+      "slug": "alcohol",
+      "name": "Alcoholic Beverages",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 221,
+      "slug": "craft-beer",
+      "name": "Craft Beer",
+      "parent_slug": "alcohol",
+      "parent_name": "Alcoholic Beverages"
+    },
+    {
+      "id": 222,
+      "slug": "hard-seltzer",
+      "name": "Hard Seltzer",
+      "parent_slug": "alcohol",
+      "parent_name": "Alcoholic Beverages"
+    },
+    {
+      "id": 220,
+      "slug": "vodka-gin",
+      "name": "Vodka & Gin",
+      "parent_slug": "alcohol",
+      "parent_name": "Alcoholic Beverages"
+    },
+    {
+      "id": 219,
+      "slug": "whiskey-bourbon",
+      "name": "Whiskey & Bourbon",
+      "parent_slug": "alcohol",
+      "parent_name": "Alcoholic Beverages"
+    },
+    {
+      "id": 179,
+      "slug": "auto-parts",
+      "name": "Auto Parts",
+      "parent_slug": "automotive-cat",
+      "parent_name": "Automotive"
+    },
+    {
+      "id": 175,
+      "slug": "automotive-cat",
+      "name": "Automotive",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 176,
+      "slug": "cars",
+      "name": "Cars",
+      "parent_slug": "automotive-cat",
+      "parent_name": "Automotive"
+    },
+    {
+      "id": 177,
+      "slug": "fuel-gas",
+      "name": "Fuel & Gas",
+      "parent_slug": "automotive-cat",
+      "parent_name": "Automotive"
+    },
+    {
+      "id": 178,
+      "slug": "tires",
+      "name": "Tires",
+      "parent_slug": "automotive-cat",
+      "parent_name": "Automotive"
+    },
+    {
+      "id": 102,
+      "slug": "baby-care",
+      "name": "Baby Care",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 98,
+      "slug": "baby-food",
+      "name": "Baby Food",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 99,
+      "slug": "baby-formula",
+      "name": "Baby Formula",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 227,
+      "slug": "baby-gear",
+      "name": "Baby Gear",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 97,
+      "slug": "baby",
+      "name": "Baby Products",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 101,
+      "slug": "baby-wipes",
+      "name": "Baby Wipes",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 100,
+      "slug": "diapers",
+      "name": "Diapers",
+      "parent_slug": "baby",
+      "parent_name": "Baby Products"
+    },
+    {
+      "id": 161,
+      "slug": "air-freshener",
+      "name": "Air Freshener",
+      "parent_slug": "batteries-household",
+      "parent_name": "Batteries & Household"
+    },
+    {
+      "id": 159,
+      "slug": "batteries",
+      "name": "Batteries",
+      "parent_slug": "batteries-household",
+      "parent_name": "Batteries & Household"
+    },
+    {
+      "id": 158,
+      "slug": "batteries-household",
+      "name": "Batteries & Household",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 163,
+      "slug": "candles",
+      "name": "Candles",
+      "parent_slug": "batteries-household",
+      "parent_name": "Batteries & Household"
+    },
+    {
+      "id": 160,
+      "slug": "light-bulbs",
+      "name": "Light Bulbs",
+      "parent_slug": "batteries-household",
+      "parent_name": "Batteries & Household"
+    },
+    {
+      "id": 162,
+      "slug": "pest-control",
+      "name": "Pest Control",
+      "parent_slug": "batteries-household",
+      "parent_name": "Batteries & Household"
+    },
+    {
+      "id": 9,
+      "slug": "beer",
+      "name": "Beer",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 1,
+      "slug": "beverages",
+      "name": "Beverages",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 8,
+      "slug": "coffee",
+      "name": "Coffee",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 13,
+      "slug": "dairy-milk",
+      "name": "Dairy Milk",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 6,
+      "slug": "energy-drinks",
+      "name": "Energy Drinks",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 4,
+      "slug": "juice",
+      "name": "Juice",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 14,
+      "slug": "kombucha",
+      "name": "Kombucha",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 12,
+      "slug": "plant-based-milk",
+      "name": "Plant Based Milk",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 3,
+      "slug": "soda",
+      "name": "Soda",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 11,
+      "slug": "spirits",
+      "name": "Spirits",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 5,
+      "slug": "sports-drinks",
+      "name": "Sports Drinks",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 7,
+      "slug": "tea",
+      "name": "Tea",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 2,
+      "slug": "water",
+      "name": "Water",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 10,
+      "slug": "wine",
+      "name": "Wine",
+      "parent_slug": "beverages",
+      "parent_name": "Beverages"
+    },
+    {
+      "id": 92,
+      "slug": "bagels",
+      "name": "Bagels",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 96,
+      "slug": "baked-goods",
+      "name": "Baked Goods",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 91,
+      "slug": "bread",
+      "name": "Bread",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 90,
+      "slug": "bread-bakery",
+      "name": "Bread & Bakery",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 95,
+      "slug": "english-muffins",
+      "name": "English Muffins",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 94,
+      "slug": "rolls",
+      "name": "Rolls",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 93,
+      "slug": "tortillas",
+      "name": "Tortillas",
+      "parent_slug": "bread-bakery",
+      "parent_name": "Bread & Bakery"
+    },
+    {
+      "id": 59,
+      "slug": "canned-packaged",
+      "name": "Canned & Packaged Foods",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 63,
+      "slug": "canned-beans",
+      "name": "Canned Beans",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 62,
+      "slug": "canned-fruit",
+      "name": "Canned Fruit",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 60,
+      "slug": "canned-soup",
+      "name": "Canned Soup",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 64,
+      "slug": "canned-tuna",
+      "name": "Canned Tuna",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 61,
+      "slug": "canned-vegetables",
+      "name": "Canned Vegetables",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 67,
+      "slug": "mac-and-cheese",
+      "name": "Mac And Cheese",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 65,
+      "slug": "pasta",
+      "name": "Pasta",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 68,
+      "slug": "ramen",
+      "name": "Ramen",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 66,
+      "slug": "rice",
+      "name": "Rice",
+      "parent_slug": "canned-packaged",
+      "parent_name": "Canned & Packaged Foods"
+    },
+    {
+      "id": 45,
+      "slug": "breakfast-bars",
+      "name": "Breakfast Bars",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 40,
+      "slug": "cereal",
+      "name": "Cereal",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 39,
+      "slug": "cereal-breakfast",
+      "name": "Cereal & Breakfast",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 44,
+      "slug": "granola",
+      "name": "Granola",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 41,
+      "slug": "oatmeal",
+      "name": "Oatmeal",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 42,
+      "slug": "pancake-mix",
+      "name": "Pancake Mix",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 43,
+      "slug": "syrup",
+      "name": "Syrup",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 46,
+      "slug": "toaster-pastries",
+      "name": "Toaster Pastries",
+      "parent_slug": "cereal-breakfast",
+      "parent_name": "Cereal & Breakfast"
+    },
+    {
+      "id": 130,
+      "slug": "all-purpose-cleaner",
+      "name": "All Purpose Cleaner",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 131,
+      "slug": "bathroom-cleaner",
+      "name": "Bathroom Cleaner",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 134,
+      "slug": "bleach",
+      "name": "Bleach",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 127,
+      "slug": "cleaning",
+      "name": "Cleaning Products",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 129,
+      "slug": "dish-soap",
+      "name": "Dish Soap",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 133,
+      "slug": "disinfectant",
+      "name": "Disinfectant",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 136,
+      "slug": "dryer-sheets",
+      "name": "Dryer Sheets",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 135,
+      "slug": "fabric-softener",
+      "name": "Fabric Softener",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 132,
+      "slug": "glass-cleaner",
+      "name": "Glass Cleaner",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 128,
+      "slug": "laundry-detergent",
+      "name": "Laundry Detergent",
+      "parent_slug": "cleaning",
+      "parent_name": "Cleaning Products"
+    },
+    {
+      "id": 168,
+      "slug": "casual-wear",
+      "name": "Casual Wear",
+      "parent_slug": "clothing",
+      "parent_name": "Clothing & Apparel"
+    },
+    {
+      "id": 164,
+      "slug": "clothing",
+      "name": "Clothing & Apparel",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 165,
+      "slug": "footwear",
+      "name": "Footwear",
+      "parent_slug": "clothing",
+      "parent_name": "Clothing & Apparel"
+    },
+    {
+      "id": 167,
+      "slug": "luxury-fashion",
+      "name": "Luxury Fashion",
+      "parent_slug": "clothing",
+      "parent_name": "Clothing & Apparel"
+    },
+    {
+      "id": 166,
+      "slug": "sportswear",
+      "name": "Sportswear",
+      "parent_slug": "clothing",
+      "parent_name": "Clothing & Apparel"
+    },
+    {
+      "id": 54,
+      "slug": "bbq-sauce",
+      "name": "Bbq Sauce",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 47,
+      "slug": "condiments-sauces",
+      "name": "Condiments & Sauces",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 52,
+      "slug": "hot-sauce",
+      "name": "Hot Sauce",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 48,
+      "slug": "ketchup",
+      "name": "Ketchup",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 50,
+      "slug": "mayonnaise",
+      "name": "Mayonnaise",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 49,
+      "slug": "mustard",
+      "name": "Mustard",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 55,
+      "slug": "pasta-sauce",
+      "name": "Pasta Sauce",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 51,
+      "slug": "salad-dressing",
+      "name": "Salad Dressing",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 56,
+      "slug": "salsa",
+      "name": "Salsa",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 53,
+      "slug": "soy-sauce",
+      "name": "Soy Sauce",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 58,
+      "slug": "spices",
+      "name": "Spices",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 57,
+      "slug": "vinegar",
+      "name": "Vinegar",
+      "parent_slug": "condiments-sauces",
+      "parent_name": "Condiments & Sauces"
+    },
+    {
+      "id": 32,
+      "slug": "butter",
+      "name": "Butter",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 30,
+      "slug": "cheese",
+      "name": "Cheese",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 37,
+      "slug": "cottage-cheese",
+      "name": "Cottage Cheese",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 33,
+      "slug": "cream",
+      "name": "Cream",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 38,
+      "slug": "cream-cheese",
+      "name": "Cream Cheese",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 28,
+      "slug": "dairy",
+      "name": "Dairy & Eggs",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 34,
+      "slug": "eggs",
+      "name": "Eggs",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 35,
+      "slug": "ice-cream",
+      "name": "Ice Cream",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 29,
+      "slug": "milk",
+      "name": "Milk",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 36,
+      "slug": "sour-cream",
+      "name": "Sour Cream",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 31,
+      "slug": "yogurt",
+      "name": "Yogurt",
+      "parent_slug": "dairy",
+      "parent_name": "Dairy & Eggs"
+    },
+    {
+      "id": 173,
+      "slug": "audio",
+      "name": "Audio",
+      "parent_slug": "electronics",
+      "parent_name": "Electronics"
+    },
+    {
+      "id": 171,
+      "slug": "computers",
+      "name": "Computers & Laptops",
+      "parent_slug": "electronics",
+      "parent_name": "Electronics"
+    },
+    {
+      "id": 169,
+      "slug": "electronics",
+      "name": "Electronics",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 172,
+      "slug": "gaming",
+      "name": "Gaming",
+      "parent_slug": "electronics",
+      "parent_name": "Electronics"
+    },
+    {
+      "id": 174,
+      "slug": "smart-home",
+      "name": "Smart Home",
+      "parent_slug": "electronics",
+      "parent_name": "Electronics"
+    },
+    {
+      "id": 170,
+      "slug": "smartphones",
+      "name": "Smartphones",
+      "parent_slug": "electronics",
+      "parent_name": "Electronics"
+    },
+    {
+      "id": 199,
+      "slug": "entertainment",
+      "name": "Entertainment",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 205,
+      "slug": "live-events",
+      "name": "Live Events",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 202,
+      "slug": "movies-tv",
+      "name": "Movies & TV",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 203,
+      "slug": "music",
+      "name": "Music",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 204,
+      "slug": "news-publishing",
+      "name": "News & Publishing",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 200,
+      "slug": "streaming-services",
+      "name": "Streaming Services",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 201,
+      "slug": "video-games",
+      "name": "Video Games",
+      "parent_slug": "entertainment",
+      "parent_name": "Entertainment"
+    },
+    {
+      "id": 191,
+      "slug": "banks",
+      "name": "Banks",
+      "parent_slug": "financial",
+      "parent_name": "Financial Services"
+    },
+    {
+      "id": 192,
+      "slug": "credit-cards",
+      "name": "Credit Cards",
+      "parent_slug": "financial",
+      "parent_name": "Financial Services"
+    },
+    {
+      "id": 190,
+      "slug": "financial",
+      "name": "Financial Services",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 193,
+      "slug": "insurance",
+      "name": "Insurance",
+      "parent_slug": "financial",
+      "parent_name": "Financial Services"
+    },
+    {
+      "id": 194,
+      "slug": "investment",
+      "name": "Investment",
+      "parent_slug": "financial",
+      "parent_name": "Financial Services"
+    },
+    {
+      "id": 75,
+      "slug": "frozen-breakfast",
+      "name": "Frozen Breakfast",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 69,
+      "slug": "frozen",
+      "name": "Frozen Foods",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 73,
+      "slug": "frozen-fruit",
+      "name": "Frozen Fruit",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 70,
+      "slug": "frozen-meals",
+      "name": "Frozen Meals",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 77,
+      "slug": "frozen-meat",
+      "name": "Frozen Meat",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 71,
+      "slug": "frozen-pizza",
+      "name": "Frozen Pizza",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 76,
+      "slug": "frozen-snacks",
+      "name": "Frozen Snacks",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 72,
+      "slug": "frozen-vegetables",
+      "name": "Frozen Vegetables",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 74,
+      "slug": "frozen--ice-cream",
+      "name": "Ice Cream",
+      "parent_slug": "frozen",
+      "parent_name": "Frozen Foods"
+    },
+    {
+      "id": 156,
+      "slug": "allergy",
+      "name": "Allergy",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 157,
+      "slug": "digestive-health",
+      "name": "Digestive Health",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 154,
+      "slug": "first-aid",
+      "name": "First Aid",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 150,
+      "slug": "health-wellness",
+      "name": "Health & Wellness",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 153,
+      "slug": "otc-medicine",
+      "name": "Otc Medicine",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 155,
+      "slug": "pain-relief",
+      "name": "Pain Relief",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 152,
+      "slug": "supplements",
+      "name": "Supplements",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 151,
+      "slug": "vitamins",
+      "name": "Vitamins",
+      "parent_slug": "health-wellness",
+      "parent_name": "Health & Wellness"
+    },
+    {
+      "id": 208,
+      "slug": "appliances",
+      "name": "Appliances",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 212,
+      "slug": "bedding",
+      "name": "Bedding & Mattresses",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 207,
+      "slug": "furniture",
+      "name": "Furniture",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 206,
+      "slug": "home-garden",
+      "name": "Home & Garden",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 213,
+      "slug": "kitchenware",
+      "name": "Kitchenware",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 211,
+      "slug": "outdoor-grills",
+      "name": "Outdoor & Grills",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 210,
+      "slug": "paint",
+      "name": "Paint",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 209,
+      "slug": "tools",
+      "name": "Tools",
+      "parent_slug": "home-garden",
+      "parent_name": "Home & Garden"
+    },
+    {
+      "id": 86,
+      "slug": "bacon",
+      "name": "Bacon",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 80,
+      "slug": "beef",
+      "name": "Beef",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 79,
+      "slug": "chicken",
+      "name": "Chicken",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 83,
+      "slug": "deli-meat",
+      "name": "Deli Meat",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 84,
+      "slug": "hot-dogs",
+      "name": "Hot Dogs",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 78,
+      "slug": "meat-protein",
+      "name": "Meat & Protein",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 87,
+      "slug": "plant-based-meat",
+      "name": "Plant Based Meat",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 81,
+      "slug": "pork",
+      "name": "Pork",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 85,
+      "slug": "sausage",
+      "name": "Sausage",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 89,
+      "slug": "seafood",
+      "name": "Seafood",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 88,
+      "slug": "tofu",
+      "name": "Tofu",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 82,
+      "slug": "turkey",
+      "name": "Turkey",
+      "parent_slug": "meat-protein",
+      "parent_name": "Meat & Protein"
+    },
+    {
+      "id": 142,
+      "slug": "aluminum-foil",
+      "name": "Aluminum Foil",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 137,
+      "slug": "paper-goods",
+      "name": "Paper & Household Goods",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 138,
+      "slug": "paper-towels",
+      "name": "Paper Towels",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 143,
+      "slug": "plastic-wrap",
+      "name": "Plastic Wrap",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 144,
+      "slug": "storage-bags",
+      "name": "Storage Bags",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 140,
+      "slug": "tissues",
+      "name": "Tissues",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 139,
+      "slug": "toilet-paper",
+      "name": "Toilet Paper",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 141,
+      "slug": "trash-bags",
+      "name": "Trash Bags",
+      "parent_slug": "paper-goods",
+      "parent_name": "Paper & Household Goods"
+    },
+    {
+      "id": 106,
+      "slug": "body-wash",
+      "name": "Body Wash",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 105,
+      "slug": "conditioner",
+      "name": "Conditioner",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 108,
+      "slug": "deodorant",
+      "name": "Deodorant",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 115,
+      "slug": "lip-balm",
+      "name": "Lip Balm",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 113,
+      "slug": "lotion",
+      "name": "Lotion",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 110,
+      "slug": "mouthwash",
+      "name": "Mouthwash",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 103,
+      "slug": "personal-care",
+      "name": "Personal Care",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 111,
+      "slug": "razor",
+      "name": "Razor",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 104,
+      "slug": "shampoo",
+      "name": "Shampoo",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 112,
+      "slug": "shaving-cream",
+      "name": "Shaving Cream",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 107,
+      "slug": "soap",
+      "name": "Soap",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 114,
+      "slug": "sunscreen",
+      "name": "Sunscreen",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 109,
+      "slug": "toothpaste",
+      "name": "Toothpaste",
+      "parent_slug": "personal-care",
+      "parent_name": "Personal Care"
+    },
+    {
+      "id": 147,
+      "slug": "cat-food",
+      "name": "Cat Food",
+      "parent_slug": "pet",
+      "parent_name": "Pet Products"
+    },
+    {
+      "id": 146,
+      "slug": "dog-food",
+      "name": "Dog Food",
+      "parent_slug": "pet",
+      "parent_name": "Pet Products"
+    },
+    {
+      "id": 149,
+      "slug": "pet-care",
+      "name": "Pet Care",
+      "parent_slug": "pet",
+      "parent_name": "Pet Products"
+    },
+    {
+      "id": 145,
+      "slug": "pet",
+      "name": "Pet Products",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 148,
+      "slug": "pet-treats",
+      "name": "Pet Treats",
+      "parent_slug": "pet",
+      "parent_name": "Pet Products"
+    },
+    {
+      "id": 187,
+      "slug": "casual-dining",
+      "name": "Casual Dining",
+      "parent_slug": "restaurants",
+      "parent_name": "Restaurants"
+    },
+    {
+      "id": 188,
+      "slug": "coffee-shops",
+      "name": "Coffee Shops",
+      "parent_slug": "restaurants",
+      "parent_name": "Restaurants"
+    },
+    {
+      "id": 186,
+      "slug": "fast-food",
+      "name": "Fast Food",
+      "parent_slug": "restaurants",
+      "parent_name": "Restaurants"
+    },
+    {
+      "id": 189,
+      "slug": "pizza-delivery",
+      "name": "Pizza Delivery",
+      "parent_slug": "restaurants",
+      "parent_name": "Restaurants"
+    },
+    {
+      "id": 185,
+      "slug": "restaurants",
+      "name": "Restaurants",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 182,
+      "slug": "department-stores",
+      "name": "Department Stores",
+      "parent_slug": "retail",
+      "parent_name": "Retail Stores"
+    },
+    {
+      "id": 181,
+      "slug": "grocery-stores",
+      "name": "Grocery Stores",
+      "parent_slug": "retail",
+      "parent_name": "Retail Stores"
+    },
+    {
+      "id": 183,
+      "slug": "home-improvement",
+      "name": "Home Improvement",
+      "parent_slug": "retail",
+      "parent_name": "Retail Stores"
+    },
+    {
+      "id": 184,
+      "slug": "pharmacy",
+      "name": "Pharmacy",
+      "parent_slug": "retail",
+      "parent_name": "Retail Stores"
+    },
+    {
+      "id": 180,
+      "slug": "retail",
+      "name": "Retail Stores",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 126,
+      "slug": "cologne",
+      "name": "Cologne",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 117,
+      "slug": "face-wash",
+      "name": "Face Wash",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 120,
+      "slug": "foundation",
+      "name": "Foundation",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 122,
+      "slug": "hair-color",
+      "name": "Hair Color",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 123,
+      "slug": "hair-styling",
+      "name": "Hair Styling",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 119,
+      "slug": "makeup",
+      "name": "Makeup",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 121,
+      "slug": "mascara",
+      "name": "Mascara",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 118,
+      "slug": "moisturizer",
+      "name": "Moisturizer",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 124,
+      "slug": "nail-care",
+      "name": "Nail Care",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 125,
+      "slug": "perfume",
+      "name": "Perfume",
+      "parent_slug": "skincare-beauty",
+      "parent_name": "Skincare & Beauty"
+    },
+    {
+      "id": 116,
+      "slug": "skincare-beauty",
+      "name": "Skincare & Beauty",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 19,
+      "slug": "candy",
+      "name": "Candy",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 16,
+      "slug": "chips",
+      "name": "Chips",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 20,
+      "slug": "chocolate",
+      "name": "Chocolate",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 18,
+      "slug": "cookies",
+      "name": "Cookies",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 17,
+      "slug": "crackers",
+      "name": "Crackers",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 25,
+      "slug": "fruit-snacks",
+      "name": "Fruit Snacks",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 22,
+      "slug": "granola-bars",
+      "name": "Granola Bars",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 26,
+      "slug": "jerky",
+      "name": "Jerky",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 21,
+      "slug": "nuts",
+      "name": "Nuts",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 23,
+      "slug": "popcorn",
+      "name": "Popcorn",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 24,
+      "slug": "pretzels",
+      "name": "Pretzels",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 15,
+      "slug": "snacks",
+      "name": "Snacks",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 27,
+      "slug": "trail-mix",
+      "name": "Trail Mix",
+      "parent_slug": "snacks",
+      "parent_name": "Snacks"
+    },
+    {
+      "id": 197,
+      "slug": "internet-providers",
+      "name": "Internet Providers",
+      "parent_slug": "telecom",
+      "parent_name": "Telecom"
+    },
+    {
+      "id": 198,
+      "slug": "streaming-tv",
+      "name": "Streaming & TV",
+      "parent_slug": "telecom",
+      "parent_name": "Telecom"
+    },
+    {
+      "id": 195,
+      "slug": "telecom",
+      "name": "Telecom",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 196,
+      "slug": "wireless-carriers",
+      "name": "Wireless Carriers",
+      "parent_slug": "telecom",
+      "parent_name": "Telecom"
+    },
+    {
+      "id": 215,
+      "slug": "cigarettes",
+      "name": "Cigarettes",
+      "parent_slug": "tobacco",
+      "parent_name": "Tobacco & Nicotine"
+    },
+    {
+      "id": 217,
+      "slug": "smokeless-tobacco",
+      "name": "Smokeless Tobacco",
+      "parent_slug": "tobacco",
+      "parent_name": "Tobacco & Nicotine"
+    },
+    {
+      "id": 214,
+      "slug": "tobacco",
+      "name": "Tobacco & Nicotine",
+      "parent_slug": null,
+      "parent_name": null
+    },
+    {
+      "id": 216,
+      "slug": "vaping",
+      "name": "Vaping & E-Cigarettes",
+      "parent_slug": "tobacco",
+      "parent_name": "Tobacco & Nicotine"
+    },
+    {
+      "id": 224,
+      "slug": "action-figures",
+      "name": "Action Figures & Dolls",
+      "parent_slug": "toys",
+      "parent_name": "Toys & Games"
+    },
+    {
+      "id": 225,
+      "slug": "board-games",
+      "name": "Board & Card Games",
+      "parent_slug": "toys",
+      "parent_name": "Toys & Games"
+    },
+    {
+      "id": 226,
+      "slug": "building-toys",
+      "name": "Building Toys",
+      "parent_slug": "toys",
+      "parent_name": "Toys & Games"
+    },
+    {
+      "id": 223,
+      "slug": "toys",
+      "name": "Toys & Games",
+      "parent_slug": null,
+      "parent_name": null
+    }
+  ],
+  "_count": 227
+}
