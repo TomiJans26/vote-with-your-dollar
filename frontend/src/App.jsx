@@ -44,13 +44,14 @@ function RequireVerified({ children }) {
 }
 
 function RequireOnboarding({ children }) {
-  if (!isAuthenticated()) {
-    return <Navigate to="/register" replace />;
+  // If logged in but not verified, nudge them
+  if (isAuthenticated()) {
+    const u = getStoredUser();
+    if (u && !u.email_verified) {
+      return <Navigate to="/verify-email" replace />;
+    }
   }
-  const u = getStoredUser();
-  if (u && !u.email_verified) {
-    return <Navigate to="/verify-email" replace />;
-  }
+  // Onboarding is required for everyone (but NOT auth)
   if (!hasCompletedOnboarding()) {
     return <Navigate to="/onboarding" replace />;
   }
@@ -88,7 +89,7 @@ export default function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/verify-email" element={<RequireAuth><VerifyEmail /></RequireAuth>} />
-        <Route path="/onboarding" element={<RequireVerified><Onboarding /></RequireVerified>} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/login" element={<Login onAuth={handleAuth} />} />
         <Route path="/register" element={<Register onAuth={handleAuth} />} />
