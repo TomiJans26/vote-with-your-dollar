@@ -17,6 +17,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
+import BetaGate from './components/BetaGate';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
@@ -84,6 +85,7 @@ export default function App() {
   }, []);
 
   return (
+    <BetaGate>
     <AuthContext.Provider value={{ user, setUser, handleLogout }}>
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -106,5 +108,6 @@ export default function App() {
         </Route>
       </Routes>
     </AuthContext.Provider>
+    </BetaGate>
   );
 }
