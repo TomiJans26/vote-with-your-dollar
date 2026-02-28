@@ -17,6 +17,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
+import ShoppingList from './pages/ShoppingList';
 import BetaGate from './components/BetaGate';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
@@ -101,6 +102,7 @@ export default function App() {
           <Route index element={<RequireOnboarding><Scanner /></RequireOnboarding>} />
           <Route path="/result/:upc" element={<Result />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/list" element={<ShoppingList />} />
           <Route path="/report" element={<RequireOnboarding><Dashboard /></RequireOnboarding>} />
           <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Settings />} />

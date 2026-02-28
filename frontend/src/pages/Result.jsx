@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { scanProduct, getAlternatives, trackClick } from '../lib/api';
 import { getPrefs, getAlignment, getBeliefProfile, getBeliefAlignment, hasCompletedOnboarding } from '../lib/prefs';
+import { addToShoppingList } from './ShoppingList';
 import DonationBar from '../components/DonationBar';
 import AlignmentBadge from '../components/AlignmentBadge';
 import IssueBreakdown from '../components/IssueBreakdown';
@@ -100,6 +101,26 @@ function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
         </div>
       )}
     </div>
+  );
+}
+
+function AddToListButton({ item }) {
+  const [added, setAdded] = useState(false);
+  const handleAdd = () => {
+    const wasNew = addToShoppingList(item);
+    setAdded(true);
+    if (wasNew && navigator.vibrate) navigator.vibrate(50);
+    setTimeout(() => setAdded(false), 2000);
+  };
+  return (
+    <button
+      onClick={handleAdd}
+      className={`inline-block px-8 py-3 rounded-xl font-semibold transition-colors mr-2 ${
+        added ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white hover:bg-amber-600'
+      }`}
+    >
+      {added ? '✓ Added!' : '📝 Add to List'}
+    </button>
   );
 }
 
@@ -297,6 +318,15 @@ export default function Result() {
                         originalCompanyId={parentCompany?.id || ''}
                       />
                     )}
+                    <AddToListButton item={{
+                      name: alt.name || alt.brand || 'Alternative',
+                      brand: alt.brand,
+                      barcode: alt.barcode || null,
+                      companyName: alt.parentCompany?.name || '',
+                      alignmentPct: alt.alignment?.dealBreakerHit ? 0 : (alt.alignment?.pct ?? 50),
+                      dealBreaker: alt.alignment?.dealBreakerHit || false,
+                      buyLink: alt.buyLink || null,
+                    }} />
                   </div>
                   <span className="text-[10px] text-gray-300">affiliate link</span>
                 </div>
@@ -312,8 +342,21 @@ export default function Result() {
         </div>
       )}
 
-      {/* Share + Scan again */}
+      {/* Share + Scan again + Add to list */}
       <div className="text-center pt-2 pb-4 space-y-3">
+        {parentCompany && (
+          <AddToListButton
+            item={{
+              name: product.name || product.brand || 'Unknown Product',
+              brand: product.brand,
+              barcode: upc.startsWith('search-') ? null : upc,
+              companyName: parentCompany.name,
+              alignmentPct: beliefResult?.dealBreakerHit ? 0 : (beliefResult?.pct ?? Math.round(((oldAlignment + 1) / 2) * 100)),
+              dealBreaker: beliefResult?.dealBreakerHit || false,
+              buyLink: null,
+            }}
+          />
+        )}
         {parentCompany && navigator.share && (
           <button
             onClick={() => {
