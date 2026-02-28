@@ -56,6 +56,8 @@ export default function Scanner() {
         (decodedText) => {
           scanner.stop().catch(() => {});
           setScanning(false);
+          // Haptic feedback on successful scan
+          if (navigator.vibrate) navigator.vibrate(100);
           navigate(`/result/${decodedText}`);
         },
         () => {}
@@ -187,11 +189,36 @@ export default function Scanner() {
       </div>
 
       {/* Scanner area */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div
-          id="scanner-region"
-          className={`w-full ${scanning ? 'min-h-[280px]' : 'h-0'}`}
-        />
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden relative">
+        <div className="relative">
+          <div
+            id="scanner-region"
+            className={`w-full ${scanning ? 'min-h-[300px]' : 'h-0'}`}
+          />
+          {/* Viewfinder overlay */}
+          {scanning && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+              {/* Dark overlay with cutout effect */}
+              <div className="absolute inset-0 bg-black/40" />
+              {/* Viewfinder window */}
+              <div className="relative z-10 w-[280px] h-[140px]">
+                {/* Clear center */}
+                <div className="absolute inset-0 bg-transparent" />
+                {/* Corner brackets */}
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-3 border-l-3 border-emerald-400 rounded-tl-lg" style={{borderWidth: '3px 0 0 3px'}} />
+                <div className="absolute top-0 right-0 w-6 h-6 border-t-3 border-r-3 border-emerald-400 rounded-tr-lg" style={{borderWidth: '3px 3px 0 0'}} />
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b-3 border-l-3 border-emerald-400 rounded-bl-lg" style={{borderWidth: '0 0 3px 3px'}} />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-3 border-r-3 border-emerald-400 rounded-br-lg" style={{borderWidth: '0 3px 3px 0'}} />
+                {/* Scan line animation */}
+                <div className="absolute left-2 right-2 h-0.5 bg-emerald-400/80 animate-pulse top-1/2" />
+              </div>
+              {/* Helper text */}
+              <p className="absolute bottom-4 left-0 right-0 text-center text-white/80 text-xs z-10">
+                Align barcode within the frame
+              </p>
+            </div>
+          )}
+        </div>
         {!scanning ? (
           <button
             onClick={startScanner}
