@@ -18,6 +18,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
 import ShoppingList from './pages/ShoppingList';
+import CompanyProfile from './pages/CompanyProfile';
+// Note: CompanyProfile uses getCompanyByName - added to api.js
 import BetaGate from './components/BetaGate';
 import { hasCompletedOnboarding } from './lib/prefs';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
@@ -106,6 +108,7 @@ export default function App() {
           <Route path="/report" element={<RequireOnboarding><Dashboard /></RequireOnboarding>} />
           <Route path="/history" element={<History />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/company/:name" element={<CompanyProfile />} />
           <Route path="/about" element={<About />} />
         </Route>
       </Routes>

@@ -241,6 +241,12 @@ export async function getCompany(companyId) {
   return res.json();
 }
 
+export async function getCompanyByName(name) {
+  const res = await authFetch(`${BASE}/company/by-name/${encodeURIComponent(name)}`);
+  if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(extractError(d, 'Company not found')); }
+  return res.json();
+}
+
 export async function searchProducts(query) {
   const res = await authFetch(`${BASE}/search?q=${encodeURIComponent(query)}`);
   if (!res.ok) return { results: [], offResults: [] };
