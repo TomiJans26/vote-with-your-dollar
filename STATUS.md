@@ -45,7 +45,7 @@
 - [x] Shopping list feature — add from scans + alternatives, alignment scores ✅ Feb 27
 - [x] Report cards / alignment scores — Dashboard.jsx with score rings, issue breakdown ✅
 - [ ] FEC batch PAC lookup — re-run with real API key (had bugs)
-- [ ] Search: "Is [brand] ethical?" landing pages
+- [x] Search: "Is [brand] ethical?" landing pages — /company/:name route ✅ Feb 28
 - [ ] Kroger OAuth + "Add to Safeway cart" integration (API docs captured)
 - [ ] Habit-based curated shopping lists (learn what you buy → suggest aligned swaps)
 
