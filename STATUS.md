@@ -37,15 +37,17 @@
 ---
 
 ## 🟡 BUILD PHASE (~30% of total work)
-- [ ] Barcode scanning — smooth, reliable, fast
-- [ ] Product alternatives engine ("you buy X, try Y instead")
-- [ ] Affiliate links wired up and generating clicks
-- [ ] Chrome browser extension (huge for user acquisition)
-- [ ] Mobile PWA polish (feels like a real app, not a website)
-- [ ] Shopping list feature (Dave's killer idea — curated lists)
-- [ ] Report cards / alignment scores (weekly/monthly emails)
+- [x] Barcode scanning — viewfinder overlay, haptic feedback ✅ Feb 27
+- [x] Product alternatives engine — already in Result.jsx ✅
+- [x] Affiliate links — Amazon tag wired, store links working ✅
+- [x] Chrome browser extension — v0.1 for Amazon/Walmart/Target/Kroger/Safeway ✅ Feb 28
+- [x] Mobile PWA polish — DollarVote branding, Apple web app, manifest ✅ Feb 27
+- [x] Shopping list feature — add from scans + alternatives, alignment scores ✅ Feb 27
+- [x] Report cards / alignment scores — Dashboard.jsx with score rings, issue breakdown ✅
 - [ ] FEC batch PAC lookup — re-run with real API key (had bugs)
 - [ ] Search: "Is [brand] ethical?" landing pages
+- [ ] Kroger OAuth + "Add to Safeway cart" integration (API docs captured)
+- [ ] Habit-based curated shopping lists (learn what you buy → suggest aligned swaps)
 
 ---
 
