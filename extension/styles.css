@@ -1,0 +1,32 @@
+/* DollarVote Extension Styles */
+.dollarvote-badge {
+  display: inline-block;
+  margin: 4px 0;
+}
+
+.dv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dv-badge:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+.dv-badge-unknown {
+  background: #9CA3AF;
+  color: #fff;
+}
