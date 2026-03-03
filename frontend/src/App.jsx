@@ -20,7 +20,7 @@ import Admin from './pages/Admin';
 import ShoppingList from './pages/ShoppingList';
 import CompanyProfile from './pages/CompanyProfile';
 // Note: CompanyProfile uses getCompanyByName - added to api.js
-// BetaGate kept in components/ but no longer used — we're going public
+import BetaGate from './components/BetaGate';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
 
@@ -61,6 +61,7 @@ export default function App() {
   }, []);
 
   return (
+    <BetaGate>
     <AuthContext.Provider value={{ user, setUser, handleLogout }}>
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -85,5 +86,6 @@ export default function App() {
         </Route>
       </Routes>
     </AuthContext.Provider>
+    </BetaGate>
   );
 }
