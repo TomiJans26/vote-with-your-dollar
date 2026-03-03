@@ -7,8 +7,7 @@ import DonationBar from '../components/DonationBar';
 import AlignmentBadge from '../components/AlignmentBadge';
 import IssueBreakdown from '../components/IssueBreakdown';
 
-function AlignmentHero({ score, beliefResult }) {
-  // Calculate display percentage (0-100)
+function AlignmentHero({ score, beliefResult, companyName, political }) {
   let pct, label, emoji;
   if (beliefResult) {
     if (beliefResult.dealBreakerHit) {
@@ -16,18 +15,16 @@ function AlignmentHero({ score, beliefResult }) {
       label = 'Deal Breaker';
       emoji = '🚫';
     } else {
-      // Use pct directly from distance-based scoring
       pct = beliefResult.pct ?? Math.round(((beliefResult.score + 1) / 2) * 100);
-      label = 'Aligned';
+      label = 'Aligned with your values';
       emoji = pct >= 70 ? '🟢' : pct >= 40 ? '🟡' : '🔴';
     }
   } else {
     pct = Math.round(((score + 1) / 2) * 100);
-    label = 'Aligned';
+    label = 'Aligned with your values';
     emoji = pct >= 70 ? '🟢' : pct >= 40 ? '🟡' : '🔴';
   }
 
-  // Gradient color
   const getColor = (p) => {
     if (beliefResult?.dealBreakerHit) return 'from-red-600 to-red-800';
     if (p >= 70) return 'from-emerald-500 to-emerald-700';
@@ -36,29 +33,29 @@ function AlignmentHero({ score, beliefResult }) {
     return 'from-red-500 to-red-700';
   };
 
-  const getRingColor = (p) => {
-    if (beliefResult?.dealBreakerHit) return 'border-red-500';
-    if (p >= 70) return 'border-emerald-500';
-    if (p >= 50) return 'border-yellow-500';
-    if (p >= 30) return 'border-orange-500';
-    return 'border-red-500';
-  };
+  // Plain english summary
+  let summary = '';
+  if (political?.donations?.total > 0) {
+    const total = political.donations.total;
+    summary = `${companyName} donated $${total.toLocaleString()} to political causes`;
+  }
 
   return (
-    <div className={`bg-gradient-to-br ${getColor(pct)} rounded-2xl p-5 text-white text-center shadow-lg`}>
-      <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full border-4 ${getRingColor(pct)} bg-white/20 mb-2`}>
-        <span className="text-3xl font-black">
-          {beliefResult?.dealBreakerHit ? emoji : `${pct}%`}
-        </span>
+    <div className={`bg-gradient-to-br ${getColor(pct)} rounded-2xl p-6 text-white text-center shadow-lg`}>
+      <div className="text-5xl font-black mb-1">
+        {beliefResult?.dealBreakerHit ? emoji : `${pct}%`}
       </div>
       <p className="text-lg font-bold tracking-wide">
-        {beliefResult?.dealBreakerHit ? '🚫 Deal Breaker Hit' : `${pct}% ${label}`}
+        {beliefResult?.dealBreakerHit ? 'Deal Breaker' : label}
       </p>
-      {beliefResult && !beliefResult.dealBreakerHit && (
-        <p className="text-xs text-white/70 mt-1">{beliefResult.label}</p>
+      {beliefResult && !beliefResult.dealBreakerHit && beliefResult.label && (
+        <p className="text-sm text-white/80 mt-1">{beliefResult.label}</p>
       )}
       {beliefResult?.dealBreakerHit && (
-        <p className="text-xs text-white/80 mt-1">This company conflicts with one of your deal-breaker issues</p>
+        <p className="text-sm text-white/80 mt-1">This company conflicts with one of your deal-breaker issues</p>
+      )}
+      {summary && (
+        <p className="text-xs text-white/60 mt-2">{summary}</p>
       )}
     </div>
   );
@@ -66,7 +63,6 @@ function AlignmentHero({ score, beliefResult }) {
 
 function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
   const [open, setOpen] = useState(false);
-
   const stores = [
     { key: 'walmart', label: '🏬 Walmart', url: storeLinks.walmart },
     { key: 'target', label: '🎯 Target', url: storeLinks.target },
@@ -77,7 +73,7 @@ function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-1 px-4 py-2 bg-indigo-500 text-white text-xs font-semibold rounded-lg hover:bg-indigo-600 transition-colors"
+        className="inline-flex items-center gap-1 px-4 py-2 bg-indigo-500 text-white text-xs font-semibold rounded-lg hover:bg-indigo-600 active:bg-indigo-700 transition-colors"
       >
         🏪 Find in Store {open ? '▲' : '▼'}
       </button>
@@ -93,7 +89,7 @@ function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
                 trackClick(brand, companyId, originalCompanyId, s.key);
                 setOpen(false);
               }}
-              className="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-700 transition-colors border-b border-gray-100 last:border-0"
+              className="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 active:bg-teal-100 hover:text-teal-700 transition-colors border-b border-gray-100 last:border-0"
             >
               {s.label}
             </a>
@@ -115,12 +111,78 @@ function AddToListButton({ item }) {
   return (
     <button
       onClick={handleAdd}
-      className={`inline-block px-8 py-3 rounded-xl font-semibold transition-colors mr-2 ${
-        added ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white hover:bg-amber-600'
+      className={`inline-block px-6 py-2.5 rounded-xl font-semibold transition-all active:scale-95 ${
+        added ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white hover:bg-amber-600 active:bg-amber-700'
       }`}
     >
       {added ? '✓ Added!' : '📝 Add to List'}
     </button>
+  );
+}
+
+function ShareButton({ product, parentCompany, beliefResult }) {
+  const [copied, setCopied] = useState(false);
+
+  const getText = () => {
+    const pct = beliefResult?.pct ?? null;
+    if (beliefResult?.dealBreakerHit) {
+      return `🚫 ${parentCompany.name} (makes ${product.name || product.brand}) hit one of my deal breakers on DollarVote!`;
+    }
+    if (pct != null) {
+      return `${pct >= 60 ? '👍' : '👎'} ${parentCompany.name} (makes ${product.name || product.brand}) scores ${pct}% aligned with my values on DollarVote!`;
+    }
+    return `I just looked up ${product.name || product.brand} on DollarVote — it's made by ${parentCompany.name}!`;
+  };
+
+  const handleShare = async () => {
+    const text = getText();
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'DollarVote — Vote With Your Dollar',
+          text,
+          url: window.location.href,
+        });
+      } catch { /* user cancelled */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${text}\n${window.location.href}`);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch { /* clipboard failed */ }
+    }
+  };
+
+  return (
+    <button
+      onClick={handleShare}
+      className="inline-block px-6 py-2.5 bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-600 active:bg-indigo-700 active:scale-95 transition-all"
+    >
+      {copied ? '✓ Copied!' : '📤 Share'}
+    </button>
+  );
+}
+
+// Skeleton loader
+function ResultSkeleton() {
+  return (
+    <div className="p-4 space-y-4 animate-pulse">
+      <div className="bg-white rounded-2xl shadow-lg p-5">
+        <div className="flex gap-4 items-start">
+          <div className="w-20 h-20 bg-gray-200 rounded-xl" />
+          <div className="flex-1 space-y-3 pt-1">
+            <div className="h-4 bg-gray-200 rounded w-3/4" />
+            <div className="h-3 bg-gray-100 rounded w-1/2" />
+          </div>
+        </div>
+      </div>
+      <div className="h-32 bg-gray-200 rounded-2xl" />
+      <div className="bg-white rounded-2xl shadow-lg p-5 space-y-3">
+        <div className="h-3 bg-gray-200 rounded w-1/3" />
+        <div className="h-5 bg-gray-200 rounded w-1/2" />
+        <div className="h-20 bg-gray-100 rounded-xl" />
+      </div>
+    </div>
   );
 }
 
@@ -149,28 +211,24 @@ export default function Result() {
   }, [upc]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-200 border-t-teal-600" />
-      </div>
-    );
+    return <ResultSkeleton />;
   }
 
   if (error) {
     return (
       <div className="p-6 text-center space-y-4">
         <div className="text-5xl">😕</div>
-        <h2 className="text-lg font-bold text-gray-800">Product Not Found</h2>
-        <p className="text-sm text-gray-600">{error}</p>
-        <p className="text-xs text-gray-400">
-          Barcode: <span className="font-mono bg-gray-100 px-2 py-0.5 rounded">{upc}</span>
+        <h2 className="text-lg font-bold text-gray-800">We couldn't find that product</h2>
+        <p className="text-sm text-gray-600">
+          {error.includes('404') || error.includes('not found')
+            ? "This product isn't in our database yet."
+            : 'Something went wrong. Please try again.'}
         </p>
         <div className="pt-2 space-y-2">
-          <Link to="/" className="inline-block px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold">
+          <Link to="/" className="inline-block px-6 py-2.5 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 active:bg-teal-800 transition-colors">
             🔍 Search by Brand
           </Link>
           <p className="text-xs text-gray-400">
-            Not all products have barcodes in our database yet.<br/>
             Try searching by brand name — we track 100+ companies and 600+ brands!
           </p>
         </div>
@@ -183,7 +241,6 @@ export default function Result() {
   const beliefProfile = getBeliefProfile();
   const useBeliefs = hasCompletedOnboarding() && Object.keys(beliefProfile).length > 0;
 
-  // Compute alignment
   const oldAlignment = parentCompany ? getAlignment(political, prefs) : 0;
   const beliefResult = useBeliefs && companyIssues && Object.keys(companyIssues).length > 0
     ? getBeliefAlignment(companyIssues, beliefProfile)
@@ -206,17 +263,21 @@ export default function Result() {
           <div className="flex-1">
             <h2 className="font-bold text-lg leading-tight break-words">{product.name || 'Unknown Product'}</h2>
             {product.brand && <p className="text-sm text-gray-500 mt-1">{product.brand}</p>}
-            <p className="text-xs text-gray-400 mt-1 font-mono">{upc}</p>
           </div>
         </div>
       </div>
 
-      {/* Alignment Hero - Big alignment score at top */}
+      {/* BIG alignment score */}
       {parentCompany && (beliefResult || political) && (
-        <AlignmentHero score={oldAlignment} beliefResult={beliefResult} />
+        <AlignmentHero
+          score={oldAlignment}
+          beliefResult={beliefResult}
+          companyName={parentCompany.name}
+          political={political}
+        />
       )}
 
-      {/* Parent company */}
+      {/* Parent company details */}
       {parentCompany ? (
         <div className="bg-white rounded-2xl shadow-lg p-5 space-y-3">
           <div className="flex items-center justify-between">
@@ -230,7 +291,7 @@ export default function Result() {
             <AlignmentBadge alignment={oldAlignment} beliefResult={beliefResult} />
           </div>
 
-          {/* Issue breakdown — enhanced with bars */}
+          {/* Issue breakdown */}
           {companyIssues && Object.keys(companyIssues).length > 0 && (
             <IssueBreakdown
               triggers={beliefResult?.triggers || []}
@@ -239,20 +300,22 @@ export default function Result() {
             />
           )}
 
-          {/* PAC Donations - total only, no party breakdown */}
+          {/* Plain English donation summary */}
           {political && political.donations?.total > 0 && (
-            <div className="space-y-1">
-              <p className="text-xs uppercase text-gray-400 font-semibold">Political Donations</p>
+            <div className="bg-gray-50 rounded-xl p-3 space-y-1">
               <p className="text-sm font-semibold text-gray-700">
-                💰 ${(political.donations.total).toLocaleString()} in PAC contributions
+                💰 {parentCompany.name} donated ${(political.donations.total).toLocaleString()} to political causes
               </p>
+              {political.donations.percentDem != null && political.donations.percentRep != null && (
+                <DonationBar percentDem={political.donations.percentDem} percentRep={political.donations.percentRep} />
+              )}
             </div>
           )}
 
           {/* No issue data notice */}
           {useBeliefs && (!companyIssues || Object.keys(companyIssues).length === 0) && (
             <p className="text-xs text-gray-400 italic bg-gray-50 rounded-lg p-2">
-              📊 We don't have detailed issue data for this company yet. Score is based on PAC donations only.
+              We don't have detailed issue data for this company yet. Score is based on PAC donations only.
             </p>
           )}
         </div>
@@ -263,12 +326,12 @@ export default function Result() {
         </div>
       )}
 
-      {/* Smart Alternatives */}
+      {/* Alternatives — prominent header */}
       {alts.length > 0 ? (
         <div className="space-y-3">
-          <div className="px-1">
-            <h3 className="font-bold text-base text-teal-800">🔄 Better Aligned Alternatives</h3>
-            <p className="text-xs text-gray-500">Products that match your values better</p>
+          <div className="bg-teal-50 rounded-xl px-4 py-3">
+            <h3 className="font-bold text-base text-teal-800">Try these instead</h3>
+            <p className="text-xs text-teal-600">Products that better match your values</p>
           </div>
           {alts.map((alt, i) => {
             const pct = alt.alignment?.pct ?? 50;
@@ -287,13 +350,12 @@ export default function Result() {
                         {alt.brand && alt.brand !== alt.name && <p className="text-xs text-gray-500 truncate">{alt.brand}</p>}
                         {alt.parentCompany && <p className="text-xs text-gray-400">{alt.parentCompany.name}</p>}
                       </div>
-                      <span className={`${badgeColor} text-white text-xs font-bold px-2 py-1 rounded-full shrink-0`}>
+                      <span className={`${badgeColor} text-white text-sm font-bold px-3 py-1 rounded-full shrink-0`}>
                         {alt.alignment?.dealBreakerHit ? '🚫' : `${pct}%`}
                       </span>
                     </div>
                   </div>
                 </div>
-                {/* Why it's better */}
                 {alt.alignment?.reasons?.length > 0 && (
                   <div className="mt-2 space-y-1 pl-1">
                     {alt.alignment.reasons.slice(0, 3).map((reason, ri) => (
@@ -306,7 +368,7 @@ export default function Result() {
                     {alt.buyLink && (
                       <a href={alt.buyLink} target="_blank" rel="noopener noreferrer"
                         onClick={() => trackClick(alt.brand || alt.name, alt.parentCompany?.id || '', parentCompany?.id || '', 'amazon')}
-                        className="inline-flex items-center gap-1 px-4 py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+                        className="inline-flex items-center gap-1 px-4 py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 active:bg-teal-800 transition-colors">
                         📦 Order Online
                       </a>
                     )}
@@ -336,14 +398,15 @@ export default function Result() {
         </div>
       ) : !loading && parentCompany && (
         <div className="bg-white rounded-2xl shadow p-5 text-center text-sm text-gray-500">
-          <p className="text-2xl mb-2">🔍</p>
           <p>We couldn't find alternatives in our database yet.</p>
-          <p className="text-xs text-gray-400 mt-1">Help us grow by suggesting products!</p>
         </div>
       )}
 
-      {/* Share + Scan again + Add to list */}
-      <div className="text-center pt-2 pb-4 space-y-3">
+      {/* Actions: Share + Add to List + Scan Again */}
+      <div className="flex flex-wrap justify-center gap-2 pt-2 pb-4">
+        {parentCompany && (
+          <ShareButton product={product} parentCompany={parentCompany} beliefResult={beliefResult} />
+        )}
         {parentCompany && (
           <AddToListButton
             item={{
@@ -357,31 +420,11 @@ export default function Result() {
             }}
           />
         )}
-        {parentCompany && navigator.share && (
-          <button
-            onClick={() => {
-              const pct = beliefResult?.pct ?? null;
-              const text = beliefResult?.dealBreakerHit
-                ? `🚫 ${parentCompany.name} (makes ${product.name || product.brand}) hit one of my deal breakers on DollarVote!`
-                : pct != null
-                  ? `${pct >= 60 ? '👍' : '👎'} ${parentCompany.name} (makes ${product.name || product.brand}) scores ${pct}% aligned with my values on DollarVote!`
-                  : `I just looked up ${product.name || product.brand} on DollarVote — it's made by ${parentCompany.name}!`;
-              navigator.share({
-                title: 'DollarVote — Vote With Your Dollar',
-                text,
-                url: 'https://dollarvote.app',
-              }).catch(() => {});
-            }}
-            className="inline-block px-8 py-3 bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-600 transition-colors mr-2"
-          >
-            📤 Share
-          </button>
-        )}
         <Link
           to="/"
-          className="inline-block px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors"
+          className="inline-block px-6 py-2.5 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 active:bg-teal-800 active:scale-95 transition-all"
         >
-          📸 Scan Another
+          🔍 Search Another
         </Link>
       </div>
     </div>

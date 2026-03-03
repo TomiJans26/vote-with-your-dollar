@@ -20,8 +20,7 @@ import Admin from './pages/Admin';
 import ShoppingList from './pages/ShoppingList';
 import CompanyProfile from './pages/CompanyProfile';
 // Note: CompanyProfile uses getCompanyByName - added to api.js
-import BetaGate from './components/BetaGate';
-import { hasCompletedOnboarding } from './lib/prefs';
+// BetaGate kept in components/ but no longer used — we're going public
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
 import { getBeliefProfile } from './lib/prefs';
 
@@ -31,33 +30,7 @@ export const useAuth = () => useContext(AuthContext);
 
 function RequireAuth({ children }) {
   if (!isAuthenticated()) {
-    return <Navigate to="/register" replace />;
-  }
-  return children;
-}
-
-function RequireVerified({ children }) {
-  if (!isAuthenticated()) {
-    return <Navigate to="/register" replace />;
-  }
-  const u = getStoredUser();
-  if (u && !u.email_verified) {
-    return <Navigate to="/verify-email" replace />;
-  }
-  return children;
-}
-
-function RequireOnboarding({ children }) {
-  // If logged in but not verified, nudge them
-  if (isAuthenticated()) {
-    const u = getStoredUser();
-    if (u && !u.email_verified) {
-      return <Navigate to="/verify-email" replace />;
-    }
-  }
-  // Onboarding is required for everyone (but NOT auth)
-  if (!hasCompletedOnboarding()) {
-    return <Navigate to="/onboarding" replace />;
+    return <Navigate to="/login" replace />;
   }
   return children;
 }
@@ -88,7 +61,6 @@ export default function App() {
   }, []);
 
   return (
-    <BetaGate>
     <AuthContext.Provider value={{ user, setUser, handleLogout }}>
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -101,18 +73,17 @@ export default function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route element={<Layout />}>
-          <Route index element={<RequireOnboarding><Scanner /></RequireOnboarding>} />
+          <Route index element={<Scanner />} />
           <Route path="/result/:upc" element={<Result />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/list" element={<ShoppingList />} />
-          <Route path="/report" element={<RequireOnboarding><Dashboard /></RequireOnboarding>} />
-          <Route path="/history" element={<History />} />
+          <Route path="/list" element={<RequireAuth><ShoppingList /></RequireAuth>} />
+          <Route path="/report" element={<Dashboard />} />
+          <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/company/:name" element={<CompanyProfile />} />
           <Route path="/about" element={<About />} />
         </Route>
       </Routes>
     </AuthContext.Provider>
-    </BetaGate>
   );
 }

@@ -48,8 +48,20 @@ export default function Explore() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-200 border-t-teal-600" />
+      <div className="p-4 space-y-4 animate-pulse">
+        <div className="text-center pt-2 space-y-2">
+          <div className="h-6 bg-gray-200 rounded w-1/2 mx-auto" />
+          <div className="h-3 bg-gray-100 rounded w-2/3 mx-auto" />
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {[1,2,3,4,5,6].map(i => (
+            <div key={i} className="p-3 bg-white rounded-xl shadow-sm border border-gray-100 space-y-2">
+              <div className="w-8 h-8 bg-gray-200 rounded" />
+              <div className="h-3 bg-gray-200 rounded w-3/4" />
+              <div className="h-2 bg-gray-100 rounded w-1/2" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -68,7 +80,7 @@ export default function Explore() {
             <button
               key={ind.slug}
               onClick={() => selectIndustry(ind)}
-              className="text-left p-3 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-teal-300 hover:shadow-md transition-all"
+              className="text-left p-3 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-teal-300 hover:shadow-md active:bg-teal-50 active:scale-[0.98] transition-all"
             >
               <div className="text-2xl mb-1">{INDUSTRY_ICONS[ind.slug] || '📦'}</div>
               <p className="text-sm font-semibold text-gray-800">{ind.name}</p>
@@ -97,8 +109,13 @@ export default function Explore() {
           </div>
 
           {companiesLoading ? (
-            <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-4 border-teal-200 border-t-teal-600 mx-auto" />
+            <div className="space-y-2 animate-pulse">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="bg-white rounded-xl shadow-sm p-3 space-y-2">
+                  <div className="h-4 bg-gray-200 rounded w-1/2" />
+                  <div className="h-2 bg-gray-100 rounded w-1/3" />
+                </div>
+              ))}
             </div>
           ) : (
             <div className="space-y-2">
@@ -106,7 +123,7 @@ export default function Explore() {
                 <button
                   key={company.slug}
                   onClick={() => navigate(`/result/search-${company.slug}`)}
-                  className="w-full text-left bg-white rounded-xl shadow-sm p-3 hover:shadow-md transition-all border border-gray-100 hover:border-teal-300"
+                  className="w-full text-left bg-white rounded-xl shadow-sm p-3 hover:shadow-md active:bg-teal-50 active:scale-[0.99] transition-all border border-gray-100 hover:border-teal-300"
                 >
                   <div className="flex items-center justify-between">
                     <div className="min-w-0 flex-1">

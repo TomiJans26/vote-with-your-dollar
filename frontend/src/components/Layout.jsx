@@ -1,10 +1,9 @@
 import { Outlet, NavLink } from 'react-router-dom';
 
 const nav = [
-  { to: '/', label: 'Scan', icon: '📷' },
-  { to: '/explore', label: 'Explore', icon: '🔍' },
+  { to: '/', label: 'Search', icon: '🔍' },
+  { to: '/explore', label: 'Explore', icon: '🧭' },
   { to: '/list', label: 'List', icon: '📝' },
-  { to: '/report', label: 'Report', icon: '📊' },
   { to: '/settings', label: 'Settings', icon: '⚙️' },
 ];
 
@@ -33,8 +32,8 @@ export default function Layout() {
               to={n.to}
               end={n.to === '/'}
               className={({ isActive }) =>
-                `flex flex-col items-center text-xs transition-colors py-1 px-3 rounded-lg ${
-                  isActive ? 'text-teal-700 font-semibold bg-teal-50' : 'text-gray-400 hover:text-gray-600'
+                `flex flex-col items-center text-xs transition-all py-1 px-3 rounded-lg active:scale-90 ${
+                  isActive ? 'text-teal-700 font-semibold bg-teal-50' : 'text-gray-400 hover:text-gray-600 active:text-teal-600'
                 }`
               }
             >
