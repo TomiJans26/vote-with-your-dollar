@@ -12,10 +12,10 @@ const nav = [
 export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen max-w-lg mx-auto bg-dark-bg">
-      {/* Header - Minimal & Modern */}
+      {/* Header - BOLD & FUN */}
       <header className="sticky top-0 z-10 glass border-b border-dark-border px-4 py-3">
         <div className="flex items-center justify-center">
-          <h1 className="text-lg font-bold tracking-tight text-gradient">
+          <h1 className="text-xl font-black tracking-tight text-gradient-purple">
             DollarVote
           </h1>
         </div>
@@ -26,8 +26,8 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {/* Bottom nav - Modern pill-shaped active indicator */}
-      <nav className="fixed bottom-0 left-0 right-0 glass border-t border-dark-border max-w-lg mx-auto pb-safe">
+      {/* Bottom nav - GRADIENT GLOW on active */}
+      <nav className="fixed bottom-0 left-0 right-0 glass border-t border-dark-border max-w-lg mx-auto pb-safe backdrop-blur-xl">
         <div className="flex justify-around items-center py-2 px-2">
           {nav.map(({ to, label, Icon }) => (
             <NavLink
@@ -35,23 +35,23 @@ export default function Layout() {
               to={to}
               end={to === '/'}
               className={({ isActive }) =>
-                `flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all duration-200 ${
+                `flex flex-col items-center gap-1.5 px-4 py-2.5 rounded-2xl transition-all duration-300 ${
                   isActive 
-                    ? 'bg-aligned/20 text-aligned shadow-lg glow-green' 
-                    : 'text-dark-text-secondary hover:text-dark-text active:scale-95'
+                    ? 'bg-gradient-to-br from-accent-purple/20 to-accent-violet/20 text-accent-violet shadow-xl glow-purple scale-105' 
+                    : 'text-dark-text-secondary hover:text-dark-text hover:bg-white/5 active:scale-95'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
                   <Icon 
-                    size={22} 
-                    className={`transition-all duration-200 ${
-                      isActive ? 'stroke-[2.5]' : 'stroke-[2]'
+                    size={24} 
+                    className={`transition-all duration-300 ${
+                      isActive ? 'stroke-[3] drop-shadow-lg' : 'stroke-[2]'
                     }`}
                   />
-                  <span className={`text-[10px] font-medium transition-all ${
-                    isActive ? 'font-semibold' : ''
+                  <span className={`text-[11px] font-bold transition-all ${
+                    isActive ? 'tracking-wide' : ''
                   }`}>
                     {label}
                   </span>

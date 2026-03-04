@@ -16,14 +16,14 @@ function ToggleSwitch({ checked, onChange, label, isDanger = false }) {
       <span className={`text-sm font-medium ${isDanger && checked ? 'text-danger' : 'text-dark-text-secondary'}`}>
         {label}
       </span>
-      <div className={`relative w-12 h-6 rounded-full transition-colors ${
+      <div className={`relative w-14 h-7 rounded-full transition-all ${
         checked 
-          ? isDanger ? 'bg-danger' : 'bg-aligned' 
+          ? isDanger ? 'bg-gradient-to-r from-danger to-danger/80 shadow-lg shadow-danger/30' : 'bg-gradient-to-r from-accent-cyan to-aligned shadow-lg shadow-accent-cyan/30' 
           : 'bg-white/10'
       }`}>
-        <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
-          checked ? 'translate-x-6' : 'translate-x-0'
-        } ${checked && isDanger ? 'shadow-lg shadow-danger/30' : checked ? 'shadow-lg shadow-aligned/30' : ''}`} />
+        <div className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-all ${
+          checked ? 'translate-x-7' : 'translate-x-0'
+        } ${checked ? 'shadow-xl' : ''}`} />
       </div>
     </button>
   );
@@ -239,9 +239,10 @@ export default function Settings() {
 
   return (
     <div className="p-4 space-y-4 pb-6 animate-slideUp">
-      <div className="text-center pt-4 pb-2">
-        <h2 className="text-3xl font-black tracking-tight">
-          <span className="text-gradient">Settings</span>
+      <div className="text-center pt-6 pb-4">
+        <div className="text-6xl mb-3 animate-pulse">⚙️</div>
+        <h2 className="text-4xl font-black tracking-tight">
+          <span className="text-gradient-purple">Settings</span>
         </h2>
       </div>
 
@@ -328,21 +329,27 @@ export default function Settings() {
               )}
             </div>
 
-            {/* Deal breakers highlighted */}
+            {/* Deal breakers highlighted - DRAMATIC */}
             {summary.dealBreakers > 0 && (
-              <div className="glass-card rounded-2xl p-4 space-y-2 border border-danger/30 bg-danger/5">
-                <div className="flex items-center gap-2">
-                  <Ban size={14} className="text-danger" />
-                  <p className="text-[10px] text-danger uppercase font-black tracking-wider">Hard Stops</p>
+              <div className="glass-card rounded-3xl p-5 space-y-3 border-2 border-danger/50 bg-gradient-to-br from-danger/20 to-danger/10 shadow-2xl shadow-danger/30 glow-red">
+                <div className="flex items-center gap-2.5">
+                  <div className="text-2xl animate-pulse">🔥</div>
+                  <div className="flex-1">
+                    <p className="text-sm text-danger uppercase font-black tracking-wider">Hard Stops</p>
+                    <p className="text-xs text-danger/80 font-bold">Non-negotiable deal breakers</p>
+                  </div>
                 </div>
                 {ISSUE_CATEGORIES.flatMap(cat => cat.issues)
                   .filter(i => profile[i.id]?.importance === 3)
                   .map(issue => (
-                    <p key={issue.id} className="text-xs text-danger font-bold pl-6">{issue.name}</p>
+                    <div key={issue.id} className="flex items-center gap-2 pl-2">
+                      <Ban size={14} className="text-danger shrink-0" />
+                      <p className="text-sm text-danger font-black">{issue.name}</p>
+                    </div>
                   ))
                 }
-                <p className="text-[10px] text-danger/60 mt-2 pl-6">
-                  We'll always warn you when a company conflicts with these.
+                <p className="text-xs text-danger/70 mt-3 pl-2 font-medium leading-relaxed">
+                  We'll block any company that conflicts with these 🚫
                 </p>
               </div>
             )}

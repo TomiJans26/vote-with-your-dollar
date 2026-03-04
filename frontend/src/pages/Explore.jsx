@@ -50,16 +50,16 @@ export default function Explore() {
   if (loading) {
     return (
       <div className="p-4 space-y-4">
-        <div className="text-center pt-4 space-y-3 animate-pulse">
-          <div className="h-8 bg-white/10 rounded-full w-1/2 mx-auto" />
-          <div className="h-3 bg-white/5 rounded-full w-2/3 mx-auto" />
+        <div className="text-center pt-4 space-y-3">
+          <div className="h-8 shimmer rounded-full w-1/2 mx-auto" />
+          <div className="h-3 shimmer rounded-full w-2/3 mx-auto" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           {[1,2,3,4,5,6].map(i => (
             <div key={i} className="glass-card rounded-3xl p-4 space-y-2 border border-dark-border">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl" />
-              <div className="h-3 bg-white/10 rounded-full w-3/4" />
-              <div className="h-2 bg-white/5 rounded-full w-1/2" />
+              <div className="w-14 h-14 shimmer rounded-2xl" />
+              <div className="h-3 shimmer rounded-full w-3/4" />
+              <div className="h-2 shimmer rounded-full w-1/2" />
             </div>
           ))}
         </div>
@@ -69,11 +69,12 @@ export default function Explore() {
 
   return (
     <div className="p-4 space-y-6 pb-safe animate-slideUp">
-      <div className="text-center pt-4 pb-2">
-        <h2 className="text-3xl font-black tracking-tight">
-          <span className="text-gradient">Explore</span> Companies
+      <div className="text-center pt-6 pb-4">
+        <div className="text-6xl mb-3 animate-float">🏢</div>
+        <h2 className="text-4xl font-black tracking-tight">
+          <span className="text-gradient-purple">Explore</span> Companies
         </h2>
-        <p className="text-sm text-dark-text-secondary mt-2">
+        <p className="text-base font-bold text-dark-text-secondary mt-3">
           Browse 200+ companies across every industry
         </p>
       </div>
@@ -85,16 +86,16 @@ export default function Explore() {
             <button
               key={ind.slug}
               onClick={() => selectIndustry(ind)}
-              className="group text-left glass-card rounded-3xl p-5 border border-dark-border hover:border-aligned/50 hover:bg-white/10 active:scale-95 transition-all"
+              className="group text-left glass-card rounded-3xl p-6 border border-dark-border hover:border-accent-purple/50 hover:bg-gradient-to-br hover:from-accent-purple/10 hover:to-accent-violet/10 active:scale-90 transition-all hover:shadow-2xl hover:shadow-accent-purple/20"
             >
-              <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
+              <div className="text-5xl mb-3 group-hover:scale-125 transition-transform">
                 {INDUSTRY_ICONS[ind.slug] || '📦'}
               </div>
-              <p className="text-sm font-bold text-dark-text mb-1 leading-tight">
+              <p className="text-base font-black text-dark-text mb-1.5 leading-tight">
                 {ind.name}
               </p>
               {ind.company_count && (
-                <p className="text-[10px] text-dark-text-muted font-medium">
+                <p className="text-xs text-dark-text-secondary font-bold">
                   {ind.company_count} companies
                 </p>
               )}

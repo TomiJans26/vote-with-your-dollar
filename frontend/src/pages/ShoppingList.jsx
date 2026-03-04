@@ -71,34 +71,34 @@ export default function ShoppingList() {
   return (
     <div className="p-4 space-y-6 pb-safe animate-slideUp">
       {/* Header */}
-      <div className="text-center pt-4 pb-2">
-        <div className="text-6xl mb-3">📝</div>
-        <h2 className="text-3xl font-black tracking-tight">
-          Shopping <span className="text-gradient">List</span>
+      <div className="text-center pt-6 pb-4">
+        <div className="text-7xl mb-3 animate-bounce">🛒</div>
+        <h2 className="text-4xl font-black tracking-tight">
+          Shopping <span className="text-gradient-purple">List</span>
         </h2>
-        <p className="text-sm text-dark-text-secondary mt-2">
-          Save products and track your overall alignment
+        <p className="text-base font-bold text-dark-text-secondary mt-3">
+          Your conscious shopping starts here 🌱
         </p>
       </div>
 
-      {/* Overall score */}
+      {/* Overall score - DRAMATIC */}
       {avgAlignment !== null && list.length > 0 && (
-        <div className={`glass-card rounded-3xl p-8 text-center shadow-2xl border transition-all ${
-          avgAlignment >= 70 ? 'border-aligned/50 glow-green' :
-          avgAlignment >= 40 ? 'border-warning/50' :
-          'border-danger/50 glow-red'
+        <div className={`glass-card rounded-3xl p-10 text-center shadow-2xl border-2 transition-all ${
+          avgAlignment >= 70 ? 'border-accent-cyan/60 bg-gradient-to-br from-accent-cyan/10 to-aligned/10 glow-green' :
+          avgAlignment >= 40 ? 'border-warning/60 bg-gradient-to-br from-warning/10 to-warning/5' :
+          'border-danger/60 bg-gradient-to-br from-danger/10 to-danger/5 glow-red'
         }`}>
-          <p className="text-sm font-bold text-dark-text-secondary uppercase tracking-wider">
+          <p className="text-xs font-black text-dark-text-secondary uppercase tracking-widest mb-2">
             List Alignment Score
           </p>
-          <p className={`text-6xl font-black mt-2 animate-countUp ${
-            avgAlignment >= 70 ? 'text-aligned' :
+          <p className={`text-7xl font-black mt-3 mb-3 animate-countUp drop-shadow-2xl ${
+            avgAlignment >= 70 ? 'text-gradient' :
             avgAlignment >= 40 ? 'text-warning' :
             'text-danger'
           }`}>
             {avgAlignment}%
           </p>
-          <p className="text-xs text-dark-text-muted mt-3 font-medium">
+          <p className="text-sm text-dark-text-muted font-bold">
             {itemsWithScores.length} of {list.length} items scored
           </p>
         </div>
@@ -176,21 +176,19 @@ export default function ShoppingList() {
           </div>
         </div>
       ) : (
-        <div className="glass-card rounded-3xl p-10 text-center space-y-4 border border-dark-border">
-          <div className="w-20 h-20 mx-auto rounded-full bg-aligned/10 flex items-center justify-center">
-            <ShoppingCart size={40} className="text-aligned/50" />
-          </div>
+        <div className="glass-card rounded-3xl p-12 text-center space-y-6 border-2 border-dark-border hover:border-accent-purple/30 transition-all">
+          <div className="text-8xl animate-bounce">🌱</div>
           <div>
-            <p className="text-dark-text font-bold text-lg mb-2">Your list is empty</p>
-            <p className="text-sm text-dark-text-secondary">
-              Scan products or browse alternatives to add items
+            <p className="text-2xl font-black text-gradient-purple mb-3">Your list is empty!</p>
+            <p className="text-base font-bold text-dark-text-secondary leading-relaxed max-w-xs mx-auto">
+              Your conscious shopping list starts here
             </p>
           </div>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-full font-bold hover:shadow-2xl hover:shadow-aligned/30 transition-all active:scale-95 mt-4"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-accent-purple via-accent-violet to-accent-pink text-white rounded-full font-black text-lg hover:shadow-2xl hover:shadow-accent-purple/50 transition-all active:scale-95 mt-6 tracking-wide"
           >
-            <Search size={20} />
+            <Search size={24} />
             Start Scanning
           </Link>
         </div>

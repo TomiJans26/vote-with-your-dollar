@@ -91,28 +91,32 @@ function IssueBar({ item }) {
   // Bar width = alignment percentage
   const barWidth = Math.max(5, alignmentPct);
 
-  // Color based on alignment percentage
-  let barColor, bgColor, borderColor, textColor;
+  // Color based on alignment percentage - GRADIENTS
+  let barColor, bgColor, borderColor, textColor, shadowColor;
   if (isDealBreaker && type === 'dealbreaker') {
-    barColor = 'bg-danger';
-    bgColor = 'bg-danger/10';
+    barColor = 'bg-gradient-to-r from-danger to-danger/80';
+    bgColor = 'bg-gradient-to-br from-danger/15 to-danger/5';
+    borderColor = 'border-danger/40';
+    textColor = 'text-danger';
+    shadowColor = 'rgba(255, 0, 110, 0.4)';
+  } else if (alignmentPct >= 70) {
+    barColor = 'bg-gradient-to-r from-accent-cyan via-aligned to-accent-cyan';
+    bgColor = 'bg-gradient-to-br from-accent-cyan/10 to-aligned/5';
+    borderColor = 'border-accent-cyan/30';
+    textColor = 'text-accent-cyan';
+    shadowColor = 'rgba(0, 245, 212, 0.4)';
+  } else if (alignmentPct >= 40) {
+    barColor = 'bg-gradient-to-r from-warning to-warning/80';
+    bgColor = 'bg-gradient-to-br from-warning/10 to-warning/5';
+    borderColor = 'border-warning/30';
+    textColor = 'text-warning';
+    shadowColor = 'rgba(255, 209, 102, 0.4)';
+  } else {
+    barColor = 'bg-gradient-to-r from-danger to-danger/80';
+    bgColor = 'bg-gradient-to-br from-danger/10 to-danger/5';
     borderColor = 'border-danger/30';
     textColor = 'text-danger';
-  } else if (alignmentPct >= 70) {
-    barColor = 'bg-aligned';
-    bgColor = 'bg-aligned/5';
-    borderColor = 'border-aligned/20';
-    textColor = 'text-aligned';
-  } else if (alignmentPct >= 40) {
-    barColor = 'bg-warning';
-    bgColor = 'bg-warning/5';
-    borderColor = 'border-warning/20';
-    textColor = 'text-warning';
-  } else {
-    barColor = 'bg-danger';
-    bgColor = 'bg-danger/5';
-    borderColor = 'border-danger/20';
-    textColor = 'text-danger';
+    shadowColor = 'rgba(255, 0, 110, 0.4)';
   }
 
   if (!hasData) {
@@ -120,6 +124,7 @@ function IssueBar({ item }) {
     bgColor = 'bg-white/5';
     borderColor = 'border-dark-border';
     textColor = 'text-dark-text-secondary';
+    shadowColor = 'transparent';
   }
 
   // Confidence indicator
@@ -135,29 +140,29 @@ function IssueBar({ item }) {
   };
 
   return (
-    <div className={`glass-card rounded-2xl border p-3.5 ${bgColor} ${borderColor} transition-all hover:bg-white/10`}>
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2 min-w-0 flex-1">
-          <span className="text-base shrink-0">{emoji}</span>
-          <span className={`text-sm font-bold truncate ${textColor}`}>{issueName}</span>
+    <div className={`glass-card rounded-3xl border-2 p-4 ${bgColor} ${borderColor} transition-all hover:bg-white/10 hover:shadow-xl`}>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+          <span className="text-xl shrink-0">{emoji}</span>
+          <span className={`text-base font-black truncate ${textColor}`}>{issueName}</span>
           {isDealBreaker && (
-            <span className="shrink-0 text-[9px] bg-danger text-white px-2 py-0.5 rounded-full font-black leading-none uppercase tracking-wide">
-              Deal Breaker
+            <span className="shrink-0 text-[9px] bg-gradient-to-r from-danger to-danger/80 text-white px-2.5 py-1 rounded-full font-black leading-none uppercase tracking-wider shadow-lg shadow-danger/30">
+              🔥 Deal Breaker
             </span>
           )}
         </div>
-        <span className="text-[10px] text-dark-text-muted shrink-0 ml-2" title={`Confidence: ${confidence}`}>
+        <span className="text-[10px] text-dark-text-muted shrink-0 ml-2 font-bold" title={`Confidence: ${confidence}`}>
           {confidenceDots}
         </span>
       </div>
 
-      {/* Alignment bar with glass effect */}
-      <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden backdrop-blur-sm">
+      {/* Alignment bar with GRADIENT & GLOW */}
+      <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden backdrop-blur-sm">
         <div
           className={`h-full rounded-full transition-all duration-700 ease-out ${barColor}`}
           style={{ 
             width: `${barWidth}%`,
-            boxShadow: `0 0 10px ${barColor === 'bg-aligned' ? 'rgba(16, 185, 129, 0.4)' : barColor === 'bg-danger' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(245, 158, 11, 0.4)'}`
+            boxShadow: hasData ? `0 0 12px ${shadowColor}, 0 0 24px ${shadowColor}` : 'none'
           }}
         />
       </div>

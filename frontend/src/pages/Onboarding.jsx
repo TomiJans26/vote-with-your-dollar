@@ -18,15 +18,15 @@ function IssuePickStep({ selected, dealBreakers, onToggle, onToggleDealBreaker, 
   );
 
   return (
-    <div className="min-h-screen bg-dark-bg p-4 space-y-6 animate-slideUp">
-      <div className="text-center pt-8 pb-4 space-y-3">
-        <div className="text-6xl mb-4">🗳️</div>
-        <h2 className="text-3xl font-black tracking-tight leading-tight">
+    <div className="min-h-screen p-4 space-y-6 animate-slideUp">
+      <div className="text-center pt-12 pb-6 space-y-4">
+        <div className="text-7xl mb-4 animate-bounce">🗳️</div>
+        <h2 className="text-4xl font-black tracking-tight leading-tight px-4">
           What issues<br />
-          <span className="text-gradient">matter to you?</span>
+          <span className="text-gradient-purple">matter to you?</span>
         </h2>
-        <p className="text-sm text-dark-text-secondary max-w-xs mx-auto">
-          Tap to select. Long-press for deal breakers.
+        <p className="text-base font-bold text-dark-text-secondary max-w-sm mx-auto leading-relaxed">
+          Tap to select. Double-tap for deal breakers 🔥
         </p>
       </div>
 
@@ -48,12 +48,12 @@ function IssuePickStep({ selected, dealBreakers, onToggle, onToggleDealBreaker, 
                 if (!isSelected) onToggle(issue.id);
                 onToggleDealBreaker(issue.id);
               }}
-              className={`text-left p-4 rounded-2xl border-2 transition-all active:scale-95 ${
+              className={`text-left p-5 rounded-3xl border-2 transition-all active:scale-90 ${
                 isDealBreaker
-                  ? 'border-danger/50 bg-danger/10 shadow-xl shadow-danger/20 glow-red'
+                  ? 'border-danger/60 bg-gradient-to-br from-danger/20 to-danger/10 shadow-2xl shadow-danger/30 glow-red scale-105'
                   : isSelected
-                    ? 'border-aligned/50 bg-aligned/10 shadow-xl shadow-aligned/20 glow-green'
-                    : 'border-dark-border glass-card hover:border-dark-border hover:bg-white/10'
+                    ? 'border-accent-cyan/60 bg-gradient-to-br from-accent-cyan/20 to-aligned/10 shadow-2xl shadow-accent-cyan/30 glow-green scale-105'
+                    : 'border-dark-border glass-card hover:border-accent-purple/40 hover:bg-white/10 hover:shadow-xl hover:shadow-accent-purple/20'
               }`}
             >
               <div className="flex items-start gap-2.5 mb-2">
@@ -110,13 +110,13 @@ function IssuePickStep({ selected, dealBreakers, onToggle, onToggleDealBreaker, 
         <button
           onClick={onNext}
           disabled={selected.length === 0}
-          className="w-full py-4 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-full font-bold hover:shadow-2xl hover:shadow-aligned/30 transition-all disabled:opacity-40 disabled:cursor-not-allowed text-base active:scale-95"
+          className="w-full py-5 bg-gradient-to-r from-accent-purple via-accent-violet to-accent-pink text-white rounded-full font-black text-lg hover:shadow-2xl hover:shadow-accent-purple/50 transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 tracking-wide"
         >
-          Done — Start Scanning →
+          Done — Start Scanning 🚀
         </button>
         <button
           onClick={onSkip}
-          className="w-full py-3 text-sm text-dark-text-muted hover:text-dark-text transition-colors font-medium"
+          className="w-full py-3 text-sm text-dark-text-muted hover:text-dark-text transition-colors font-bold"
         >
           Skip — show me everything
         </button>

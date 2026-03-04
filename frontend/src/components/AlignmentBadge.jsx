@@ -9,34 +9,34 @@ export default function AlignmentBadge({ alignment, beliefResult, size = 'md', s
     
     if (beliefResult.dealBreakerHit) {
       emoji = null; // We'll use Ban icon instead
-      label = 'Deal Breaker';
-      colors = 'bg-danger text-white';
-      ringColor = '#ef4444';
+      label = 'Hard No 🚫';
+      colors = 'bg-gradient-to-br from-danger to-danger/80 text-white shadow-lg shadow-danger/30';
+      ringColor = '#ff006e';
     } else if (beliefResult.color === 'green') {
-      emoji = '✓';
-      label = 'Great match';
-      colors = 'bg-aligned/20 text-aligned border border-aligned/30';
-      ringColor = '#10b981';
+      emoji = '✨';
+      label = "This one's a keeper!";
+      colors = 'bg-gradient-to-br from-accent-cyan/30 to-aligned/30 text-accent-cyan border-2 border-accent-cyan/40 shadow-lg shadow-accent-cyan/20';
+      ringColor = '#00f5d4';
     } else if (beliefResult.color === 'lightgreen') {
       emoji = '✓';
       label = 'Good match';
-      colors = 'bg-aligned/10 text-aligned border border-aligned/20';
-      ringColor = '#10b981';
+      colors = 'bg-gradient-to-br from-aligned/20 to-aligned/10 text-aligned border-2 border-aligned/30';
+      ringColor = '#06d6a0';
     } else if (beliefResult.color === 'yellow') {
-      emoji = '~';
-      label = 'Mixed';
-      colors = 'bg-warning/20 text-warning border border-warning/30';
-      ringColor = '#f59e0b';
+      emoji = '🤔';
+      label = 'Mixed bag';
+      colors = 'bg-gradient-to-br from-warning/20 to-warning/10 text-warning border-2 border-warning/30';
+      ringColor = '#ffd166';
     } else if (beliefResult.color === 'orange') {
-      emoji = '!';
-      label = 'Weak match';
-      colors = 'bg-warning/20 text-warning border border-warning/30';
-      ringColor = '#f59e0b';
+      emoji = '⚠️';
+      label = 'Might want to rethink this';
+      colors = 'bg-gradient-to-br from-warning/20 to-warning/10 text-warning border-2 border-warning/30';
+      ringColor = '#ffd166';
     } else if (beliefResult.color === 'red') {
-      emoji = '✗';
+      emoji = '👎';
       label = 'Poor match';
-      colors = 'bg-danger/20 text-danger border border-danger/30';
-      ringColor = '#ef4444';
+      colors = 'bg-gradient-to-br from-danger/20 to-danger/10 text-danger border-2 border-danger/30 shadow-lg shadow-danger/10';
+      ringColor = '#ff006e';
     } else {
       emoji = '?';
       label = 'No data';
@@ -54,19 +54,19 @@ export default function AlignmentBadge({ alignment, beliefResult, size = 'md', s
       colors = 'bg-white/5 text-dark-text-secondary border border-dark-border';
       ringColor = '#6b7280';
     } else if (alignment > 0) {
-      emoji = '✓';
-      label = abs > 0.5 ? 'Great match' : 'Good match';
+      emoji = abs > 0.5 ? '✨' : '✓';
+      label = abs > 0.5 ? 'Great match! 💚' : 'Good match';
       colors = abs > 0.5 
-        ? 'bg-aligned/20 text-aligned border border-aligned/30' 
-        : 'bg-aligned/10 text-aligned border border-aligned/20';
-      ringColor = '#10b981';
+        ? 'bg-gradient-to-br from-accent-cyan/30 to-aligned/30 text-accent-cyan border-2 border-accent-cyan/40 shadow-lg shadow-accent-cyan/20' 
+        : 'bg-gradient-to-br from-aligned/20 to-aligned/10 text-aligned border-2 border-aligned/30';
+      ringColor = abs > 0.5 ? '#00f5d4' : '#06d6a0';
     } else {
-      emoji = '✗';
+      emoji = abs > 0.5 ? '👎' : '⚠️';
       label = abs > 0.5 ? 'Poor match' : 'Weak match';
       colors = abs > 0.5 
-        ? 'bg-danger/20 text-danger border border-danger/30' 
-        : 'bg-warning/20 text-warning border border-warning/30';
-      ringColor = abs > 0.5 ? '#ef4444' : '#f59e0b';
+        ? 'bg-gradient-to-br from-danger/20 to-danger/10 text-danger border-2 border-danger/30 shadow-lg shadow-danger/10' 
+        : 'bg-gradient-to-br from-warning/20 to-warning/10 text-warning border-2 border-warning/30';
+      ringColor = abs > 0.5 ? '#ff006e' : '#ffd166';
     }
   }
 

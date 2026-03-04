@@ -160,17 +160,17 @@ function ShareButton({ product, parentCompany, beliefResult }) {
   );
 }
 
-// Skeleton loader
+// Skeleton loader - SHIMMER EFFECT
 function ResultSkeleton() {
   return (
     <div className="p-4 space-y-4">
       {[1, 2, 3].map(i => (
-        <div key={i} className="glass-card rounded-3xl p-6 animate-pulse">
+        <div key={i} className="glass-card rounded-3xl p-6 border border-dark-border">
           <div className="flex gap-4 items-start">
-            <div className="w-20 h-20 bg-white/10 rounded-2xl shrink-0" />
+            <div className="w-20 h-20 shimmer rounded-2xl shrink-0" />
             <div className="flex-1 space-y-3 pt-1">
-              <div className="h-4 bg-white/10 rounded-full w-3/4" />
-              <div className="h-3 bg-white/5 rounded-full w-1/2" />
+              <div className="h-4 shimmer rounded-full w-3/4" />
+              <div className="h-3 shimmer rounded-full w-1/2" />
             </div>
           </div>
         </div>
@@ -209,26 +209,26 @@ export default function Result() {
 
   if (error) {
     return (
-      <div className="p-6 text-center space-y-6 animate-slideUp">
-        <div className="text-6xl pt-8">😕</div>
+      <div className="p-6 text-center space-y-8 animate-slideUp">
+        <div className="text-8xl pt-12 animate-bounce">🔍</div>
         <div>
-          <h2 className="text-2xl font-black text-dark-text mb-2">Not found</h2>
-          <p className="text-sm text-dark-text-secondary max-w-xs mx-auto">
+          <h2 className="text-3xl font-black text-gradient-purple mb-3">Oops! 🙈</h2>
+          <p className="text-base font-bold text-dark-text-secondary max-w-sm mx-auto leading-relaxed">
             {error.includes('404') || error.includes('not found')
-              ? "This product isn't in our database yet."
-              : 'Something went wrong. Please try again.'}
+              ? "We haven't researched this one yet — but we will 🔮"
+              : 'Something went sideways. Give it another shot!'}
           </p>
         </div>
-        <div className="pt-4">
+        <div className="pt-4 space-y-4">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-full font-bold hover:shadow-2xl hover:shadow-aligned/30 transition-all active:scale-95"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-accent-purple via-accent-violet to-accent-pink text-white rounded-full font-black text-lg hover:shadow-2xl hover:shadow-accent-purple/40 transition-all active:scale-95 tracking-wide"
           >
-            <Search size={20} />
-            Search by Brand
+            <Search size={24} />
+            Try Another Search
           </Link>
-          <p className="text-xs text-dark-text-muted mt-4">
-            Try searching by brand name — we track 100+ companies!
+          <p className="text-sm text-dark-text-muted font-medium px-4">
+            Try scanning that sketchy energy drink 👀
           </p>
         </div>
       </div>
@@ -335,9 +335,9 @@ export default function Result() {
       {/* Alternatives */}
       {alts.length > 0 && (
         <div className="space-y-3">
-          <div className="glass-card rounded-2xl px-5 py-4 border border-aligned/30 bg-aligned/5">
-            <h3 className="font-black text-base text-aligned mb-1">Try these instead</h3>
-            <p className="text-xs text-dark-text-secondary">Better aligned with your values</p>
+          <div className="glass-card rounded-3xl px-6 py-5 border-2 border-accent-cyan/40 bg-gradient-to-br from-accent-cyan/10 to-aligned/10 shadow-xl shadow-accent-cyan/20">
+            <h3 className="font-black text-xl text-gradient mb-2">✨ Try these instead</h3>
+            <p className="text-sm font-bold text-dark-text-secondary">Better aligned with your values</p>
           </div>
           
           <div className="space-y-3">
@@ -406,9 +406,9 @@ export default function Result() {
                         target="_blank" 
                         rel="noopener noreferrer"
                         onClick={() => trackClick(alt.brand || alt.name, alt.parentCompany?.id || '', parentCompany?.id || '', 'amazon')}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-aligned text-white text-xs font-bold rounded-xl hover:bg-aligned/90 active:scale-95 transition-all shadow-lg shadow-aligned/20"
+                        className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-accent-cyan to-aligned text-white text-sm font-black rounded-xl hover:shadow-2xl hover:shadow-accent-cyan/40 active:scale-95 transition-all tracking-wide"
                       >
-                        <ExternalLink size={14} />
+                        <ExternalLink size={16} />
                         Order Online
                       </a>
                     )}
@@ -458,9 +458,9 @@ export default function Result() {
         )}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-aligned/20 transition-all active:scale-95"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-purple via-accent-violet to-accent-pink text-white rounded-full font-black text-base hover:shadow-2xl hover:shadow-accent-purple/40 transition-all active:scale-95 tracking-wide"
         >
-          <Search size={16} />
+          <Search size={20} />
           Search Another
         </Link>
       </div>

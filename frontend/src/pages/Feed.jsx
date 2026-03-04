@@ -52,12 +52,12 @@ export default function Feed() {
     return (
       <div className="p-4 space-y-3">
         {[1, 2, 3, 4].map(i => (
-          <div key={i} className="glass-card rounded-3xl p-4 animate-pulse">
+          <div key={i} className="glass-card rounded-3xl p-4 border border-dark-border">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl shrink-0" />
+              <div className="w-14 h-14 shimmer rounded-2xl shrink-0" />
               <div className="flex-1 space-y-2">
-                <div className="h-3 bg-white/10 rounded-full w-3/4" />
-                <div className="h-2 bg-white/5 rounded-full w-1/2" />
+                <div className="h-3 shimmer rounded-full w-3/4" />
+                <div className="h-2 shimmer rounded-full w-1/2" />
               </div>
             </div>
           </div>
@@ -79,11 +79,12 @@ export default function Feed() {
   return (
     <div className="p-4 space-y-6 animate-slideUp">
       {/* Header */}
-      <div className="text-center pt-4 pb-2">
-        <h2 className="text-3xl font-black tracking-tight">
-          News <span className="text-gradient">Feed</span>
+      <div className="text-center pt-6 pb-4">
+        <div className="text-6xl mb-3 animate-bounce">📰</div>
+        <h2 className="text-4xl font-black tracking-tight">
+          News <span className="text-gradient-purple">Feed</span>
         </h2>
-        <p className="text-sm text-dark-text-secondary mt-2">
+        <p className="text-base font-bold text-dark-text-secondary mt-3">
           Recent actions from companies you care about
         </p>
       </div>
@@ -118,8 +119,8 @@ export default function Feed() {
                 className="glass-card rounded-3xl p-4 space-y-3 border border-dark-border hover:border-dark-border transition-all group"
               >
                 <div className="flex items-start gap-3">
-                  {/* Company logo placeholder */}
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-aligned/20 to-aligned/10 flex items-center justify-center shrink-0 font-bold text-aligned border border-aligned/20">
+                  {/* Company logo placeholder - GRADIENT CIRCLE */}
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent-purple via-accent-violet to-accent-pink flex items-center justify-center shrink-0 font-black text-xl text-white shadow-xl shadow-accent-purple/30 border-2 border-accent-purple/50">
                     {companyInitial}
                   </div>
                   
@@ -146,29 +147,29 @@ export default function Feed() {
                     {signal.source || 'News'}
                   </span>
                   
-                  {/* Interaction buttons */}
+                  {/* Interaction buttons - ANIMATED */}
                   <div className="flex items-center gap-2">
                     <button 
                       onClick={() => handleInteraction(signal.id, 'up')}
-                      className={`p-2 rounded-xl transition-all active:scale-90 ${
+                      className={`p-2.5 rounded-xl transition-all active:scale-75 ${
                         interaction === 'up' 
-                          ? 'bg-aligned/20 text-aligned' 
-                          : 'hover:bg-white/5 text-dark-text-muted hover:text-aligned'
+                          ? 'bg-gradient-to-br from-accent-cyan to-aligned text-white shadow-lg shadow-accent-cyan/30 scale-110' 
+                          : 'hover:bg-white/5 text-dark-text-muted hover:text-accent-cyan hover:scale-105'
                       }`}
                       title="Helpful"
                     >
-                      <ThumbsUp size={16} strokeWidth={2.5} />
+                      <ThumbsUp size={18} strokeWidth={2.5} className={interaction === 'up' ? 'fill-current' : ''} />
                     </button>
                     <button 
                       onClick={() => handleInteraction(signal.id, 'down')}
-                      className={`p-2 rounded-xl transition-all active:scale-90 ${
+                      className={`p-2.5 rounded-xl transition-all active:scale-75 ${
                         interaction === 'down' 
-                          ? 'bg-danger/20 text-danger' 
-                          : 'hover:bg-white/5 text-dark-text-muted hover:text-danger'
+                          ? 'bg-gradient-to-br from-danger to-danger/80 text-white shadow-lg shadow-danger/30 scale-110' 
+                          : 'hover:bg-white/5 text-dark-text-muted hover:text-danger hover:scale-105'
                       }`}
                       title="Not helpful"
                     >
-                      <ThumbsDown size={16} strokeWidth={2.5} />
+                      <ThumbsDown size={18} strokeWidth={2.5} className={interaction === 'down' ? 'fill-current' : ''} />
                     </button>
                   </div>
                 </div>

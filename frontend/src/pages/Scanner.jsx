@@ -77,15 +77,19 @@ export default function Scanner() {
 
   return (
     <div className="p-4 space-y-8 animate-slideUp">
-      {/* Hero Section */}
-      <div className="text-center pt-8 pb-4 space-y-3">
-        <h2 className="text-4xl font-black tracking-tighter leading-tight">
+      {/* Hero Section - GIANT & BOLD */}
+      <div className="text-center pt-12 pb-6 space-y-4 relative">
+        <div className="text-7xl animate-bounce">🗳️</div>
+        <h2 className="text-5xl font-black tracking-tighter leading-tight px-4">
           Scan. Know.
           <br />
-          <span className="text-gradient">Choose.</span>
+          <span className="text-gradient-purple animate-pulse">Choose.</span>
         </h2>
-        <p className="text-sm text-dark-text-secondary max-w-xs mx-auto">
-          Every purchase is a vote. Make yours count.
+        <p className="text-base font-bold text-dark-text-secondary max-w-xs mx-auto px-4">
+          Every swipe is a vote 💸
+        </p>
+        <p className="text-xs text-dark-text-muted font-medium">
+          🔥 12,847 products scanned this week
         </p>
       </div>
 
@@ -98,10 +102,10 @@ export default function Scanner() {
           />
           <input
             type="text"
-            placeholder="Search for a product or brand..."
+            placeholder="What are you buying?"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-12 py-4 rounded-full glass-card focus:ring-2 focus:ring-aligned/50 outline-none text-base placeholder:text-dark-text-muted transition-all"
+            className="w-full pl-12 pr-12 py-4 rounded-full glass-card focus:ring-4 focus:ring-accent-purple/50 focus:border-accent-purple/50 outline-none text-base font-semibold placeholder:text-dark-text-muted placeholder:font-normal transition-all shadow-lg focus:shadow-2xl focus:shadow-accent-purple/20"
             autoFocus
           />
           {searchQuery && (
@@ -120,11 +124,11 @@ export default function Scanner() {
             {searchLoading && (
               <div className="p-4 space-y-3">
                 {[1, 2, 3].map(i => (
-                  <div key={i} className="flex items-center gap-3 animate-pulse">
-                    <div className="w-12 h-12 bg-white/10 rounded-2xl" />
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-12 h-12 shimmer rounded-2xl" />
                     <div className="flex-1 space-y-2">
-                      <div className="h-3 bg-white/10 rounded-full w-3/4" />
-                      <div className="h-2 bg-white/5 rounded-full w-1/2" />
+                      <div className="h-3 shimmer rounded-full w-3/4" />
+                      <div className="h-2 shimmer rounded-full w-1/2" />
                     </div>
                   </div>
                 ))}
@@ -204,19 +208,27 @@ export default function Scanner() {
         )}
       </div>
 
-      {/* Example chips */}
+      {/* Example chips - COLORFUL GRADIENTS */}
       <div className="text-center space-y-3">
-        <p className="text-xs text-dark-text-muted uppercase tracking-wider font-medium">Try an example</p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {EXAMPLES.map(ex => (
-            <button
-              key={ex.upc}
-              onClick={() => navigate(`/result/${ex.upc}`)}
-              className="text-sm px-5 py-2.5 glass-card text-dark-text rounded-full hover:bg-white/10 active:scale-95 transition-all font-medium border border-dark-border"
-            >
-              {ex.label}
-            </button>
-          ))}
+        <p className="text-xs text-dark-text-muted uppercase tracking-wider font-bold">Try an example 👇</p>
+        <div className="flex flex-wrap justify-center gap-2.5">
+          {EXAMPLES.map((ex, i) => {
+            const gradients = [
+              'bg-gradient-to-r from-red-500/20 to-red-600/20 border-red-500/30 hover:border-red-500/50 text-red-400',
+              'bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border-orange-500/30 hover:border-orange-500/50 text-orange-400',
+              'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/30 hover:border-blue-500/50 text-blue-400',
+              'bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30 hover:border-purple-500/50 text-purple-400',
+            ];
+            return (
+              <button
+                key={ex.upc}
+                onClick={() => navigate(`/result/${ex.upc}`)}
+                className={`text-sm px-6 py-3 rounded-full hover:scale-105 active:scale-95 transition-all font-bold border-2 shadow-lg ${gradients[i % gradients.length]}`}
+              >
+                {ex.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -255,17 +267,17 @@ export default function Scanner() {
         {!scanning ? (
           <button
             onClick={startScanner}
-            className="w-full py-4 text-sm font-semibold text-dark-text hover:bg-white/5 active:bg-white/10 transition-all flex items-center justify-center gap-2.5 group animate-glow"
+            className="w-full py-5 text-base font-black text-white bg-gradient-to-r from-accent-cyan to-aligned hover:bg-white/5 active:scale-95 transition-all flex items-center justify-center gap-3 group shadow-2xl shadow-accent-cyan/30 animate-glowPulse rounded-2xl"
           >
-            <Camera size={22} className="text-aligned group-hover:scale-110 transition-transform" />
-            <span>Scan a Barcode</span>
+            <Camera size={26} className="group-hover:scale-110 transition-transform drop-shadow-lg" />
+            <span className="tracking-wide">Scan a Barcode</span>
           </button>
         ) : (
           <button
             onClick={stopScanner}
-            className="w-full py-4 text-sm font-medium bg-white/5 text-dark-text-secondary hover:bg-white/10 active:bg-white/15 transition-colors flex items-center justify-center gap-2"
+            className="w-full py-5 text-base font-bold bg-white/5 text-dark-text-secondary hover:bg-white/10 active:bg-white/15 transition-colors flex items-center justify-center gap-2.5 rounded-2xl"
           >
-            <X size={18} />
+            <X size={20} />
             Stop Scanner
           </button>
         )}
