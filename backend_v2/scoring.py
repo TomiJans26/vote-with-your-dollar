@@ -1,15 +1,15 @@
-"""Belief alignment scoring engine — 10-point scale, distance-based.
+"""Belief alignment scoring engine — 20-point scale, distance-based.
 
-Both stances on -5 to +5 scale (0 = neutral, 5 = strongly support, -5 = strongly oppose).
-User stances come directly as -5 to +5 from onboarding sliders.
-Company stances stored as -1.0 to 1.0, scaled to -5..+5 for comparison.
+Both stances on -10 to +10 scale (0 = neutral, 10 = strongly support, -10 = strongly oppose).
+User stances come directly as -10 to +10 from onboarding sliders.
+Company stances stored as -1.0 to 1.0, scaled to -10..+10 for comparison.
 
-Alignment per issue = 1 - (gap / 10), where gap = |user - company| (0 to 10 range)
+Alignment per issue = 1 - (gap / 20), where gap = |user - company| (0 to 20 range)
   Gap 0  → 100% aligned
-  Gap 2  → 80% aligned
-  Gap 5  → 50% aligned
-  Gap 8  → 20% aligned
-  Gap 10 → 0% aligned
+  Gap 4  → 80% aligned
+  Gap 10 → 50% aligned
+  Gap 16 → 20% aligned
+  Gap 20 → 0% aligned
 
 1% granularity. Every point matters.
 """
@@ -86,12 +86,14 @@ def score_company(
         if not ci:
             continue
 
-        # User stance: -5 to +5 directly from slider
-        user_val = max(-5, min(5, belief.get("stance", 0)))
-        # Company stance: already -5 to +5
+        # User stance: -10 to +10 directly from slider
+        user_val = max(-10, min(10, belief.get("stance", 0)))
+        # Company stance: stored as -1.0 to 1.0, scale to -10 to +10
         company_val = ci.get("stance", 0)
         if isinstance(company_val, str):
-            company_val = _parse_stance(company_val) * 5
+            company_val = _parse_stance(company_val) * 10
+        else:
+            company_val = company_val * 10  # Scale from -1..1 to -10..10
 
         # Skip neutral/no-data company stances — silence ≠ disagreement
         # If we have no real signal (stance is 0), don't count it against OR for the company
@@ -99,18 +101,18 @@ def score_company(
         if company_val == 0:
             continue
 
-        # Distance on 10-point scale
-        gap = abs(user_val - company_val)  # 0 to 10
-        alignment = 1.0 - (gap / 10.0)    # 1.0 = perfect, 0.0 = opposite
+        # Distance on 20-point scale
+        gap = abs(user_val - company_val)  # 0 to 20
+        alignment = 1.0 - (gap / 20.0)    # 1.0 = perfect, 0.0 = opposite
 
         issue_name = ISSUE_NAMES.get(issue_id, issue_id)
         imp_label = IMPORTANCE_LABELS.get(importance, "")
         weight = IMPORTANCE_WEIGHTS.get(importance, 0)
         issues_scored += 1
 
-        # Deal breaker: if gap > 5 (more than half the scale)
-        if importance == 3:
-            if gap > 5:
+        # Deal breaker: if gap > 10 (more than half the scale)
+        if importance == 3 or belief.get("is_deal_breaker", False):
+            if gap > 10:
                 deal_breaker_hit = True
                 conflicting.append(issue_id)
                 reasons.append(f"🚫 Deal breaker: {issue_name} — {gap:.0f} points apart")
@@ -118,19 +120,21 @@ def score_company(
                 matching.append(issue_id)
                 weighted_alignment_sum += alignment * weight
                 total_weight += weight
-                if gap <= 2:
+                if gap <= 4:
                     reasons.append(f"✅ {issue_name} — closely aligned (deal breaker)")
         else:
             weighted_alignment_sum += alignment * weight
             total_weight += weight
 
-            if gap <= 2:
+            if gap <= 4:
                 matching.append(issue_id)
                 orig_issue = (original_company_issues or {}).get(issue_id)
                 if orig_issue:
                     orig_stance = orig_issue.get("stance", 0)
                     if isinstance(orig_stance, str):
-                        orig_stance = _parse_stance(orig_stance) * 5
+                        orig_stance = _parse_stance(orig_stance) * 10
+                    else:
+                        orig_stance = orig_stance * 10
                     orig_gap = abs(user_val - orig_stance)
                     if orig_gap > gap:
                         reasons.append(f"✅ {issue_name} ({imp_label}) — closer than {original_company_name or 'the original'}")
@@ -138,7 +142,7 @@ def score_company(
                         reasons.append(f"✅ {issue_name} ({imp_label})")
                 else:
                     reasons.append(f"✅ {issue_name} ({imp_label})")
-            elif gap >= 7:
+            elif gap >= 14:
                 conflicting.append(issue_id)
                 reasons.append(f"⚠️ {issue_name} — {gap:.0f} points apart")
 

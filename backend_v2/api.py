@@ -737,3 +737,19 @@ def subscribe_report_emails(
     # TODO: implement email subscription storage
     # For now, just acknowledge
     return {"ok": True, "message": "Subscribed to report emails"}
+
+
+@router.get("/signals/recent")
+def get_recent_signals(limit: int = 20, db: Session = Depends(get_db)):
+    from sqlalchemy import text
+    result = db.execute(text("""
+        SELECT s.id, s.title, s.url, s.source, s.created_at, c.name as company_name
+        FROM signals s 
+        JOIN companies c ON s.company_id = c.id
+        WHERE s.url IS NOT NULL AND s.title IS NOT NULL
+        ORDER BY s.created_at DESC 
+        LIMIT :limit
+    """), {"limit": limit})
+    return [{"id": r[0], "title": r[1], "url": r[2], "source": r[3], 
+             "date": r[4].isoformat() if r[4] else None, "company": r[5]} 
+            for r in result.fetchall()]

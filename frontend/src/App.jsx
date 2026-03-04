@@ -19,6 +19,7 @@ import AdminLogin from './pages/AdminLogin';
 import Admin from './pages/Admin';
 import ShoppingList from './pages/ShoppingList';
 import CompanyProfile from './pages/CompanyProfile';
+import Feed from './pages/Feed';
 // Note: CompanyProfile uses getCompanyByName - added to api.js
 import BetaGate from './components/BetaGate';
 import { getStoredUser, isAuthenticated, getMe, saveBeliefProfileToServer } from './lib/api';
@@ -77,6 +78,7 @@ export default function App() {
           <Route index element={<Scanner />} />
           <Route path="/result/:upc" element={<Result />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/feed" element={<Feed />} />
           <Route path="/list" element={<RequireAuth><ShoppingList /></RequireAuth>} />
           <Route path="/report" element={<Dashboard />} />
           <Route path="/history" element={<RequireAuth><History /></RequireAuth>} />

@@ -64,7 +64,7 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
         cat_name = cat_tag.replace("en:", "")
         data = _off_cached_get(
             "https://world.openfoodfacts.org/api/v2/search",
-            params={"categories_tags_en": cat_name, "page_size": 20,
+            params={"categories_tags_en": cat_name, "page_size": 50,
                     "fields": "code,product_name,brands,brand_owner,brand_owner_imported,image_small_url,image_url",
                     "countries_tags_en": "united-states"})
         if not data:
@@ -83,8 +83,9 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
             if brand_lower in exclude_brands:
                 continue
             # Relevance check — skip products that aren't similar to what was scanned
+            # Lowered threshold to return more alternatives
             rel = _relevance_score(product_name, name)
-            if rel < 0.2:
+            if rel < 0.1:
                 continue
             seen_barcodes.add(barcode)
             alt_products.append({
@@ -101,11 +102,11 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
             break
 
     # Search-based fallback
-    if len(alt_products) < 5 and product_name:
+    if len(alt_products) < 10 and product_name:
         search_term = product_name.split(",")[0].split("-")[0].strip()[:40]
         data = _off_cached_get(
             "https://world.openfoodfacts.org/api/v2/search",
-            params={"search_terms": search_term, "page_size": 20,
+            params={"search_terms": search_term, "page_size": 50,
                     "fields": "code,product_name,brands,brand_owner,brand_owner_imported,image_small_url,image_url"})
         if data:
             for p in data.get("products", []):
@@ -122,7 +123,7 @@ def find_off_alternatives(upc: str, exclude_company_id: str, brand_map: dict,
                 if brand_lower in exclude_brands:
                     continue
                 rel = _relevance_score(product_name, name)
-                if rel < 0.2:
+                if rel < 0.1:
                     continue
                 seen_barcodes.add(barcode)
                 alt_products.append({

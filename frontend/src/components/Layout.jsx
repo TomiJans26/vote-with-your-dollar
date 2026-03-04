@@ -3,6 +3,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 const nav = [
   { to: '/', label: 'Search', icon: '🔍' },
   { to: '/explore', label: 'Explore', icon: '🧭' },
+  { to: '/feed', label: 'Feed', icon: '📰' },
   { to: '/list', label: 'List', icon: '📝' },
   { to: '/settings', label: 'Settings', icon: '⚙️' },
 ];

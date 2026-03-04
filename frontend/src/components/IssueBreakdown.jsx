@@ -10,15 +10,19 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
       const belief = beliefProfile?.[issueId];
       const trigger = triggers?.find(t => t.issueId === issueId);
 
-      // Both on -5 to +5 scale
+      // User stances on -10 to +10 scale, company stances -1.0 to 1.0 (scaled to -10..+10)
       const userStance = belief ? belief.stance : 0;
-      const companyStance = typeof data.stance === 'number' ? data.stance : 0;
-      const isDealBreaker = belief?.importance === 3;
+      let companyStance = typeof data.stance === 'number' ? data.stance : 0;
+      // Scale company stance from -1..1 to -10..10
+      if (companyStance >= -1 && companyStance <= 1) {
+        companyStance = companyStance * 10;
+      }
+      const isDealBreaker = belief?.importance === 3 || belief?.is_deal_breaker;
       const importance = belief?.importance || 0;
 
       // Distance-based alignment per issue (0-100%)
-      const gap = Math.abs(userStance - companyStance); // 0 to 10
-      const alignmentPct = Math.round((1 - gap / 10) * 100); // 100% = perfect, 0% = opposite
+      const gap = Math.abs(userStance - companyStance); // 0 to 20
+      const alignmentPct = Math.round((1 - gap / 20) * 100); // 100% = perfect, 0% = opposite
 
       // Skip no-data stances for alignment display
       const companyConf = (data.confidence || '').toLowerCase();
@@ -36,8 +40,9 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
         importance,
         confidence: data.confidence || 'low',
         notes: data.notes,
+        sourceUrl: data.source_url || data.sourceUrl,
         type: trigger?.type || (hasData && belief && importance > 0
-          ? (gap <= 2 ? 'aligned' : gap >= 7 ? 'misaligned' : 'neutral')
+          ? (gap <= 4 ? 'aligned' : gap >= 14 ? 'misaligned' : 'neutral')
           : 'neutral'),
       });
     }
@@ -54,7 +59,7 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
       emoji: getCategoryEmoji(t.issueId),
       isDealBreaker: t.type === 'dealbreaker',
       importance: t.type === 'dealbreaker' ? 3 : 1,
-      alignmentPct: t.gap != null ? Math.round((1 - t.gap / 10) * 100) : 50,
+      alignmentPct: t.gap != null ? Math.round((1 - t.gap / 20) * 100) : 50,
       hasData: true,
       confidence: 'medium',
     }));
@@ -65,19 +70,22 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
   return (
     <div className="space-y-2 mt-3">
       <p className="text-xs uppercase text-gray-400 font-semibold tracking-wide">
-        📊 Issue-by-Issue Breakdown
+        📊 Issues we have data on
       </p>
       <div className="space-y-1.5">
         {items.map((item, i) => (
           <IssueBar key={item.issueId || i} item={item} />
         ))}
       </div>
+      <p className="text-[10px] text-gray-400 italic pt-1">
+        Scores based on publicly available records. Tap sources to verify.
+      </p>
     </div>
   );
 }
 
 function IssueBar({ item }) {
-  const { issueName, emoji, companyStance, userStance, alignmentPct, hasData, isDealBreaker, importance, confidence, notes, type } = item;
+  const { issueName, emoji, companyStance, userStance, alignmentPct, hasData, isDealBreaker, importance, confidence, notes, sourceUrl, type } = item;
 
   // Bar width = alignment percentage
   const barWidth = Math.max(5, alignmentPct);
@@ -116,12 +124,12 @@ function IssueBar({ item }) {
   // Confidence indicator
   const confidenceDots = confidence === 'high' || confidence === 'HIGH' ? '●●●' : confidence === 'medium' || confidence === 'MEDIUM' ? '●●○' : '●○○';
 
-  // Stance label using 5-0-5 scale
+  // Stance label using 10-0-10 scale
   const stanceLabel = (val) => {
-    if (val >= 4) return 'Strongly supports';
-    if (val >= 2) return 'Leans support';
-    if (val <= -4) return 'Strongly opposes';
-    if (val <= -2) return 'Leans oppose';
+    if (val >= 8) return 'Strongly supports';
+    if (val >= 4) return 'Leans support';
+    if (val <= -8) return 'Strongly opposes';
+    if (val <= -4) return 'Leans oppose';
     return 'Neutral';
   };
 
@@ -167,6 +175,18 @@ function IssueBar({ item }) {
 
       {notes && (
         <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">{notes}</p>
+      )}
+      {sourceUrl && (
+        <div className="mt-1">
+          <a 
+            href={sourceUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[10px] text-teal-600 hover:text-teal-700 underline inline-flex items-center gap-0.5"
+          >
+            📄 Source
+          </a>
+        </div>
       )}
     </div>
   );

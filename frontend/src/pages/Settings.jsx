@@ -6,6 +6,15 @@ import { useAuth } from '../App';
 import { logout as apiLogout, deleteAccount, isAuthenticated, saveBeliefProfileToServer } from '../lib/api';
 
 function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
+  const getLabel = (v) => {
+    if (v === 0) return 'Neutral';
+    if (v <= -8) return 'Strongly ' + leftLabel;
+    if (v <= -4) return 'Lean ' + leftLabel;
+    if (v >= 8) return 'Strongly ' + rightLabel;
+    if (v >= 4) return 'Lean ' + rightLabel;
+    return v < 0 ? 'Slightly ' + leftLabel : 'Slightly ' + rightLabel;
+  };
+  
   return (
     <div className="space-y-1">
       <div className="flex justify-between text-[10px] font-semibold px-0.5">
@@ -13,7 +22,7 @@ function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
         <span className="text-red-500">{rightLabel} →</span>
       </div>
       <input
-        type="range" min={-5} max={5} step={1} value={value}
+        type="range" min={-10} max={10} step={1} value={value}
         onChange={e => onChange(Number(e.target.value))}
         className="w-full accent-teal-600"
       />
@@ -22,7 +31,7 @@ function StanceSlider({ value, onChange, leftLabel, rightLabel }) {
           value === 0 ? 'bg-gray-100 text-gray-500' :
           value < 0 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
         }`}>
-          {STANCE_LABELS.find(s => s.value === value)?.label || 'Neutral'}
+          {getLabel(value)}
         </span>
       </div>
     </div>
@@ -73,12 +82,34 @@ function GranularEditor({ profile, onUpdate, onSave }) {
                 </div>
 
                 {isActive && (
-                  <StanceSlider
-                    value={belief.stance}
-                    onChange={v => onUpdate(issue.id, { ...belief, stance: v })}
-                    leftLabel={issue.leftLabel || 'Oppose'}
-                    rightLabel={issue.rightLabel || 'Support'}
-                  />
+                  <>
+                    <StanceSlider
+                      value={belief.stance}
+                      onChange={v => onUpdate(issue.id, { ...belief, stance: v })}
+                      leftLabel={issue.leftLabel || 'Oppose'}
+                      rightLabel={issue.rightLabel || 'Support'}
+                    />
+                    <div className="flex items-center justify-between pt-1">
+                      <label className="text-xs text-gray-600 flex items-center gap-1.5 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={belief.is_deal_breaker || belief.importance === 3}
+                          onChange={(e) => onUpdate(issue.id, { 
+                            ...belief, 
+                            is_deal_breaker: e.target.checked,
+                            importance: e.target.checked ? 3 : (belief.importance === 3 ? 2 : belief.importance)
+                          })}
+                          className="w-4 h-4 accent-red-500"
+                        />
+                        <span className={belief.is_deal_breaker || belief.importance === 3 ? 'text-red-600 font-semibold' : ''}>
+                          Dealbreaker 🚫
+                        </span>
+                      </label>
+                      {(belief.is_deal_breaker || belief.importance === 3) && (
+                        <span className="text-[10px] text-red-500">One violation = company flagged</span>
+                      )}
+                    </div>
+                  </>
                 )}
               </div>
             );
