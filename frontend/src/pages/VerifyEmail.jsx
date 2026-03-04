@@ -85,23 +85,23 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">📧</div>
-          <h1 className="text-2xl font-bold text-teal-600">Verify Your Email</h1>
-          <p className="text-gray-500 mt-2">
+          <h1 className="text-2xl font-bold text-aligned">Verify Your Email</h1>
+          <p className="text-dark-text-secondary mt-2">
             We sent a 6-digit code to your email.
             <br />Enter it below to verify your account.
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border p-6">
+        <div className="glass-card rounded-xl shadow-sm border p-6">
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4">{error}</div>
+            <div className="bg-danger/10 text-danger p-3 rounded-lg text-sm mb-4">{error}</div>
           )}
           {success && (
-            <div className="bg-green-50 text-green-600 p-3 rounded-lg text-sm mb-4">{success}</div>
+            <div className="bg-aligned/10 text-aligned p-3 rounded-lg text-sm mb-4">{success}</div>
           )}
 
           <div className="flex justify-center gap-2 mb-6" onPaste={handlePaste}>
@@ -116,7 +116,7 @@ export default function VerifyEmail() {
                 onChange={e => handleChange(i, e.target.value)}
                 onKeyDown={e => handleKeyDown(i, e)}
                 className="w-12 h-14 text-center text-2xl font-bold border-2 rounded-lg
-                  focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none
+                  focus:border-aligned focus:ring-2 focus:ring-aligned/20 outline-none
                   transition-all"
                 disabled={loading}
               />
@@ -126,8 +126,8 @@ export default function VerifyEmail() {
           <button
             onClick={() => handleVerify(code.join(''))}
             disabled={loading || code.some(d => d === '')}
-            className="w-full py-3 bg-teal-500 text-white font-semibold rounded-lg
-              hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full py-3 bg-aligned text-white font-semibold rounded-lg
+              hover:bg-aligned disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? 'Verifying...' : 'Verify Email'}
           </button>
@@ -136,7 +136,7 @@ export default function VerifyEmail() {
             <button
               onClick={handleResend}
               disabled={resendCooldown > 0}
-              className="text-teal-600 text-sm hover:underline disabled:text-gray-400 disabled:no-underline"
+              className="text-aligned text-sm hover:underline disabled:text-dark-text-secondary disabled:no-underline"
             >
               {resendCooldown > 0
                 ? `Resend code in ${resendCooldown}s`

@@ -55,7 +55,7 @@ const ISSUE_LABELS = Object.fromEntries(
 const STANCE_COLORS = {
   strong_support: 'bg-green-500/20 text-green-400 border-green-500/30',
   lean_support: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-  neutral: 'bg-gray-600/20 text-gray-400 border-gray-600/30',
+  neutral: 'bg-white/10 text-dark-text-secondary border-white/10',
   lean_oppose: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
   strong_oppose: 'bg-red-500/20 text-red-400 border-red-500/30',
 };
@@ -83,10 +83,10 @@ function StanceBadge({ stance }) {
 // Stat card component
 function StatCard({ label, value, sub }) {
   return (
-    <div className="bg-gray-800 rounded-xl p-5 border border-gray-700">
-      <p className="text-gray-400 text-sm">{label}</p>
+    <div className="glass-card rounded-xl p-5 border border-dark-border">
+      <p className="text-dark-text-secondary text-sm">{label}</p>
       <p className="text-3xl font-bold text-white mt-1">{value ?? '—'}</p>
-      {sub && <p className="text-teal-400 text-xs mt-1">{sub}</p>}
+      {sub && <p className="text-aligned text-xs mt-1">{sub}</p>}
     </div>
   );
 }
@@ -209,24 +209,24 @@ export default function Admin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
+    <div className="min-h-screen bg-dark-bg flex">
       {/* Mobile menu button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-lg border border-gray-700"
+        className="lg:hidden fixed top-4 left-4 z-50 glass-card text-white p-2 rounded-lg border border-dark-border"
       >
         ☰
       </button>
 
       {/* Sidebar */}
       <aside className={`
-        fixed lg:static inset-y-0 left-0 z-40 w-64 bg-gray-950 border-r border-gray-800 flex flex-col
+        fixed lg:static inset-y-0 left-0 z-40 w-64 bg-dark-bg-elevated border-r border-dark-border flex flex-col
         transform transition-transform lg:translate-x-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="p-6 border-b border-gray-800">
-          <h1 className="text-xl font-bold text-teal-400">DollarVote</h1>
-          <p className="text-gray-500 text-sm">Admin Dashboard</p>
+        <div className="p-6 border-b border-dark-border">
+          <h1 className="text-xl font-bold text-gradient">DollarVote</h1>
+          <p className="text-dark-text-secondary text-sm">Admin Dashboard</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">
           {SECTIONS.map((s) => (
@@ -235,16 +235,16 @@ export default function Admin() {
               onClick={() => loadSection(s)}
               className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 section === s
-                  ? 'bg-teal-600/20 text-teal-400'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                  ? 'bg-aligned/20 text-aligned'
+                  : 'text-dark-text-secondary hover:bg-white/5 hover:text-dark-text'
               }`}
             >
               {SECTION_LABELS[s]}
             </button>
           ))}
         </nav>
-        <div className="p-4 border-t border-gray-800">
-          <button onClick={logout} className="text-gray-500 hover:text-red-400 text-sm">
+        <div className="p-4 border-t border-dark-border">
+          <button onClick={logout} className="text-dark-text-muted hover:text-danger text-sm">
             Sign Out
           </button>
         </div>
@@ -272,7 +272,7 @@ export default function Admin() {
                   <StatCard label="Scans Today" value={stats.scans_today} />
                 </div>
               ) : (
-                <p className="text-gray-500">Loading...</p>
+                <p className="text-dark-text-secondary">Loading...</p>
               )}
             </div>
           )}
@@ -284,20 +284,20 @@ export default function Admin() {
               {clicks ? (
                 <div className="space-y-8">
                   {/* By type */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                  <div className="glass-card rounded-xl p-6 border border-dark-border">
                     <h3 className="text-lg font-semibold text-white mb-4">Clicks by Store</h3>
                     {clicks.by_type.length === 0 ? (
-                      <p className="text-gray-500">No click data yet</p>
+                      <p className="text-dark-text-secondary">No click data yet</p>
                     ) : (
                       <div className="space-y-3">
                         {clicks.by_type.map((r) => {
                           const max = Math.max(...clicks.by_type.map((x) => x.count));
                           return (
                             <div key={r.link_type} className="flex items-center gap-3">
-                              <span className="text-gray-300 w-24 text-sm capitalize">{r.link_type || 'unknown'}</span>
-                              <div className="flex-1 bg-gray-700 rounded-full h-6 overflow-hidden">
+                              <span className="text-dark-text-secondary w-24 text-sm capitalize">{r.link_type || 'unknown'}</span>
+                              <div className="flex-1 bg-white/10 rounded-full h-6 overflow-hidden">
                                 <div
-                                  className="bg-teal-500 h-full rounded-full flex items-center justify-end pr-2"
+                                  className="bg-aligned h-full rounded-full flex items-center justify-end pr-2"
                                   style={{ width: `${Math.max((r.count / max) * 100, 8)}%` }}
                                 >
                                   <span className="text-xs text-white font-medium">{r.count}</span>
@@ -311,14 +311,14 @@ export default function Admin() {
                   </div>
 
                   {/* Top brands */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                  <div className="glass-card rounded-xl p-6 border border-dark-border">
                     <h3 className="text-lg font-semibold text-white mb-4">Top 10 Clicked Brands</h3>
                     {clicks.top_brands.length === 0 ? (
-                      <p className="text-gray-500">No data yet</p>
+                      <p className="text-dark-text-secondary">No data yet</p>
                     ) : (
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="text-gray-400 border-b border-gray-700">
+                          <tr className="text-dark-text-secondary border-b border-dark-border">
                             <th className="text-left py-2">#</th>
                             <th className="text-left py-2">Brand</th>
                             <th className="text-right py-2">Clicks</th>
@@ -326,10 +326,10 @@ export default function Admin() {
                         </thead>
                         <tbody>
                           {clicks.top_brands.map((b, i) => (
-                            <tr key={i} className="border-b border-gray-700/50">
-                              <td className="py-2 text-gray-500">{i + 1}</td>
+                            <tr key={i} className="border-b border-dark-border-subtle">
+                              <td className="py-2 text-dark-text-muted">{i + 1}</td>
                               <td className="py-2 text-white">{b.brand || '—'}</td>
-                              <td className="py-2 text-right text-teal-400 font-medium">{b.count}</td>
+                              <td className="py-2 text-right text-aligned font-medium">{b.count}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -338,7 +338,7 @@ export default function Admin() {
                   </div>
                 </div>
               ) : (
-                <p className="text-gray-500">Loading...</p>
+                <p className="text-dark-text-secondary">Loading...</p>
               )}
             </div>
           )}
@@ -348,10 +348,10 @@ export default function Admin() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-6">Research Queue</h2>
               {research ? (
-                <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                <div className="glass-card rounded-xl border border-dark-border overflow-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-gray-400 border-b border-gray-700 text-left">
+                      <tr className="text-dark-text-secondary border-b border-dark-border text-left">
                         <th className="p-3">Brand</th>
                         <th className="p-3">Barcode</th>
                         <th className="p-3 text-right">Scans</th>
@@ -362,25 +362,25 @@ export default function Admin() {
                     </thead>
                     <tbody>
                       {research.items.length === 0 ? (
-                        <tr><td colSpan={6} className="p-6 text-center text-gray-500">Queue is empty</td></tr>
+                        <tr><td colSpan={6} className="p-6 text-center text-dark-text-muted">Queue is empty</td></tr>
                       ) : research.items.map((r) => (
-                        <tr key={r.id} className="border-b border-gray-700/50">
+                        <tr key={r.id} className="border-b border-dark-border-subtle">
                           <td className="p-3 text-white">{r.brand_name || r.company_name || '—'}</td>
-                          <td className="p-3 text-gray-400 font-mono text-xs">{r.barcode || '—'}</td>
-                          <td className="p-3 text-right text-teal-400 font-bold">{r.scan_count}</td>
+                          <td className="p-3 text-dark-text-secondary font-mono text-xs">{r.barcode || '—'}</td>
+                          <td className="p-3 text-right text-aligned font-bold">{r.scan_count}</td>
                           <td className="p-3">
                             <span className={`text-xs px-2 py-1 rounded-full ${
-                              r.status === 'complete' ? 'bg-green-500/20 text-green-400' :
-                              r.status === 'in_progress' ? 'bg-yellow-500/20 text-yellow-400' :
-                              'bg-gray-600/30 text-gray-300'
+                              r.status === 'complete' ? 'bg-aligned/20 text-aligned' :
+                              r.status === 'in_progress' ? 'bg-warning/20 text-warning' :
+                              'bg-white/10 text-dark-text-secondary'
                             }`}>{r.status}</span>
                           </td>
-                          <td className="p-3 text-gray-500 text-xs">{r.created_at?.slice(0, 10)}</td>
+                          <td className="p-3 text-dark-text-muted text-xs">{r.created_at?.slice(0, 10)}</td>
                           <td className="p-3">
                             {r.status !== 'complete' && (
                               <button
                                 onClick={() => markComplete(r.id)}
-                                className="text-xs bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-lg"
+                                className="text-xs bg-aligned hover:bg-aligned/90 text-white px-3 py-1 rounded-lg"
                               >
                                 ✓ Complete
                               </button>
@@ -392,7 +392,7 @@ export default function Admin() {
                   </table>
                 </div>
               ) : (
-                <p className="text-gray-500">Loading...</p>
+                <p className="text-dark-text-secondary">Loading...</p>
               )}
             </div>
           )}
@@ -402,10 +402,10 @@ export default function Admin() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-6">Users</h2>
               {users ? (
-                <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                <div className="glass-card rounded-xl border border-dark-border overflow-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-gray-400 border-b border-gray-700 text-left">
+                      <tr className="text-dark-text-secondary border-b border-dark-border text-left">
                         <th className="p-3">ID</th>
                         <th className="p-3">Username</th>
                         <th className="p-3">Email</th>
@@ -415,19 +415,19 @@ export default function Admin() {
                     </thead>
                     <tbody>
                       {users.users.map((u) => (
-                        <tr key={u.id} className="border-b border-gray-700/50">
-                          <td className="p-3 text-gray-500">{u.id}</td>
+                        <tr key={u.id} className="border-b border-dark-border-subtle">
+                          <td className="p-3 text-dark-text-muted">{u.id}</td>
                           <td className="p-3 text-white">{u.username}</td>
-                          <td className="p-3 text-gray-300">{u.email}</td>
+                          <td className="p-3 text-dark-text-secondary">{u.email}</td>
                           <td className="p-3">{u.email_verified ? '✅' : '❌'}</td>
-                          <td className="p-3 text-gray-500 text-xs">{u.created_at?.slice(0, 10)}</td>
+                          <td className="p-3 text-dark-text-muted text-xs">{u.created_at?.slice(0, 10)}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
               ) : (
-                <p className="text-gray-500">Loading...</p>
+                <p className="text-dark-text-secondary">Loading...</p>
               )}
             </div>
           )}
@@ -440,37 +440,37 @@ export default function Admin() {
                 <div>
                   <button
                     onClick={() => setCompanyDetail(null)}
-                    className="text-teal-400 hover:text-teal-300 text-sm mb-4 flex items-center gap-1"
+                    className="text-aligned hover:text-aligned/80 text-sm mb-4 flex items-center gap-1"
                   >
                     ← Back to companies
                   </button>
-                  <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                  <div className="glass-card rounded-xl border border-dark-border p-6 mb-6">
                     <div className="flex items-start justify-between">
                       <div>
                         <h2 className="text-2xl font-bold text-white">{companyDetail.company.name}</h2>
                         <div className="flex gap-4 mt-1 text-sm">
                           {companyDetail.company.ticker && (
-                            <span className="text-teal-400 font-mono">{companyDetail.company.ticker}</span>
+                            <span className="text-aligned font-mono">{companyDetail.company.ticker}</span>
                           )}
                           {companyDetail.company.industry && (
-                            <span className="text-gray-400">{companyDetail.company.industry}</span>
+                            <span className="text-dark-text-secondary">{companyDetail.company.industry}</span>
                           )}
                           {companyDetail.company.country && (
-                            <span className="text-gray-500">{companyDetail.company.country}</span>
+                            <span className="text-dark-text-muted">{companyDetail.company.country}</span>
                           )}
                         </div>
                         {companyDetail.company.description && (
-                          <p className="text-gray-400 text-sm mt-3 max-w-2xl">{companyDetail.company.description}</p>
+                          <p className="text-dark-text-secondary text-sm mt-3 max-w-2xl">{companyDetail.company.description}</p>
                         )}
                       </div>
                       <div className="flex gap-4 text-center">
-                        <div className="bg-gray-900 rounded-lg px-4 py-3 border border-gray-700">
-                          <p className="text-2xl font-bold text-teal-400">{companyDetail.click_count}</p>
-                          <p className="text-gray-500 text-xs">Clicks</p>
+                        <div className="bg-dark-bg-elevated rounded-lg px-4 py-3 border border-dark-border">
+                          <p className="text-2xl font-bold text-aligned">{companyDetail.click_count}</p>
+                          <p className="text-dark-text-muted text-xs">Clicks</p>
                         </div>
-                        <div className="bg-gray-900 rounded-lg px-4 py-3 border border-gray-700">
-                          <p className="text-2xl font-bold text-green-400">${companyDetail.pac_total.toLocaleString()}</p>
-                          <p className="text-gray-500 text-xs">PAC Total</p>
+                        <div className="bg-dark-bg-elevated rounded-lg px-4 py-3 border border-dark-border">
+                          <p className="text-2xl font-bold text-aligned">${companyDetail.pac_total.toLocaleString()}</p>
+                          <p className="text-dark-text-muted text-xs">PAC Total</p>
                         </div>
                       </div>
                     </div>
@@ -478,11 +478,11 @@ export default function Admin() {
 
                   {/* Brands */}
                   {companyDetail.company.brands?.length > 0 && (
-                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                    <div className="glass-card rounded-xl border border-dark-border p-6 mb-6">
                       <h3 className="text-lg font-semibold text-white mb-3">Brands ({companyDetail.company.brands.length})</h3>
                       <div className="flex flex-wrap gap-2">
                         {companyDetail.company.brands.map((b, i) => (
-                          <span key={i} className="bg-gray-700/50 text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-600/50">
+                          <span key={i} className="bg-white/5 text-dark-text-secondary text-xs px-3 py-1.5 rounded-lg border border-dark-border-subtle">
                             {b}
                           </span>
                         ))}
@@ -492,18 +492,18 @@ export default function Admin() {
 
                   {/* Issues */}
                   {companyDetail.issues?.length > 0 && (
-                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+                    <div className="glass-card rounded-xl border border-dark-border p-6 mb-6">
                       <h3 className="text-lg font-semibold text-white mb-4">Issue Stances</h3>
                       <div className="grid gap-3">
                         {companyDetail.issues.map((issue) => (
-                          <div key={issue.key} className="flex items-center gap-3 py-2 border-b border-gray-700/50 last:border-0">
-                            <span className="text-gray-300 text-sm w-48 shrink-0">{ISSUE_LABELS[issue.key] || issue.key}</span>
+                          <div key={issue.key} className="flex items-center gap-3 py-2 border-b border-dark-border-subtle last:border-0">
+                            <span className="text-dark-text-secondary text-sm w-48 shrink-0">{ISSUE_LABELS[issue.key] || issue.key}</span>
                             <StanceBadge stance={issue.stance} />
                             {issue.importance && (
-                              <span className="text-gray-500 text-xs">({issue.importance})</span>
+                              <span className="text-dark-text-muted text-xs">({issue.importance})</span>
                             )}
                             {issue.notes && (
-                              <span className="text-gray-500 text-xs truncate max-w-md" title={issue.notes}>{issue.notes}</span>
+                              <span className="text-dark-text-muted text-xs truncate max-w-md" title={issue.notes}>{issue.notes}</span>
                             )}
                           </div>
                         ))}
@@ -513,15 +513,15 @@ export default function Admin() {
 
                   {/* Research Queue Items */}
                   {companyDetail.research_items?.length > 0 && (
-                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
+                    <div className="glass-card rounded-xl border border-dark-border p-6">
                       <h3 className="text-lg font-semibold text-white mb-3">Research Queue</h3>
                       {companyDetail.research_items.map((r) => (
-                        <div key={r.id} className="flex items-center gap-3 py-2 text-sm border-b border-gray-700/50 last:border-0">
-                          <span className="text-gray-300">{r.brand_name || '—'}</span>
+                        <div key={r.id} className="flex items-center gap-3 py-2 text-sm border-b border-dark-border-subtle last:border-0">
+                          <span className="text-dark-text-secondary">{r.brand_name || '—'}</span>
                           <span className={`text-xs px-2 py-0.5 rounded-full ${
-                            r.status === 'complete' ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/30 text-gray-300'
+                            r.status === 'complete' ? 'bg-aligned/20 text-aligned' : 'bg-white/10 text-dark-text-secondary'
                           }`}>{r.status}</span>
-                          <span className="text-gray-500 text-xs">{r.scan_count} scans</span>
+                          <span className="text-dark-text-muted text-xs">{r.scan_count} scans</span>
                         </div>
                       ))}
                     </div>
@@ -533,12 +533,12 @@ export default function Admin() {
                   <h2 className="text-2xl font-bold text-white mb-6">Companies</h2>
 
                   {/* Value Sort Controls */}
-                  <div className="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-4">
-                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Rank by Values</h3>
+                  <div className="glass-card rounded-xl border border-dark-border p-4 mb-4">
+                    <h3 className="text-sm font-semibold text-dark-text-secondary mb-3">Rank by Values</h3>
                     <div className="flex flex-wrap items-end gap-3">
                       {[0, 1, 2].map((idx) => (
                         <div key={idx} className="flex-1 min-w-[180px]">
-                          <label className="text-xs text-gray-500 mb-1 block">Priority {idx + 1} {idx === 0 ? '(3×)' : idx === 1 ? '(2×)' : '(1×)'}</label>
+                          <label className="text-xs text-dark-text-muted mb-1 block">Priority {idx + 1} {idx === 0 ? '(3×)' : idx === 1 ? '(2×)' : '(1×)'}</label>
                           <select
                             value={rankIssues[idx]}
                             onChange={(e) => {
@@ -546,7 +546,7 @@ export default function Admin() {
                               next[idx] = e.target.value;
                               setRankIssues(next);
                             }}
-                            className="w-full bg-gray-900 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            className="w-full bg-dark-bg-elevated border border-dark-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-aligned"
                           >
                             <option value="">— Select issue —</option>
                             {ALL_ISSUES.map((ik) => (
@@ -558,14 +558,14 @@ export default function Admin() {
                       <button
                         onClick={rankCompanies}
                         disabled={!rankIssues.some(Boolean)}
-                        className="bg-teal-600 hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors"
+                        className="bg-aligned hover:bg-aligned/90 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors"
                       >
                         Rank
                       </button>
                       {rankingMode && (
                         <button
                           onClick={() => { setRankingMode(false); setRankedCompanies(null); }}
-                          className="text-gray-400 hover:text-white text-sm px-3 py-2"
+                          className="text-dark-text-secondary hover:text-white text-sm px-3 py-2"
                         >
                           Clear
                         </button>
@@ -578,15 +578,15 @@ export default function Admin() {
                     placeholder="Search companies..."
                     value={companySearch}
                     onChange={(e) => setCompanySearch(e.target.value)}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-4"
+                    className="w-full glass-card border border-dark-border rounded-lg px-4 py-2.5 text-white placeholder-dark-text-muted focus:outline-none focus:ring-2 focus:ring-aligned mb-4"
                   />
 
                   {/* Ranked results */}
                   {rankingMode && rankedCompanies ? (
-                    <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                    <div className="glass-card rounded-xl border border-dark-border overflow-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="text-gray-400 border-b border-gray-700 text-left">
+                          <tr className="text-dark-text-secondary border-b border-dark-border text-left">
                             <th className="p-3 w-12">#</th>
                             <th className="p-3">Company</th>
                             <th className="p-3 text-right">Score</th>
@@ -599,11 +599,11 @@ export default function Admin() {
                           {rankedCompanies.companies
                             .filter((c) => !companySearch || c.name.toLowerCase().includes(companySearch.toLowerCase()))
                             .map((c, i) => (
-                            <tr key={c.id} className="border-b border-gray-700/50 hover:bg-gray-700/30 cursor-pointer" onClick={() => openCompanyDetail(c.id)}>
-                              <td className="p-3 text-gray-500">{i + 1}</td>
+                            <tr key={c.id} className="border-b border-dark-border-subtle hover:bg-white/5 cursor-pointer" onClick={() => openCompanyDetail(c.id)}>
+                              <td className="p-3 text-dark-text-muted">{i + 1}</td>
                               <td className="p-3 text-white font-medium">{c.name}</td>
                               <td className="p-3 text-right font-bold">
-                                <span className={c.score > 0 ? 'text-green-400' : c.score < 0 ? 'text-red-400' : 'text-gray-400'}>
+                                <span className={c.score > 0 ? 'text-aligned' : c.score < 0 ? 'text-danger' : 'text-dark-text-secondary'}>
                                   {c.score > 0 ? '+' : ''}{c.score}
                                 </span>
                               </td>
@@ -618,38 +618,38 @@ export default function Admin() {
                       </table>
                     </div>
                   ) : companies ? (
-                    <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-auto">
+                    <div className="glass-card rounded-xl border border-dark-border overflow-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="text-gray-400 border-b border-gray-700 text-left">
-                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('name')}>Name{sortArrow('name')}</th>
-                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('ticker')}>Ticker{sortArrow('ticker')}</th>
-                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('industry')}>Industry{sortArrow('industry')}</th>
-                            <th className="p-3 cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('country')}>Country{sortArrow('country')}</th>
-                            <th className="p-3 text-right cursor-pointer hover:text-teal-400 select-none" onClick={() => toggleSort('brand_count')}>Brands{sortArrow('brand_count')}</th>
+                          <tr className="text-dark-text-secondary border-b border-dark-border text-left">
+                            <th className="p-3 cursor-pointer hover:text-aligned select-none" onClick={() => toggleSort('name')}>Name{sortArrow('name')}</th>
+                            <th className="p-3 cursor-pointer hover:text-aligned select-none" onClick={() => toggleSort('ticker')}>Ticker{sortArrow('ticker')}</th>
+                            <th className="p-3 cursor-pointer hover:text-aligned select-none" onClick={() => toggleSort('industry')}>Industry{sortArrow('industry')}</th>
+                            <th className="p-3 cursor-pointer hover:text-aligned select-none" onClick={() => toggleSort('country')}>Country{sortArrow('country')}</th>
+                            <th className="p-3 text-right cursor-pointer hover:text-aligned select-none" onClick={() => toggleSort('brand_count')}>Brands{sortArrow('brand_count')}</th>
                           </tr>
                         </thead>
                         <tbody>
                           {filteredCompanies?.map((c) => (
-                            <tr key={c.id} className="border-b border-gray-700/50 hover:bg-gray-700/30 cursor-pointer" onClick={() => openCompanyDetail(c.slug || c.id)}>
+                            <tr key={c.id} className="border-b border-dark-border-subtle hover:bg-white/5 cursor-pointer" onClick={() => openCompanyDetail(c.slug || c.id)}>
                               <td className="p-3 text-white font-medium">{c.name}</td>
-                              <td className="p-3 text-teal-400 font-mono text-xs">{c.ticker || '—'}</td>
-                              <td className="p-3 text-gray-300">{c.industry || '—'}</td>
-                              <td className="p-3 text-gray-400">{c.country || '—'}</td>
-                              <td className="p-3 text-right text-gray-400">{c.brand_count}</td>
+                              <td className="p-3 text-aligned font-mono text-xs">{c.ticker || '—'}</td>
+                              <td className="p-3 text-dark-text-secondary">{c.industry || '—'}</td>
+                              <td className="p-3 text-dark-text-secondary">{c.country || '—'}</td>
+                              <td className="p-3 text-right text-dark-text-secondary">{c.brand_count}</td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
                     </div>
                   ) : (
-                    <p className="text-gray-500">Loading...</p>
+                    <p className="text-dark-text-secondary">Loading...</p>
                   )}
                 </div>
               )}
               {loadingDetail && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                  <div className="bg-gray-800 rounded-xl p-6 text-white">Loading company details...</div>
+                  <div className="glass-card rounded-xl p-6 text-white border border-dark-border">Loading company details...</div>
                 </div>
               )}
             </div>

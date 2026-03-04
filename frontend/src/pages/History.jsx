@@ -21,9 +21,9 @@ export default function History() {
     return (
       <div className="p-6 text-center space-y-4 pt-12">
         <div className="text-5xl">📋</div>
-        <h2 className="text-lg font-bold text-gray-800">Scan History</h2>
-        <p className="text-sm text-gray-500">Sign in to track your scan history across sessions.</p>
-        <Link to="/login" className="inline-block mt-2 px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold">
+        <h2 className="text-lg font-bold text-dark-text">Scan History</h2>
+        <p className="text-sm text-dark-text-secondary">Sign in to track your scan history across sessions.</p>
+        <Link to="/login" className="inline-block mt-2 px-6 py-2 bg-aligned text-white rounded-xl font-semibold">
           Sign In
         </Link>
       </div>
@@ -33,7 +33,7 @@ export default function History() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-200 border-t-teal-600" />
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-aligned/30 border-t-teal-600" />
       </div>
     );
   }
@@ -41,8 +41,8 @@ export default function History() {
   return (
     <div className="p-4 space-y-4">
       <div className="text-center pt-2">
-        <h2 className="text-xl font-bold text-teal-800">📋 Scan History</h2>
-        <p className="text-sm text-gray-500 mt-1">
+        <h2 className="text-xl font-bold text-gradient">📋 Scan History</h2>
+        <p className="text-sm text-dark-text-secondary mt-1">
           {history.length > 0
             ? `${history.length} product${history.length !== 1 ? 's' : ''} scanned`
             : 'No scans yet — go scan something!'}
@@ -50,10 +50,10 @@ export default function History() {
       </div>
 
       {history.length === 0 && (
-        <div className="bg-white rounded-2xl shadow-lg p-8 text-center space-y-3">
+        <div className="glass-card rounded-2xl shadow-lg p-8 text-center space-y-3">
           <div className="text-5xl">🛒</div>
-          <p className="text-sm text-gray-500">Your scan history will appear here.</p>
-          <Link to="/" className="inline-block mt-2 px-6 py-2 bg-teal-600 text-white rounded-xl font-semibold text-sm">
+          <p className="text-sm text-dark-text-secondary">Your scan history will appear here.</p>
+          <Link to="/" className="inline-block mt-2 px-6 py-2 bg-aligned text-white rounded-xl font-semibold text-sm">
             Start Scanning
           </Link>
         </div>
@@ -62,17 +62,17 @@ export default function History() {
       {history.map((item) => {
         const date = item.scanned_at ? new Date(item.scanned_at) : null;
         const scoreColor = item.alignment_score != null
-          ? item.alignment_score >= 70 ? 'bg-emerald-500' : item.alignment_score >= 40 ? 'bg-yellow-500' : 'bg-red-500'
-          : 'bg-gray-300';
+          ? item.alignment_score >= 70 ? 'bg-emerald-500' : item.alignment_score >= 40 ? 'bg-warning/100' : 'bg-danger/100'
+          : 'bg-dark-text-muted';
 
         return (
           <Link
             key={item.id}
             to={`/result/${item.upc}`}
-            className="block bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow"
+            className="block glass-card rounded-2xl shadow-lg p-4 hover:shadow-xl transition-shadow"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-2xl shrink-0">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-2xl shrink-0">
                 📦
               </div>
               <div className="flex-1 min-w-0">
@@ -80,10 +80,10 @@ export default function History() {
                   {item.product_name || item.brand || 'Unknown Product'}
                 </p>
                 {item.parent_company && (
-                  <p className="text-xs text-gray-500 truncate">{item.parent_company}</p>
+                  <p className="text-xs text-dark-text-secondary truncate">{item.parent_company}</p>
                 )}
                 {date && (
-                  <p className="text-[10px] text-gray-400 mt-0.5">
+                  <p className="text-[10px] text-dark-text-secondary mt-0.5">
                     {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} at{' '}
                     {date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
                   </p>
@@ -94,7 +94,7 @@ export default function History() {
                   {item.alignment_score}%
                 </span>
               )}
-              <span className="text-gray-300 text-sm shrink-0">→</span>
+              <span className="text-dark-text-muted text-sm shrink-0">→</span>
             </div>
           </Link>
         );

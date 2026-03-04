@@ -28,15 +28,15 @@ export default function BetaGate({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-dark-bg flex items-center justify-center p-4">
       <div className={`max-w-sm w-full text-center ${shake ? 'animate-shake' : ''}`}>
         {/* Logo */}
         <div className="mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-aligned/10 mb-4">
             <span className="text-3xl">🗳️</span>
           </div>
-          <h1 className="text-3xl font-bold text-white">DollarVote</h1>
-          <p className="text-emerald-400 mt-1 text-sm font-medium tracking-wide uppercase">Private Beta</p>
+          <h1 className="text-3xl font-bold text-gradient">DollarVote</h1>
+          <p className="text-aligned mt-1 text-sm font-medium tracking-wide uppercase">Private Beta</p>
         </div>
 
         {/* Code input */}
@@ -47,25 +47,25 @@ export default function BetaGate({ children }) {
               value={code}
               onChange={(e) => { setCode(e.target.value); setError(false); }}
               placeholder="Enter beta code"
-              className={`w-full px-4 py-3 rounded-xl bg-gray-900 border text-white text-center text-lg tracking-widest placeholder:text-gray-600 placeholder:tracking-normal focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors ${
-                error ? 'border-red-500' : 'border-gray-800'
+              className={`w-full px-4 py-3 rounded-xl bg-dark-bg-elevated border text-white text-center text-lg tracking-widest placeholder:text-dark-text-secondary placeholder:tracking-normal focus:outline-none focus:ring-2 focus:ring-aligned transition-colors ${
+                error ? 'border-danger' : 'border-dark-border'
               }`}
               autoFocus
               autoComplete="off"
             />
             {error && (
-              <p className="text-red-400 text-sm mt-2">Invalid code. Try again.</p>
+              <p className="text-danger text-sm mt-2">Invalid code. Try again.</p>
             )}
           </div>
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-colors"
+            className="w-full py-3 rounded-xl bg-aligned hover:bg-aligned/90 text-white font-semibold transition-colors active:scale-95"
           >
             Enter
           </button>
         </form>
 
-        <p className="text-gray-600 text-xs mt-8">
+        <p className="text-dark-text-secondary text-xs mt-8">
           Vote with your dollar. Every purchase is a choice.
         </p>
       </div>

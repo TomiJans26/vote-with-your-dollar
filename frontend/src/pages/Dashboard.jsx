@@ -13,14 +13,14 @@ function ScoreRing({ score, size = 80, label }) {
   return (
     <div className="flex flex-col items-center">
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size/2} cy={size/2} r={radius} stroke="#e5e7eb" strokeWidth="6" fill="none" />
+        <circle cx={size/2} cy={size/2} r={radius} stroke="rgba(255,255,255,0.1)" strokeWidth="6" fill="none" />
         <circle cx={size/2} cy={size/2} r={radius} stroke={color} strokeWidth="6" fill="none"
           strokeDasharray={circumference} strokeDashoffset={offset}
           strokeLinecap="round" className="transition-all duration-1000"
         />
       </svg>
       <span className="text-2xl font-black -mt-[52px] mb-6" style={{ color }}>{score}%</span>
-      {label && <p className="text-xs text-gray-400 mt-1">{label}</p>}
+      {label && <p className="text-xs text-dark-text-secondary mt-1">{label}</p>}
     </div>
   );
 }
@@ -34,26 +34,26 @@ function ReportCard({ report }) {
   return (
     <div className="space-y-4">
       {/* Overall Score */}
-      <div className="bg-white rounded-2xl shadow-lg p-5 text-center">
-        <p className="text-xs text-gray-400 uppercase font-semibold">{periodLabel} Report Card</p>
+      <div className="glass-card rounded-2xl shadow-lg p-5 text-center border border-dark-border">
+        <p className="text-xs text-dark-text-secondary uppercase font-semibold">{periodLabel} Report Card</p>
         <div className="mt-3">
           <ScoreRing score={overallScore} size={100} />
         </div>
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-dark-text-secondary mt-2">
           Based on {totalScans} product{totalScans !== 1 ? 's' : ''} from {totalCompanies} compan{totalCompanies !== 1 ? 'ies' : 'y'}
         </p>
       </div>
 
       {/* Deal Breaker Alerts */}
       {dealBreakerAlerts && dealBreakerAlerts.length > 0 && (
-        <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-4 space-y-2">
-          <p className="text-sm font-bold text-red-700">🚫 Deal Breaker Alerts</p>
+        <div className="glass-card border-2 border-danger/50 rounded-2xl p-4 space-y-2 bg-danger/10">
+          <p className="text-sm font-bold text-danger">🚫 Deal Breaker Alerts</p>
           {dealBreakerAlerts.map((alert, i) => (
             <div key={i} className="flex items-start gap-2 text-sm">
-              <span className="text-red-500 mt-0.5">•</span>
-              <p className="text-red-600">
+              <span className="text-danger mt-0.5">•</span>
+              <p className="text-danger">
                 <strong>{alert.company}</strong> — {alert.issue}
-                {alert.product && <span className="text-red-400"> (from buying {alert.product})</span>}
+                {alert.product && <span className="text-danger/70"> (from buying {alert.product})</span>}
               </p>
             </div>
           ))}
@@ -62,20 +62,20 @@ function ReportCard({ report }) {
 
       {/* Issue Impact */}
       {issueBreakdown && issueBreakdown.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-lg p-4 space-y-3">
-          <p className="text-xs text-gray-400 uppercase font-semibold">Where Your Money Went</p>
+        <div className="glass-card rounded-2xl shadow-lg p-4 space-y-3 border border-dark-border">
+          <p className="text-xs text-dark-text-secondary uppercase font-semibold">Where Your Money Went</p>
           {issueBreakdown.map((item, i) => {
             const pct = Math.round(item.alignedPct);
-            const barColor = pct >= 70 ? 'bg-emerald-500' : pct >= 40 ? 'bg-yellow-500' : 'bg-red-500';
+            const barColor = pct >= 70 ? 'bg-aligned' : pct >= 40 ? 'bg-warning' : 'bg-danger';
             return (
               <div key={i} className="space-y-1">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-700">{item.issueName}</span>
-                  <span className={`text-xs font-bold ${pct >= 70 ? 'text-emerald-600' : pct >= 40 ? 'text-yellow-600' : 'text-red-600'}`}>
+                  <span className="text-dark-text">{item.issueName}</span>
+                  <span className={`text-xs font-bold ${pct >= 70 ? 'text-aligned' : pct >= 40 ? 'text-warning' : 'text-danger'}`}>
                     {pct}% aligned
                   </span>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-2">
+                <div className="w-full bg-white/10 rounded-full h-2">
                   <div className={`${barColor} h-2 rounded-full transition-all duration-500`} style={{ width: `${pct}%` }} />
                 </div>
               </div>
@@ -87,23 +87,23 @@ function ReportCard({ report }) {
       {/* Top Aligned / Worst Aligned */}
       <div className="grid grid-cols-2 gap-3">
         {topAligned && topAligned.length > 0 && (
-          <div className="bg-emerald-50 rounded-xl p-3 space-y-2">
-            <p className="text-[10px] text-emerald-600 uppercase font-bold">✅ Most Aligned</p>
+          <div className="glass-card rounded-xl p-3 space-y-2 border border-aligned/30 bg-aligned/10">
+            <p className="text-[10px] text-aligned uppercase font-bold">✅ Most Aligned</p>
             {topAligned.map((c, i) => (
               <div key={i} className="text-xs">
-                <p className="font-semibold text-emerald-800">{c.name}</p>
-                <p className="text-emerald-500">{c.score}% match</p>
+                <p className="font-semibold text-aligned">{c.name}</p>
+                <p className="text-aligned/70">{c.score}% match</p>
               </div>
             ))}
           </div>
         )}
         {worstAligned && worstAligned.length > 0 && (
-          <div className="bg-red-50 rounded-xl p-3 space-y-2">
-            <p className="text-[10px] text-red-600 uppercase font-bold">⚠️ Least Aligned</p>
+          <div className="glass-card rounded-xl p-3 space-y-2 border border-danger/30 bg-danger/10">
+            <p className="text-[10px] text-danger uppercase font-bold">⚠️ Least Aligned</p>
             {worstAligned.map((c, i) => (
               <div key={i} className="text-xs">
-                <p className="font-semibold text-red-800">{c.name}</p>
-                <p className="text-red-500">{c.score}% match</p>
+                <p className="font-semibold text-danger">{c.name}</p>
+                <p className="text-danger/70">{c.score}% match</p>
               </div>
             ))}
           </div>
@@ -112,12 +112,12 @@ function ReportCard({ report }) {
 
       {/* Industry Breakdown */}
       {spendingByIndustry && spendingByIndustry.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-lg p-4 space-y-2">
-          <p className="text-xs text-gray-400 uppercase font-semibold">Products by Industry</p>
+        <div className="glass-card rounded-2xl shadow-lg p-4 space-y-2 border border-dark-border">
+          <p className="text-xs text-dark-text-secondary uppercase font-semibold">Products by Industry</p>
           {spendingByIndustry.map((ind, i) => (
-            <div key={i} className="flex justify-between items-center text-sm py-1 border-b border-gray-50 last:border-0">
-              <span className="text-gray-600">{ind.name}</span>
-              <span className="text-xs text-gray-400">{ind.count} product{ind.count !== 1 ? 's' : ''}</span>
+            <div key={i} className="flex justify-between items-center text-sm py-1 border-b border-dark-border-subtle last:border-0">
+              <span className="text-dark-text-secondary">{ind.name}</span>
+              <span className="text-xs text-dark-text-muted">{ind.count} product{ind.count !== 1 ? 's' : ''}</span>
             </div>
           ))}
         </div>
@@ -153,7 +153,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-teal-200 border-t-teal-600" />
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-aligned/20 border-t-aligned" />
       </div>
     );
   }
@@ -164,32 +164,32 @@ export default function Dashboard() {
       <div className="p-4 space-y-4">
         <div className="text-center pt-4">
           <span className="text-5xl">📊</span>
-          <h2 className="text-xl font-bold text-teal-800 mt-2">Your Report Card</h2>
-          <p className="text-sm text-gray-400 mt-1">
+          <h2 className="text-xl font-bold text-gradient mt-2">Your Report Card</h2>
+          <p className="text-sm text-dark-text-secondary mt-1">
             Scan some products first, then we'll show you where your money is really going.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 text-center space-y-4">
+        <div className="glass-card rounded-2xl shadow-lg p-6 text-center space-y-4 border border-dark-border">
           <p className="text-4xl">🛒</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-dark-text-secondary">
             Every product you scan gets tracked. We'll build a picture of your shopping habits
             and show you a report card with your alignment scores.
           </p>
           <Link
             to="/"
-            className="inline-block px-6 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors"
+            className="inline-block px-6 py-3 bg-aligned text-white rounded-xl font-semibold hover:bg-aligned/90 transition-colors active:scale-95"
           >
             Start Scanning →
           </Link>
         </div>
 
         {!hasOnboarded && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
-            <p className="text-sm text-yellow-700">
+          <div className="glass-card border border-warning/30 rounded-xl p-4 text-center bg-warning/10">
+            <p className="text-sm text-warning">
               💡 <strong>Set up your values first</strong> to get personalized scores.
             </p>
-            <Link to="/onboarding" className="text-sm text-yellow-600 underline">Set up now →</Link>
+            <Link to="/onboarding" className="text-sm text-warning underline">Set up now →</Link>
           </div>
         )}
       </div>
@@ -199,8 +199,8 @@ export default function Dashboard() {
   return (
     <div className="p-4 space-y-4">
       <div className="text-center pt-2">
-        <h2 className="text-xl font-bold text-teal-800">📊 Your Report Card</h2>
-        <p className="text-xs text-gray-400">Where your money really goes</p>
+        <h2 className="text-xl font-bold text-gradient">📊 Your Report Card</h2>
+        <p className="text-xs text-dark-text-secondary">Where your money really goes</p>
       </div>
 
       {/* Period toggle */}
@@ -215,8 +215,8 @@ export default function Dashboard() {
             onClick={() => setPeriod(p.key)}
             className={`px-4 py-1.5 text-xs rounded-full font-semibold transition-colors ${
               period === p.key
-                ? 'bg-teal-600 text-white'
-                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                ? 'bg-aligned text-white'
+                : 'glass-card text-dark-text-secondary hover:bg-white/10'
             }`}
           >
             {p.label}
@@ -226,13 +226,13 @@ export default function Dashboard() {
 
       {/* Granular preferences nudge */}
       {hasOnboarded && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-center gap-3">
+        <div className="glass-card border border-aligned/30 rounded-xl p-3 flex items-center gap-3 bg-aligned/10">
           <span className="text-2xl">🎯</span>
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-blue-700 font-medium">Want more precise scores?</p>
-            <p className="text-[10px] text-blue-500">Set detailed stances on each issue in Settings</p>
+            <p className="text-xs text-aligned font-medium">Want more precise scores?</p>
+            <p className="text-[10px] text-aligned/70">Set detailed stances on each issue in Settings</p>
           </div>
-          <Link to="/settings" className="text-xs text-blue-600 font-bold shrink-0">Tune →</Link>
+          <Link to="/settings" className="text-xs text-aligned font-bold shrink-0">Tune →</Link>
         </div>
       )}
 
@@ -245,27 +245,27 @@ export default function Dashboard() {
 
       {/* Recent scans */}
       {history.length > 0 && (
-        <div className="bg-white rounded-2xl shadow-lg p-4 space-y-2">
+        <div className="glass-card rounded-2xl shadow-lg p-4 space-y-2 border border-dark-border">
           <div className="flex justify-between items-center">
-            <p className="text-xs text-gray-400 uppercase font-semibold">Recent Scans</p>
-            <Link to="/history" className="text-xs text-teal-600">See all →</Link>
+            <p className="text-xs text-dark-text-secondary uppercase font-semibold">Recent Scans</p>
+            <Link to="/history" className="text-xs text-aligned">See all →</Link>
           </div>
           {history.slice(0, 5).map((scan, i) => (
             <Link
               key={i}
               to={`/result/${scan.barcode || 'search-' + scan.parent_company}`}
-              className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 rounded-lg px-1 transition-colors"
+              className="flex items-center gap-3 py-2 border-b border-dark-border-subtle last:border-0 hover:bg-white/5 rounded-lg px-1 transition-colors"
             >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm shrink-0">📦</div>
+              <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center text-sm shrink-0">📦</div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{scan.product_name || scan.brand_name || 'Unknown'}</p>
-                <p className="text-[10px] text-gray-400">{scan.parent_company}</p>
+                <p className="text-sm font-medium truncate text-dark-text">{scan.product_name || scan.brand_name || 'Unknown'}</p>
+                <p className="text-[10px] text-dark-text-muted">{scan.parent_company}</p>
               </div>
               {scan.alignment_score != null && (
                 <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                  scan.alignment_score >= 70 ? 'bg-emerald-100 text-emerald-700' :
-                  scan.alignment_score >= 40 ? 'bg-yellow-100 text-yellow-700' :
-                  'bg-red-100 text-red-700'
+                  scan.alignment_score >= 70 ? 'bg-aligned/20 text-aligned' :
+                  scan.alignment_score >= 40 ? 'bg-warning/20 text-warning' :
+                  'bg-danger/20 text-danger'
                 }`}>
                   {Math.round(scan.alignment_score)}%
                 </span>
@@ -302,12 +302,12 @@ function LocalReportFromHistory({ history }) {
   const avgScore = scoredCount > 0 ? Math.round(totalScore / scoredCount) : 50;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-5 text-center space-y-3">
+    <div className="glass-card rounded-2xl shadow-lg p-5 text-center space-y-3 border border-dark-border">
       <ScoreRing score={avgScore} size={80} />
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-dark-text-secondary">
         Average alignment across {history.length} scan{history.length !== 1 ? 's' : ''}
       </p>
-      <p className="text-xs text-gray-300">
+      <p className="text-xs text-dark-text-muted">
         Scan more products to build a detailed report
       </p>
     </div>
@@ -329,17 +329,17 @@ function EmailReportCard() {
 
   if (submitted) {
     return (
-      <div className="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-center">
-        <p className="text-sm text-teal-700 font-medium">✅ Report emails set up!</p>
-        <p className="text-xs text-teal-500">We'll send your {frequency} report card to {email}</p>
+      <div className="glass-card border border-aligned/30 rounded-2xl p-4 text-center bg-aligned/10">
+        <p className="text-sm text-aligned font-medium">✅ Report emails set up!</p>
+        <p className="text-xs text-aligned/70">We'll send your {frequency} report card to {email}</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-4 space-y-3">
-      <p className="text-xs text-gray-400 uppercase font-semibold">📧 Get Report Cards by Email</p>
-      <p className="text-xs text-gray-500">
+    <div className="glass-card rounded-2xl shadow-lg p-4 space-y-3 border border-dark-border">
+      <p className="text-xs text-dark-text-secondary uppercase font-semibold">📧 Get Report Cards by Email</p>
+      <p className="text-xs text-dark-text-secondary">
         We'll send you a summary of where your money went and suggest better alternatives.
       </p>
       <form onSubmit={handleSubmit} className="space-y-2">
@@ -348,7 +348,7 @@ function EmailReportCard() {
             type="button"
             onClick={() => setFrequency('weekly')}
             className={`flex-1 py-2 text-xs rounded-lg font-semibold transition-colors ${
-              frequency === 'weekly' ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-500'
+              frequency === 'weekly' ? 'bg-aligned text-white' : 'glass-card text-dark-text-secondary'
             }`}
           >
             Weekly
@@ -357,7 +357,7 @@ function EmailReportCard() {
             type="button"
             onClick={() => setFrequency('monthly')}
             className={`flex-1 py-2 text-xs rounded-lg font-semibold transition-colors ${
-              frequency === 'monthly' ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-500'
+              frequency === 'monthly' ? 'bg-aligned text-white' : 'glass-card text-dark-text-secondary'
             }`}
           >
             Monthly
@@ -370,11 +370,11 @@ function EmailReportCard() {
             onChange={e => setEmail(e.target.value)}
             placeholder="your@email.com"
             required
-            className="flex-1 px-3 py-2 text-sm rounded-lg border border-gray-300 focus:border-teal-500 outline-none"
+            className="flex-1 px-3 py-2 text-sm rounded-lg bg-white/5 border border-white/10 text-white focus:border-aligned outline-none placeholder-dark-text-muted"
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-teal-600 text-white text-sm rounded-lg font-semibold hover:bg-teal-700 transition-colors"
+            className="px-4 py-2 bg-aligned text-white text-sm rounded-lg font-semibold hover:bg-aligned/90 transition-colors active:scale-95"
           >
             Subscribe
           </button>

@@ -3,7 +3,7 @@ export default function About() {
     <div className="p-4 space-y-4 max-w-prose mx-auto">
       <div className="text-center pt-2">
         <div className="text-5xl mb-2">🗳️</div>
-        <h2 className="text-xl font-bold text-teal-800">About DollarVote</h2>
+        <h2 className="text-xl font-bold text-gradient">About DollarVote</h2>
       </div>
 
       {/* Mission Statement */}
@@ -12,14 +12,14 @@ export default function About() {
           "I want to spend my money with companies that use the profits gained from me
           for investments in values that matter to me."
         </p>
-        <p className="text-teal-200 text-sm mt-3 font-semibold">
+        <p className="text-aligned/70 text-sm mt-3 font-semibold">
           Shift your dollars to match your values.
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg p-5 space-y-4 text-sm text-gray-700 leading-relaxed">
+      <div className="glass-card rounded-2xl shadow-lg p-5 space-y-4 text-sm text-dark-text leading-relaxed">
         <section>
-          <h3 className="font-bold text-teal-800 mb-1">What is this?</h3>
+          <h3 className="font-bold text-gradient mb-1">What is this?</h3>
           <p>
             <strong>Vote With Your Dollar</strong> helps you shift your spending to companies
             that share your values. Scan a product barcode to discover who really profits from
@@ -28,7 +28,7 @@ export default function About() {
         </section>
 
         <section>
-          <h3 className="font-bold text-teal-800 mb-1">How it works</h3>
+          <h3 className="font-bold text-gradient mb-1">How it works</h3>
           <ol className="list-decimal ml-4 space-y-1">
             <li>Tell us what values matter to you during onboarding</li>
             <li>Scan a product barcode (or search by brand)</li>
@@ -39,7 +39,7 @@ export default function About() {
         </section>
 
         <section>
-          <h3 className="font-bold text-teal-800 mb-1">Data Sources</h3>
+          <h3 className="font-bold text-gradient mb-1">Data Sources</h3>
           <ul className="list-disc ml-4 space-y-1">
             <li><strong>Product data:</strong> Open Food Facts, UPCitemdb</li>
             <li><strong>Company/brand mapping:</strong> Curated database of 100+ parent companies and 600+ brands</li>
@@ -49,7 +49,7 @@ export default function About() {
         </section>
 
         <section>
-          <h3 className="font-bold text-teal-800 mb-1">Limitations</h3>
+          <h3 className="font-bold text-gradient mb-1">Limitations</h3>
           <ul className="list-disc ml-4 space-y-1">
             <li>Company stances are simplified — reality is nuanced</li>
             <li>Not all companies have US-registered PACs</li>
@@ -59,7 +59,7 @@ export default function About() {
         </section>
 
         <section>
-          <h3 className="font-bold text-teal-800 mb-1">Privacy</h3>
+          <h3 className="font-bold text-gradient mb-1">Privacy</h3>
           <p>
             Your belief profile is stored locally and synced to your account when signed in.
             Scan history is saved to help you track your shopping habits over time.
@@ -68,7 +68,7 @@ export default function About() {
         </section>
       </div>
 
-      <p className="text-center text-xs text-gray-400 pb-4">
+      <p className="text-center text-xs text-dark-text-secondary pb-4">
         Built with ❤️ for conscious consumers everywhere.
       </p>
     </div>
