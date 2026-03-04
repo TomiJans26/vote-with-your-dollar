@@ -321,8 +321,11 @@ export default function Result() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl shadow-lg p-5 text-center text-gray-500 text-sm">
-          <p>🔍 Parent company not identified</p>
-          <p className="text-xs mt-1">This product's brand may not be in our database yet.</p>
+          <p>🔍 Researching this brand now...</p>
+          <p className="text-xs mt-1">We're looking up this company across news, public records, and government filings. Check back shortly!</p>
+          <div className="mt-3 animate-pulse flex justify-center">
+            <div className="h-2 w-32 bg-teal-200 rounded"></div>
+          </div>
         </div>
       )}
 

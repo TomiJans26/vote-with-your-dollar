@@ -294,10 +294,14 @@ def scan_product(upc: str, authorization: str = Header(None), db: Session = Depe
     political = get_company_political_data(parent_company["id"]) if parent_company else None
     company_issues = _company_issues_data.get(parent_company["id"], {}).get("issues", {}) if parent_company else {}
 
-    # Auto-queue unknown scans to research queue
+    # Auto-lookup unknown brands — research live, never show "we don't know"
     if not parent_company:
         from admin import add_to_research_queue
         add_to_research_queue(db, brand_name=product.get("brand"), barcode=upc)
+        # Trigger background on-demand lookup so next scan has data
+        from on_demand import trigger_background_lookup
+        from database import SessionLocal
+        trigger_background_lookup(product.get("brand", ""), upc, SessionLocal)
 
     # Save scan history if authenticated
     user = auth_optional(authorization, db)
