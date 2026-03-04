@@ -6,56 +6,26 @@ import { addToShoppingList } from './ShoppingList';
 import DonationBar from '../components/DonationBar';
 import AlignmentBadge from '../components/AlignmentBadge';
 import IssueBreakdown from '../components/IssueBreakdown';
+import { ExternalLink, Share2, Plus, Search, Ban, ShoppingCart, Store, Package } from 'lucide-react';
 
 function AlignmentHero({ score, beliefResult, companyName, political }) {
-  let pct, label, emoji;
-  if (beliefResult) {
-    if (beliefResult.dealBreakerHit) {
-      pct = 0;
-      label = 'Deal Breaker';
-      emoji = '🚫';
-    } else {
-      pct = beliefResult.pct ?? Math.round(((beliefResult.score + 1) / 2) * 100);
-      label = 'Aligned with your values';
-      emoji = pct >= 70 ? '🟢' : pct >= 40 ? '🟡' : '🔴';
-    }
-  } else {
-    pct = Math.round(((score + 1) / 2) * 100);
-    label = 'Aligned with your values';
-    emoji = pct >= 70 ? '🟢' : pct >= 40 ? '🟡' : '🔴';
-  }
-
-  const getColor = (p) => {
-    if (beliefResult?.dealBreakerHit) return 'from-red-600 to-red-800';
-    if (p >= 70) return 'from-emerald-500 to-emerald-700';
-    if (p >= 50) return 'from-yellow-500 to-amber-600';
-    if (p >= 30) return 'from-orange-500 to-orange-700';
-    return 'from-red-500 to-red-700';
-  };
-
-  // Plain english summary
-  let summary = '';
-  if (political?.donations?.total > 0) {
-    const total = political.donations.total;
-    summary = `${companyName} donated $${total.toLocaleString()} to political causes`;
-  }
+  const isDealBreaker = beliefResult?.dealBreakerHit;
+  const pct = isDealBreaker ? 0 : (beliefResult?.pct ?? Math.round(((score + 1) / 2) * 100));
 
   return (
-    <div className={`bg-gradient-to-br ${getColor(pct)} rounded-2xl p-6 text-white text-center shadow-lg`}>
-      <div className="text-5xl font-black mb-1">
-        {beliefResult?.dealBreakerHit ? emoji : `${pct}%`}
-      </div>
-      <p className="text-lg font-bold tracking-wide">
-        {beliefResult?.dealBreakerHit ? 'Deal Breaker' : label}
-      </p>
-      {beliefResult && !beliefResult.dealBreakerHit && beliefResult.label && (
-        <p className="text-sm text-white/80 mt-1">{beliefResult.label}</p>
-      )}
-      {beliefResult?.dealBreakerHit && (
-        <p className="text-sm text-white/80 mt-1">This company conflicts with one of your deal-breaker issues</p>
-      )}
-      {summary && (
-        <p className="text-xs text-white/60 mt-2">{summary}</p>
+    <div className={`glass-card rounded-3xl p-8 text-center shadow-2xl border transition-all ${
+      isDealBreaker 
+        ? 'border-danger/50 glow-red' 
+        : pct >= 70 
+          ? 'border-aligned/50 glow-green' 
+          : 'border-warning/50'
+    }`}>
+      <AlignmentBadge alignment={score} beliefResult={beliefResult} showRing={true} />
+      
+      {political?.donations?.total > 0 && (
+        <p className="text-xs text-dark-text-secondary mt-4">
+          {companyName} donated <span className="font-bold text-dark-text">${political.donations.total.toLocaleString()}</span> to political causes
+        </p>
       )}
     </div>
   );
@@ -64,37 +34,45 @@ function AlignmentHero({ score, beliefResult, companyName, political }) {
 function StoreDropdown({ storeLinks, brand, companyId, originalCompanyId }) {
   const [open, setOpen] = useState(false);
   const stores = [
-    { key: 'walmart', label: '🏬 Walmart', url: storeLinks.walmart },
-    { key: 'target', label: '🎯 Target', url: storeLinks.target },
-    { key: 'kroger', label: '🛒 Kroger', url: storeLinks.kroger },
+    { key: 'walmart', label: 'Walmart', url: storeLinks.walmart },
+    { key: 'target', label: 'Target', url: storeLinks.target },
+    { key: 'kroger', label: 'Kroger', url: storeLinks.kroger },
   ];
 
   return (
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-1 px-4 py-2 bg-indigo-500 text-white text-xs font-semibold rounded-lg hover:bg-indigo-600 active:bg-indigo-700 transition-colors"
+        className="inline-flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl text-sm font-semibold hover:bg-white/10 transition-all border border-dark-border group"
       >
-        🏪 Find in Store {open ? '▲' : '▼'}
+        <Store size={16} className="group-hover:scale-110 transition-transform" />
+        Find in Store
       </button>
       {open && (
-        <div className="absolute left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-200 z-10 min-w-[160px] overflow-hidden">
-          {stores.map((s) => (
-            <a
-              key={s.key}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                trackClick(brand, companyId, originalCompanyId, s.key);
-                setOpen(false);
-              }}
-              className="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 active:bg-teal-100 hover:text-teal-700 transition-colors border-b border-gray-100 last:border-0"
-            >
-              {s.label}
-            </a>
-          ))}
-        </div>
+        <>
+          {/* Backdrop */}
+          <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+          {/* Dropdown */}
+          <div className="absolute left-0 mt-2 glass-card rounded-2xl shadow-2xl border border-dark-border z-20 min-w-[180px] overflow-hidden">
+            {stores.map((s, i) => (
+              <a
+                key={s.key}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  trackClick(brand, companyId, originalCompanyId, s.key);
+                  setOpen(false);
+                }}
+                className={`block px-4 py-3 text-sm text-dark-text-secondary hover:text-dark-text hover:bg-white/10 transition-colors ${
+                  i < stores.length - 1 ? 'border-b border-dark-border-subtle' : ''
+                }`}
+              >
+                {s.label}
+              </a>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
@@ -111,11 +89,23 @@ function AddToListButton({ item }) {
   return (
     <button
       onClick={handleAdd}
-      className={`inline-block px-6 py-2.5 rounded-xl font-semibold transition-all active:scale-95 ${
-        added ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white hover:bg-amber-600 active:bg-amber-700'
+      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all active:scale-95 ${
+        added 
+          ? 'bg-aligned text-white shadow-lg shadow-aligned/30' 
+          : 'glass-card hover:bg-white/10 border border-dark-border'
       }`}
     >
-      {added ? '✓ Added!' : '📝 Add to List'}
+      {added ? (
+        <>
+          <Plus size={16} strokeWidth={3} />
+          Added!
+        </>
+      ) : (
+        <>
+          <ShoppingCart size={16} />
+          Add to List
+        </>
+      )}
     </button>
   );
 }
@@ -156,9 +146,16 @@ function ShareButton({ product, parentCompany, beliefResult }) {
   return (
     <button
       onClick={handleShare}
-      className="inline-block px-6 py-2.5 bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-600 active:bg-indigo-700 active:scale-95 transition-all"
+      className="inline-flex items-center gap-2 px-5 py-2.5 glass-card rounded-xl font-semibold hover:bg-white/10 transition-all active:scale-95 border border-dark-border"
     >
-      {copied ? '✓ Copied!' : '📤 Share'}
+      {copied ? (
+        <>✓ Copied!</>
+      ) : (
+        <>
+          <Share2 size={16} />
+          Share
+        </>
+      )}
     </button>
   );
 }
@@ -166,22 +163,18 @@ function ShareButton({ product, parentCompany, beliefResult }) {
 // Skeleton loader
 function ResultSkeleton() {
   return (
-    <div className="p-4 space-y-4 animate-pulse">
-      <div className="bg-white rounded-2xl shadow-lg p-5">
-        <div className="flex gap-4 items-start">
-          <div className="w-20 h-20 bg-gray-200 rounded-xl" />
-          <div className="flex-1 space-y-3 pt-1">
-            <div className="h-4 bg-gray-200 rounded w-3/4" />
-            <div className="h-3 bg-gray-100 rounded w-1/2" />
+    <div className="p-4 space-y-4">
+      {[1, 2, 3].map(i => (
+        <div key={i} className="glass-card rounded-3xl p-6 animate-pulse">
+          <div className="flex gap-4 items-start">
+            <div className="w-20 h-20 bg-white/10 rounded-2xl shrink-0" />
+            <div className="flex-1 space-y-3 pt-1">
+              <div className="h-4 bg-white/10 rounded-full w-3/4" />
+              <div className="h-3 bg-white/5 rounded-full w-1/2" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="h-32 bg-gray-200 rounded-2xl" />
-      <div className="bg-white rounded-2xl shadow-lg p-5 space-y-3">
-        <div className="h-3 bg-gray-200 rounded w-1/3" />
-        <div className="h-5 bg-gray-200 rounded w-1/2" />
-        <div className="h-20 bg-gray-100 rounded-xl" />
-      </div>
+      ))}
     </div>
   );
 }
@@ -216,20 +209,26 @@ export default function Result() {
 
   if (error) {
     return (
-      <div className="p-6 text-center space-y-4">
-        <div className="text-5xl">😕</div>
-        <h2 className="text-lg font-bold text-gray-800">We couldn't find that product</h2>
-        <p className="text-sm text-gray-600">
-          {error.includes('404') || error.includes('not found')
-            ? "This product isn't in our database yet."
-            : 'Something went wrong. Please try again.'}
-        </p>
-        <div className="pt-2 space-y-2">
-          <Link to="/" className="inline-block px-6 py-2.5 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 active:bg-teal-800 transition-colors">
-            🔍 Search by Brand
+      <div className="p-6 text-center space-y-6 animate-slideUp">
+        <div className="text-6xl pt-8">😕</div>
+        <div>
+          <h2 className="text-2xl font-black text-dark-text mb-2">Not found</h2>
+          <p className="text-sm text-dark-text-secondary max-w-xs mx-auto">
+            {error.includes('404') || error.includes('not found')
+              ? "This product isn't in our database yet."
+              : 'Something went wrong. Please try again.'}
+          </p>
+        </div>
+        <div className="pt-4">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-full font-bold hover:shadow-2xl hover:shadow-aligned/30 transition-all active:scale-95"
+          >
+            <Search size={20} />
+            Search by Brand
           </Link>
-          <p className="text-xs text-gray-400">
-            Try searching by brand name — we track 100+ companies and 600+ brands!
+          <p className="text-xs text-dark-text-muted mt-4">
+            Try searching by brand name — we track 100+ companies!
           </p>
         </div>
       </div>
@@ -247,22 +246,24 @@ export default function Result() {
     : null;
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-5 pb-safe animate-slideUp">
       {/* Product card */}
-      <div className="bg-white rounded-2xl shadow-lg p-5">
+      <div className="glass-card rounded-3xl p-5 border border-dark-border">
         <div className="flex gap-4 items-start">
           {product.image ? (
             <img
               src={product.image}
               alt=""
               onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling && (e.target.nextSibling.style.display = 'flex'); }}
-              className="w-20 h-20 object-contain rounded-xl bg-gray-50 shrink-0"
+              className="w-24 h-24 object-contain rounded-2xl bg-dark-bg-elevated shrink-0 border border-dark-border-subtle"
             />
           ) : null}
-          <div className="w-20 h-20 bg-gray-100 rounded-xl items-center justify-center text-3xl shrink-0" style={{ display: product.image ? 'none' : 'flex' }}>📦</div>
-          <div className="flex-1">
-            <h2 className="font-bold text-lg leading-tight break-words">{product.name || 'Unknown Product'}</h2>
-            {product.brand && <p className="text-sm text-gray-500 mt-1">{product.brand}</p>}
+          <div className="w-24 h-24 bg-dark-bg-elevated rounded-2xl items-center justify-center shrink-0 border border-dark-border-subtle" style={{ display: product.image ? 'none' : 'flex' }}>
+            <Package size={32} className="text-dark-text-muted" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="font-black text-lg leading-tight break-words text-dark-text">{product.name || 'Unknown Product'}</h2>
+            {product.brand && <p className="text-sm text-dark-text-secondary mt-1.5">{product.brand}</p>}
           </div>
         </div>
       </div>
@@ -279,13 +280,13 @@ export default function Result() {
 
       {/* Parent company details */}
       {parentCompany ? (
-        <div className="bg-white rounded-2xl shadow-lg p-5 space-y-3">
+        <div className="glass-card rounded-3xl p-5 space-y-4 border border-dark-border">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase text-gray-400 font-semibold">Parent Company</p>
-              <h3 className="font-bold text-lg">{parentCompany.name}</h3>
+              <p className="text-xs uppercase text-dark-text-muted font-bold tracking-wider">Parent Company</p>
+              <h3 className="font-black text-xl text-dark-text mt-1">{parentCompany.name}</h3>
               {parentCompany.ticker && (
-                <span className="text-xs text-gray-400">{parentCompany.ticker}</span>
+                <span className="text-xs text-dark-text-muted font-medium">{parentCompany.ticker}</span>
               )}
             </div>
             <AlignmentBadge alignment={oldAlignment} beliefResult={beliefResult} />
@@ -300,11 +301,11 @@ export default function Result() {
             />
           )}
 
-          {/* Plain English donation summary */}
+          {/* Political donations */}
           {political && political.donations?.total > 0 && (
-            <div className="bg-gray-50 rounded-xl p-3 space-y-1">
-              <p className="text-sm font-semibold text-gray-700">
-                💰 {parentCompany.name} donated ${(political.donations.total).toLocaleString()} to political causes
+            <div className="glass-card rounded-2xl p-4 space-y-2 border border-dark-border-subtle">
+              <p className="text-sm font-bold text-dark-text">
+                💰 Political Donations: <span className="text-aligned">${(political.donations.total).toLocaleString()}</span>
               </p>
               {political.donations.percentDem != null && political.donations.percentRep != null && (
                 <DonationBar percentDem={political.donations.percentDem} percentRep={political.donations.percentRep} />
@@ -314,65 +315,101 @@ export default function Result() {
 
           {/* No issue data notice */}
           {useBeliefs && (!companyIssues || Object.keys(companyIssues).length === 0) && (
-            <p className="text-xs text-gray-400 italic bg-gray-50 rounded-lg p-2">
+            <p className="text-xs text-dark-text-muted italic glass-card rounded-xl p-3 border border-dark-border-subtle">
               We don't have detailed issue data for this company yet. Score is based on PAC donations only.
             </p>
           )}
         </div>
       ) : (
-        <div className="bg-white rounded-2xl shadow-lg p-5 text-center text-gray-500 text-sm">
-          <p>🔍 Researching this brand now...</p>
-          <p className="text-xs mt-1">We're looking up this company across news, public records, and government filings. Check back shortly!</p>
-          <div className="mt-3 animate-pulse flex justify-center">
-            <div className="h-2 w-32 bg-teal-200 rounded"></div>
+        <div className="glass-card rounded-3xl p-6 text-center border border-dark-border">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-aligned/10 flex items-center justify-center">
+            <Search size={32} className="text-aligned/50 animate-pulse" />
           </div>
+          <p className="text-sm font-semibold text-dark-text mb-2">Researching this brand...</p>
+          <p className="text-xs text-dark-text-secondary">
+            We're looking up this company across news, public records, and government filings. Check back shortly!
+          </p>
         </div>
       )}
 
-      {/* Alternatives — prominent header */}
-      {alts.length > 0 ? (
+      {/* Alternatives */}
+      {alts.length > 0 && (
         <div className="space-y-3">
-          <div className="bg-teal-50 rounded-xl px-4 py-3">
-            <h3 className="font-bold text-base text-teal-800">Try these instead</h3>
-            <p className="text-xs text-teal-600">Products that better match your values</p>
+          <div className="glass-card rounded-2xl px-5 py-4 border border-aligned/30 bg-aligned/5">
+            <h3 className="font-black text-base text-aligned mb-1">Try these instead</h3>
+            <p className="text-xs text-dark-text-secondary">Better aligned with your values</p>
           </div>
-          {alts.map((alt, i) => {
-            const pct = alt.alignment?.pct ?? 50;
-            const badgeColor = alt.alignment?.dealBreakerHit ? 'bg-red-500' : pct >= 70 ? 'bg-emerald-500' : pct >= 40 ? 'bg-yellow-500' : 'bg-red-400';
-            return (
-              <div key={alt.barcode || alt.parentCompany?.id || i} className="bg-white rounded-2xl shadow-lg p-4 border-l-4 border-teal-500">
-                <div className="flex gap-3 items-start">
-                  {alt.image ? (
-                    <img src={alt.image} alt="" className="w-14 h-14 object-contain rounded-lg bg-gray-50 shrink-0" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling && (e.target.nextSibling.style.display = 'flex'); }} />
-                  ) : null}
-                  <div className="w-14 h-14 bg-gray-100 rounded-lg items-center justify-center text-2xl shrink-0" style={{ display: alt.image ? 'none' : 'flex' }}>📦</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="font-semibold text-sm leading-tight truncate">{alt.name || alt.brand || 'Alternative'}</p>
-                        {alt.brand && alt.brand !== alt.name && <p className="text-xs text-gray-500 truncate">{alt.brand}</p>}
-                        {alt.parentCompany && <p className="text-xs text-gray-400">{alt.parentCompany.name}</p>}
+          
+          <div className="space-y-3">
+            {alts.map((alt, i) => {
+              const pct = alt.alignment?.pct ?? 50;
+              const isDealBreaker = alt.alignment?.dealBreakerHit;
+              
+              return (
+                <div 
+                  key={alt.barcode || alt.parentCompany?.id || i} 
+                  className={`glass-card rounded-3xl p-4 border-l-4 transition-all ${
+                    isDealBreaker ? 'border-danger glow-red' : pct >= 70 ? 'border-aligned glow-green' : 'border-warning'
+                  } border border-dark-border`}
+                >
+                  <div className="flex gap-3 items-start mb-3">
+                    {alt.image ? (
+                      <img 
+                        src={alt.image} 
+                        alt="" 
+                        className="w-16 h-16 object-contain rounded-2xl bg-dark-bg-elevated shrink-0 border border-dark-border-subtle" 
+                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling && (e.target.nextSibling.style.display = 'flex'); }} 
+                      />
+                    ) : null}
+                    <div className="w-16 h-16 bg-dark-bg-elevated rounded-2xl items-center justify-center shrink-0 border border-dark-border-subtle" style={{ display: alt.image ? 'none' : 'flex' }}>
+                      <Package size={24} className="text-dark-text-muted" />
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div className="min-w-0 flex-1">
+                          <p className="font-bold text-sm leading-tight text-dark-text truncate">
+                            {alt.name || alt.brand || 'Alternative'}
+                          </p>
+                          {alt.brand && alt.brand !== alt.name && (
+                            <p className="text-xs text-dark-text-secondary truncate">{alt.brand}</p>
+                          )}
+                          {alt.parentCompany && (
+                            <p className="text-xs text-dark-text-muted">{alt.parentCompany.name}</p>
+                          )}
+                        </div>
+                        
+                        <div className={`shrink-0 font-black text-sm px-3 py-1.5 rounded-full ${
+                          isDealBreaker ? 'bg-danger text-white' :
+                          pct >= 70 ? 'bg-aligned text-white' :
+                          pct >= 40 ? 'bg-warning text-white' :
+                          'bg-danger text-white'
+                        }`}>
+                          {isDealBreaker ? <Ban size={14} /> : `${pct}%`}
+                        </div>
                       </div>
-                      <span className={`${badgeColor} text-white text-sm font-bold px-3 py-1 rounded-full shrink-0`}>
-                        {alt.alignment?.dealBreakerHit ? '🚫' : `${pct}%`}
-                      </span>
                     </div>
                   </div>
-                </div>
-                {alt.alignment?.reasons?.length > 0 && (
-                  <div className="mt-2 space-y-1 pl-1">
-                    {alt.alignment.reasons.slice(0, 3).map((reason, ri) => (
-                      <p key={ri} className="text-xs text-gray-600 leading-snug">{reason}</p>
-                    ))}
-                  </div>
-                )}
-                <div className="mt-3 space-y-2">
+                  
+                  {alt.alignment?.reasons?.length > 0 && (
+                    <div className="mb-3 space-y-1 px-2 py-2 glass-card rounded-xl border border-dark-border-subtle">
+                      {alt.alignment.reasons.slice(0, 2).map((reason, ri) => (
+                        <p key={ri} className="text-xs text-dark-text-secondary leading-relaxed">{reason}</p>
+                      ))}
+                    </div>
+                  )}
+                  
                   <div className="flex flex-wrap gap-2">
                     {alt.buyLink && (
-                      <a href={alt.buyLink} target="_blank" rel="noopener noreferrer"
+                      <a 
+                        href={alt.buyLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
                         onClick={() => trackClick(alt.brand || alt.name, alt.parentCompany?.id || '', parentCompany?.id || '', 'amazon')}
-                        className="inline-flex items-center gap-1 px-4 py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg hover:bg-teal-700 active:bg-teal-800 transition-colors">
-                        📦 Order Online
+                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-aligned text-white text-xs font-bold rounded-xl hover:bg-aligned/90 active:scale-95 transition-all shadow-lg shadow-aligned/20"
+                      >
+                        <ExternalLink size={14} />
+                        Order Online
                       </a>
                     )}
                     {alt.storeLinks && (
@@ -388,46 +425,43 @@ export default function Result() {
                       brand: alt.brand,
                       barcode: alt.barcode || null,
                       companyName: alt.parentCompany?.name || '',
-                      alignmentPct: alt.alignment?.dealBreakerHit ? 0 : (alt.alignment?.pct ?? 50),
-                      dealBreaker: alt.alignment?.dealBreakerHit || false,
+                      alignmentPct: isDealBreaker ? 0 : pct,
+                      dealBreaker: isDealBreaker,
                       buyLink: alt.buyLink || null,
                     }} />
                   </div>
-                  <span className="text-[10px] text-gray-300">affiliate link</span>
+                  <span className="text-[9px] text-dark-text-muted mt-2 block">affiliate link</span>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : !loading && parentCompany && (
-        <div className="bg-white rounded-2xl shadow p-5 text-center text-sm text-gray-500">
-          <p>We couldn't find alternatives in our database yet.</p>
+              );
+            })}
+          </div>
         </div>
       )}
 
-      {/* Actions: Share + Add to List + Scan Again */}
-      <div className="flex flex-wrap justify-center gap-2 pt-2 pb-4">
+      {/* Actions */}
+      <div className="flex flex-wrap justify-center gap-2 pt-4">
         {parentCompany && (
-          <ShareButton product={product} parentCompany={parentCompany} beliefResult={beliefResult} />
-        )}
-        {parentCompany && (
-          <AddToListButton
-            item={{
-              name: product.name || product.brand || 'Unknown Product',
-              brand: product.brand,
-              barcode: upc.startsWith('search-') ? null : upc,
-              companyName: parentCompany.name,
-              alignmentPct: beliefResult?.dealBreakerHit ? 0 : (beliefResult?.pct ?? Math.round(((oldAlignment + 1) / 2) * 100)),
-              dealBreaker: beliefResult?.dealBreakerHit || false,
-              buyLink: null,
-            }}
-          />
+          <>
+            <ShareButton product={product} parentCompany={parentCompany} beliefResult={beliefResult} />
+            <AddToListButton
+              item={{
+                name: product.name || product.brand || 'Unknown Product',
+                brand: product.brand,
+                barcode: upc.startsWith('search-') ? null : upc,
+                companyName: parentCompany.name,
+                alignmentPct: beliefResult?.dealBreakerHit ? 0 : (beliefResult?.pct ?? Math.round(((oldAlignment + 1) / 2) * 100)),
+                dealBreaker: beliefResult?.dealBreakerHit || false,
+                buyLink: null,
+              }}
+            />
+          </>
         )}
         <Link
           to="/"
-          className="inline-block px-6 py-2.5 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 active:bg-teal-800 active:scale-95 transition-all"
+          className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-aligned to-aligned/80 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-aligned/20 transition-all active:scale-95"
         >
-          🔍 Search Another
+          <Search size={16} />
+          Search Another
         </Link>
       </div>
     </div>

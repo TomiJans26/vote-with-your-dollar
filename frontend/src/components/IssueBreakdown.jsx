@@ -1,4 +1,5 @@
 import { ALL_ISSUES } from '../lib/issues';
+import { ExternalLink } from 'lucide-react';
 
 export default function IssueBreakdown({ triggers, companyIssues, beliefProfile }) {
   if ((!triggers || triggers.length === 0) && !companyIssues) return null;
@@ -68,16 +69,16 @@ export default function IssueBreakdown({ triggers, companyIssues, beliefProfile 
   if (items.length === 0) return null;
 
   return (
-    <div className="space-y-2 mt-3">
-      <p className="text-xs uppercase text-gray-400 font-semibold tracking-wide">
-        📊 Issues we have data on
+    <div className="space-y-3 mt-4">
+      <p className="text-xs uppercase text-dark-text-muted font-bold tracking-wider px-1">
+        Issue Breakdown
       </p>
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         {items.map((item, i) => (
           <IssueBar key={item.issueId || i} item={item} />
         ))}
       </div>
-      <p className="text-[10px] text-gray-400 italic pt-1">
+      <p className="text-[10px] text-dark-text-muted italic pt-2 px-1">
         Scores based on publicly available records. Tap sources to verify.
       </p>
     </div>
@@ -93,32 +94,32 @@ function IssueBar({ item }) {
   // Color based on alignment percentage
   let barColor, bgColor, borderColor, textColor;
   if (isDealBreaker && type === 'dealbreaker') {
-    barColor = 'bg-red-500';
-    bgColor = 'bg-red-50';
-    borderColor = 'border-red-300';
-    textColor = 'text-red-800';
+    barColor = 'bg-danger';
+    bgColor = 'bg-danger/10';
+    borderColor = 'border-danger/30';
+    textColor = 'text-danger';
   } else if (alignmentPct >= 70) {
-    barColor = 'bg-emerald-500';
-    bgColor = 'bg-emerald-50/50';
-    borderColor = 'border-emerald-200';
-    textColor = 'text-emerald-800';
+    barColor = 'bg-aligned';
+    bgColor = 'bg-aligned/5';
+    borderColor = 'border-aligned/20';
+    textColor = 'text-aligned';
   } else if (alignmentPct >= 40) {
-    barColor = 'bg-yellow-500';
-    bgColor = 'bg-yellow-50/50';
-    borderColor = 'border-yellow-200';
-    textColor = 'text-yellow-800';
+    barColor = 'bg-warning';
+    bgColor = 'bg-warning/5';
+    borderColor = 'border-warning/20';
+    textColor = 'text-warning';
   } else {
-    barColor = 'bg-orange-500';
-    bgColor = 'bg-orange-50/50';
-    borderColor = 'border-orange-200';
-    textColor = 'text-orange-800';
+    barColor = 'bg-danger';
+    bgColor = 'bg-danger/5';
+    borderColor = 'border-danger/20';
+    textColor = 'text-danger';
   }
 
   if (!hasData) {
-    barColor = 'bg-gray-300';
-    bgColor = 'bg-gray-50/50';
-    borderColor = 'border-gray-200';
-    textColor = 'text-gray-500';
+    barColor = 'bg-white/20';
+    bgColor = 'bg-white/5';
+    borderColor = 'border-dark-border';
+    textColor = 'text-dark-text-secondary';
   }
 
   // Confidence indicator
@@ -134,57 +135,63 @@ function IssueBar({ item }) {
   };
 
   return (
-    <div className={`rounded-lg border p-2.5 ${bgColor} ${borderColor}`}>
-      <div className="flex items-center justify-between mb-1">
-        <div className="flex items-center gap-1.5 min-w-0">
-          <span className="text-sm shrink-0">{emoji}</span>
-          <span className={`text-xs font-semibold truncate ${textColor}`}>{issueName}</span>
+    <div className={`glass-card rounded-2xl border p-3.5 ${bgColor} ${borderColor} transition-all hover:bg-white/10`}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+          <span className="text-base shrink-0">{emoji}</span>
+          <span className={`text-sm font-bold truncate ${textColor}`}>{issueName}</span>
           {isDealBreaker && (
-            <span className="shrink-0 text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded-full font-bold leading-none">
-              DEAL BREAKER
+            <span className="shrink-0 text-[9px] bg-danger text-white px-2 py-0.5 rounded-full font-black leading-none uppercase tracking-wide">
+              Deal Breaker
             </span>
           )}
         </div>
-        <span className="text-[10px] text-gray-400 shrink-0 ml-1" title={`Confidence: ${confidence}`}>
+        <span className="text-[10px] text-dark-text-muted shrink-0 ml-2" title={`Confidence: ${confidence}`}>
           {confidenceDots}
         </span>
       </div>
 
-      {/* Alignment bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+      {/* Alignment bar with glass effect */}
+      <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden backdrop-blur-sm">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
-          style={{ width: `${barWidth}%` }}
+          className={`h-full rounded-full transition-all duration-700 ease-out ${barColor}`}
+          style={{ 
+            width: `${barWidth}%`,
+            boxShadow: `0 0 10px ${barColor === 'bg-aligned' ? 'rgba(16, 185, 129, 0.4)' : barColor === 'bg-danger' ? 'rgba(239, 68, 68, 0.4)' : 'rgba(245, 158, 11, 0.4)'}`
+          }}
         />
       </div>
 
       {/* Stance + alignment % */}
-      <div className="flex items-center justify-between mt-1">
-        <span className="text-[10px] text-gray-500">
+      <div className="flex items-center justify-between mt-2">
+        <span className="text-[11px] text-dark-text-secondary font-medium">
           {stanceLabel(companyStance)}
           {importance > 0 && hasData && ` · ${alignmentPct}% aligned`}
         </span>
-        <span className={`text-[10px] font-medium ${
-          type === 'aligned' ? 'text-emerald-600' : 
-          type === 'misaligned' || type === 'dealbreaker' ? 'text-red-600' : 
-          'text-gray-400'
+        <span className={`text-[11px] font-bold ${
+          type === 'aligned' ? 'text-aligned' : 
+          type === 'misaligned' || type === 'dealbreaker' ? 'text-danger' : 
+          'text-dark-text-muted'
         }`}>
           {type === 'aligned' ? '✓ Aligned' : type === 'misaligned' ? '✗ Misaligned' : type === 'dealbreaker' ? '🚫 Conflict' : hasData ? '' : 'No data'}
         </span>
       </div>
 
       {notes && (
-        <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">{notes}</p>
+        <p className="text-[11px] text-dark-text-secondary mt-2 leading-relaxed border-t border-dark-border-subtle pt-2">
+          {notes}
+        </p>
       )}
       {sourceUrl && (
-        <div className="mt-1">
+        <div className="mt-2 pt-2 border-t border-dark-border-subtle">
           <a 
             href={sourceUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-[10px] text-teal-600 hover:text-teal-700 underline inline-flex items-center gap-0.5"
+            className="text-[11px] text-aligned hover:text-aligned/80 font-medium inline-flex items-center gap-1.5 hover:gap-2 transition-all group"
           >
-            📄 Source
+            <ExternalLink size={12} className="group-hover:scale-110 transition-transform" />
+            View Source
           </a>
         </div>
       )}

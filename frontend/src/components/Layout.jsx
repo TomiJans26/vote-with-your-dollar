@@ -1,45 +1,62 @@
 import { Outlet, NavLink } from 'react-router-dom';
+import { Search, Compass, Newspaper, ClipboardList, Settings } from 'lucide-react';
 
 const nav = [
-  { to: '/', label: 'Search', icon: '🔍' },
-  { to: '/explore', label: 'Explore', icon: '🧭' },
-  { to: '/feed', label: 'Feed', icon: '📰' },
-  { to: '/list', label: 'List', icon: '📝' },
-  { to: '/settings', label: 'Settings', icon: '⚙️' },
+  { to: '/', label: 'Search', Icon: Search },
+  { to: '/explore', label: 'Explore', Icon: Compass },
+  { to: '/feed', label: 'Feed', Icon: Newspaper },
+  { to: '/list', label: 'List', Icon: ClipboardList },
+  { to: '/settings', label: 'Settings', Icon: Settings },
 ];
 
 export default function Layout() {
   return (
-    <div className="flex flex-col min-h-screen max-w-lg mx-auto">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-teal-700 to-teal-600 text-white px-4 py-3 shadow-md">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold tracking-tight">🗳️ DollarVote</h1>
-          <span className="text-xs text-teal-200">Every dollar is a vote</span>
+    <div className="flex flex-col min-h-screen max-w-lg mx-auto bg-dark-bg">
+      {/* Header - Minimal & Modern */}
+      <header className="sticky top-0 z-10 glass border-b border-dark-border px-4 py-3">
+        <div className="flex items-center justify-center">
+          <h1 className="text-lg font-bold tracking-tight text-gradient">
+            DollarVote
+          </h1>
         </div>
       </header>
 
       {/* Content */}
-      <main className="flex-1 overflow-y-auto pb-20 bg-gray-50">
+      <main className="flex-1 overflow-y-auto pb-24">
         <Outlet />
       </main>
 
-      {/* Bottom nav */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 max-w-lg mx-auto shadow-lg">
-        <div className="flex justify-around py-2">
-          {nav.map(n => (
+      {/* Bottom nav - Modern pill-shaped active indicator */}
+      <nav className="fixed bottom-0 left-0 right-0 glass border-t border-dark-border max-w-lg mx-auto pb-safe">
+        <div className="flex justify-around items-center py-2 px-2">
+          {nav.map(({ to, label, Icon }) => (
             <NavLink
-              key={n.to}
-              to={n.to}
-              end={n.to === '/'}
+              key={to}
+              to={to}
+              end={to === '/'}
               className={({ isActive }) =>
-                `flex flex-col items-center text-xs transition-all py-1 px-3 rounded-lg active:scale-90 ${
-                  isActive ? 'text-teal-700 font-semibold bg-teal-50' : 'text-gray-400 hover:text-gray-600 active:text-teal-600'
+                `flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all duration-200 ${
+                  isActive 
+                    ? 'bg-aligned/20 text-aligned shadow-lg glow-green' 
+                    : 'text-dark-text-secondary hover:text-dark-text active:scale-95'
                 }`
               }
             >
-              <span className="text-xl">{n.icon}</span>
-              {n.label}
+              {({ isActive }) => (
+                <>
+                  <Icon 
+                    size={22} 
+                    className={`transition-all duration-200 ${
+                      isActive ? 'stroke-[2.5]' : 'stroke-[2]'
+                    }`}
+                  />
+                  <span className={`text-[10px] font-medium transition-all ${
+                    isActive ? 'font-semibold' : ''
+                  }`}>
+                    {label}
+                  </span>
+                </>
+              )}
             </NavLink>
           ))}
         </div>
